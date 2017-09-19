@@ -1,0 +1,15 @@
+.fa-twitter
+{
+	font-size: 20px;
+}
+.fa-github
+{
+	font-size: 20px;	
+}
+.lineDivider
+{
+	margin-top: 5%;
+	border-right: 2px inset;
+    border-color: #ececec;
+    min-height: 10%;
+}
