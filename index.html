@@ -14,13 +14,13 @@
 	<body>
 		<div class="container mainLoginWrapper well">
 			<div class="row">
-				<div class="col-sm-3 logo">
-					<h3>InterConn</h3>
+				<div class="col-sm-12 logo">
+					<span>InterConn</span>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-3 credentialsWrapper">
+				<div class="col-sm-6 credentialsWrapper">
 					<h3>Sign In</h3>
 					<form method="POST" action="./service/loginPage.php">
 						<div class="input-group emailWrapper">
@@ -36,28 +36,32 @@
 					    <div class="forgotPasswordWrapper">
 					    	<a href="#">Forgot password?</a>
 					    </div>
-					    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+					    <div class="buttonWrapper">
+					    	<button type="submit" class="btn btn-primary btn-block">Sign In</button>
+					    </div>
 					</form>
 				</div>
 
 				<div class="col-sm-1 lineDivider">
 				</div>
-<br>
-				<div class="col-sm-3 otherSourcesWrapper">
+
+				<div class="col-sm-5 otherSourcesWrapper">
 					<h3>Login with</h3>
 
-					<div class="input-group twitterWrapper">
-						<span class="input-group-addon"><i class="glyphicon fa fa-twitter"></i></span>
-						<button type="submit" class="btn btn-primary btn-block">Twitter</button>
+					<div class="twitterWrapper">
+						<button type="submit" class="btn btn-primary btn-block">
+							<i class="glyphicon fa fa-twitter"></i>&nbsp;&nbsp; Twitter
+						</button>
 					</div>
-					<div class="input-group gitHubWrapper">
-						<span class="input-group-addon"><i class="glyphicon fa fa-github"></i></span>
-						<button type="submit" class="btn btn-primary btn-block">GitHub</button>
+					<div class="gitHubWrapper">
+						<button type="submit" class="btn btn-primary btn-block">
+							<i class="glyphicon fa fa-github"></i>&nbsp;&nbsp; GitHub
+						</button>
 					</div>					
 				</div>
 			</div>
-			<div class="row">
-				<h3>Don't have an account yet?<a href="#">Create your account now</a></h3>
+			<div class="row newAccountWrapper">
+				Don't have an account yet?&nbsp;<a href="#">Create your account now</a>
 			</div>
 		</div>
 	</body>
