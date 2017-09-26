@@ -2,10 +2,10 @@
 class DatabaseConnection{
 
     // Database details
-    private $host = "change_to_your_db_host";
-    private $db_name = "change_to_your_db_name";
-    private $username = "change_to_your_db_username";
-    private $password = "change_to_your_db_password";
+    private $host = "handson-mysql";
+    private $db_name = "InterConn";
+    private $username = "user";
+    private $password = "handson1234";
     public $conn;
 
     public function getConnection(){

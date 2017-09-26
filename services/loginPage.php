@@ -1,9 +1,10 @@
 <?php
 session_start();
-include_once "connection.php";
+include_once "./models/database_connect.php";
+include_once "./services/WebService.php";
 
-if($_POST && check_login($_POST['emailid'],$_POST['password'])){
-    $_SESSION['emailid'] = $_POST['emailid'];
+if($_POST && check_login($_POST['email'],$_POST['password'])){
+    $_SESSION['emailid'] = $_POST['email'];
     $_SESSION['loggedIn'] = True;
 
     header("location: index.php");
@@ -21,12 +22,13 @@ if($_POST && check_login($_POST['emailid'],$_POST['password'])){
 
 function check_login($emailid,$password){
     echo $emailid."-- details--".$password;
+    
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
-
+var_dump($conn);
     $web_service = new WebService();
     $getUserDetails = $web_service->getUserDetails(); 
-
+var_dump($web_service);
    
 
     echo $getUserDetails;
