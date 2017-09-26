@@ -1,0 +1,51 @@
+.fa-twitter
+{
+	font-size: 20px;
+}
+
+.fa-github
+{
+	font-size: 20px;	
+}
+
+.lineDivider
+{
+	margin-top: 5%;
+	border-right: 2px inset;
+    border-color: #ececec;
+    min-height: 15%;
+    margin-left: -8%;
+}
+
+.mainLoginWrapper
+{
+	width:40%;
+	margin-top: 10%;
+}
+
+.newAccountWrapper
+{
+	text-align: center;
+	font-family: times new roman;
+	font-size: 24px;
+	padding: 10px
+}
+
+.logo
+{
+	text-align: center;
+	font-family: buxton sketch;
+	font-size: 56px;
+}
+
+.emailWrapper,
+.passwordWrapper,
+.forgotPasswordWrapper,
+.buttonWrapper,
+.twitterWrapper,
+.gitHubWrapper
+{
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
