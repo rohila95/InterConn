@@ -7,12 +7,13 @@ if($_POST && check_login($_POST['email'],$_POST['password'])){
     $_SESSION['emailid'] = $_POST['email'];
     $_SESSION['loggedIn'] = True;
 
-    header("location: index.php");
+    // header("location: HomePage.html");
     exit();
     session_write_close();
 }elseif($_POST) {
     echo "Unsuccessful login<br><br>";
     echo "the session variable contents:<br>";
+    // header("location: ../index.html");
     print_r($_SESSION);
 }else {
     echo "You're not logged in";
@@ -21,19 +22,17 @@ if($_POST && check_login($_POST['email'],$_POST['password'])){
 }
 
 function check_login($emailid,$password){
-    echo $emailid."-- details--".$password;
-    
+
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
-var_dump($conn);
+    $password=mysqli_real_escape_string($conn,$password);
+    $emailid=mysqli_real_escape_string($conn,$emailid);
     $web_service = new WebService();
     $getUserDetails = $web_service->getUserDetails($emailid,$password);
-var_dump($web_service);
-   
-
-    echo $getUserDetails;
-
-    $result = $conn->query($getUserDetails);
+    echo $emailid;
+    echo $password;
+    echo htmlspecialchars($getUserDetails);
+    // $result = $conn->query($getUserDetails);
 
     if ($result->num_rows > 0) {
 
