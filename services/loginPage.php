@@ -8,7 +8,7 @@ if($_POST && check_login($_POST['email'],$_POST['password'])){
     $_SESSION['loggedIn'] = True;
 
 
-    // header("location: HomePage.html");
+    header("location: ../HomePage.html");
 
     exit();
     session_write_close();
@@ -16,13 +16,14 @@ if($_POST && check_login($_POST['email'],$_POST['password'])){
     echo "Unsuccessful login<br><br>";
     echo "the session variable contents:<br>";
 
-    // header("location: ../index.html");
+    header("location: ../index.html?status=Unsuccessful");
 
     print_r($_SESSION);
 }else {
     echo "You're not logged in";
     echo "<br><br>the session variable contents:<br>";
     print_r($_SESSION);
+    header("location: ../index.html?status=notloggedin");
 }
 
 function check_login($emailid,$password){
@@ -37,7 +38,7 @@ function check_login($emailid,$password){
     echo $emailid;
     echo $password;
     echo htmlspecialchars($getUserDetails);
-    // $result = $conn->query($getUserDetails);
+    $result = $conn->query($getUserDetails);
 
 
     if ($result->num_rows > 0) {
