@@ -1,14 +1,20 @@
 html, body {
     max-width: 100%;
     overflow-x: hidden;
+     overflow-y: hidden;
 }
 
 
 .verticle_navbar_HP{
 	   max-width: 8% !important;
 	   min-width: 8% !important;
+
 }
 
+
+.dummyBlock{
+	min-height: 47%;
+}
 
 .title_main_HP {
 	color: #fff;
@@ -21,7 +27,6 @@ html, body {
 }
 
 .menu_leftMain_HP{
-    min-height: 944px;
     width: 152%;
     background-color: #222222;
     margin-left: -14%;
@@ -57,12 +62,10 @@ html, body {
 .navbar-nav li{
 	width: 100%;
 	color: #888C93;
-	max-height: 40px;
+
 }
 
-.active{
-	max-height:: 40px !important;
-}
+
 
 .categoryTitle_HP{
 	color: white;
@@ -85,4 +88,8 @@ html, body {
 
 .menu_leftMain_HP .row{
 	margin-left: 1%;
+}
+
+.leftMenuContentWrapper_HP{
+	min-height: 845px !important;
 }
