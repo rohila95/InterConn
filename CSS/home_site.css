@@ -1,0 +1,36 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.title_main_HP {
+	color: #fff;
+    font-family: "Satisfy", cursive;
+    padding: 9%;
+}
+
+.title_main_HP h3{
+	  font-family: "Satisfy", cursive;
+}
+
+.menu_leftMain_HP{
+    height: 944px;
+    width: 152%;
+    background-color: #222222;
+    margin-left: -14%;
+    margin-top: -9%;
+}
+
+.headerSpace_HP{
+	position: fixed;
+	border-bottom: 1px solid;
+    width: 100%;
+    height: 45px;
+    margin-left: 0.8%;
+}
+
+
+.loggedIn_user{
+	color: yellow;
+    font-size: 12px;
+}
