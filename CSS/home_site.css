@@ -34,3 +34,19 @@ html, body {
 	color: yellow;
     font-size: 12px;
 }
+
+.channelsContainer_menu_HP{
+	max-height: 50%;
+	height: 450px;
+	margin-top: 40%;
+}
+
+.navbar-nav li{
+	width: 100%;
+	color: #888C93;
+	max-height: 40px;
+}
+
+.active{
+	max-height:: 40px !important;
+}
