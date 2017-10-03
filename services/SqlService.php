@@ -27,6 +27,12 @@ class SqlService
 		return $sql;
 	}
 
+	public function getSpecificChannelDetails($channelid)
+	{
+		$sql="SELECT channel_id,channel_name,type,purpose,created_by,created_at FROM `channel` WHERE channel_id=".$channelid;
+		return $sql;
+	}
+
 }
 
 

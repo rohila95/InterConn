@@ -51,10 +51,31 @@ class WebService
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
-    $userid=mysqli_real_escape_string($conn,$workspaceid);
+    $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
     $sql_service = new SqlService();
     $workspaceUserDetailsQuery = $sql_service->getUsersWorkspace($workspaceid);
     $result = $conn->query($workspaceUserDetailsQuery);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
+  public function getSpecificChannelDetails($channelid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $channelid=mysqli_real_escape_string($conn,$channelid);
+    $sql_service = new SqlService();
+    $channelDetailsQuery = $sql_service->getSpecificChannelDetails($channelid);
+    $result = $conn->query($channelDetailsQuery);
 
 
     if ($result->num_rows > 0) {
