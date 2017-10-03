@@ -13,7 +13,7 @@ html, body {
 
 
 .dummyBlock{
-	min-height: 47%;
+	min-height: 51%;
 }
 
 .title_main_HP {
@@ -34,7 +34,7 @@ html, body {
 }
 
 .headerSpace_HP{
-	position: fixed;
+
 	border-bottom: 1px solid;
     width: 100%;
     height: 45px;
@@ -92,4 +92,13 @@ html, body {
 
 .leftMenuContentWrapper_HP{
 	min-height: 845px !important;
+}
+
+.mainContent_HP{
+	margin-left: 0.2%;
+}
+
+.channeltitle_maincontent{
+	margin-left: 45%;
+	margin-top: 35%;
 }

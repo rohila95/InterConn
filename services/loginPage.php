@@ -8,7 +8,7 @@ $loggedInId="";
 if($_POST && check_login($_POST['email'],$_POST['password'])){
     $_SESSION['emailid'] = $_POST['email'];
     $_SESSION['loggedIn'] = True;
-   header("location: ../HomePage.php");
+   header("location: ../HomePage.php?channel=1");
     // exit();
     // session_write_close();
 }elseif($_POST) {

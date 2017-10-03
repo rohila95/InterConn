@@ -17,13 +17,16 @@
    	$directMessagestr='';
    foreach($channelDetails as $channel)
    {
-   		$channelstr.=' <li channelid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.$channel->channel_name.'</span></a></li>';
+   		$channelstr.=' <li channelid="" class="active"><a href="./HomePage.php?channel='.$channel->channel_id.'"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.$channel->channel_name.'</span></a></li>';
    }
 
    foreach($directMessagesDetails as $directMessage)
    {
    		$directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="'.$directMessage->first_name.'" >'.$directMessage->first_name.'</span></a></li>';
    }
+
+
+   
 ?>
 <html>
 	<head>
@@ -80,10 +83,16 @@
 
 			</div>
 			<div class="col-lg-11 mainContent_HP">
-				<div class="headerSpace_HP row"> </div>
-				<form>
-					<div class=" "></div>
-				</form>				
+				<div clas="row rightContent_wrapper_HP"> 
+				<div class="headerSpace_HP row"> Headers Here</div>
+				
+					<?php
+						if(isset($_GET["channel"])){
+							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
+							echo '<div class="row" id="channel_'.$currentChannel[0]->channel_id.'_contentwrapper">  <h1 class="channeltitle_maincontent">'. $currentChannel[0]->channel_name.' </h1></div>';
+						}	
+					?>	
+				</div>
 			</div>
 		</div>
 	</div>
