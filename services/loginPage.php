@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once "../models/database_connect.php";
-include_once "./WebService.php";
+include_once "./SqlService.php";
 
 if($_POST && check_login($_POST['email'],$_POST['password'])){
     $_SESSION['emailid'] = $_POST['email'];
@@ -33,11 +33,11 @@ function check_login($emailid,$password){
     $conn = $database_connection->getConnection();
     $password=mysqli_real_escape_string($conn,$password);
     $emailid=mysqli_real_escape_string($conn,$emailid);
-    $web_service = new WebService();
-    $getUserDetails = $web_service->getUserDetails($emailid,$password);
-    echo $emailid;
-    echo $password;
-    echo htmlspecialchars($getUserDetails);
+    $sql_service = new SqlService();
+    $getUserDetails = $sql_service->getUserDetails($emailid,$password);
+    // echo $emailid;
+    // echo $password;
+    // echo htmlspecialchars($getUserDetails);
     $result = $conn->query($getUserDetails);
 
 
