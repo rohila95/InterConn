@@ -3,14 +3,14 @@ session_start();
 include_once "../models/database_connect.php";
 include_once "./SqlService.php";
 
+$loggedInId="";
+
 if($_POST && check_login($_POST['email'],$_POST['password'])){
     $_SESSION['emailid'] = $_POST['email'];
     $_SESSION['loggedIn'] = True;
-    $_SESSION['userid'] = $id;
-
    header("location: ../HomePage.php");
-    exit();
-    session_write_close();
+    // exit();
+    // session_write_close();
 }elseif($_POST) {
     echo "Unsuccessful login<br><br>";
     echo "the session variable contents:<br>";
@@ -24,7 +24,6 @@ if($_POST && check_login($_POST['email'],$_POST['password'])){
 }
 
 function check_login($emailid,$password){
-
 
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
@@ -41,7 +40,9 @@ function check_login($emailid,$password){
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
-            $id=$row['user_id'];
+            //var_dump($row);
+            $loggedInId = $row['user_id'];
+            $_SESSION['userid'] = $loggedInId ;
             return true;
         }
     } else {

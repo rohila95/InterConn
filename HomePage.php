@@ -1,8 +1,29 @@
 <?php
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 	session_start();
-	include_once "../models/database_connect.php";
-	include_once "./WebService.php";
-	echo $_SESSION['userid'];
+	include_once "./services/WebService.php";
+	$web_service = new WebService();
+	
+    $userDetails = json_decode($web_service->getUserDetails($_SESSION['emailid']));
+    $workspaceDetails = json_decode($web_service->getWorkspaceDetails($_SESSION['userid']));
+    $workspaceName=$workspaceDetails[0]->workspace_name;
+
+    $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid']));
+    $directMessagesDetails = json_decode($web_service->getDirectMessagesDetails($workspaceDetails[0]->workspace_id));
+
+   	$channelstr='';
+   	$directMessagestr='';
+   foreach($channelDetails as $channel)
+   {
+   		$channelstr.=' <li channelid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.$channel->channel_name.'</span></a></li>';
+   }
+
+   foreach($directMessagesDetails as $directMessage)
+   {
+   		$directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="'.$directMessage->first_name.'" >'.$directMessage->first_name.'</span></a></li>';
+   }
 ?>
 <html>
 	<head>
@@ -21,6 +42,7 @@
 	</head>
 
 	<body>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-1 verticle_navbar_HP">
@@ -28,17 +50,16 @@
 				<div class="row menu_leftMain_HP">
 					<div class="leftMenuContentWrapper_HP" >
 						<div class="row title_main_HP"> <h3> InterConn  </h3>
-							<span class="loggedIn_user"> Workspace</span> <br>
-							<span class="loggedIn_user"> LoggedIn User</span><br>
+							<span class="loggedIn_user"> <?php  echo $workspaceName; ?></span> <br>
+							<span class="loggedIn_user"><?php  echo $userDetails[0]->first_name; ?> </span><br>
 							<span class="loggedIn_user"> All Threads</span><br>
 						</div>
 
 						<div class="row channelsContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"> 3</span></div>
+							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"> 2</span></div>
 							<ul class="nav navbar-nav channels_UL_List">
-						        <li channelid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="channelName" >General</span></a></li>
-						        <li channelid="" ><a href="#"><span class="channelPrivacyLevel"> </span><span class="channelName" > Random </span></a></li>
-						        <li channelid="" ><a href="#"><span class="channelPrivacyLevel"> </span><span class="channelName" > Testing </span></a></li>
+								<?php echo $channelstr;?>
+
 						    </ul>
 
 						</div>
@@ -46,9 +67,7 @@
 						<div class="row directMessageContainer_menu_HP">
 							<div class="categoryTitle_HP channelTitle"> Direct Messages <span class="noOfDirectMessages_HP numberCount_badge"> 3</span></div>
 							<ul class="nav navbar-nav directmessages_UL_List">
-						        <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="channelName" >Dummy 1</span></a></li>
-						        <li touserid="" ><a href="#"><span class="channelPrivacyLevel"> </span><span class="channelName" > Dummy 2 </span></a></li>
-						        <li touserid="" ><a href="#"><span class="channelPrivacyLevel"> </span><span class="channelName" > Dummy 3 </span></a></li>
+						        <?php echo $directMessagestr;?>
 						    </ul>
 						</div>
 						<div class="row dummyBlock">

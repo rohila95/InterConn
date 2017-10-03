@@ -1,8 +1,8 @@
 <?php
-include_once "../models/database_connect.php";
-include_once "./SqlService.php";
-class WebService
-{
+include("database_connect.php");
+include("SqlService.php");
+
+class WebService{
 
   public function getWorkspaceDetails($userid)
   {
@@ -17,11 +17,12 @@ class WebService
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
-            return $row['workspace_name'];
+            $array[]= $row;
         }
     } else {
         return 'fail';
     }
+    return json_encode($array);
     $conn->close();
   }
 
@@ -68,6 +69,7 @@ class WebService
     return json_encode($array);
     $conn->close();
   }
+
   public function getSpecificChannelDetails($channelid)
   {
     $database_connection = new DatabaseConnection();
@@ -76,6 +78,29 @@ class WebService
     $sql_service = new SqlService();
     $channelDetailsQuery = $sql_service->getSpecificChannelDetails($channelid);
     $result = $conn->query($channelDetailsQuery);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
+
+  public function getUserDetails($emailid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $emailid=mysqli_real_escape_string($conn,$emailid);
+    $sql_service = new SqlService();
+    $userDetailQuery = $sql_service->getUserDetail($emailid);
+    //echo $userDetailQuery;
+    $result = $conn->query($userDetailQuery);
 
 
     if ($result->num_rows > 0) {
