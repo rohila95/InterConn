@@ -59,7 +59,7 @@
 						</div>
 
 						<div class="row channelsContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"> 2</span></div>
+							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo count($channelDetails);?></span></div>
 							<ul class="nav navbar-nav channels_UL_List">
 								<?php echo $channelstr;?>
 
@@ -68,7 +68,7 @@
 						</div>
 
 						<div class="row directMessageContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Direct Messages <span class="noOfDirectMessages_HP numberCount_badge"> 3</span></div>
+							<div class="categoryTitle_HP channelTitle"> Direct Messages <span class="noOfDirectMessages_HP numberCount_badge"> <?php echo count($directMessagesDetails);?></span></div>
 							<ul class="nav navbar-nav directmessages_UL_List">
 						        <?php echo $directMessagestr;?>
 						    </ul>
