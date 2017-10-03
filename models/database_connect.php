@@ -4,16 +4,16 @@ class DatabaseConnection{
     // Database details
 
     //for local
-    private $host = "handson-mysql";
-    private $db_name = "InterConn";
-    private $username = "user";
-    private $password = "handson1234";
+    // private $host = "handson-mysql";
+    // private $db_name = "InterConn";
+    // private $username = "user";
+    // private $password = "handson1234";
 
     //for docker
-    // private $host = "localhost";
-    // private $db_name = "InterConn";
-    // private $username = "admin";
-    // private $password = "M0n@rch$";
+    private $host = "localhost";
+    private $db_name = "InterConn";
+    private $username = "admin";
+    private $password = "M0n@rch$";
     public $conn;
 
     public function getConnection(){
