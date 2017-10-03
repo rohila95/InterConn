@@ -9,9 +9,7 @@ if($_POST && check_login($_POST['email'],$_POST['password'])){
     $_SESSION['loggedIn'] = True;
     $_SESSION['userid'] = $id;
 
-   header("location: ../HomePage.html");
-
-
+   header("location: ../HomePage.php");
     exit();
     session_write_close();
 }elseif($_POST) {
@@ -44,16 +42,13 @@ function check_login($emailid,$password){
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
-            $id=$row['user_id']
+            $id=$row['user_id'];
             return true;
         }
     } else {
         return false;
     }
     $conn->close();
-
-
-
 
 }
 
