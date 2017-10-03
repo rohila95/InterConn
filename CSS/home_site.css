@@ -1,6 +1,19 @@
 html, body {
     max-width: 100%;
     overflow-x: hidden;
+     overflow-y: hidden;
+}
+
+
+.verticle_navbar_HP{
+	   max-width: 8% !important;
+	   min-width: 8% !important;
+
+}
+
+
+.dummyBlock{
+	min-height: 47%;
 }
 
 .title_main_HP {
@@ -14,7 +27,6 @@ html, body {
 }
 
 .menu_leftMain_HP{
-    height: 944px;
     width: 152%;
     background-color: #222222;
     margin-left: -14%;
@@ -33,4 +45,51 @@ html, body {
 .loggedIn_user{
 	color: yellow;
     font-size: 12px;
+}
+
+.channelsContainer_menu_HP, .directMessageContainer_menu_HP{
+	max-height: 50%;
+	margin-top: 20%;
+}
+
+
+.directMessageContainer_menu_HP{
+	margin-top: 20%;
+}
+
+
+
+.navbar-nav li{
+	width: 100%;
+	color: #888C93;
+
+}
+
+
+
+.categoryTitle_HP{
+	color: white;
+    padding: 10%;
+    font-size: larger;
+}
+
+
+.channels_UL_List, .directmessages_UL_List{
+
+    margin-top: -9%;
+    margin-left: 15%;
+ }
+
+
+.numberCount_badge{
+	color: yellow;
+	font-size: x-small !important;
+}
+
+.menu_leftMain_HP .row{
+	margin-left: 1%;
+}
+
+.leftMenuContentWrapper_HP{
+	min-height: 845px !important;
 }

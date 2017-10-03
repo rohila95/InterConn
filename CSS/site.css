@@ -5,7 +5,7 @@
 
 .fa-github
 {
-	font-size: 20px;	
+	font-size: 20px;
 }
 
 .lineDivider
@@ -48,4 +48,11 @@
 	padding-top: 10px;
 	padding-right: 10px;
 	padding-left: 10px;
+}
+.invalidField
+{
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	color:red;
 }
