@@ -51,5 +51,21 @@ class SqlService{
 		return $sql;
 	}
 
+	public function createMessage($userid,$content)
+	{
+		$sql="INSERT INTO `InterConn`.`message` (`message_id`, `created_by`, `created_at`, `message_place`, `content`, `is_threaded`, `is_active`, `edited_at`, `has_shared_content`) VALUES (NULL, '".$userid."', CURRENT_TIMESTAMP, '', '".$content."', '0', '0', '0000-00-00 00:00:00.000000', '0')";
+		return $sql;
+	}
+	public function createChannelMessageMap($channelid,$messageid)
+	{
+		$sql="INSERT INTO `InterConn`.`message_channel` (`message_id`, `channel_id`) VALUES ('".$messageid."', '".$channelid."')";
+		return $sql;
+	}
+	public function createDirectMessageMap($receiverid,$messageid)
+	{
+		$sql="INSERT INTO `InterConn`.`message_direct` (`message_id`, `receiver_id`) VALUES ('".$messageid."', '".$receiverid."')";
+		return $sql;
+	}
+
 }
 ?>
