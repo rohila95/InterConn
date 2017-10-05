@@ -83,18 +83,40 @@
 
 			</div>
 			<div class="col-lg-11 mainContent_HP">
-				<div clas="row rightContent_wrapper_HP"> 
-				<div class="headerSpace_HP row"> Headers Here</div>
-				
+				 
+				<div class="headerSpace_HP row"> general
+				</div>
+				<div class="row rightContent_wrapper_HP">
+				<!-- 
 					<?php
-						if(isset($_GET["channel"])){
-							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
-							echo '<div class="row" id="channel_'.$currentChannel[0]->channel_id.'_contentwrapper">  <h1 class="channeltitle_maincontent">'. $currentChannel[0]->channel_name.' </h1></div>';
-						}	
-					?>	
+						// if(isset($_GET["channel"])){
+						// 	$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
+						// 	echo '<div class="row" id="channel_'.$currentChannel[0]->channel_id.'_contentwrapper">  <h1 class="channeltitle_maincontent">'. $currentChannel[0]->channel_name.' </h1></div>';
+						// }	
+					?> -->
+
+
+					<div class="row w3-panel w3-card-2 message"> 
+						<div class="message_header"><b>rohila </b><span class="message_time">12:28pm </span></div>
+						<div class="message_body">hellooooooooooooooooo</div>
+					</div>	
+					
+				</div>
+				<div class="footerSpace_HP row">
+					<form method="POST" action="./services/sendMessage.php"> 
+						<div class="input-group">
+					      <input type="text" class="form-control" placeholder="Type your message...">
+					      <span class="input-group-btn">
+					        <button class="btn btn-secondary" type="button">send</button>
+					      </span>
+					    </div>
+				    </form>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="footer row">
+		<small >&copy; Mahesh Kukunooru, Rohila Gudipati, Maheedhar Gunnam</small> 
 	</div>
 	</body>
 </html>

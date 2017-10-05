@@ -102,3 +102,31 @@ html, body {
 	margin-left: 45%;
 	margin-top: 35%;
 }
+
+.footer
+{
+    position: fixed;
+    bottom: 0;
+    width: 101%;
+    text-align: center;
+    background-color: rgb(34, 34, 34);
+    color: #827e7e;
+    font-size: 14px;
+    font-weight: lighter;
+    font-style: italic;
+}
+.footerSpace_HP
+{
+	position: fixed;
+    bottom: 2px;
+    width: 92%;
+}
+.message_time
+{
+	font-style: italic;
+    font-size: smaller;
+}
+.message
+{
+	margin-left: 2%;
+}
