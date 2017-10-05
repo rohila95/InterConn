@@ -56,4 +56,15 @@
 	padding-left: 10px;
 	color:red;
 }
-
+.footer
+{
+    position: fixed;
+    bottom: 0;
+    width: 101%;
+    text-align: center;
+    background-color: rgb(34, 34, 34);
+    color: #827e7e;
+    font-size: 14px;
+    font-weight: lighter;
+    font-style: italic;
+}
