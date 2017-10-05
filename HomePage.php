@@ -83,23 +83,40 @@
 
 			</div>
 			<div class="col-lg-11 mainContent_HP">
-				 
-				<div class="headerSpace_HP row"> general
-				</div>
-				<div class="row rightContent_wrapper_HP">
-				<!-- 
 					<?php
-						// if(isset($_GET["channel"])){
-						// 	$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
-						// 	echo '<div class="row" id="channel_'.$currentChannel[0]->channel_id.'_contentwrapper">  <h1 class="channeltitle_maincontent">'. $currentChannel[0]->channel_name.' </h1></div>';
-						// }	
-					?> -->
+						if(isset($_GET["channel"])){
+							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
+							echo '<div class="headerSpace_HP row"> '. $currentChannel[0]->channel_name.'</div>';
+						}	
+					?> 
 
+				<div class="row rightContent_wrapper_HP">
+				
+					<?php
+						if(isset($_GET["channel"])){
+							$currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"]));
+							// var_dump($currentChannelMessages);
 
-					<div class="row w3-panel w3-card-2 message"> 
+							$msgStr='';
+
+							foreach ($currentChannelMessages as $message) 
+							{
+								$msgStr.='<div class="row w3-panel w3-card-2 message"><div class="message_header"><b>';
+								$msgStr.=$message->first_name;
+								$msgStr.=' </b><span class="message_time">';
+								$msgStr.=$message->created_at;
+								$msgStr.='</span></div><div class="message_body">';
+								$msgStr.=$message->content;
+								$msgStr.='</div></div>';
+							}
+							echo $msgStr;
+						}	
+					?> 
+
+					<!-- <div class="row w3-panel w3-card-2 message"> 
 						<div class="message_header"><b>rohila </b><span class="message_time">12:28pm </span></div>
 						<div class="message_body">hellooooooooooooooooo</div>
-					</div>	
+					</div>	 -->
 					
 				</div>
 				<div class="footerSpace_HP row">

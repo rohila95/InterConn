@@ -35,13 +35,13 @@ class SqlService{
 
 	public function getSpecificChannelDetails($channelid)
 	{
-		$sql="SELECT channel_id,channel_name,type,purpose,created_by,created_at FROM `channel` WHERE channel_id=".$channelid."order by message.created_at";
+		$sql="SELECT channel_id,channel_name,type,purpose,created_by,created_at FROM `channel` WHERE channel_id=".$channelid;
 		return $sql;
 	}
 
 	public function getChannelMessages($channelid)
 	{
-		$sql="SELECT message.message_id,message.created_by,message.created_at,message.content FROM `message`,`message_channel` where message.message_id=message_channel.message_id and is_active=0 and message_channel.channel_id=".$channelid;
+		$sql="SELECT message.message_id,user.first_name,message.created_at,message.content FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at";
 		return $sql;
 	}
 

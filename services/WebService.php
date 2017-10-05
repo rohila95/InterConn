@@ -79,7 +79,6 @@ class WebService{
     $channelDetailsQuery = $sql_service->getSpecificChannelDetails($channelid);
     $result = $conn->query($channelDetailsQuery);
 
-
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
