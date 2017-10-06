@@ -17,12 +17,12 @@
    	$directMessagestr='';
    foreach($channelDetails as $channel)
    {
-   		$channelstr.=' <li channelid="" class="active"><a href="./HomePage.php?channel='.$channel->channel_id.'"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.$channel->channel_name.'</span></a></li>';
+   		$channelstr.=' <li channelid="" class="active"><a href="./HomePage.php?channel='.$channel->channel_id.'"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a></li>';
    }
 
    foreach($directMessagesDetails as $directMessage)
    {
-   		$directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="'.$directMessage->first_name.'" >'.$directMessage->first_name.'</span></a></li>';
+   		$directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="'.$directMessage->first_name.'" >'.htmlspecialchars($directMessage->first_name).'</span></a></li>';
    }
 
 
@@ -83,31 +83,45 @@
 
 			</div>
 			<div class="col-lg-11 mainContent_HP">
-				 
-				<div class="headerSpace_HP row"> general
-				</div>
-				<div class="row rightContent_wrapper_HP">
-				<!-- 
 					<?php
-						// if(isset($_GET["channel"])){
-						// 	$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
-						// 	echo '<div class="row" id="channel_'.$currentChannel[0]->channel_id.'_contentwrapper">  <h1 class="channeltitle_maincontent">'. $currentChannel[0]->channel_name.' </h1></div>';
-						// }	
-					?> -->
+						if(isset($_GET["channel"])){
+							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
+							echo '<div class="headerSpace_HP row"> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+						}	
+					?> 
 
+				<div class="row rightContent_wrapper_HP">
+				
+					<?php
+						if(isset($_GET["channel"])){
+							$currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"]));
+							// var_dump($currentChannelMessages);
 
-					<div class="row w3-panel w3-card-2 message"> 
-						<div class="message_header"><b>rohila </b><span class="message_time">12:28pm </span></div>
-						<div class="message_body">hellooooooooooooooooo</div>
-					</div>	
+							$msgStr='';
+
+							foreach ($currentChannelMessages as $message) 
+							{
+								$msgStr.='<div class="row w3-panel w3-card-2 message"><div class="message_header"><b>';
+								$msgStr.=htmlspecialchars($message->first_name);
+								$msgStr.=' </b><span class="message_time">';
+								$msgStr.=$message->created_at;
+								$msgStr.='</span></div><div class="message_body">';
+								$msgStr.=htmlspecialchars($message->content);
+								$msgStr.='</div></div>';
+							}
+							echo $msgStr;
+						}	
+					?> 
 					
 				</div>
 				<div class="footerSpace_HP row">
 					<form method="POST" action="./services/sendMessage.php"> 
 						<div class="input-group">
-					      <input type="text" class="form-control" placeholder="Type your message...">
+					      <input type="text" class="form-control" placeholder="Type your message..." name="message">
+					      <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
+					      <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
 					      <span class="input-group-btn">
-					        <button class="btn btn-secondary" type="button">send</button>
+					        <button class="btn btn-secondary" type="submit">send</button>
 					      </span>
 					    </div>
 				    </form>
