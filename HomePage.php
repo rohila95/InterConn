@@ -48,7 +48,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-1 verticle_navbar_HP">
+			<div class="col-xs-1 verticle_navbar_HP">
 
 				<div class="row menu_leftMain_HP">
 					<div class="leftMenuContentWrapper_HP" >
@@ -73,16 +73,16 @@
 						        <?php echo $directMessagestr;?>
 						    </ul>
 						</div>
-						<div class="row dummyBlock">
+						<!-- <div class="row dummyBlock">
 
-						</div>
+						</div> -->
 
 					</div>
 
 				</div>
 
 			</div>
-			<div class="col-lg-11 mainContent_HP">
+			<div class="col-offset mainContent_HP">
 					<?php
 						if(isset($_GET["channel"])){
 							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
@@ -117,7 +117,7 @@
 				<div class="footerSpace_HP row">
 					<form method="POST" action="./services/sendMessage.php"> 
 						<div class="input-group">
-					      <input type="text" class="form-control" placeholder="Type your message..." name="message">
+					      <input type="text" class="form-control" autofocus placeholder="Type your message..." name="message">
 					      <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
 					      <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
 					      <span class="input-group-btn">

@@ -1,15 +1,20 @@
 
-@media (max-width: 900px) {
-   
-   .menu_leftMain_HP{
-      background-color: #222222;
-      min-height:600px !important;
-	}
 
-
-
+@media screen and (min-height: 845px) {
 
 }
+
+
+
+  .menu_leftMain_HP{
+      background-color: #222222;
+      height:100% !important;
+      overflow-y: auto;
+  }
+  .leftMenuContentWrapper_HP{
+	  min-height: 545px !important;
+  }
+
 
 
 html, body {
@@ -19,8 +24,8 @@ html, body {
 
 
 .verticle_navbar_HP{
-	   max-width: 8% !important;
-	   min-width: 8% !important;
+	   max-width: 9% !important;
+	   min-width: 125px !important;
 	   background-color: #222222;
 }
 
@@ -98,13 +103,7 @@ html, body {
 	margin-left: 1%;
 }
 
-.leftMenuContentWrapper_HP{
-	min-height: 845px !important;
-}
 
-.mainContent_HP{
-	/*margin-left: 0.2%;*/
-}
 
 .channeltitle_maincontent{
 	margin-left: 45%;
@@ -124,10 +123,9 @@ html, body {
     font-style: italic;
 }
 .footerSpace_HP
-{
-	position: fixed;
-    bottom: 2px;
-    width: 92%;
+{  
+    width: 101%;
+    margin-
 }
 .message_time
 {
@@ -141,6 +139,12 @@ html, body {
 
 .rightContent_wrapper_HP{
 	max-height: 87%;
+	height: 87%;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+body{
+	min-width: 1245px !important;
+	overflow-x: hidden;
 }
