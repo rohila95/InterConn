@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "../models/database_connect.php";
+include_once "./database_connect.php";
 include_once "./SqlService.php";
 
 $loggedInId="";
