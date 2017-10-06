@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 02, 2017 at 10:51 PM
+-- Generation Time: Oct 06, 2017 at 04:39 PM
 -- Server version: 10.0.19-MariaDB-1~trusty-log
 -- PHP Version: 5.5.9-1ubuntu4.9
 
@@ -25,9 +25,6 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `channel`
 --
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `InterConn` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `InterConn`;
 
 CREATE TABLE IF NOT EXISTS `channel` (
   `channel_id` bigint(20) NOT NULL,
@@ -43,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `channel` (
 --
 
 INSERT INTO `channel` (`channel_id`, `channel_name`, `type`, `purpose`, `created_by`, `created_at`) VALUES
-(1, 'general', 'public', '\r\n', 11, '2017-10-03 01:40:37'),
+(1, 'general', 'public', '', 11, '2017-10-03 15:01:49'),
 (2, 'random', 'public', '', 11, '2017-10-03 01:40:37');
 
 -- --------------------------------------------------------
@@ -94,7 +91,48 @@ CREATE TABLE IF NOT EXISTS `message` (
   `is_active` int(11) NOT NULL DEFAULT '0',
   `edited_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `has_shared_content` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`message_id`, `created_by`, `created_at`, `message_place`, `content`, `is_threaded`, `is_active`, `edited_at`, `has_shared_content`) VALUES
+(5, 9, '2017-10-04 17:28:34', 0, 'hello', 0, 0, '0000-00-00 00:00:00', 0),
+(6, 10, '2017-10-04 17:29:34', 0, 'hi how are u', 0, 0, '0000-00-00 00:00:00', 0),
+(7, 11, '2017-10-04 17:35:27', 0, 'good', 0, 0, '0000-00-00 00:00:00', 0),
+(8, 9, '2017-10-04 17:34:48', 0, 'hi direct message', 0, 0, '0000-00-00 00:00:00', 0),
+(9, 10, '2017-10-04 17:35:48', 0, 'true,direct message', 0, 0, '0000-00-00 00:00:00', 0),
+(10, 10, '2017-10-04 17:47:17', 0, 'hi another private message', 0, 0, '0000-00-00 00:00:00', 0),
+(11, 11, '2017-10-04 17:48:17', 0, 'yup', 0, 0, '0000-00-00 00:00:00', 0),
+(16, 9, '2017-10-05 21:21:38', 0, 'hiii', 0, 0, '0000-00-00 00:00:00', 0),
+(17, 10, '2017-10-05 21:22:44', 0, 'welcome', 0, 0, '0000-00-00 00:00:00', 0),
+(18, 10, '2017-10-05 21:24:20', 0, '<!--jzsdhfj-->', 0, 0, '0000-00-00 00:00:00', 0),
+(19, 10, '2017-10-05 21:24:30', 0, '><:"#%$(#$)%^_$E_', 0, 0, '0000-00-00 00:00:00', 0),
+(20, 10, '2017-10-05 21:24:57', 0, 'hiii', 0, 0, '0000-00-00 00:00:00', 0),
+(21, 10, '2017-10-05 21:25:10', 0, 'good job', 0, 0, '0000-00-00 00:00:00', 0),
+(22, 11, '2017-10-05 21:28:07', 0, 'fgdfg', 0, 0, '0000-00-00 00:00:00', 0),
+(23, 11, '2017-10-05 21:28:56', 0, '', 0, 0, '0000-00-00 00:00:00', 0),
+(24, 10, '2017-10-05 21:32:23', 0, 'hiii', 0, 0, '0000-00-00 00:00:00', 0),
+(25, 10, '2017-10-05 21:32:29', 0, 'hiii', 0, 0, '0000-00-00 00:00:00', 0),
+(26, 10, '2017-10-06 00:18:11', 0, 'hey sup people ', 0, 0, '0000-00-00 00:00:00', 0),
+(27, 9, '2017-10-06 18:19:40', 0, 'erg', 0, 0, '0000-00-00 00:00:00', 0),
+(28, 9, '2017-10-06 18:19:43', 0, 'tyhrt', 0, 0, '0000-00-00 00:00:00', 0),
+(29, 9, '2017-10-06 18:19:46', 0, 'rtyrt', 0, 0, '0000-00-00 00:00:00', 0),
+(30, 9, '2017-10-06 18:19:54', 0, 'erterterwt', 0, 0, '0000-00-00 00:00:00', 0),
+(31, 9, '2017-10-06 18:20:46', 0, 'rtj', 0, 0, '0000-00-00 00:00:00', 0),
+(32, 9, '2017-10-06 18:20:49', 0, 'ertre', 0, 0, '0000-00-00 00:00:00', 0),
+(33, 9, '2017-10-06 18:20:51', 0, '45y54y', 0, 0, '0000-00-00 00:00:00', 0),
+(34, 9, '2017-10-06 18:21:27', 0, '', 0, 0, '0000-00-00 00:00:00', 0),
+(35, 9, '2017-10-06 18:36:52', 0, 'Hey Handsome ', 0, 0, '0000-00-00 00:00:00', 0),
+(36, 9, '2017-10-06 18:37:04', 0, 'whats going on ??', 0, 0, '0000-00-00 00:00:00', 0),
+(37, 9, '2017-10-06 18:56:51', 0, '', 0, 0, '0000-00-00 00:00:00', 0),
+(38, 9, '2017-10-06 19:10:33', 0, 'hello', 0, 0, '0000-00-00 00:00:00', 0),
+(39, 9, '2017-10-06 19:10:34', 0, 'hello', 0, 0, '0000-00-00 00:00:00', 0),
+(40, 9, '2017-10-06 19:10:37', 0, 'hello', 0, 0, '0000-00-00 00:00:00', 0),
+(41, 9, '2017-10-06 19:10:48', 0, '', 0, 0, '0000-00-00 00:00:00', 0),
+(42, 9, '2017-10-06 19:10:52', 0, '', 0, 0, '0000-00-00 00:00:00', 0),
+(43, 9, '2017-10-06 20:15:52', 0, '35y45yjhopi54yoi54oyu54iyuoi[45uy[45uyw45oyu45[oiyuio[54uy[oi45uyoi[45wuyoi[w45uyoi[w45uio[yuw54oi[yuw45o[iyu4w5[yu45o[iyu45oi[yu45io[yu[4oi5uy[i4o5uy[o4i5wuy[o4iuy[oi45uyoi[45uy45', 0, 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -107,6 +145,43 @@ CREATE TABLE IF NOT EXISTS `message_channel` (
   `channel_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `message_channel`
+--
+
+INSERT INTO `message_channel` (`message_id`, `channel_id`) VALUES
+(5, 1),
+(6, 1),
+(7, 1),
+(16, 1),
+(17, 1),
+(18, 1),
+(19, 1),
+(20, 2),
+(21, 2),
+(22, 1),
+(23, 1),
+(24, 1),
+(25, 1),
+(26, 2),
+(27, 1),
+(28, 1),
+(29, 1),
+(30, 1),
+(31, 1),
+(32, 1),
+(33, 1),
+(34, 1),
+(35, 2),
+(36, 2),
+(37, 1),
+(38, 1),
+(39, 1),
+(40, 1),
+(41, 1),
+(42, 1),
+(43, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -117,6 +192,16 @@ CREATE TABLE IF NOT EXISTS `message_direct` (
   `message_id` bigint(20) NOT NULL,
   `receiver_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `message_direct`
+--
+
+INSERT INTO `message_direct` (`message_id`, `receiver_id`) VALUES
+(8, 10),
+(9, 9),
+(10, 11),
+(11, 10);
 
 -- --------------------------------------------------------
 
@@ -192,7 +277,7 @@ INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id
 (8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', '', 'chick', '', '', '', NULL, ''),
 (9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', '', 'rohila', '', '', '', NULL, ''),
 (10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', '', 'maheedhar', '', '', '', NULL, ''),
-(11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku001@odu.edu', '', 'mahesh', '', '', '', NULL, '');
+(11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', '', 'mahesh', '', '', '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -383,7 +468,7 @@ ALTER TABLE `emoji`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `message_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `message_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `message_reaction`
 --
@@ -430,8 +515,7 @@ ALTER TABLE `channel_invitation`
 -- Constraints for table `message`
 --
 ALTER TABLE `message`
-  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`message_id`) REFERENCES `threaded_message` (`parent_message_id`);
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `message_channel`
@@ -466,7 +550,8 @@ ALTER TABLE `shared_message`
 -- Constraints for table `threaded_message`
 --
 ALTER TABLE `threaded_message`
-  ADD CONSTRAINT `threaded_message_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `threaded_message_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `threaded_message_ibfk_2` FOREIGN KEY (`parent_message_id`) REFERENCES `message` (`message_id`);
 
 --
 -- Constraints for table `user`
