@@ -45,7 +45,7 @@ html, body {
 
 	border-bottom: 1px solid;
     width: 100%;
-    height: 45px;
+    height: 7%;
     margin-left: 0.8%;
 }
 
@@ -137,4 +137,10 @@ html, body {
 .message
 {
 	margin-left: 2%;
+}
+
+.rightContent_wrapper_HP{
+	max-height: 87%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
