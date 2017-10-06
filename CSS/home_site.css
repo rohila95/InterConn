@@ -1,14 +1,27 @@
+
+@media (max-width: 900px) {
+   
+   .menu_leftMain_HP{
+      background-color: #222222;
+      min-height:600px !important;
+	}
+
+
+
+
+}
+
+
 html, body {
     max-width: 100%;
-    overflow-x: hidden;
-     overflow-y: hidden;
+  overflow: hidden;
 }
 
 
 .verticle_navbar_HP{
 	   max-width: 8% !important;
 	   min-width: 8% !important;
-
+	   background-color: #222222;
 }
 
 
@@ -26,12 +39,7 @@ html, body {
 	  font-family: "Satisfy", cursive;
 }
 
-.menu_leftMain_HP{
-    width: 152%;
-    background-color: #222222;
-    margin-left: -14%;
-    margin-top: -9%;
-}
+
 
 .headerSpace_HP{
 
@@ -95,7 +103,7 @@ html, body {
 }
 
 .mainContent_HP{
-	margin-left: 0.2%;
+	/*margin-left: 0.2%;*/
 }
 
 .channeltitle_maincontent{
