@@ -79,7 +79,6 @@ class WebService{
     $channelDetailsQuery = $sql_service->getSpecificChannelDetails($channelid);
     $result = $conn->query($channelDetailsQuery);
 
-
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
@@ -114,5 +113,107 @@ class WebService{
     return json_encode($array);
     $conn->close();
   }
+
+  public function getChannelMessages($channelid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $channelid=mysqli_real_escape_string($conn,$channelid);
+    $sql_service = new SqlService();
+    $channelMessages = $sql_service->getChannelMessages($channelid);
+    $result = $conn->query($channelMessages);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
+
+  public function getDirectMessages($userid,$messagerUserid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $messagerUserid=mysqli_real_escape_string($conn,$messagerUserid);
+    $sql_service = new SqlService();
+    $directMessages = $sql_service->getDirectMessages($userid,$messagerUserid);
+    $result = $conn->query($directMessages);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
+
+  public function createChannelMessage($userid,$content,$channelid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $content=mysqli_real_escape_string($conn,$content);
+    $channelid=mysqli_real_escape_string($conn,$channelid);
+    $sql_service = new SqlService();
+    $message = $sql_service->createMessage($userid,$content);
+    $result = $conn->query($message);
+    if ($result === TRUE) {
+        $messageid = $conn->insert_id;
+        // echo "New record created successfully. Last inserted ID is: " . $last_id;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $messageChannelMap = $sql_service->createChannelMessageMap($channelid,$messageid);
+    $result = $conn->query($messageChannelMap);
+    if ($result === TRUE) {
+        echo "New record created successfully. Last inserted ID is: " . $last_id;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+
+    $conn->close();
+  }
+
+  public function createDirectMessage($userid,$content,$receiverid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $content=mysqli_real_escape_string($conn,$content);
+    $receiverid=mysqli_real_escape_string($conn,$receiverid);
+    $sql_service = new SqlService();
+    $message = $sql_service->createMessage($userid,$content);
+    $result = $conn->query($message);
+    if ($result === TRUE) {
+        $messageid = $conn->insert_id;
+        // echo "New record created successfully. Last inserted ID is: " . $last_id;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $messageChannelMap = $sql_service->createDirectMessageMap($receiverid,$messageid);
+    $result = $conn->query($messageChannelMap);
+    if ($result === TRUE) {
+        echo "New record created successfully. Last inserted ID is: " . $last_id;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+
+    $conn->close();
+  }
+
 }
 ?>
