@@ -7,8 +7,10 @@
     $userid=$_POST['userid'];
     $channelid=$_POST['channelid'];
     $content=$_POST['message'];
-        
-    $web_service = new WebService();
-    $insertStr = $web_service->createChannelMessage($userid,$content,$channelid);
+    if(trim($content)!='')
+    {  
+      $web_service = new WebService();
+      $insertStr = $web_service->createChannelMessage($userid,$content,$channelid);
+    }
     header("location: ../HomePage.php?channel=".$channelid);
 ?>

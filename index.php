@@ -25,7 +25,19 @@
 					<h3>Sign In</h3>
 					<form method="POST" action="./services/loginPage.php">
 						<div class="invalidField">
-
+						<?php
+							if(isset($_GET["status"]))
+							{
+								if($_GET["status"]=='Unsuccessful')
+								{
+									echo 'Invalid username or password!';
+								}
+								else if($_GET["status"]=='notloggedin')
+								{
+									echo 'You are not signed in. Please Sign In.';
+								}
+							}
+						?>
 						</div>
 						<div class="input-group emailWrapper">
 						    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

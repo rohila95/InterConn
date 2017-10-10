@@ -4,8 +4,10 @@
 	error_reporting(E_ALL);
 	session_start();
 	include_once "./services/WebService.php";
-	$web_service = new WebService();
-	
+	if($_SESSION['loggedIn'])
+	{
+		$web_service = new WebService();
+
     $userDetails = json_decode($web_service->getUserDetails($_SESSION['emailid']));
     $workspaceDetails = json_decode($web_service->getWorkspaceDetails($_SESSION['userid']));
     $workspaceName=$workspaceDetails[0]->workspace_name;
@@ -15,18 +17,24 @@
 
    	$channelstr='';
    	$directMessagestr='';
-   foreach($channelDetails as $channel)
-   {
-   		$channelstr.=' <li channelid="" class="active"><a href="./HomePage.php?channel='.$channel->channel_id.'"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a></li>';
-   }
-
-   foreach($directMessagesDetails as $directMessage)
-   {
-   		$directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="'.$directMessage->first_name.'" >'.htmlspecialchars($directMessage->first_name).'</span></a></li>';
-   }
-
-
-   
+		if ($channelDetails!='')
+		{
+	   foreach($channelDetails as $channel)
+	   {
+	   		$channelstr.=' <li channelid="" class="active"><a href="./HomePage.php?channel='.$channel->channel_id.'#latest"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a></li>';
+	   }
+			}
+		if ($directMessagesDetails!='')
+		{
+	   foreach($directMessagesDetails as $directMessage)
+	   {
+	   		$directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="'.$directMessage->first_name.'" >'.htmlspecialchars($directMessage->first_name).'</span></a></li>';
+	   }
+			}
+	}
+	else {
+		header("location: ./index.php?status=notloggedin");
+	}
 ?>
 <html>
 	<head>
@@ -48,7 +56,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-1 verticle_navbar_HP">
+			<div class="col-xs-1 verticle_navbar_HP">
 
 				<div class="row menu_leftMain_HP">
 					<div class="leftMenuContentWrapper_HP" >
@@ -73,55 +81,76 @@
 						        <?php echo $directMessagestr;?>
 						    </ul>
 						</div>
-						<div class="row dummyBlock">
+						<!-- <div class="row dummyBlock">
 
-						</div>
+						</div> -->
 
 					</div>
 
 				</div>
 
 			</div>
-			<div class="col-lg-11 mainContent_HP">
+			<div class="col-offset mainContent_HP">
 					<?php
 						if(isset($_GET["channel"])){
 							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
-							echo '<div class="headerSpace_HP row"> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
-						}	
-					?> 
+							if($currentChannel!='')
+								echo '<div class="headerSpace_HP row"> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+							else
+								echo '<div class="headerSpace_HP row">Channel doesn\'t exist </div>';
+						}
+					?>
 
 				<div class="row rightContent_wrapper_HP">
-				
+
 					<?php
 						if(isset($_GET["channel"])){
 							$currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"]));
 							// var_dump($currentChannelMessages);
 
 							$msgStr='';
-
-							foreach ($currentChannelMessages as $message) 
+							if ($currentChannelMessages!=null)
 							{
-								$msgStr.='<div class="row w3-panel w3-card-2 message"><div class="message_header"><b>';
-								$msgStr.=htmlspecialchars($message->first_name);
-								$msgStr.=' </b><span class="message_time">';
-								$msgStr.=$message->created_at;
-								$msgStr.='</span></div><div class="message_body">';
-								$msgStr.=htmlspecialchars($message->content);
-								$msgStr.='</div></div>';
+								foreach ($currentChannelMessages as $message)
+								{
+									$msgStr.='<div class="row w3-panel w3-card-2 message"><div class="message_header"><b>';
+									$msgStr.=htmlspecialchars($message->first_name);
+									$msgStr.=' </b><span class="message_time">';
+									$msgStr.=$message->created_at;
+									$msgStr.='</span></div><div class="message_body">';
+									$msgStr.=htmlspecialchars($message->content);
+									$msgStr.='</div></div>';
+								}
+							}
+							else
+							{
+								$msgStr="<div>No messages in this channel..</div>";
 							}
 							echo $msgStr;
-						}	
-					?> 
-					
+						}
+					?>
+					<div id="latest">
+
+					</div>
 				</div>
 				<div class="footerSpace_HP row">
-					<form method="POST" action="./services/sendMessage.php"> 
+					<form method="POST" action="./services/sendMessage.php">
 						<div class="input-group">
-					      <input type="text" class="form-control" placeholder="Type your message..." name="message">
+					      <input type="text" class="form-control" autofocus placeholder="Type your message..." name="message">
 					      <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
 					      <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
 					      <span class="input-group-btn">
-					        <button class="btn btn-secondary" type="submit">send</button>
+									<?php
+									if(isset($_GET["channel"])){
+										$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
+										if($currentChannel!='')
+											echo '<button class="btn btn-secondary" type="submit">send</button>';
+										else
+											echo '<button class="btn btn-secondary disabled" type="submit">send</button>';
+									}
+
+									?>
+
 					      </span>
 					    </div>
 				    </form>
@@ -130,7 +159,7 @@
 		</div>
 	</div>
 	<div class="footer row">
-		<small >&copy; Mahesh Kukunooru, Rohila Gudipati, Maheedhar Gunnam</small> 
+		<small >&copy; Mahesh Kukunooru, Rohila Gudipati, Maheedhar Gunnam</small>
 	</div>
 	</body>
 </html>
