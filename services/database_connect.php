@@ -37,5 +37,3 @@ class DatabaseConnection{
     }
 }
 ?>
-
-<!-- // test commit  -->

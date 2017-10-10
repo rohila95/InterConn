@@ -21,7 +21,7 @@
 		{
 	   foreach($channelDetails as $channel)
 	   {
-	   		$channelstr.=' <li channelid="" class="active"><a href="./HomePage.php?channel='.$channel->channel_id.'"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a></li>';
+	   		$channelstr.=' <li channelid="" class="active"><a href="./HomePage.php?channel='.$channel->channel_id.'#latest"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a></li>';
 	   }
 			}
 		if ($directMessagesDetails!='')
@@ -33,7 +33,7 @@
 			}
 	}
 	else {
-		header("location: ./index.html?status=notloggedin");
+		header("location: ./index.php?status=notloggedin");
 	}
 ?>
 <html>
@@ -129,7 +129,9 @@
 							echo $msgStr;
 						}
 					?>
+					<div id="latest">
 
+					</div>
 				</div>
 				<div class="footerSpace_HP row">
 					<form method="POST" action="./services/sendMessage.php">
