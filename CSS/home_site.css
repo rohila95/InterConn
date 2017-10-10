@@ -130,3 +130,7 @@ html, body {
 {
 	margin-left: 2%;
 }
+
+/*.message_body{
+    overflow-wrap: break-word;
+}*/
