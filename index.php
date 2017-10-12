@@ -34,19 +34,19 @@
 								}
 								else if($_GET["status"]=='notloggedin')
 								{
-									echo 'You are not signed in. Please Sign In.';
+									echo 'You are not signed in. Please Sign In';
 								}
 							}
 						?>
 						</div>
 						<div class="input-group emailWrapper">
 						    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						    <input id="email" type="text" class="form-control" name="email" placeholder="Email" value="rgudi001@odu.edu">
+						    <input id="email" type="text" class="form-control" name="email" placeholder="Email" >
 						</div>
 
 						<div class="input-group passwordWrapper">
 						    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						    <input id="password" type="password" class="form-control" name="password" placeholder="Password" value="rohila">
+						    <input id="password" type="password" class="form-control" name="password" placeholder="Password" >
 						</div>
 						 <div class="forgotPasswordWrapper">
 					    	<a href="#">Forgot password?</a>
@@ -64,12 +64,12 @@
 					<h3>Login with</h3>
 
 					<div class="twitterWrapper">
-						<button type="submit" class="btn btn-primary btn-block">
+						<button type="submit" class="btn btn-primary btn-block disabled">
 							<i class="glyphicon fa fa-twitter"></i>&nbsp;&nbsp; Twitter
 						</button>
 					</div>
 					<div class="gitHubWrapper">
-						<button type="submit" class="btn btn-primary btn-block">
+						<button type="submit" class="btn btn-primary btn-block disabled">
 							<i class="glyphicon fa fa-github"></i>&nbsp;&nbsp; GitHub
 						</button>
 					</div>

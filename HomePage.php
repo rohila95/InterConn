@@ -21,14 +21,22 @@
 		{
 	   foreach($channelDetails as $channel)
 	   {
-	   		$channelstr.=' <li channelid="" class="active"><a href="./HomePage.php?channel='.$channel->channel_id.'#latest"> <span class="channelPrivacyLevel"> </span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a></li>';
+	   		if($channel->channel_id==$_GET["channel"])
+		   		$channelstr.='<li class="active currentChannel">';
+		   	else
+		   		$channelstr.='<li class="active">';
+	   		if($channel->type=='private')
+	   			$channelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'#latest"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+	   		else
+	   			$channelstr.='<a href="./HomePage.php?channel='.$channel->channel_id.'#latest"><span class="channelPrivacyLevel"><i class="fa fa-unlock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+	   		$channelstr.='</li>';
 	   }
 			}
 		if ($directMessagesDetails!='')
 		{
 	   foreach($directMessagesDetails as $directMessage)
 	   {
-	   		$directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"> </span><span class="'.$directMessage->first_name.'" >'.htmlspecialchars($directMessage->first_name).'</span></a></li>';
+	   		$directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"><i class="fa fa-dot-circle-o"></i></span><span class="'.$directMessage->first_name.'" >'.htmlspecialchars($directMessage->first_name).' '.htmlspecialchars($directMessage->last_name).'</span></a></li>';
 	   }
 			}
 	}
@@ -60,14 +68,18 @@
 
 				<div class="row menu_leftMain_HP">
 					<div class="leftMenuContentWrapper_HP" >
-						<div class="row title_main_HP"> <h3> InterConn  </h3>
-							<span class="loggedIn_user"> <?php  echo $workspaceName; ?></span> <br>
-							<span class="loggedIn_user"><?php  echo $userDetails[0]->first_name; ?> </span><br>
-							<span class="loggedIn_user"> All Threads</span><br>
+						<div class="row title_main_HP"> 
+							<h3> InterConn  </h3>
 						</div>
-
+						<div class="loginDetails">
+							<span class="loggedIn_user"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name; ?> </span><br>
+							<span class="loggedIn_user"><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
+							
+							
+						</div>
+						<span class="categoryTitle_HP"><i class="fa fa-comments-o"></i> All Threads</span><br>
 						<div class="row channelsContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo count($channelDetails);?></span></div>
+							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo count($channelDetails);?></span><i class="fa fa-plus-square-o pull-right"></i></div>
 							<ul class="nav navbar-nav channels_UL_List">
 								<?php echo $channelstr;?>
 
@@ -76,7 +88,7 @@
 						</div>
 
 						<div class="row directMessageContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Direct Messages <span class="noOfDirectMessages_HP numberCount_badge"> <?php echo count($directMessagesDetails);?></span></div>
+							<div class="categoryTitle_HP channelTitle"> Direct Messages <span class="noOfDirectMessages_HP numberCount_badge"> <?php echo count($directMessagesDetails);?></span><i class="fa fa-plus-square-o pull-right"></i></div>
 							<ul class="nav navbar-nav directmessages_UL_List">
 						        <?php echo $directMessagestr;?>
 						    </ul>
@@ -90,19 +102,19 @@
 				</div>
 
 			</div>
-			<div class="col-offset mainContent_HP">
+			<div class="col-offset mainContent_HP">		
 					<?php
 						if(isset($_GET["channel"])){
 							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
 							if($currentChannel!='')
-								echo '<div class="headerSpace_HP row"> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+								echo '<div class="headerSpace_HP row"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'<i class="fa fa-star-o"></i><i class="fa fa-users"></i>created on,purpose,created by</div>';
 							else
 								echo '<div class="headerSpace_HP row">Channel doesn\'t exist </div>';
 						}
 					?>
 
 				<div class="row rightContent_wrapper_HP">
-
+					<div class="messagesList">
 					<?php
 						if(isset($_GET["channel"])){
 							$currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"]));
@@ -115,7 +127,7 @@
 								{
 									$msgStr.='<div class="row w3-panel w3-card-2 message"><div class="message_header"><b>';
 									$msgStr.=htmlspecialchars($message->first_name);
-									$msgStr.=' </b><span class="message_time">';
+									$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time">';
 									$msgStr.=$message->created_at;
 									$msgStr.='</span></div><div class="message_body">';
 									$msgStr.=htmlspecialchars($message->content);
@@ -132,11 +144,12 @@
 					<div id="latest">
 
 					</div>
+					</div>
 				</div>
 				<div class="footerSpace_HP row">
 					<form method="POST" action="./services/sendMessage.php">
 						<div class="input-group">
-					      <input type="text" class="form-control" autofocus placeholder="Type your message..." name="message">
+					      <input type="text" class="form-control" required autofocus placeholder="Type your message..." name="message">
 					      <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
 					      <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
 					      <span class="input-group-btn">

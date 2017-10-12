@@ -46,7 +46,7 @@ class SqlService{
 
 	public function getChannelMessages($channelid)
 	{
-		$sql="SELECT message.message_id,user.first_name,message.created_at,message.content FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at";
+		$sql="SELECT message.message_id,user.first_name,user.last_name,message.created_at,message.content FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at";
 		return $sql;
 	}
 
