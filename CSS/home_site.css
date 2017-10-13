@@ -88,6 +88,10 @@ html, body {
     background-color: #4c4b4b;
     color: #e6e6e6;
 }
+.currentDate
+{
+  text-align: center;
+}
 .navbar-nav li{
 	width: 100%;
 	color: #888C93;
@@ -158,24 +162,40 @@ html, body {
 .messageSet
 {
   padding-bottom: 1%;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    border-radius: 12px;
 }
 
 .message_body{
     overflow-wrap: break-word;
 }
+.addOnMessages
+{
+  margin-top: -0.5%;
+  padding-left: 3.1%;
+}
 
-
-
-/*body{
-	min-width: 1245px !important;
-	overflow-x: hidden;
-}*/
 .loginDetails
 {
     padding-left: 10%;
     padding-bottom: 9%;
 }
+pre
+{
+    font-family: Times New Roman;
 
+    display: block;
+    padding: 0px;
+    margin: 0 0 10px;
+    font-size: 12px;
+    line-height: normal;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #ffffff;
+    border: 0px;
+    border-radius: 0px;
+}
 
 .rightContent_wrapper_HP{
   position: absolute;

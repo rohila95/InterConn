@@ -137,22 +137,52 @@
 								foreach ($currentChannelMessages as $message)
 								{
 									$currentDate=$web_service->getFormatDate($message->created_at);
+									$currentTime=$web_service->getFormatTime($message->created_at);
 									if($currentDate==$today)
 										$currentDate='Today';
-									if($prevdate!=$currentDate)
-									{
-										$msgStr.='<div class="currentDate">'.$currentDate.'</div>';
-										$prevdate=$currentDate;
-									}
 									
-									$msgStr.='<div class="row messageSet"><img class="col-xs-2 userPic" src="./images/user.png" alt="User"><div class="col-offset-xs-1 message"><div class="message_header"><b>';
-									$msgStr.=htmlspecialchars($message->first_name);
-									$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
-									$msgStr.=$web_service->getFormatTime($message->created_at);
-									$msgStr.='</span></div><div class="message_body">';
-									$msgStr.=htmlspecialchars($message->content);
-									$msgStr.='</div></div></div>';
+									
+									if($prevUser=='' && $prevTime=='')
+									{
+										if($prevdate!=$currentDate)
+										{
+											$msgStr.='<div class="currentDate">'.$currentDate.'</div>';
+											$prevdate=$currentDate;
+										}
+										$msgStr.='<div class="row messageSet"><img class="col-xs-2 userPic" src="./images/user.png" alt="User"><div class="col-offset-xs-1 message"><div class="message_header"><b>';
+										$msgStr.=htmlspecialchars($message->first_name);
+										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
+										$msgStr.=$currentTime;
+										$msgStr.='</span></div>';
+										$msgStr.='<div class="message_body"><pre>'.htmlspecialchars($message->content).'</pre></div>';
+										$prevUser=$message->first_name;
+										$prevTime=$currentTime;
+
+									}
+									else if($prevUser==$message->first_name && $prevTime==$currentTime )
+									{
+										$msgStr.='<div class="message_body addOnMessages"><pre>'.htmlspecialchars($message->content).'</pre></div>';
+										
+									}
+									else if($prevUser!=$message->first_name || $prevTime!=$currentTime)
+									{
+										$msgStr.='</div></div>';
+										if($prevdate!=$currentDate)
+										{
+											$msgStr.='<div class="currentDate">'.$currentDate.'</div>';
+											$prevdate=$currentDate;
+										}
+										$msgStr.='<div class="row messageSet"><img class="col-xs-2 userPic" src="./images/user.png" alt="User"><div class="col-offset-xs-1 message"><div class="message_header"><b>';
+										$msgStr.=htmlspecialchars($message->first_name);
+										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
+										$msgStr.=$currentTime;
+										$msgStr.='</span></div>';
+										$msgStr.='<div class="message_body"><pre>'.htmlspecialchars($message->content).'</pre></div>';
+										$prevUser=$message->first_name;
+										$prevTime=$currentTime;
+									}
 								}
+								$msgStr.='</div></div>';
 							}
 							else
 							{
