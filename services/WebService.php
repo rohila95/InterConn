@@ -127,7 +127,9 @@ class WebService{
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
-              $array[]= $row;
+            // $row['date']= getFormatDate($row['created_at']);
+            // $row['time']= getFormatTime($row['created_at']);
+            $array[]= $row;
         }
     } else {
         return 'fail';
@@ -213,6 +215,20 @@ class WebService{
 
 
     $conn->close();
+  }
+
+  public function getFormatDate($timestamp)
+  {
+    $time = strtotime($timestamp);
+    $formattedDate = date("l, F jS, o", $time);
+    return $formattedDate;
+  }
+  
+  public function getFormatTime($timestamp)
+  {
+    $time = strtotime($timestamp);
+    $formattedDate = date("g:i A", $time);
+    return $formattedDate;
   }
 
 }

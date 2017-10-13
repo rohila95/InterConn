@@ -40,7 +40,7 @@ class SqlService{
 
 	public function getSpecificChannelDetails($channelid)
 	{
-		$sql="SELECT channel_id,channel_name,type,purpose,created_by,created_at FROM `channel` WHERE channel_id=".$channelid;
+		$sql="SELECT channel.channel_id,channel_name,type,purpose,created_by,created_at,count(user_channel.user_id) as usercount FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and channel.channel_id=".$channelid;
 		return $sql;
 	}
 

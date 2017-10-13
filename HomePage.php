@@ -40,7 +40,8 @@
 	   }
 			}
 	}
-	else {
+	if(!$_SESSION['loggedIn'] || !isset($_GET["channel"]) || $_GET["channel"]=='')
+	{
 		header("location: ./index.php?status=notloggedin");
 	}
 ?>
@@ -49,12 +50,9 @@
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="./scripts/home_sitescript.js"></script>
-
+		
+		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="./CSS/home_site.css">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -102,17 +100,24 @@
 				</div>
 
 			</div>
-			<div class="col-offset mainContent_HP">		
+			<div class="col-offset-xs-1 mainContent_HP">		
 					<?php
 						if(isset($_GET["channel"])){
 							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
 							if($currentChannel!='')
-								echo '<div class="headerSpace_HP row"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'<i class="fa fa-star-o"></i><i class="fa fa-users"></i>created on,purpose,created by</div>';
+							{
+								echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+								$user_count=$currentChannel[0]->usercount;
+								$purpose=$currentChannel[0]->purpose;
+							}
 							else
 								echo '<div class="headerSpace_HP row">Channel doesn\'t exist </div>';
 						}
 					?>
-
+					<div class='headerAddon_HP'>
+						<i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| purpose: <i><?php echo $purpose;?></i>
+					</div>
+					</div>
 				<div class="row rightContent_wrapper_HP">
 					<div class="messagesList">
 					<?php
@@ -121,17 +126,32 @@
 							// var_dump($currentChannelMessages);
 
 							$msgStr='';
+							$prevdate='';
+							$prevUser='';
+							$prevTime='';
 							if ($currentChannelMessages!=null)
 							{
+								date_default_timezone_set('America/New_York');
+								$time= time();
+								$today = date("l, F jS, o", $time);
 								foreach ($currentChannelMessages as $message)
 								{
-									$msgStr.='<div class="row w3-panel w3-card-2 message"><div class="message_header"><b>';
+									$currentDate=$web_service->getFormatDate($message->created_at);
+									if($currentDate==$today)
+										$currentDate='Today';
+									if($prevdate!=$currentDate)
+									{
+										$msgStr.='<div class="currentDate">'.$currentDate.'</div>';
+										$prevdate=$currentDate;
+									}
+									
+									$msgStr.='<div class="row messageSet"><img class="col-xs-2 userPic" src="./images/user.png" alt="User"><div class="col-offset-xs-1 message"><div class="message_header"><b>';
 									$msgStr.=htmlspecialchars($message->first_name);
-									$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time">';
-									$msgStr.=$message->created_at;
+									$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
+									$msgStr.=$web_service->getFormatTime($message->created_at);
 									$msgStr.='</span></div><div class="message_body">';
 									$msgStr.=htmlspecialchars($message->content);
-									$msgStr.='</div></div>';
+									$msgStr.='</div></div></div>';
 								}
 							}
 							else
@@ -148,23 +168,24 @@
 				</div>
 				<div class="footerSpace_HP row">
 					<form method="POST" action="./services/sendMessage.php">
+						<input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
+					    <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
 						<div class="input-group">
-					      <input type="text" class="form-control" required autofocus placeholder="Type your message..." name="message">
-					      <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
-					      <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
-					      <span class="input-group-btn">
+					      
+					      
+					      
 									<?php
 									if(isset($_GET["channel"])){
 										$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
 										if($currentChannel!='')
-											echo '<button class="btn btn-secondary" type="submit">send</button>';
+											echo '<input type="text" class="form-control inputMessage" required autofocus placeholder="Type your message..." name="message"><span class="input-group-btn"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
 										else
-											echo '<button class="btn btn-secondary disabled" type="submit">send</button>';
+											echo '<input type="text" class="form-control inputMessage" disabled autofocus placeholder="Type your message..." name="message"><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
 									}
 
 									?>
 
-					      </span>
+					      
 					    </div>
 				    </form>
 				</div>
