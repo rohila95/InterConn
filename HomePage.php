@@ -106,7 +106,10 @@
 							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
 							if($currentChannel!='')
 							{
-								echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+								if($channel->type=='private')
+	   								echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+	   							else
+									echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
 								$user_count=$currentChannel[0]->usercount;
 								$purpose=$currentChannel[0]->purpose;
 							}
