@@ -118,7 +118,7 @@
 						}
 					?>
 					<div class='headerAddon_HP'>
-						<i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| purpose: <i><?php echo $purpose;?></i>
+						<i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i>
 					</div>
 					</div>
 				<div class="row rightContent_wrapper_HP">
@@ -149,7 +149,7 @@
 									{
 										if($prevdate!=$currentDate)
 										{
-											$msgStr.='<div class="currentDate">'.$currentDate.'</div>';
+											$msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
 											$prevdate=$currentDate;
 										}
 										$msgStr.='<div class="row messageSet"><img class="col-xs-2 userPic" src="./images/user.png" alt="User"><div class="col-offset-xs-1 message"><div class="message_header"><b>';
@@ -172,7 +172,7 @@
 										$msgStr.='</div></div>';
 										if($prevdate!=$currentDate)
 										{
-											$msgStr.='<div class="currentDate">'.$currentDate.'</div>';
+											$msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
 											$prevdate=$currentDate;
 										}
 										$msgStr.='<div class="row messageSet"><img class="col-xs-2 userPic" src="./images/user.png" alt="User"><div class="col-offset-xs-1 message"><div class="message_header"><b>';
