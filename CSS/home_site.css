@@ -24,8 +24,7 @@ html, body {
 
 
 .verticle_navbar_HP{
-	   max-width: 9% !important;
-	   min-width: 215px !important;
+	   min-width: 11% !important;
 	   background-color: #222222;
       font-family: Times New Roman !important;
        font-size: 16px;
@@ -46,10 +45,15 @@ html, body {
 	  font-family: "Satisfy", cursive;
 }
 
-.userPic {
-    border-radius: 8px;
-    width: 5%;
-    height: 5%;
+.defUserPic {
+    border-radius: 4px;
+    width: 40% !important;
+    height: 40% !important;
+    color:white;
+    font-weight: bolder;
+    font-size: 16px;
+    background: blue;
+    padding:7%;
 }
 
 .headerSpace_HP{
@@ -97,7 +101,8 @@ html, body {
 {
   text-align: center;
   font-weight: bold;
-  width: 20%;
+  font-size: 12px;
+  width: 16%;
 }
 .navbar-nav li{
 	width: 100%;
@@ -164,8 +169,11 @@ html, body {
 }
 .message
 {
-	margin-left: 2%;
+	margin-left: -5%;
 }
+
+
+
 
 
 .message_body{
@@ -174,7 +182,7 @@ html, body {
 .addOnMessages
 {
   margin-top: -0.5%;
-  padding-left: 3.1%;
+
 }
 
 .loginDetails
@@ -196,6 +204,7 @@ pre
     background-color: #ffffff;
     border: 0px;
     border-radius: 0px;
+    white-space: pre-wrap;
 }
 
 .rightContent_wrapper_HP{
@@ -213,7 +222,7 @@ pre
 .footerSpace_HP {
     position: absolute;
     bottom: 0.2%;
-    width: 87.5%;
+    width: 87.7%;
     right: 1.82%;
 }
 .fa-paper-plane
@@ -228,6 +237,6 @@ pre
 .daySeperatorLine{
     border-bottom: 1px solid;
     border-bottom-color: #bcbcbd;
-    width: 40%;
+    width: 42%;
     margin-top: 0.7%;
 }

@@ -141,6 +141,14 @@
 								{
 									$currentDate=$web_service->getFormatDate($message->created_at);
 									$currentTime=$web_service->getFormatTime($message->created_at);
+									$shortName= htmlspecialchars($message->first_name)[0];
+									if(htmlspecialchars($message->last_name) == '' || htmlspecialchars($message->last_name)== null){
+										$shortName.= htmlspecialchars($message->first_name)[1];
+									}else{
+										$shortName.= htmlspecialchars($message->last_name)[0];
+									}
+									$defUserPicBGColorArr = ['#3F51B5','#2196F3','#00BCD4','#CDDC39','#FF5722'];
+									$defUserPicBGColor = $defUserPicBGColorArr[((int)$message->user_id)%5];
 									if($currentDate==$today)
 										$currentDate='Today';
 
@@ -152,7 +160,11 @@
 											$msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
 											$prevdate=$currentDate;
 										}
-										$msgStr.='<div class="row messageSet"><img class="col-xs-2 userPic" src="./images/user.png" alt="User"><div class="col-offset-xs-1 message"><div class="message_header"><b>';
+										
+										
+
+
+										$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. strtoupper($shortName) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
 										$msgStr.=htmlspecialchars($message->first_name);
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
@@ -175,7 +187,7 @@
 											$msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
 											$prevdate=$currentDate;
 										}
-										$msgStr.='<div class="row messageSet"><img class="col-xs-2 userPic" src="./images/user.png" alt="User"><div class="col-offset-xs-1 message"><div class="message_header"><b>';
+										$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. strtoupper($shortName) .'</div> </div><div class="col-xs-11 message"><div class="message_header"><b>';
 										$msgStr.=htmlspecialchars($message->first_name);
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
