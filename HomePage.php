@@ -211,9 +211,9 @@
 									if(isset($_GET["channel"])){
 										$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
 										if($currentChannel!='')
-											echo '<textarea class="form-control inputMessage" row="1" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
+											echo '<textarea class="form-control inputMessage" rows="1" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
 										else
-											echo '<textarea class="form-control inputMessage" row="1" disabled autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
+											echo '<textarea class="form-control inputMessage" rows="1" disabled autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
 									}
 
 									?>
