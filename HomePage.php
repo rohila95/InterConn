@@ -50,8 +50,6 @@
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./CSS/home_site.css">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -70,7 +68,7 @@
 							<h3> InterConn  </h3>
 						</div>
 						<div class="loginDetails">
-							<span class="loggedIn_user"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name; ?> </span><br>
+							<span class="loggedIn_user"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name.' '.$userDetails[0]->last_name; ?> </span><br>
 							<span class="loggedIn_user"><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
 
 
@@ -105,10 +103,10 @@
 						if(isset($_GET["channel"])){
 							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
 							if($currentChannel!='')
-							{
-								if($channel->type=='private')
+							{ 
+								if($currentChannel[0]->type=='private')
 	   								echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
-	   							else
+	   							else if($currentChannel[0]->type=='public')
 									echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
 								$user_count=$currentChannel[0]->usercount;
 								$purpose=$currentChannel[0]->purpose;
@@ -123,6 +121,7 @@
 					</div>
 				<div class="row rightContent_wrapper_HP">
 					<div class="messagesList">
+					<div>This is the begining of Chat....</div>
 					<?php
 						if(isset($_GET["channel"])){
 							$currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"]));
