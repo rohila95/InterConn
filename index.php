@@ -2,6 +2,8 @@
 	<head>
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="./scripts/sitescript.js"></script>
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -31,6 +33,15 @@
 								else if($_GET["status"]=='notloggedin')
 								{
 									echo 'You are not signed in. Please Sign In';
+								}
+								else if($_GET["status"]=='signout')
+								{
+									session_start();
+									unset($_SESSION['loggedIn']);
+									unset($_SESSION['emailid']);
+									unset($_SESSION['userid']);
+									session_unset();
+									session_destroy();
 								}
 							}
 						?>

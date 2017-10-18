@@ -161,15 +161,16 @@ class WebService{
     $conn->close();
   }
 
-  public function createChannelMessage($userid,$content,$channelid)
+  public function createChannelMessage($userid,$content,$channelid,$timestamp)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
     $userid=mysqli_real_escape_string($conn,$userid);
     $content=mysqli_real_escape_string($conn,$content);
     $channelid=mysqli_real_escape_string($conn,$channelid);
+    $timestamp=mysqli_real_escape_string($conn,$timestamp);
     $sql_service = new SqlService();
-    $message = $sql_service->createMessage($userid,$content);
+    $message = $sql_service->createMessage($userid,$content,$timestamp);
     $result = $conn->query($message);
     if ($result === TRUE) {
         $messageid = $conn->insert_id;

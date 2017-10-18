@@ -26,9 +26,9 @@
 		   	else
 		   		$channelstr.='<li class="active">';
 	   		if($channel->type=='private')
-	   			$channelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'#latest"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+	   			$channelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'#"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
 	   		else
-	   			$channelstr.='<a href="./HomePage.php?channel='.$channel->channel_id.'#latest"><span class="channelPrivacyLevel"><i class="fa fa-unlock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+	   			$channelstr.='<a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-unlock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
 	   		$channelstr.='</li>';
 	   }
 			}
@@ -49,6 +49,8 @@
 	<head>
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="./scripts/home_sitescript.js"></script>
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./CSS/home_site.css">
@@ -89,9 +91,13 @@
 						        <?php echo $directMessagestr;?>
 						    </ul>
 						</div>
-						<!-- <div class="row dummyBlock">
-
-						</div> -->
+						<div class="row signOut">
+							
+							<a href="./index.php?status=signout">
+								<span class="channelPrivacyLevel"><i class="fa fa-sign-out"></i></span>Sign Out
+							</a>
+							
+						</div>
 
 					</div>
 
@@ -140,11 +146,11 @@
 								{
 									$currentDate=$web_service->getFormatDate($message->created_at);
 									$currentTime=$web_service->getFormatTime($message->created_at);
-									$shortName= htmlspecialchars($message->first_name)[0];
-									if(htmlspecialchars($message->last_name) == '' || htmlspecialchars($message->last_name)== null){
-										$shortName.= htmlspecialchars($message->first_name)[1];
+									$shortName= $message->first_name[0];
+									if($message->last_name == '' || $message->last_name== null){
+										$shortName.= $message->first_name[1];
 									}else{
-										$shortName.= htmlspecialchars($message->last_name)[0];
+										$shortName.= $message->last_name[0];
 									}
 									$defUserPicBGColorArr = ['#3F51B5','#2196F3','#00BCD4','#CDDC39','#FF5722'];
 									$defUserPicBGColor = $defUserPicBGColorArr[((int)$message->user_id)%5];
@@ -163,7 +169,7 @@
 										
 
 
-										$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. strtoupper($shortName) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
+										$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
 										$msgStr.=htmlspecialchars($message->first_name);
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
@@ -205,9 +211,7 @@
 							echo $msgStr;
 						}
 					?>
-					<div id="latest">
-
-					</div>
+					
 					</div>
 				</div>
 				<div class="footerSpace_HP row">

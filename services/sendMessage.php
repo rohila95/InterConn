@@ -7,10 +7,11 @@
     $userid=$_POST['userid'];
     $channelid=$_POST['channelid'];
     $content=$_POST['message'];
+    $timestamp = date('Y-m-d H:i:s', time());
     if(trim($content)!='')
     {  
       $web_service = new WebService();
-      $insertStr = $web_service->createChannelMessage($userid,$content,$channelid);
+      $insertStr = $web_service->createChannelMessage($userid,$content,$channelid,$timestamp);
     }
-    header("location: ../HomePage.php?channel=".$channelid."#latest");
+    header("location: ../HomePage.php?channel=".$channelid);
 ?>

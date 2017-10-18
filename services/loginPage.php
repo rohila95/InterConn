@@ -25,7 +25,7 @@ if($_POST && check_login($_POST['email'],$_POST['password'])){
     }
     $conn->close();
 
-   header("location: ../HomePage.php?channel=".$channelid."#latest");
+   header("location: ../HomePage.php?channel=".$channelid);
     // exit();
     // session_write_close();
 }elseif($_POST) {
