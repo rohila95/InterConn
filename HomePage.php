@@ -77,7 +77,7 @@
 						</div>
 						<span class="categoryTitle_HP"><i class="fa fa-comments-o"></i> All Threads</span><br>
 						<div class="row channelsContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo count($channelDetails);?></span><i class="fa fa-plus-square-o pull-right"></i></div>
+							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo count($channelDetails);?></span><i class="fa fa-plus-square-o pull-right createNewChannelIcon"></i></div>
 							<ul class="nav navbar-nav channels_UL_List">
 								<?php echo $channelstr;?>
 
@@ -103,6 +103,22 @@
 
 				</div>
 
+			</div>
+			<div class="modal fade" id="createChannel" role="dialog">
+			    <div class="modal-dialog modal-lg">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Modal Header</h4>
+			        </div>
+			        <div class="modal-body">
+			          <p>This is a large modal.</p>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			    </div>
 			</div>
 			<div class="col-offset-xs-1 mainContent_HP">
 					<?php
