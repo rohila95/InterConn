@@ -72,5 +72,25 @@ class SqlService{
 		return $sql;
 	}
 
+	public function createChannel($channelName,$type,$purpose,$created_by,$timestamp)
+	{
+		$sql="INSERT INTO `InterConn`.`channel` (`channel_id`, `channel_name`, `type`, `purpose`, `created_by`, `created_at`) VALUES (NULL, '".$channelName."', '".$type."', '".$purpose."', '".$created_by."', '".$timestamp."')";
+		return $sql;
+	}
+
+	public function createChannelUserMap($userid,$channelid,$timestamp)
+	{
+		$sql="INSERT INTO `InterConn`.`user_channel` (`user_id`, `channel_id`, `joined_at`, `left_at`, `starred`) VALUES ( '".$userid."',  '".$channelid."',  '".$timestamp."', '0000-00-00 00:00:00', '0')";
+		return $sql;
+	}
+
+	public function registerNewUser($username,$first_name,$last_name,$email_id,$profile_pic,$password,$phone_number,$what_i_do,$status,$status_emoji,$skype)
+	{
+		$sql="INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`) VALUES (NULL, '".$username."', '".$first_name."', '".$last_name."', '".$email_id."', '".$profile_pic."', '".$password."', '".$phone_number."', '".$what_i_do."', '".$status."', ".$status_emoji.", '".$skype."')";
+		return $sql;
+	}
+
+	
+
 }
 ?>
