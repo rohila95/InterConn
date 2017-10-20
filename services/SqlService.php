@@ -90,7 +90,17 @@ class SqlService{
 		return $sql;
 	}
 
-	
+	public function userWorkspaceMap($userid,$workspaceid)
+	{
+		$sql="INSERT INTO `InterConn`.`user_workspace` (`user_id`, `workspace_id`) VALUES ('".$userid."', '".$workspaceid."')";
+		return $sql;
+	}
+
+	public function getDefaultWorkspaceChannels($workspaceid)
+	{
+		$sql="SELECT channel.channel_id FROM `workspace_channel`,`channel` where workspace_channel.channel_id=channel.channel_id and (channel.channel_name='general' or channel.channel_name='random') and workspace_id=$workspaceid";
+		return $sql;
+	}
 
 }
 ?>

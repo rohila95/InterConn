@@ -294,5 +294,62 @@ class WebService{
     $conn->close();
   }
 
+  public function registerNewUser($username,$first_name,$last_name,$email_id,$profile_pic,$password,$phone_number,$what_i_do,$status,$status_emoji,$skype,$workspaceid,$timestamp)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $username=mysqli_real_escape_string($conn,$username);
+    $first_name=mysqli_real_escape_string($conn,$first_name);
+    $last_name=mysqli_real_escape_string($conn,$last_name);
+    $email_id=mysqli_real_escape_string($conn,$email_id);
+    $profile_pic=mysqli_real_escape_string($conn,$profile_pic);
+    $password=mysqli_real_escape_string($conn,$password);
+    $phone_number=mysqli_real_escape_string($conn,$phone_number);
+    $what_i_do=mysqli_real_escape_string($conn,$what_i_do);
+    $status=mysqli_real_escape_string($conn,$status);
+    $status_emoji=mysqli_real_escape_string($conn,$status_emoji);
+    $skype=mysqli_real_escape_string($conn,$skype);
+    $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
+    $timestamp=mysqli_real_escape_string($conn,$timestamp);
+    $sql_service = new SqlService();
+    $user = $sql_service->registerNewUser($username,$first_name,$last_name,$email_id,$profile_pic,$password,$phone_number,$what_i_do,$status,$status_emoji,$skype);
+    $result = $conn->query($user);
+    if ($result === TRUE) {
+        $userid = $conn->insert_id;
+        echo "New record created successfully. Last inserted ID is: " . $last_id;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $userWorkspaceMap = $sql_service->userWorkspaceMap($userid,$workspaceid);
+    $result = $conn->query($userWorkspaceMap);
+    if ($result === TRUE) {
+        echo "New record created successfully. Last inserted ID is: " . $last_id;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    //insert into default channels
+    $defaultChannels = $sql_service->getDefaultWorkspaceChannels($workspaceid);
+    $result = $conn->query($defaultChannels);
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $channelid=$row['channel_id'];
+              $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
+              $innerresult = $conn->query($userChannelMap);
+              if ($innerresult === TRUE) {
+                  echo "New record created successfully. Last inserted ID is: " . $last_id;
+              } else {
+                  echo "Error: " . $sql . "<br>" . $conn->error;
+              }
+        }
+    } else {
+        return 'fail';
+    }
+    $conn->close();
+  }
+
+
+
 }
 ?>
