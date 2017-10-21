@@ -50,6 +50,7 @@
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="./scripts/home_sitescript.js"></script>
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -109,7 +110,8 @@
 			      <div class="modal-content">
 			        <div class="modal-header">
 			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 class="modal-title">Modal Header</h4>
+			          <h4 class="modal-title">Create Channel</h4>
+			          <h6>Channels are where yours members communicate.They're best when organized around a topic.</h6>
 			        </div>
 			        <div class="modal-body">
 			          <p>This is a large modal.</p>
@@ -190,14 +192,14 @@
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
 										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body"><pre>'.htmlspecialchars($message->content).'</pre></div>';
+										$msgStr.='<div class="message_body">'.htmlspecialchars($message->content).'</div>';
 										$prevUser=$message->first_name;
 										$prevTime=$currentTime;
 
 									}
 									else if($prevUser==$message->first_name && $prevTime==$currentTime )
 									{
-										$msgStr.='<div class="message_body addOnMessages"><pre>'.htmlspecialchars($message->content).'</pre></div>';
+										$msgStr.='<div class="message_body addOnMessages">'.htmlspecialchars($message->content).'</div>';
 
 									}
 									else if($prevUser!=$message->first_name || $prevTime!=$currentTime)
@@ -213,7 +215,7 @@
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
 										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body"><pre>'.htmlspecialchars($message->content).'</pre></div>';
+										$msgStr.='<div class="message_body">'.htmlspecialchars($message->content).'</div>';
 										$prevUser=$message->first_name;
 										$prevTime=$currentTime;
 									}

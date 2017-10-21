@@ -83,7 +83,7 @@
 				</div>
 			</div>
 			<div class="row newAccountWrapper">
-				Don't have an account yet?&nbsp;<a href="#">Create your account now</a>
+				Don't have an account yet?&nbsp;<a href="./register.html">Create your account now</a>
 			</div>
 		</div>
 		<div class="footer row">
