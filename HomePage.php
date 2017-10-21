@@ -111,7 +111,7 @@
 			        <div class="modal-header">
 			          <button type="button" class="close" data-dismiss="modal">&times;</button>
 			          <h4 class="modal-title">Create Channel</h4>
-			          <h6>Channels are where yours members communicate.They're best when organized around a topic</h6>
+			          <h6>Channels are where yours members communicate.They're best when organized around a topic.</h6>
 			        </div>
 			        <div class="modal-body">
 			          <p>This is a large modal.</p>
