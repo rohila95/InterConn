@@ -114,7 +114,26 @@
 			          <h6>Channels are where yours members communicate.They're best when organized around a topic.</h6>
 			        </div>
 			        <div class="modal-body">
-			          <p>This is a large modal.</p>
+			          <form>
+			          	<div class="row"> 
+					      	<div class="form-group">
+						        <input type="text" class="form-control email" name="email" required>
+						        <label class="form-control-placeholder" for="name">E-mail</label>
+					      	</div>
+					    </div>
+					    <div class="row">
+					      	<div class="form-group">
+						        <input type="password" class="form-control password" name="password" required>
+						        <label class="form-control-placeholder" for="password">Password</label>
+						    </div>
+						</div>
+					    <div class="row">
+					      	<div class="form-group">
+						        <input type="text" class="form-control whatIDo" name="whatIDo" required>
+						        <label class="form-control-placeholder" for="name">What I do</label>
+					      	</div>
+					    </div>
+			          </form>
 			        </div>
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
