@@ -4,7 +4,37 @@
 
 }
 
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.newChannelDetails
+{
+      margin-left: 0px;
+    margin-right: 0px;
 
+    padding-right: 30%;
+    padding-left: 30%;
+    padding-top: 5%;
+}
+.form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  opacity: 0.5;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+  font-size: 18px;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+  font-family: Times New Roman;
+  margin-left: -2%;
+}
 
   .menu_leftMain_HP{
       background-color: #222222;

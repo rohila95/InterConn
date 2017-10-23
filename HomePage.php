@@ -113,24 +113,24 @@
 			          <h4 class="modal-title">Create Channel</h4>
 			          <h6>Channels are where yours members communicate.They're best when organized around a topic.</h6>
 			        </div>
-			        <div class="modal-body">
+			        <div class="modal-body newChannelDetails">
 			          <form>
 			          	<div class="row"> 
 					      	<div class="form-group">
-						        <input type="text" class="form-control email" name="email" required>
-						        <label class="form-control-placeholder" for="name">E-mail</label>
+						        <input type="text" class="form-control email" name="name" required>
+						        <label class="form-control-placeholder" for="name">Name</label>
 					      	</div>
 					    </div>
 					    <div class="row">
 					      	<div class="form-group">
-						        <input type="password" class="form-control password" name="password" required>
-						        <label class="form-control-placeholder" for="password">Password</label>
+						        <input type="password" class="form-control password" name="purpose" required>
+						        <label class="form-control-placeholder" for="purpose">Purpose</label>
 						    </div>
 						</div>
 					    <div class="row">
 					      	<div class="form-group">
-						        <input type="text" class="form-control whatIDo" name="whatIDo" required>
-						        <label class="form-control-placeholder" for="name">What I do</label>
+						        <input type="text" class="form-control whatIDo" name="invites" required>
+						        <label class="form-control-placeholder" for="invite">Send invites to :</label>
 					      	</div>
 					    </div>
 			          </form>
