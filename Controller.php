@@ -1,21 +1,20 @@
 <?php
-
-
+session_start();
 include_once "./services/ReactionService.php";
 
-$reactionService = new ReactionService();
+$postInputObj= [];
+// to read the $_Post incoming values in to an object
+if($_POST){
+    foreach($_POST as $key => $value){
+        $postInput[$key] = $value;
+    }
+}
 
-if(isset($_POST["setReaction"])){
+if(isset($_POST["setReaction"])){ // to post a react by a
 
-
-	$reactionService -> postReaction();
-
-	$postInput={};
-	foreach($_POST as $key => $value){
-
-	}
-
-	
+    $reactionService = new ReactionService();
+    print_r(json_encode($postInputObj));
+    $reactionService -> postReaction($postInputObj);
 }
 
 

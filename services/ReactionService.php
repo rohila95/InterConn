@@ -5,35 +5,35 @@ include("SqlService.php");
 class ReactionService{
 
 // Method to take post a reaction to a particular message
-  public function postReaction()
+  public function postReaction($postInputObj)
   {
 
-    echo "hello from post";
-    // $database_connection = new DatabaseConnection();
-    // $conn = $database_connection->getConnection();
-    // $userid=mysqli_real_escape_string($conn,$userid);
+     $database_connection = new DatabaseConnection();
+     $conn = $database_connection->getConnection();
+     $userid= mysqli_real_escape_string($conn,$userid);
 
-    // $sql_service = new SqlService();
-    // $workspaceDetailsQuery = $sql_service->getWorkspace($userid);
-    // $result = $conn->query($workspaceDetailsQuery);
+     $sql_service = new SqlService();
+     $workspaceDetailsQuery = $sql_service->getWorkspace($userid);
+     $result = $conn->query($workspaceDetailsQuery);
 
 
-    // if ($result->num_rows > 0) {
+     if ($result->num_rows > 0) {
 
-    //     while($row = $result->fetch_assoc()) {
-    //         $array[]= $row;
-    //     }
-    // } else {
-    //     return 'fail';
-    // }
-    // return json_encode($array);
-    // $conn->close();
+         while($row = $result->fetch_assoc()) {
+             $array[]= $row;
+         }
+     } else {
+         return 'fail';
+     }
+     return json_encode($array);
+     $conn->close();
   }
 
 
   /**
   * Helper methods follows below
   */
+  
 
 
 
