@@ -7,6 +7,20 @@ function start()
 		{
 			$('#createChannel').modal('show');
 		});
+
+		$(".message_body").mouseenter(function() {
+			id=$(this).attr("id");
+			offset=$(this).offset();
+
+			$(".messageHoverButtons").css({'top': offset.top, 'left' : parseInt($(this).css("width"))})
+			$(".messageHoverButtons").show();
+			
+			console.log(id);
+
+		});
+		$(".message_body").mouseleave(function() {
+		  $(".messageHoverButtons").hide();
+		});
 	});
 }
 start();

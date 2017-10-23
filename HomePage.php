@@ -137,9 +137,16 @@
 			        </div>
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			          <button type="button" class="btn btn-default createChannelBtn" data-dismiss="modal">Create Channel</button>
 			        </div>
 			      </div>
 			    </div>
+			</div>
+			<div class="btn-group messageHoverButtons">
+				    <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-up"></i></button>
+				    <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-down"></i></button>
+				    <button type="button" class="btn btn-primary"><i class="fa fa-comments-o"></i></button>
+				    <button type="button" class="btn btn-primary"><i class="fa fa-reply"></i></button>
 			</div>
 			<div class="col-offset-xs-1 mainContent_HP">
 					<?php
@@ -211,14 +218,14 @@
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
 										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body">'.htmlspecialchars($message->content).'</div>';
+										$msgStr.='<div class="message_body" id="'.$message->message_id.'">'.htmlspecialchars($message->content).'</div>';
 										$prevUser=$message->first_name;
 										$prevTime=$currentTime;
 
 									}
 									else if($prevUser==$message->first_name && $prevTime==$currentTime )
 									{
-										$msgStr.='<div class="message_body addOnMessages">'.htmlspecialchars($message->content).'</div>';
+										$msgStr.='<div class="message_body addOnMessages" id="'.$message->message_id.'">'.htmlspecialchars($message->content).'</div>';
 
 									}
 									else if($prevUser!=$message->first_name || $prevTime!=$currentTime)
@@ -234,7 +241,7 @@
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
 										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body">'.htmlspecialchars($message->content).'</div>';
+										$msgStr.='<div class="message_body" id="'.$message->message_id.'">'.htmlspecialchars($message->content).'</div>';
 										$prevUser=$message->first_name;
 										$prevTime=$currentTime;
 									}
