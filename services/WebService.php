@@ -176,14 +176,14 @@ class WebService{
         $messageid = $conn->insert_id;
         // echo "New record created successfully. Last inserted ID is: " . $last_id;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $message . "<br>" . $conn->error;
     }
     $messageChannelMap = $sql_service->createChannelMessageMap($channelid,$messageid);
     $result = $conn->query($messageChannelMap);
     if ($result === TRUE) {
-        echo "New record created successfully. Last inserted ID is: " . $last_id;
+        echo "New record created successfully. Last inserted ID is: " ;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $messageChannelMap . "<br>" . $conn->error;
     }
 
 
@@ -204,14 +204,14 @@ class WebService{
         $messageid = $conn->insert_id;
         // echo "New record created successfully. Last inserted ID is: " . $last_id;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $message . "<br>" . $conn->error;
     }
     $messageChannelMap = $sql_service->createDirectMessageMap($receiverid,$messageid);
     $result = $conn->query($messageChannelMap);
     if ($result === TRUE) {
-        echo "New record created successfully. Last inserted ID is: " . $last_id;
+        echo "New record created successfully. Last inserted ID is: " ;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $messageChannelMap . "<br>" . $conn->error;
     }
     $conn->close();
   }
@@ -249,15 +249,15 @@ class WebService{
         $channelid = $conn->insert_id;
         // echo "New record created successfully. Last inserted ID is: " . $last_id;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $channel . "<br>" . $conn->error;
     }
 
     $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
     $result = $conn->query($userChannelMap);
     if ($result === TRUE) {
-        echo "New record created successfully. Last inserted ID is: " . $last_id;
+        echo "New record created successfully. Last inserted ID is: " ;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $userChannelMap . "<br>" . $conn->error;
     }
 
     foreach ($invites as $id) {
@@ -265,9 +265,9 @@ class WebService{
       $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
       $result = $conn->query($userChannelMap);
       if ($result === TRUE) {
-          echo "New record created successfully. Last inserted ID is: " . $last_id;
+          echo "New record created successfully. Last inserted ID is: ";
       } else {
-          echo "Error: " . $sql . "<br>" . $conn->error;
+          echo "Error: " . $userChannelMap . "<br>" . $conn->error;
       }
     }
     $conn->close();
@@ -286,9 +286,9 @@ class WebService{
       $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
       $result = $conn->query($userChannelMap);
       if ($result === TRUE) {
-          echo "New record created successfully. Last inserted ID is: " . $last_id;
+          echo "New record created successfully. Last inserted ID is: ";
       } else {
-          echo "Error: " . $sql . "<br>" . $conn->error;
+          echo "Error: " . $userChannelMap . "<br>" . $conn->error;
       }
     }
     $conn->close();
@@ -316,17 +316,17 @@ class WebService{
     $result = $conn->query($user);
     if ($result === TRUE) {
         $userid = $conn->insert_id;
-        echo "New record created successfully. Last inserted ID is: " . $last_id;
+        echo "New record created successfully. Last inserted ID is: ";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $user . "<br>" . $conn->error;
     }
 
     $userWorkspaceMap = $sql_service->userWorkspaceMap($userid,$workspaceid);
     $result = $conn->query($userWorkspaceMap);
     if ($result === TRUE) {
-        echo "New record created successfully. Last inserted ID is: " . $last_id;
+        echo "New record created successfully. Last inserted ID is: ";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $userWorkspaceMap . "<br>" . $conn->error;
     }
     //insert into default channels
     $defaultChannels = $sql_service->getDefaultWorkspaceChannels($workspaceid);
@@ -338,9 +338,9 @@ class WebService{
               $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
               $innerresult = $conn->query($userChannelMap);
               if ($innerresult === TRUE) {
-                  echo "New record created successfully. Last inserted ID is: " . $last_id;
+                  echo "New record created successfully. Last inserted ID is: ";
               } else {
-                  echo "Error: " . $sql . "<br>" . $conn->error;
+                  echo "Error: " . $userChannelMap . "<br>" . $conn->error;
               }
         }
     } else {
@@ -348,36 +348,6 @@ class WebService{
     }
     $conn->close();
   }
-
-
-  
-  public function createDirectMessage($userid,$content,$receiverid)
-  {
-    $database_connection = new DatabaseConnection();
-    $conn = $database_connection->getConnection();
-    $userid=mysqli_real_escape_string($conn,$userid);
-    $content=mysqli_real_escape_string($conn,$content);
-    $receiverid=mysqli_real_escape_string($conn,$receiverid);
-    $sql_service = new SqlService();
-    $message = $sql_service->createMessage($userid,$content);
-    $result = $conn->query($message);
-    if ($result === TRUE) {
-        $messageid = $conn->insert_id;
-        // echo "New record created successfully. Last inserted ID is: " . $last_id;
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    $messageChannelMap = $sql_service->createDirectMessageMap($receiverid,$messageid);
-    $result = $conn->query($messageChannelMap);
-    if ($result === TRUE) {
-        echo "New record created successfully. Last inserted ID is: " . $last_id;
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    $conn->close();
-  }
-
-
 
 }
 ?>

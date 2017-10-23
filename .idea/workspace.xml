@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="93e66bcb-f980-4c53-a607-cd86fbac036d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller.php" afterPath="$PROJECT_DIR$/Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/ReactionService.php" afterPath="$PROJECT_DIR$/services/ReactionService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/SqlService.php" afterPath="$PROJECT_DIR$/services/SqlService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/WebService.php" afterPath="$PROJECT_DIR$/services/WebService.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,18 +32,6 @@
         <splitter split-orientation="horizontal" split-proportion="0.8763251">
           <split-first>
             <leaf>
-              <file leaf-file-name="ReactionService.php" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/services/ReactionService.php">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="850">
-                      <caret line="50" column="4" lean-forward="false" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
-                      <folding>
-                        <marker date="1508789750000" expanded="true" signature="442:1655" ph="..." />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
               <file leaf-file-name="loginPage.php" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/services/loginPage.php">
                   <provider selected="true" editor-type-id="text-editor">
@@ -56,11 +42,11 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="WebService.php" pinned="false" current-in-tab="false">
+              <file leaf-file-name="WebService.php" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/services/WebService.php">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="590">
-                      <caret line="184" column="12" lean-forward="true" selection-start-line="182" selection-start-column="4" selection-end-line="184" selection-end-column="12" />
+                    <state relative-caret-position="840">
+                      <caret line="350" column="0" lean-forward="true" selection-start-line="350" selection-start-column="0" selection-end-line="350" selection-end-column="0" />
                       <folding />
                     </state>
                   </provider>
@@ -144,6 +130,7 @@
         <option value="$PROJECT_DIR$/services/SqlService.php" />
         <option value="$PROJECT_DIR$/Controller.php" />
         <option value="$PROJECT_DIR$/services/ReactionService.php" />
+        <option value="$PROJECT_DIR$/services/WebService.php" />
       </list>
     </option>
   </component>
@@ -239,7 +226,7 @@
       <option name="presentableId" value="Default" />
       <updated>1506399945139</updated>
       <workItem from="1506399948108" duration="2407000" />
-      <workItem from="1508720020013" duration="10882000" />
+      <workItem from="1508720020013" duration="11675000" />
     </task>
     <servers />
   </component>
@@ -276,7 +263,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13289000" />
+    <option name="totallyTimeSpent" value="14082000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -367,17 +354,9 @@
         <state relative-caret-position="493">
           <caret line="32" column="12" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
           <folding>
-            <marker date="1508721634000" expanded="true" signature="9084:9119" ph="..." />
-            <marker date="1508721634000" expanded="true" signature="10408:10443" ph="..." />
+            <marker date="1508789814000" expanded="true" signature="9106:9141" ph="..." />
+            <marker date="1508789814000" expanded="true" signature="10430:10465" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/loginPage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-200">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -426,14 +405,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/WebService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="184" column="12" lean-forward="true" selection-start-line="182" selection-start-column="4" selection-end-line="184" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -446,9 +417,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
           <caret line="50" column="4" lean-forward="false" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
-          <folding>
-            <marker date="1508789750000" expanded="true" signature="442:1655" ph="..." />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/loginPage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-200">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/WebService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="350" column="0" lean-forward="true" selection-start-line="350" selection-start-column="0" selection-end-line="350" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
