@@ -286,8 +286,9 @@ pre
   display:none;
   position: absolute;
   z-index: 100;
+  cursor: pointer;
 }
 
-.message_header,.message_body{
+.message_header,.message_body,.createNewChannelIcon{
   cursor: pointer;
 }

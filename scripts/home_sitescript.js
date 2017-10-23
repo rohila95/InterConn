@@ -18,9 +18,21 @@ function start()
 			console.log(id);
 
 		});
-		$(".message_body").mouseleave(function() {
-		  $(".messageHoverButtons").hide();
+		// $(".message_body").mouseleave(function() {
+		//   $(".messageHoverButtons").hide();
+		// });
+
+		$(".messageHoverButtons").hover(function(event) {
+			event.stopPropagation();
+			event.preventDefault();
 		});
+
+		$(".messageHoverButtons").click(function(event) {
+			alert("clicked");
+		});
+
+
+
 	});
 }
 start();

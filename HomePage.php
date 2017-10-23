@@ -127,6 +127,16 @@
 						        <label class="form-control-placeholder" for="purpose">Purpose</label>
 						    </div>
 						</div>
+						<div class="row">
+							<div class="form-group">
+								<label class="radio-inline">
+							      <input type="radio" name="optradio">Private
+							    </label>
+							    <label class="radio-inline">
+							      <input type="radio" name="optradio">Public
+							    </label>
+						    </div>
+						</div>
 					    <div class="row">
 					      	<div class="form-group">
 						        <input type="text" class="form-control whatIDo" name="invites" required>
