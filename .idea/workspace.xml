@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93e66bcb-f980-4c53-a607-cd86fbac036d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller.php" afterPath="$PROJECT_DIR$/Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HomePage.php" afterPath="$PROJECT_DIR$/HomePage.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/ReactionService.php" afterPath="$PROJECT_DIR$/services/ReactionService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/WebService.php" afterPath="$PROJECT_DIR$/services/WebService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/SqlService.php" afterPath="$PROJECT_DIR$/services/SqlService.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,14 +15,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.37745097">
+    <splitter split-orientation="horizontal" split-proportion="0.37285122">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="Controller.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Controller.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="340">
-                  <caret line="20" column="2" lean-forward="true" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+                <state relative-caret-position="374">
+                  <caret line="22" column="2" lean-forward="true" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
                   <folding />
                 </state>
               </provider>
@@ -31,46 +31,106 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
-          <file leaf-file-name="loginPage.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/services/loginPage.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
-                  <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ReactionService.php" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/services/ReactionService.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="476">
-                  <caret line="28" column="11" lean-forward="true" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
-                  <folding>
-                    <marker date="1508722049000" expanded="true" signature="306:744" ph="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="WebService.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/services/WebService.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="238">
-                  <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
+        <splitter split-orientation="horizontal" split-proportion="0.8763251">
+          <split-first>
+            <leaf>
+              <file leaf-file-name="ReactionService.php" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/services/ReactionService.php">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="850">
+                      <caret line="50" column="4" lean-forward="false" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
+                      <folding>
+                        <marker date="1508789750000" expanded="true" signature="442:1655" ph="..." />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="loginPage.php" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/services/loginPage.php">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="-200">
+                      <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="16" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="WebService.php" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/services/WebService.php">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="590">
+                      <caret line="184" column="12" lean-forward="true" selection-start-line="182" selection-start-column="4" selection-end-line="184" selection-end-column="12" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="sendMessage.php" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/services/sendMessage.php">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="153">
+                      <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="45" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+            </leaf>
+          </split-first>
+          <split-second>
+            <leaf>
+              <file leaf-file-name="SqlService.php" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/services/SqlService.php">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="532">
+                      <caret line="105" column="41" lean-forward="false" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="41" />
+                      <folding>
+                        <marker date="1508787028000" expanded="true" signature="108:187" ph="select * fro... user" />
+                        <marker date="1508787028000" expanded="true" signature="261:310" ph="select * fro... user" />
+                        <marker date="1508787028000" expanded="true" signature="382:624" ph="SELECT works... workspace" />
+                        <marker date="1508787028000" expanded="true" signature="703:991" ph="SELECT chann... channel" />
+                        <marker date="1508787028000" expanded="true" signature="1075:1398" ph="SELECT chann... channel" />
+                        <marker date="1508787028000" expanded="true" signature="1488:1691" ph="SELECT user.... user" />
+                        <marker date="1508787028000" expanded="true" signature="1792:2009" ph="SELECT chann... channel" />
+                        <marker date="1508787028000" expanded="true" signature="2101:2423" ph="SELECT messa... message" />
+                        <marker date="1508787028000" expanded="true" signature="2516:2910" ph="SELECT messa... message" />
+                        <marker date="1508787028000" expanded="true" signature="3003:3282" ph="INSERT INTO `InterConn`.`message`... " />
+                        <marker date="1508787028000" expanded="true" signature="3378:3492" ph="INSERT INTO `InterConn`.`message_channel`... " />
+                        <marker date="1508787028000" expanded="true" signature="3588:3703" ph="INSERT INTO `InterConn`.`message_direct`... " />
+                        <marker date="1508787028000" expanded="true" signature="3819:4030" ph="INSERT INTO `InterConn`.`channel`... " />
+                        <marker date="1508787028000" expanded="true" signature="4132:4321" ph="INSERT INTO `InterConn`.`user_channel`... " />
+                        <marker date="1508787028000" expanded="true" signature="4508:4890" ph="INSERT INTO `user`... " />
+                        <marker date="1508787028000" expanded="true" signature="4979:5090" ph="INSERT INTO `InterConn`.`user_workspace`... " />
+                        <marker date="1508787028000" expanded="true" signature="5182:5384" ph="SELECT chann... workspace_channel" />
+                        <marker date="1508787028000" expanded="true" signature="5614:5810" ph="INSERT INTO `InterConn`.`user_workspace`... " />
+                        <marker date="1508787028000" expanded="true" signature="5930:5978" ph="DELETE FROM " />
+                        <marker date="1508787028000" expanded="true" signature="5930:5979" ph="DELETE FROM " />
+                        <marker date="1508787028000" expanded="true" signature="5930:6012" ph="DELETE FROM " />
+                        <marker date="1508787028000" expanded="true" signature="5930:6013" ph="DELETE FROM " />
+                        <marker date="1508787028000" expanded="true" signature="5930:6041" ph="DELETE FROM " />
+                        <marker date="1508787028000" expanded="true" signature="5930:6042" ph="DELETE FROM " />
+                        <marker date="1508787028000" expanded="true" signature="5930:6068" ph="DELETE FROM " />
+                        <marker date="1508787028000" expanded="true" signature="5930:6069" ph="DELETE FROM " />
+                        <marker date="1508787028000" expanded="true" signature="5930:6094" ph="DELETE FROM " />
+                        <marker date="1508787028000" expanded="true" signature="6197:6337" ph="SELECT * FRO... message_reaction" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+            </leaf>
+          </split-second>
+        </splitter>
       </split-second>
     </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>getWorkspaceDetails</find>
+      <find>createDirect</find>
+      <find>createChannelMessage</find>
+      <find>$timestamp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -81,8 +141,9 @@
       <list>
         <option value="$PROJECT_DIR$/HomePage.php" />
         <option value="$PROJECT_DIR$/services/loginPage.php" />
-        <option value="$PROJECT_DIR$/services/ReactionService.php" />
+        <option value="$PROJECT_DIR$/services/SqlService.php" />
         <option value="$PROJECT_DIR$/Controller.php" />
+        <option value="$PROJECT_DIR$/services/ReactionService.php" />
       </list>
     </option>
   </component>
@@ -178,7 +239,7 @@
       <option name="presentableId" value="Default" />
       <updated>1506399945139</updated>
       <workItem from="1506399948108" duration="2407000" />
-      <workItem from="1508720020013" duration="3116000" />
+      <workItem from="1508720020013" duration="10882000" />
     </task>
     <servers />
   </component>
@@ -215,7 +276,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5523000" />
+    <option name="totallyTimeSpent" value="13289000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -230,7 +291,7 @@
     <frame x="-1928" y="-78" width="1936" height="1216" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13006397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10074627" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.49573562" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35701108" sideWeight="0.3891258" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -303,8 +364,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HomePage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="493">
+          <caret line="32" column="12" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
           <folding>
             <marker date="1508721634000" expanded="true" signature="9084:9119" ph="..." />
             <marker date="1508721634000" expanded="true" signature="10408:10443" ph="..." />
@@ -312,36 +373,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/WebService.php">
+    <entry file="file://$PROJECT_DIR$/services/loginPage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="-200">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/loginPage.php">
+    <entry file="file://$PROJECT_DIR$/services/SqlService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="532">
+          <caret line="105" column="41" lean-forward="false" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="41" />
+          <folding>
+            <marker date="1508787028000" expanded="true" signature="108:187" ph="select * fro... user" />
+            <marker date="1508787028000" expanded="true" signature="261:310" ph="select * fro... user" />
+            <marker date="1508787028000" expanded="true" signature="382:624" ph="SELECT works... workspace" />
+            <marker date="1508787028000" expanded="true" signature="703:991" ph="SELECT chann... channel" />
+            <marker date="1508787028000" expanded="true" signature="1075:1398" ph="SELECT chann... channel" />
+            <marker date="1508787028000" expanded="true" signature="1488:1691" ph="SELECT user.... user" />
+            <marker date="1508787028000" expanded="true" signature="1792:2009" ph="SELECT chann... channel" />
+            <marker date="1508787028000" expanded="true" signature="2101:2423" ph="SELECT messa... message" />
+            <marker date="1508787028000" expanded="true" signature="2516:2910" ph="SELECT messa... message" />
+            <marker date="1508787028000" expanded="true" signature="3003:3282" ph="INSERT INTO `InterConn`.`message`... " />
+            <marker date="1508787028000" expanded="true" signature="3378:3492" ph="INSERT INTO `InterConn`.`message_channel`... " />
+            <marker date="1508787028000" expanded="true" signature="3588:3703" ph="INSERT INTO `InterConn`.`message_direct`... " />
+            <marker date="1508787028000" expanded="true" signature="3819:4030" ph="INSERT INTO `InterConn`.`channel`... " />
+            <marker date="1508787028000" expanded="true" signature="4132:4321" ph="INSERT INTO `InterConn`.`user_channel`... " />
+            <marker date="1508787028000" expanded="true" signature="4508:4890" ph="INSERT INTO `user`... " />
+            <marker date="1508787028000" expanded="true" signature="4979:5090" ph="INSERT INTO `InterConn`.`user_workspace`... " />
+            <marker date="1508787028000" expanded="true" signature="5182:5384" ph="SELECT chann... workspace_channel" />
+            <marker date="1508787028000" expanded="true" signature="5614:5810" ph="INSERT INTO `InterConn`.`user_workspace`... " />
+            <marker date="1508787028000" expanded="true" signature="5930:5978" ph="DELETE FROM " />
+            <marker date="1508787028000" expanded="true" signature="5930:5979" ph="DELETE FROM " />
+            <marker date="1508787028000" expanded="true" signature="5930:6012" ph="DELETE FROM " />
+            <marker date="1508787028000" expanded="true" signature="5930:6013" ph="DELETE FROM " />
+            <marker date="1508787028000" expanded="true" signature="5930:6041" ph="DELETE FROM " />
+            <marker date="1508787028000" expanded="true" signature="5930:6042" ph="DELETE FROM " />
+            <marker date="1508787028000" expanded="true" signature="5930:6068" ph="DELETE FROM " />
+            <marker date="1508787028000" expanded="true" signature="5930:6069" ph="DELETE FROM " />
+            <marker date="1508787028000" expanded="true" signature="5930:6094" ph="DELETE FROM " />
+            <marker date="1508787028000" expanded="true" signature="6197:6337" ph="SELECT * FRO... message_reaction" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/sendMessage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/WebService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="184" column="12" lean-forward="true" selection-start-line="182" selection-start-column="4" selection-end-line="184" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="2" lean-forward="true" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+        <state relative-caret-position="374">
+          <caret line="22" column="2" lean-forward="true" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/ReactionService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="11" lean-forward="true" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
+        <state relative-caret-position="850">
+          <caret line="50" column="4" lean-forward="false" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
           <folding>
-            <marker date="1508722049000" expanded="true" signature="306:744" ph="..." />
+            <marker date="1508789750000" expanded="true" signature="442:1655" ph="..." />
           </folding>
         </state>
       </provider>
