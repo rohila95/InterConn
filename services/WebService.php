@@ -350,6 +350,34 @@ class WebService{
   }
 
 
+  
+  public function createDirectMessage($userid,$content,$receiverid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $content=mysqli_real_escape_string($conn,$content);
+    $receiverid=mysqli_real_escape_string($conn,$receiverid);
+    $sql_service = new SqlService();
+    $message = $sql_service->createMessage($userid,$content);
+    $result = $conn->query($message);
+    if ($result === TRUE) {
+        $messageid = $conn->insert_id;
+        // echo "New record created successfully. Last inserted ID is: " . $last_id;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $messageChannelMap = $sql_service->createDirectMessageMap($receiverid,$messageid);
+    $result = $conn->query($messageChannelMap);
+    if ($result === TRUE) {
+        echo "New record created successfully. Last inserted ID is: " . $last_id;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $conn->close();
+  }
+
+
 
 }
 ?>

@@ -19,26 +19,26 @@
    	$directMessagestr='';
 		if ($channelDetails!='')
 		{
-	   foreach($channelDetails as $channel)
-	   {
-	   		if($channel->channel_id==$_GET["channel"])
-		   		$channelstr.='<li class="active currentChannel">';
-		   	else
-		   		$channelstr.='<li class="active">';
-	   		if($channel->type=='private')
-	   			$channelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'#"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
-	   		else
-	   			$channelstr.='<a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-unlock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
-	   		$channelstr.='</li>';
-	   }
-			}
+           foreach($channelDetails as $channel)
+           {
+                if($channel->channel_id==$_GET["channel"])
+                    $channelstr.='<li class="active currentChannel">';
+                else
+                    $channelstr.='<li class="active">';
+                if($channel->type=='private')
+                    $channelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'#"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+                else
+                    $channelstr.='<a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-unlock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+                $channelstr.='</li>';
+           }
+        }
 		if ($directMessagesDetails!='')
 		{
-	   foreach($directMessagesDetails as $directMessage)
-	   {
-	   		$directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"><i class="fa fa-dot-circle-o"></i></span><span class="'.$directMessage->first_name.'" >'.htmlspecialchars($directMessage->first_name).' '.htmlspecialchars($directMessage->last_name).'</span></a></li>';
-	   }
-			}
+           foreach($directMessagesDetails as $directMessage)
+           {
+                $directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"><i class="fa fa-dot-circle-o"></i></span><span class="'.$directMessage->first_name.'" >'.htmlspecialchars($directMessage->first_name).' '.htmlspecialchars($directMessage->last_name).'</span></a></li>';
+           }
+        }
 	}
 	if(!$_SESSION['loggedIn'] || !isset($_GET["channel"]) || $_GET["channel"]=='')
 	{
