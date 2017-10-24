@@ -12,7 +12,7 @@
 }
 .message_body:hover {
   display:block;
-  background-color: #717274;
+  background-color: #dedddd;
 }
 .newChannelDetails
 {
@@ -292,8 +292,14 @@ pre
 .message_header,.message_body,.createNewChannelIcon{
   cursor: pointer;
 }
-
-
+.emojireaction
+{
+    background-color: #d5eff5;
+    border: 1px solid;
+    border-radius: 7px;
+    display: inline-block;
+    padding: 2px;
+}
 
 
 

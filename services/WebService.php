@@ -317,35 +317,35 @@ class WebService{
     if ($result === TRUE) {
         $userid = $conn->insert_id;
         echo "New record created successfully. Last inserted ID is: ";
+        $userWorkspaceMap = $sql_service->userWorkspaceMap($userid,$workspaceid);
+        $result = $conn->query($userWorkspaceMap);
+        if ($result === TRUE) {
+            echo "New record created successfully. Last inserted ID is: ";
+        } else {
+            echo "Error: " . $userWorkspaceMap . "<br>" . $conn->error;
+        }
+        //insert into default channels
+        $defaultChannels = $sql_service->getDefaultWorkspaceChannels($workspaceid);
+        $result = $conn->query($defaultChannels);
+        if ($result->num_rows > 0) {
+
+            while($row = $result->fetch_assoc()) {
+                  $channelid=$row['channel_id'];
+                  $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
+                  $innerresult = $conn->query($userChannelMap);
+                  if ($innerresult === TRUE) {
+                      echo "New record created successfully. Last inserted ID is: ";
+                  } else {
+                      echo "Error: " . $userChannelMap . "<br>" . $conn->error;
+                  }
+            }
+        } else {
+            return 'fail';
+        }
     } else {
         echo "Error: " . $user . "<br>" . $conn->error;
     }
-
-    $userWorkspaceMap = $sql_service->userWorkspaceMap($userid,$workspaceid);
-    $result = $conn->query($userWorkspaceMap);
-    if ($result === TRUE) {
-        echo "New record created successfully. Last inserted ID is: ";
-    } else {
-        echo "Error: " . $userWorkspaceMap . "<br>" . $conn->error;
-    }
-    //insert into default channels
-    $defaultChannels = $sql_service->getDefaultWorkspaceChannels($workspaceid);
-    $result = $conn->query($defaultChannels);
-    if ($result->num_rows > 0) {
-
-        while($row = $result->fetch_assoc()) {
-              $channelid=$row['channel_id'];
-              $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
-              $innerresult = $conn->query($userChannelMap);
-              if ($innerresult === TRUE) {
-                  echo "New record created successfully. Last inserted ID is: ";
-              } else {
-                  echo "Error: " . $userChannelMap . "<br>" . $conn->error;
-              }
-        }
-    } else {
-        return 'fail';
-    }
+   
     $conn->close();
   }
 
