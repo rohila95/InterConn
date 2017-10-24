@@ -184,6 +184,7 @@
 					<div>This is the begining of Chat....</div>
 					<?php
 						if(isset($_GET["channel"])){
+							// echo $web_service->getChannelMessages($_GET["channel"]);
 							$currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"]));
 							// var_dump($currentChannelMessages);
 
@@ -228,7 +229,16 @@
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
 										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
+										$msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
+										// print_r($message->emojis);
+										if($message->emojis!='0')
+											foreach ($message->emojis as $emoji)
+											{
+												$msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
+											}
+
+
+										$msgStr.=' </div></div>';
 										$prevUser=$message->first_name;
 										$prevTime=$currentTime;
 
@@ -251,7 +261,14 @@
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
 										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
+										$msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
+										// print_r($message->emojis);
+										if($message->emojis!='0')
+											foreach ($message->emojis as $emoji)
+											{
+												$msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
+											}
+										$msgStr.=' </div></div>';
 										$prevUser=$message->first_name;
 										$prevTime=$currentTime;
 									}
