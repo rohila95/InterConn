@@ -1,5 +1,6 @@
 function start()
 {
+	var curMessageId='';
 	$(document).ready(function() {
 		console.log("Inside ready"); 
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
@@ -9,7 +10,7 @@ function start()
 		});
 
 		$(".message_body").mouseenter(function() {
-			id=$(this).attr("id");
+            curMessageId = $(this).attr("id");
 			offset=$(this).offset();
 
 			$(".messageHoverButtons").css({'top': offset.top, 'left' : parseInt($(this).css("width"))})
@@ -18,17 +19,59 @@ function start()
 			console.log(id);
 
 		});
-		// $(".message_body").mouseleave(function() {
+
+		// $(".message").mouseleave(function() {
 		//   $(".messageHoverButtons").hide();
 		// });
 
-		$(".messageHoverButtons").hover(function(event) {
-			event.stopPropagation();
-			event.preventDefault();
-		});
+		// $(".messageHoverButtons").hover(function(event) {
+		// 	event.stopPropagation();
+		// 	event.preventDefault();
+		// });
 
 		$(".messageHoverButtons").click(function(event) {
-			alert("clicked");
+            event.preventDefault();
+            $(".messageHoverButtons").hide();
+            var emoji_idCLicked = $(this).attr("emojiid");
+            var data= {};
+
+            data["setReaction"] = "yes";
+            data["message_id"] = curMessageId;
+            data["emoji_id"] = emoji_idCLicked;
+
+            $.post('./Controller.php',data,function (data){
+
+                if($.trim(data).split("-")[0] == "success"){
+
+                	var curMsgEle = $(".message_body#"+curMessageId);
+					if($.trim(data).split("-")[1] == "inserted"){
+						// Increase the count, the name logic is to be taken care yet
+                        if (curMsgEle.find(".msg_reactionsec").find("[emojiid="+emoji_idCLicked+"]").length == 0 ){ //adding a reaction dynamically
+                        	var curReactionToattach = $("div").addClass("emojireaction").attr("emojiid",emoji_idCLicked);
+                        	var emojiPicToAppened = "";
+                        	if(emoji_idCLicked == "1"){
+                                emojiPicToAppened = "<i class=\"fa fa-thumbs-o-up\"></i><span class='reactionCount'>1</span>";
+							}else{
+                                emojiPicToAppened = "<i class=\"fa fa-thumbs-o-down\"></i><span class='reactionCount'>1</span>";
+							}
+                            curReactionToattach.find("[emojiid="+emoji_idCLicked+"]").append(emojiPicToAppened);
+                            curMsgEle.find(".msg_reactionsec").append(curReactionToattach);
+
+						}else{
+                            var curReactionEle = curMsgEle.find(".msg_reactionsec").find("[emojiid="+emoji_idCLicked+"]").find("span.reactionCount");
+                           var curReactionCount = praseInt(curReactionEle.html());
+                            curReactionEle.html(++curReactionCount);
+						}
+					}else{
+						// Decrease the count, the name logic is to be taken care yet
+
+					}
+
+                }else{
+                    alert("You have reacted to the message, but the System didn't quite capture that. Please try again.");
+                }
+            });
+
 		});
 
 

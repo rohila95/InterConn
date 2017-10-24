@@ -153,8 +153,8 @@
 			    </div>
 			</div>
 			<div class="btn-group messageHoverButtons">
-				    <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-up"></i></button>
-				    <button type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-down"></i></button>
+				    <button emojiid="1" type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-up"></i></button>
+				    <button emojiid="2" type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-down"></i></button>
 				    <button type="button" class="btn btn-primary"><i class="fa fa-comments-o"></i></button>
 				    <button type="button" class="btn btn-primary"><i class="fa fa-reply"></i></button>
 			</div>
@@ -228,14 +228,14 @@
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
 										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body" id="'.$message->message_id.'">'.htmlspecialchars($message->content).'</div>';
+										$msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
 										$prevUser=$message->first_name;
 										$prevTime=$currentTime;
 
 									}
 									else if($prevUser==$message->first_name && $prevTime==$currentTime )
 									{
-										$msgStr.='<div class="message_body addOnMessages" id="'.$message->message_id.'">'.htmlspecialchars($message->content).'</div>';
+										$msgStr.='<div class="message_body addOnMessages" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
 
 									}
 									else if($prevUser!=$message->first_name || $prevTime!=$currentTime)
@@ -251,7 +251,7 @@
 										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
 										$msgStr.=$currentTime;
 										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body" id="'.$message->message_id.'">'.htmlspecialchars($message->content).'</div>';
+										$msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
 										$prevUser=$message->first_name;
 										$prevTime=$currentTime;
 									}

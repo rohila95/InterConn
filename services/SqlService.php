@@ -121,9 +121,51 @@ class SqlService{
         return $sql;
     }
 
-
-
-
+	public function getSpecificMessageReactionEmojiCount( $messageid,$emojid){
+        $sql= "SELECT COUNT (*) FROM `InterConn`.`message_reaction` WHERE `message_reaction`.`message_id` = ".$messageid." and `message_reaction`.`emoji_id`=".$emojid;
+        return $sql;
+	}
 
 }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

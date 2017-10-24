@@ -16,7 +16,7 @@ if(isset($_POST["setReaction"])){ // to post a react by a
 
     $reactionService = new ReactionService();
     print_r(json_encode($postInputObj));
-    $reactionService -> postReactionIfNotExist($postInputObj);
+    return $reactionService -> postReactionIfNotExist($postInputObj);
 }
 
 

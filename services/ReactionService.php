@@ -28,6 +28,7 @@ class ReactionService{
 
          $deleteMessageReactionSQLQuery =  $sql_service->deleteIfMessageReactionExist($userid, $messageid,$emojid);
          $conn->query($deleteMessageReactionSQLQuery);
+
          if ($conn->affected_rows() > 0) {
              return "success-deleted";
          }
@@ -38,7 +39,6 @@ class ReactionService{
          if ($isInserted === TRUE) {
              return "success-inserted";
          }
-
      }
       $conn->close();
       return 'fail';
