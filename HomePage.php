@@ -71,8 +71,13 @@
 							<h3> InterConn  </h3>
 						</div>
 						<div class="loginDetails">
-							<span class="loggedIn_user"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name.' '.$userDetails[0]->last_name; ?> </span><br>
+							<span class="loggedIn_user"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name.' '.$userDetails[0]->last_name; ?>
+                                <a class="signOut" href="./index.php?status=signout" title="Sign Out">
+                                    <span class="channelPrivacyLevel" title="Sign Out"><i class="fa fa-sign-out"></i></span>
+                                </a></span>
+                            <br>
 							<span class="loggedIn_user"><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
+
 
 
 						</div>
@@ -92,13 +97,7 @@
 						        <?php echo $directMessagestr;?>
 						    </ul>
 						</div>
-						<div class="row signOut">
-							
-							<a href="./index.php?status=signout">
-								<span class="channelPrivacyLevel"><i class="fa fa-sign-out"></i></span>Sign Out
-							</a>
-							
-						</div>
+
 
 					</div>
 
