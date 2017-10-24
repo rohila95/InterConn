@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("database_connect.php");
-include("SqlService.php");
+include_once("database_connect.php");
+include_once("SqlService.php");
 
 
 class ReactionService{
