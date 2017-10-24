@@ -16,7 +16,7 @@ function start()
 			$(".messageHoverButtons").css({'top': offset.top, 'left' : parseInt($(this).css("width"))})
 			$(".messageHoverButtons").show();
 			
-			console.log(id);
+			//console.log(curMessageId);
 
 		});
 
@@ -29,7 +29,7 @@ function start()
 		// 	event.preventDefault();
 		// });
 
-		$(".messageHoverButtons").click(function(event) {
+		$(".messageHoverButtons button").click(function(event) {
             event.preventDefault();
             $(".messageHoverButtons").hide();
             var emoji_idCLicked = $(this).attr("emojiid");
@@ -47,23 +47,32 @@ function start()
 					if($.trim(data).split("-")[1] == "inserted"){
 						// Increase the count, the name logic is to be taken care yet
                         if (curMsgEle.find(".msg_reactionsec").find("[emojiid="+emoji_idCLicked+"]").length == 0 ){ //adding a reaction dynamically
-                        	var curReactionToattach = $("div").addClass("emojireaction").attr("emojiid",emoji_idCLicked);
+                        	var curReactionToattach = $("<div>").addClass("emojireaction").attr("emojiid",emoji_idCLicked);
                         	var emojiPicToAppened = "";
                         	if(emoji_idCLicked == "1"){
                                 emojiPicToAppened = "<i class=\"fa fa-thumbs-o-up\"></i><span class='reactionCount'>1</span>";
 							}else{
                                 emojiPicToAppened = "<i class=\"fa fa-thumbs-o-down\"></i><span class='reactionCount'>1</span>";
 							}
-                            curReactionToattach.find("[emojiid="+emoji_idCLicked+"]").append(emojiPicToAppened);
+                            curReactionToattach.append(emojiPicToAppened);
                             curMsgEle.find(".msg_reactionsec").append(curReactionToattach);
 
 						}else{
-                            var curReactionEle = curMsgEle.find(".msg_reactionsec").find("[emojiid="+emoji_idCLicked+"]").find("span.reactionCount");
-                           var curReactionCount = praseInt(curReactionEle.html());
-                            curReactionEle.html(++curReactionCount);
+                        	var curReactionEle = curMsgEle.find(".msg_reactionsec").find("[emojiid="+emoji_idCLicked+"]");
+                            var curReactionCount = parseInt(curReactionEle.find("span.reactionCount").html());
+                            curReactionEle.find("span.reactionCount").html(++curReactionCount);
 						}
 					}else{
 						// Decrease the count, the name logic is to be taken care yet
+
+                        var curReactionEle = curMsgEle.find(".msg_reactionsec").find("[emojiid="+emoji_idCLicked+"]");
+                        var curReactionCount = parseInt(curReactionEle.find("span.reactionCount").html());
+
+						if(curReactionCount <= 1 ){
+                            curReactionEle.remove();
+						}else{
+                            curReactionEle.find("span.reactionCount").html(--curReactionCount);
+						}
 
 					}
 

@@ -18,9 +18,9 @@ $reactionService = new ReactionService();
 $webService = new WebService();
 if(isset($_POST["setReaction"])){ // to post a react by a
 
-    
-    print_r(json_encode($postInputObj));
-    $reactionService -> postReactionIfNotExist($postInputObj);
+    // echo "inside controller";
+    //print_r(json_encode($postInputObj));
+   $reactionService -> postReactionIfNotExist($postInputObj, $_SESSION['userid']);
 }
 
 if(isset($_POST["register"])){ // to post a react by a
