@@ -126,46 +126,18 @@ class SqlService{
         return $sql;
 	}
 
+
+	public function getProfileDetails($user_id){
+		$sql = "SELECT * FROM `InterConn`.`user` WHERE `user`.`user_id` = ". $user_id;
+		return $sql;
+	}
+
+	public function getPublicChannels($user_id){
+		// echo $user
+		$sql="SELECT * FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and user_channel.user_id=".$user_id." and channel.type='public'";
+		return $sql;
+	}
+
+
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

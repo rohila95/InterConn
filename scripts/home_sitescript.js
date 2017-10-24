@@ -2,7 +2,7 @@ function start()
 {
 	var curMessageId='';
 	$(document).ready(function() {
-		console.log("Inside ready"); 
+		console.log("Inside ready");
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
 		$('.createNewChannelIcon').click(function()
 		{
@@ -15,10 +15,14 @@ function start()
 
 			$(".messageHoverButtons").css({'top': offset.top, 'left' : parseInt($(this).css("width"))})
 			$(".messageHoverButtons").show();
-			
+
 			//console.log(curMessageId);
 
 		});
+
+		$(".loggedIn_user").click(function(){
+			window.location.href = "ProfilePage.php";
+		})
 
 		// $(".message").mouseleave(function() {
 		//   $(".messageHoverButtons").hide();

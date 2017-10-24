@@ -345,9 +345,56 @@ class WebService{
     } else {
         echo "Error: " . $user . "<br>" . $conn->error;
     }
-   
+
     $conn->close();
   }
+
+
+  public function getProfileDetails($userid){
+
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $sql_service = new SqlService();
+    $profileDetails = $sql_service->getProfileDetails($userid);
+    $result = $conn->query($profileDetails);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+            $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+
+  }
+
+  public function getPublicChannelsDetails($userid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $sql_service = new SqlService();
+    $channelsDetailsQuery = $sql_service->getPublicChannels($userid);
+    $result = $conn->query($channelsDetailsQuery);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+            $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
+
 
 }
 ?>
