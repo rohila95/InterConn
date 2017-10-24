@@ -9,8 +9,15 @@
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="./CSS/site.css">
+		<link rel="stylesheet" href="./CSS/colisiondetect.css">
+		<script type="text/javascript" src="./scripts/d3/d3.js"></script>
+	    <script type="text/javascript" src="./scripts/d3/d3.geom.js"></script>
+	    <script type="text/javascript" src="./scripts/d3/d3.layout.js"></script>
+	   	<script type="text/javascript" src="./scripts/collisiondetect.js"></script>
 	</head>
 	<body>
+		<div id="collisiondetect_wrapper" style="position: absolute;"> </div>
+
 		<div class="container mainLoginWrapper well w3-panel w3-card-4">
 			<div class="row">
 				<div class="col-sm-12 logo">
