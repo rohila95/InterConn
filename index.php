@@ -90,7 +90,8 @@
 				</div>
 			</div>
 			<div class="row newAccountWrapper">
-				Don't have an account yet?&nbsp;<a href="./register.html">Create your account now</a>
+				<div class="col-sm-12">
+				Don't have an account yet?&nbsp;<a href="./register.html">Create your account now</a> </div>
 			</div>
 		</div>
 		<div class="footer row">
