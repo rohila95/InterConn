@@ -129,6 +129,21 @@ class WebService{
         while($row = $result->fetch_assoc()) {
             // $row['date']= getFormatDate($row['created_at']);
             // $row['time']= getFormatTime($row['created_at']);
+          $messageid=$row['message_id'];
+          $emojiArray=[];
+          $messageReactions = $sql_service->getMessageReactions($messageid);
+          $innerresult = $conn->query($messageReactions);
+          if ($innerresult->num_rows > 0) {
+            while($innerrow = $innerresult->fetch_assoc()) {
+              $emojiArray[]=$innerrow;
+            }
+            $row['emojis']=$emojiArray;
+          } 
+
+          else {
+            $row['emojis']=0;
+          }
+          
             $array[]= $row;
         }
     } else {

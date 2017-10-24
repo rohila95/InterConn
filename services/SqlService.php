@@ -49,6 +49,12 @@ class SqlService{
 		$sql="SELECT message.message_id,user.user_id,user.first_name,user.last_name,message.created_at,message.content FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at";
 		return $sql;
 	}
+	public function getMessageReactions($messageid)
+	{
+		$sql="SELECT count(*) as count,message_reaction.emoji_id,message_id,emoji.emoji_code,emoji.emoji_pic FROM `message_reaction`,`emoji` where message_reaction.emoji_id=emoji.emoji_id and message_id=".$messageid." group by message_id, message_reaction.emoji_id";
+		return $sql;
+	}
+
 
 	public function getDirectMessages($userid,$messagerUserid)
 	{
