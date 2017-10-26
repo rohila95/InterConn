@@ -8,15 +8,13 @@ $loggedInId="";
 if($_POST && check_login($_POST['email'],$_POST['password'])){
     $_SESSION['emailid'] = $_POST['email'];
     $_SESSION['loggedIn'] = True;
-
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
-    
+
     $sql_service = new SqlService();
     $getUserDetails = $sql_service->getChannelGeneral($_SESSION['userid']);
     $result = $conn->query($getUserDetails);
     if ($result->num_rows > 0) {
-
         while($row = $result->fetch_assoc()) {
             $channelid=$row['channel_id'];
         }
