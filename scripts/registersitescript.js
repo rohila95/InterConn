@@ -4,7 +4,7 @@ function start()
 		console.log("Inside ready"); 
 		$( ".createUser" ).on("click",function(e) {
 		console.log("in clickkk");
-		e.preventDefault();
+		// e.preventDefault();
 		var myForm = document.getElementById('registerForm');
 	   var formData = new FormData(myForm),
 	   convertedJSON = {},
