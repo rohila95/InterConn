@@ -71,8 +71,13 @@
 							<h3> InterConn  </h3>
 						</div>
 						<div class="loginDetails">
-							<span class="loggedIn_user"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name.' '.$userDetails[0]->last_name; ?> </span><br>
+							<span class="loggedIn_user"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name.' '.$userDetails[0]->last_name; ?>
+                                <a class="signOut" href="./index.php?status=signout" title="Sign Out">
+                                    <span class="channelPrivacyLevel" title="Sign Out"><i class="fa fa-sign-out"></i></span>
+                                </a></span>
+                            <br>
 							<span class="loggedIn_user"><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
+
 
 
 						</div>
@@ -92,13 +97,15 @@
 						        <?php echo $directMessagestr;?>
 						    </ul>
 						</div>
+
 						<div class="row signOut">
-							
+
 							<a href="./index.php?status=signout">
 								<span class="channelPrivacyLevel"><i class="fa fa-sign-out"></i></span>Sign Out
 							</a>
-							
+
 						</div>
+
 
 					</div>
 
@@ -115,7 +122,7 @@
 			        </div>
 			        <div class="modal-body newChannelDetails">
 			          <form>
-			          	<div class="row"> 
+			          	<div class="row">
 					      	<div class="form-group">
 						        <input type="text" class="form-control email" name="name" required>
 						        <label class="form-control-placeholder" for="name">Name</label>
@@ -163,7 +170,7 @@
 						if(isset($_GET["channel"])){
 							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
 							if($currentChannel!='')
-							{ 
+							{
 								if($currentChannel[0]->type=='private')
 	   								echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
 	   							else if($currentChannel[0]->type=='public')
@@ -220,8 +227,8 @@
 											$msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
 											$prevdate=$currentDate;
 										}
-										
-										
+
+
 
 
 										$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
@@ -282,7 +289,7 @@
 							echo $msgStr;
 						}
 					?>
-					
+
 					</div>
 				</div>
 				<div class="footerSpace_HP row">

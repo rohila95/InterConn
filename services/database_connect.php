@@ -3,7 +3,7 @@ class DatabaseConnection{
 
     // Database details
 
-    //for local
+    // //for local
     // private $host = "handson-mysql";
     // private $db_name = "InterConn";
     // private $username = "user";

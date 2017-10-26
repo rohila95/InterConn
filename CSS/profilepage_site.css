@@ -1,0 +1,80 @@
+.channelsProfilePage{
+	color: blue;
+}
+.mainLoginWrapper
+{
+	width:50%;
+	margin-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    padding-top: 1%;
+}
+.logo
+{
+	text-align: center;
+	font-family: buxton sketch;
+	font-size: 56px;
+}
+.footer
+{
+    position: fixed;
+    bottom: 0;
+    width: 101%;
+    text-align: center;
+    background-color: rgb(34, 34, 34);
+    color: #827e7e;
+    font-size: 14px;
+    font-weight: lighter;
+    font-style: italic;
+}
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  opacity: 0.5;
+}
+.profile-pic {
+    border-radius: 15%;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all .3s ease;
+    text-decoration: none;
+}
+
+.profile-pic:hover {
+    background-color: rgba(0,0,0,.5);
+    z-index: 10000;
+    color: #fff;
+    transition: all .3s ease;
+    text-decoration: none;
+}
+
+.profile-pic span {
+    display: inline-block;
+    padding-top: 4.5em;
+    padding-bottom: 4.5em;
+}
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+  font-size: 18px;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+  font-family: Times New Roman;
+  margin-left: -2%;
+}
+/*#e87e7e;*/
