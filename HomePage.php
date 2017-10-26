@@ -98,13 +98,6 @@
 						    </ul>
 						</div>
 
-						<div class="row signOut">
-
-							<a href="./index.php?status=signout">
-								<span class="channelPrivacyLevel"><i class="fa fa-sign-out"></i></span>Sign Out
-							</a>
-
-						</div>
 
 
 					</div>
@@ -160,9 +153,9 @@
 			    </div>
 			</div>
 			<div class="btn-group messageHoverButtons">
-				    <button emojiid="1" type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-up"></i></button>
-				    <button emojiid="2" type="button" class="btn btn-primary"><i class="fa fa-thumbs-o-down"></i></button>
-				    <button type="button" class="btn btn-primary"><i class="fa fa-comments-o"></i></button>
+				    <button emojiid="1" type="button" class="btn btn-primary" title="Like"><i class="fa fa-thumbs-o-up"></i></button>
+				    <button emojiid="2" type="button" class="btn btn-primary" title="Dislike"><i class="fa fa-thumbs-o-down"></i></button>
+				    <button type="button" class="btn btn-primary" title=""><i class="fa fa-comments-o"></i></button>
 				    <button type="button" class="btn btn-primary"><i class="fa fa-reply"></i></button>
 			</div>
 			<div class="col-offset-xs-1 mainContent_HP">
