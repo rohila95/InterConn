@@ -109,6 +109,7 @@ html, body {
 .loggedIn_user{
 	color: yellow;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .channelsContainer_menu_HP, .directMessageContainer_menu_HP{
@@ -295,11 +296,15 @@ pre
 }
 .emojireaction
 {
-    background-color: #d5eff5;
+    background-color: #7a7db7;
     border: 1px solid;
-    border-radius: 7px;
+    border-radius: 4px;
     display: inline-block;
-    padding: 2px;
+    padding: 2px 2px 2px 4px;
+    height: 28px;
+    min-width: 40px;
+    align-items: center;
+    color: white;
 }
 
 
