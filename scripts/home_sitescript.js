@@ -21,7 +21,8 @@ function start()
 		});
 
 		$(".loggedIn_user").click(function(){
-			window.location.href = "ProfilePage.php";
+			var id= $('.loggedIn_user').attr('id');
+			window.location.href = "ProfilePage.php?userid="+id;
 		})
 
 		// $(".message").mouseleave(function() {

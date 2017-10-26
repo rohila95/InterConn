@@ -11,7 +11,7 @@ class ReactionService{
       //print_r($postInputObj);
 
        //echo "hello".$useridFromSession;
-      $userid = $useridFromSession;
+     $userid = $useridFromSession;
      $database_connection = new DatabaseConnection();
      $conn = $database_connection->getConnection();
      $userid = mysqli_real_escape_string($conn,$userid);
@@ -31,14 +31,16 @@ class ReactionService{
          $conn->query($deleteMessageReactionSQLQuery);
 
          if ($conn->affected_rows > 0) {
+            
              return "success-deleted";
          }
      } else { // there isn't this reaction by the current user, insert one
          $timestamp = date('Y-m-d H:i:s', time());
          $insertMessageReactionSQLQuery =  $sql_service->insertMessageReaction($userid, $messageid,$emojid,$timestamp);
-         //echo $insertMessageReactionSQLQuery;
+        //echo $insertMessageReactionSQLQuery;
          $isInserted = $conn->query($insertMessageReactionSQLQuery);
          if ($isInserted === TRUE) {
+        
              return "success-inserted";
          }
      }

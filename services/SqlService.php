@@ -20,6 +20,11 @@ class SqlService{
 		$sql="SELECT workspace.workspace_id,workspace.workspace_name,workspace.workspace_domain,workspace.created_by,workspace.created_at FROM `workspace`,`user_workspace` where user_workspace.workspace_id=workspace.workspace_id and user_workspace.user_id=".$userid;
 		return $sql;
 	}
+	public function getAllWorkspaceDetails()
+	{
+		$sql="SELECT * FROM `workspace`";
+		return $sql;
+	}
 
 	public function getChannels($userid)
 	{

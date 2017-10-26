@@ -71,12 +71,12 @@
 							<h3> InterConn  </h3>
 						</div>
 						<div class="loginDetails">
-							<span class="loggedIn_user"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name.' '.$userDetails[0]->last_name; ?>
+							<span class="loggedIn_user" id=<?php  echo '"'.$userDetails[0]->user_id.'"'?>><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name.' '.$userDetails[0]->last_name; ?>
                                 <a class="signOut" href="./index.php?status=signout" title="Sign Out">
                                     <span class="channelPrivacyLevel" title="Sign Out"><i class="fa fa-sign-out"></i></span>
                                 </a></span>
                             <br>
-							<span class="loggedIn_user"><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
+							<span class="loggedIn_workspace"><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
 
 
 

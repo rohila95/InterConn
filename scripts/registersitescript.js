@@ -22,7 +22,7 @@ function start()
 	        data: {'register':stringData},
 	        dataType: 'text',
 	        success: function (data) {
-	        	console.log(data);
+	        	// console.log(data);
 	        	if (data.includes("Error"))
 	        	{
 	        		$('.uniqueEmail').html('Email Id already exists. Try with different Id.');
@@ -35,8 +35,34 @@ function start()
 	        }
 
 	    });
-	 });
 
+	 });
+		 $.ajax({
+	        url: './Controller.php',
+	        type: 'post',
+	        data: {'getworkspaces':''},
+	        dataType: 'text',
+	        success: function (data) {
+	        	// console.log(data);
+	        	if (data.includes("Error"))
+	        	{
+	        		console.log(data);
+	        	}
+	        	else
+	        	{
+	        		var obj = JSON.parse(data);
+	        		selectOptStr='';
+	        		obj.forEach(function(element)
+	        		{
+	        			selectOptStr+=' <option value="'+element["workspace_id"]+'">'+element["workspace_name"]+'</option>';
+	        		});
+	        		
+	        		$('#workspaceid').html(selectOptStr);
+	        	}
+
+	        }
+
+	    });
 
 	});
 }

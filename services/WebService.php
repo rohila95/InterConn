@@ -26,6 +26,27 @@ class WebService{
     $conn->close();
   }
 
+  public function getAllWorkspaceDetails()
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $sql_service = new SqlService();
+    $workspaceDetailsQuery = $sql_service->getAllWorkspaceDetails();
+    $result = $conn->query($workspaceDetailsQuery);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+            $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
+
   public function getChannelsDetails($userid)
   {
     $database_connection = new DatabaseConnection();

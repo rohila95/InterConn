@@ -18,9 +18,9 @@ $reactionService = new ReactionService();
 $webService = new WebService();
 if(isset($_POST["setReaction"])){ // to post a react by a
 
-    // echo "inside controller";
-    //print_r(json_encode($postInputObj));
-   $reactionService -> postReactionIfNotExist($postInputObj, $_SESSION['userid']);
+   //echo "inside controller";
+  //print_r(json_encode($postInputObj));
+  echo  $reactionService -> postReactionIfNotExist($postInputObj, $_SESSION['userid']);
 }
 
 if(isset($_POST["register"])){ // to post a react by a
@@ -39,8 +39,11 @@ if(isset($_POST["register"])){ // to post a react by a
     $workspaceid=1;
     $webService->registerNewUser($username,$firstName,$lastName,$email,' ',$password,$phoneNumber,$whatIDo,$status,1,$skype,$workspaceid,$timestamp);
   
-    echo 'register';
+    // echo 'register';
 }
-
+if(isset($_POST["getworkspaces"]))
+{
+  echo  $webService->getAllWorkspaceDetails();
+}
 
 ?>
