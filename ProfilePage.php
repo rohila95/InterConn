@@ -4,11 +4,11 @@
 	error_reporting(E_ALL);
 	session_start();
 	include_once "./services/WebService.php";
-	if($_SESSION['loggedIn'])
+	if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
 	{
 		$web_service = new WebService();
 
-    $userDetails = json_decode($web_service->getProfileDetails($_SESSION['userid']));
+    	$userDetails = json_decode($web_service->getProfileDetails($_SESSION['userid']));
 		$channelDetails = json_decode($web_service->getPublicChannelsDetails($_SESSION['userid']));
 
 		$channelstr='';
@@ -23,7 +23,7 @@
            }
         }
 	}
-	if(!$_SESSION['loggedIn'])
+	else
 	{
 		header("location: ./index.php?status=notloggedin");
 	}

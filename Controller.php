@@ -25,7 +25,7 @@ if(isset($_POST["setReaction"])){ // to post a react by a
 
 if(isset($_POST["register"])){ // to post a react by a
 	$data=json_decode($_POST["register"]);
-	var_dump($data);
+	// var_dump($data);
     $firstName = $data->firstName;
     $lastName = $data->lastName;
     $email = $data->email;
@@ -36,7 +36,7 @@ if(isset($_POST["register"])){ // to post a react by a
     $skype = $data->skype;
     $username='@'.strtolower($firstName);
     $timestamp=date('Y-m-d H:i:s', time());
-    $workspaceid=1;
+    $workspaceid=$data->workspace;
     $webService->registerNewUser($username,$firstName,$lastName,$email,' ',$password,$phoneNumber,$whatIDo,$status,1,$skype,$workspaceid,$timestamp);
   
     // echo 'register';
@@ -45,5 +45,15 @@ if(isset($_POST["getworkspaces"]))
 {
   echo  $webService->getAllWorkspaceDetails();
 }
-
+if(isset($_POST["createChannel"]))
+{
+  $data=json_decode($_POST["createChannel"]);
+  $userid=$_SESSION['userid'];
+  $channelName=$data->$channelName;
+  $type=$data->$type;
+  $purpose=$data->$purpose;
+  $timestamp=date('Y-m-d H:i:s', time());
+  $invites=$data->$invites;
+  echo $webService->createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites)
+}
 ?>

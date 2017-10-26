@@ -52,7 +52,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="./scripts/home_sitescript.js"></script>
-
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+		<script src="./scripts/tagsinput/bootstrap-tagsinput.min.js"></script>
+		<link rel="stylesheet" href="./scripts/tagsinput/bootstrap-tagsinput.css">-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./CSS/home_site.css">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -121,32 +123,32 @@
 			          <h6>Channels are where yours members communicate.They're best when organized around a topic.</h6>
 			        </div>
 			        <div class="modal-body newChannelDetails">
-			          <form>
+			          <form role="form" id="createChannelForm">
 			          	<div class="row">
 					      	<div class="form-group">
-						        <input type="text" class="form-control email" name="name" required>
+						        <input type="text" class="form-control channelName" name="name" required>
 						        <label class="form-control-placeholder" for="name">Name</label>
 					      	</div>
 					    </div>
 					    <div class="row">
 					      	<div class="form-group">
-						        <input type="password" class="form-control password" name="purpose" required>
+						        <input type="password" class="form-control channelPurpose" name="purpose" required>
 						        <label class="form-control-placeholder" for="purpose">Purpose</label>
 						    </div>
 						</div>
 						<div class="row">
 							<div class="form-group">
 								<label class="radio-inline">
-							      <input type="radio" name="optradio">Private
+							      <input type="radio" name="type">Private
 							    </label>
 							    <label class="radio-inline">
-							      <input type="radio" name="optradio">Public
+							      <input type="radio" name="type">Public
 							    </label>
 						    </div>
 						</div>
 					    <div class="row">
 					      	<div class="form-group">
-						        <input type="text" class="form-control whatIDo" name="invites" required>
+						        <input type="text" class="form-control channelInvites" name="invites" required>
 						        <label class="form-control-placeholder" for="invite">Send invites to :</label>
 					      	</div>
 					    </div>

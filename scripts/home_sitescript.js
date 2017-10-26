@@ -88,7 +88,94 @@ function start()
 
 		});
 
+		// // var elt = $('input');
+		// // elt.tagsinput({
+		// //   itemValue: 'value',
+		// //   itemText: 'text',
+		// //   typeaheadjs: {
+		// //     name: 'cities',
+		// //     displayKey: 'text',
+		// //     source: cities.ttAdapter()
+		// //   }
+		// // });
+		// // elt.tagsinput('add', { "value": 1 , "text": "Amsterdam"   , "continent": "Europe"    });
+		// // elt.tagsinput('add', { "value": 4 , "text": "Washington"  , "continent": "America"   });
+		// // elt.tagsinput('add', { "value": 7 , "text": "Sydney"      , "continent": "Australia" });
+		// // elt.tagsinput('add', { "value": 10, "text": "Beijing"     , "continent": "Asia"      });
+		// // elt.tagsinput('add', { "value": 13, "text": "Cairo"       , "continent": "Africa"    });
 
+		// var places = [
+		//   {name: "New York"}, 
+		//   {name: "Los Angeles"},
+		//   {name: "Copenhagen"},
+		//   {name: "Albertslund"},
+		//   {name: "Skjern"}  
+		// ];
+
+		// $('.channelInvites').tagsinput({
+		//   typeahead: {
+		//     source: places.map(function(item) { return item.name }),
+		//     afterSelect: function() {
+		//     	this.$element[0].value = '';
+		//     }
+		//   }
+		// });
+
+
+		$( ".createChannelBtn" ).on("click",function(e) {
+			console.log("in clickkk");
+			// e.preventDefault();
+			var myForm = document.getElementById('createChannelForm');
+		   	var formData = new FormData(myForm),
+		   	convertedJSON = {},
+		   	it = formData.entries(),
+		   	n;
+		   	while(n = it.next()) {
+		      if(!n || n.done) break;
+		      convertedJSON[n.value[0]] = n.value[1];
+		    }
+		    var stringData = JSON.stringify(convertedJSON);
+	     	console.log(convertedJSON);
+		    $.ajax({
+		        url: './Controller.php',
+		        type: 'post',
+		        data: {'createChannel':stringData},
+		        dataType: 'text',
+		        success: function (data) {
+		        	console.log(data);
+		    //     	if (data.includes("Error"))
+		    //     	{
+		    //     		$('#errorModal .modal-body').html("<p>Email Id already exists. Try with different Email Id.</p>");
+						// $('#errorModal').on('hidden.bs.modal', function (e) {
+						// 	$('#errorModal').off();
+						// });
+						
+						// $("#errorModal").modal("show");
+						// $("#errorModal").css("z-index","1100");
+
+		    //     		// $('.uniqueEmail').html('Email Id already exists. Try with different Id.');
+		    //     	}
+		    //     	else
+		    //     	{
+		    //     		$('#successModal .modal-body').html("<p>Registration Successful. </p>");
+						// $('#successModal').on('hidden.bs.modal', function (e) {  
+						// 	$('#successModal').off();
+						// 	window.location.href = "./index.php";
+										
+						// });
+					 
+						 
+						// $("#successModal").modal("show");
+						// $("#successModal").css("z-index","1100");
+
+		    //     		// window.location.href = "./index.php";
+		    //     	}
+
+		        }
+
+		    });
+
+	 	});
 
 	});
 }
