@@ -8,6 +8,12 @@ function start()
 		{
 			$('#createChannel').modal('show');
 		});
+        $(".inputMessage").keypress(function (e) {
+            if(e.which == 13 && !e.shiftKey) {
+                $(this).closest("form").submit();
+                e.preventDefault();
+            }
+        });
 
 		$(".message_body").mouseenter(function() {
             curMessageId = $(this).attr("id");
