@@ -153,10 +153,10 @@
 			    </div>
 			</div>
 			<div class="btn-group messageHoverButtons">
-				    <button emojiid="1" type="button" class="btn btn-primary" title="Like"><i class="fa fa-thumbs-o-up"></i></button>
-				    <button emojiid="2" type="button" class="btn btn-primary" title="Dislike"><i class="fa fa-thumbs-o-down"></i></button>
-				    <button type="button" class="btn btn-primary" title=""><i class="fa fa-comments-o"></i></button>
-				    <button type="button" class="btn btn-primary"><i class="fa fa-reply"></i></button>
+				    <button emojiid="1" type="button" class="btn btn-primary thumbsbutt" title="thumbsup"><i class="fa fa-thumbs-o-up"></i></button>
+				    <button emojiid="2" type="button" class="btn btn-primary thumbsbutt" title="thumbsdown"><i class="fa fa-thumbs-o-down"></i></button>
+				    <button type="button" class="btn btn-primary threadbutt" title="thread"><i class="fa fa-comments-o"></i></button>
+				    <button type="button" class="btn btn-primary replybutt" title="reply"><i class="fa fa-reply"></i></button>
 			</div>
 			<div class="col-offset-xs-1 mainContent_HP">
 					<?php
@@ -284,30 +284,32 @@
 					?>
 
 					</div>
-				</div>
-				<div class="footerSpace_HP row">
-					<form method="POST" action="./services/sendMessage.php">
-						<input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
-					    <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
-						<div class="input-group form-group">
+                    <div class="footerSpace_HP row">
+                        <form method="POST" action="./services/sendMessage.php">
+                            <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
+                            <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
+                            <div class="input-group form-group">
 
 
 
-									<?php
-									if(isset($_GET["channel"])){
-										$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
-										if($currentChannel!='')
-											echo '<textarea class="form-control inputMessage" rows="1" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
-										else
-											echo '<textarea class="form-control inputMessage" rows="1" disabled autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
-									}
+                                <?php
+                                if(isset($_GET["channel"])){
+                                    $currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
+                                    if($currentChannel!='')
+                                        echo '<textarea class="form-control inputMessage" rows="1" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
+                                    else
+                                        echo '<textarea class="form-control inputMessage" rows="1" disabled autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
+                                }
 
-									?>
+                                ?>
 
 
-					    </div>
-				    </form>
-				</div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
 			</div>
 		</div>
 	</div>
