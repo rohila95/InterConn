@@ -34,7 +34,8 @@ function start()
 		// 	event.preventDefault();
 		// });
 
-		$(".messageHoverButtons button").click(function(event) {
+		// this registration takes care of thumbsup and thumbs down functionality
+		$(".messageHoverButtons .thumbsbutt").click(function(event) {
             event.preventDefault();
             $(".messageHoverButtons").hide();
             var emoji_idCLicked = $(this).attr("emojiid");
@@ -88,6 +89,7 @@ function start()
 
 		});
 
+
 		// // var elt = $('input');
 		// // elt.tagsinput({
 		// //   itemValue: 'value',
@@ -120,6 +122,16 @@ function start()
 		//     }
 		//   }
 		// });
+
+        // this registration takes care of
+        $(".messageHoverButtons .threadbutt").click(function(event) {
+            event.preventDefault();
+            alert("clicked thread button");
+            $(".messageHoverButtons").hide();
+
+        });
+
+
 
 
 		$( ".createChannelBtn" ).on("click",function(e) {

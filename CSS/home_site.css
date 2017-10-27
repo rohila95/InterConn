@@ -106,7 +106,7 @@ html, body {
   font-size: 22px;
 }
 
-.loggedIn_user{
+.loggedIn_user,.loggedIn_workspace{
 	color: yellow;
     font-size: 12px;
     cursor: pointer;
@@ -172,7 +172,7 @@ html, body {
 {
     font-family: Times New Roman !important;
     font-size: 16px;
-    color: #888C93;
+    color: white;
     margin-left: 3%;
 }
 .numberCount_badge{
