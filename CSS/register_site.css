@@ -13,6 +13,14 @@
 	font-family: buxton sketch;
 	font-size: 56px;
 }
+#successModal .modal-header
+{
+  background-color: green;
+}
+#errorModal .modal-header
+{
+  background-color: red;
+}
 .footer
 {
     position: fixed;

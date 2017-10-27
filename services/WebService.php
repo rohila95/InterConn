@@ -266,7 +266,7 @@ class WebService{
     return $formattedDate;
   }
 
-  public function createChannel($userid,$channelName,$type,$purpose,$created_by,$timestamp,$invites)
+  public function createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
@@ -274,16 +274,15 @@ class WebService{
     $channelName=mysqli_real_escape_string($conn,$channelName);
     $type=mysqli_real_escape_string($conn,$type);
     $purpose=mysqli_real_escape_string($conn,$purpose);
-    $created_by=mysqli_real_escape_string($conn,$created_by);
     $timestamp=mysqli_real_escape_string($conn,$timestamp);
 
     $sql_service = new SqlService();
 
-    $channel = $sql_service->createChannel($channelName,$type,$purpose,$created_by,$timestamp);
+    $channel = $sql_service->createChannel($channelName,$type,$purpose,$userid,$timestamp);
     $result = $conn->query($channel);
     if ($result === TRUE) {
         $channelid = $conn->insert_id;
-        // echo "New record created successfully. Last inserted ID is: " . $last_id;
+        echo "id-" . $channelid.".";
     } else {
         echo "Error: " . $channel . "<br>" . $conn->error;
     }
@@ -291,7 +290,7 @@ class WebService{
     $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
     $result = $conn->query($userChannelMap);
     if ($result === TRUE) {
-        echo "New record created successfully. Last inserted ID is: " ;
+        // echo "New record created successfully. Last inserted ID is: " ;
     } else {
         echo "Error: " . $userChannelMap . "<br>" . $conn->error;
     }
@@ -301,7 +300,7 @@ class WebService{
       $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
       $result = $conn->query($userChannelMap);
       if ($result === TRUE) {
-          echo "New record created successfully. Last inserted ID is: ";
+          // echo "New record created successfully. Last inserted ID is: ";
       } else {
           echo "Error: " . $userChannelMap . "<br>" . $conn->error;
       }
