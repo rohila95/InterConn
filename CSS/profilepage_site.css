@@ -10,6 +10,10 @@
     padding-bottom: 5%;
     padding-top: 1%;
 }
+.file-upload
+{
+	display:none !important;
+}
 .logo
 {
 	text-align: center;
