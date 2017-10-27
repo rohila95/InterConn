@@ -132,8 +132,12 @@ function start()
         // this registration takes care of
         $(".messageHoverButtons .threadbutt").click(function(event) {
             event.preventDefault();
-            alert("clicked thread button");
             $(".messageHoverButtons").hide();
+            $(".regularMessagesWrapper").removeClass("col-xs-12").addClass("col-xs-8");
+            $(".threadMessageWrapper").show();
+			$(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
+
+
 
         });
 

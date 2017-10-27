@@ -266,6 +266,9 @@ pre
     margin-left: 0%;
 }
 
+.threadMessageWrapper{
+    display: none;
+}
 
 .messageEntrySpace_regularMsg_HP {
     position: fixed;

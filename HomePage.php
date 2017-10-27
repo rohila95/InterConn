@@ -214,7 +214,7 @@
                             <i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i>
                         </div>
                             </div>
-                <div class="col-lg-12 regularMessagesWrapper">
+                <div class="col-xs-12 regularMessagesWrapper">
                     <div class="row rightContent_wrapper_HP">
                         <div class="messagesList">
                         <div>This is the begining of Chat....</div>
@@ -345,8 +345,9 @@
                         </form>
                     </div>
                 </div>
-               <!-- <div class="col-lg-12 threadMessageWrapper">
-                </div>-->
+               <div class="col-xs-4 threadMessageWrapper" >
+                   <h3> Heelo I am Thread Space</h3>
+                </div>
             </div>
 
             </div>
