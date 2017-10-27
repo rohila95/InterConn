@@ -148,8 +148,7 @@ class WebService{
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
-            // $row['date']= getFormatDate($row['created_at']);
-            // $row['time']= getFormatTime($row['created_at']);
+          //get emojis
           $messageid=$row['message_id'];
           $emojiArray=[];
           $messageReactions = $sql_service->getMessageReactions($messageid);
@@ -159,14 +158,39 @@ class WebService{
               $emojiArray[]=$innerrow;
             }
             $row['emojis']=$emojiArray;
-          } 
-
+          }
           else {
             $row['emojis']=0;
           }
-          
-            $array[]= $row;
-        }
+          //get threads
+          if($row['is_threaded']==1)
+          {
+            $messageThreads = $sql_service->getThreadReplyCount($messageid);
+            $innerresult = $conn->query($messageThreads);
+            if ($innerresult->num_rows > 0) {
+              while($innerrow = $innerresult->fetch_assoc()) {
+
+                $lastMessageThreads = $sql_service->getLastThreadReply($messageid);
+                $lastThreadresult = $conn->query($lastMessageThreads);
+                if ($lastThreadresult->num_rows > 0) {
+                  while($lastThreadrow = $lastThreadresult->fetch_assoc()) {
+                    $innerrow['content']=$lastThreadrow['content'];
+                    $innerrow['created_at']=$lastThreadrow['created_at'];
+                    $innerrow['first_name']=$lastThreadrow['first_name'];
+                    $innerrow['last_name']=$lastThreadrow['last_name'];
+                    $innerrow['profile_pic']=$lastThreadrow['profile_pic'];
+                  }
+                }
+
+                $row['threads']=$innerrow;
+              }
+            }
+
+
+          }
+
+          $array[]= $row;
+      }
     } else {
         return 'fail';
     }
