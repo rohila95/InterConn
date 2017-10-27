@@ -165,7 +165,6 @@ class WebService{
           //get threads
           if($row['is_threaded']==1)
           {
-            // $threaded=[];
             $messageThreads = $sql_service->getThreadReplyCount($messageid);
             $innerresult = $conn->query($messageThreads);
             if ($innerresult->num_rows > 0) {
@@ -185,7 +184,6 @@ class WebService{
 
                 $row['threads']=$innerrow;
               }
-              // $row['threads']=$threaded;
             }
 
 

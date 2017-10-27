@@ -115,7 +115,7 @@
 			          <h4 class="modal-title">Success</h4>
 			        </div>
 			        <div class="modal-body">
-			          
+
 			        </div>
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -131,7 +131,7 @@
 			          <h4 class="modal-title">Error</h4>
 			        </div>
 			        <div class="modal-body">
-			          
+
 			        </div>
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -235,6 +235,7 @@
                                     $today = date("l, F jS, o", $time);
                                     foreach ($currentChannelMessages as $message)
                                     {
+																				// echo json_encode($message);
                                         $currentDate=$web_service->getFormatDate($message->created_at);
                                         $currentTime=$web_service->getFormatTime($message->created_at);
                                         $shortName= $message->first_name[0];
@@ -272,9 +273,13 @@
                                                 {
                                                     $msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
                                                 }
+																						if($message->is_threaded==1)
+																						{
+																							$thread=$message->threads->threadCount;
+																							$msgStr.=$thread.'repliesss';
 
-
-                                            $msgStr.=' </div></div>';
+																						}
+																						$msgStr.=' </div></div>';
                                             $prevUser=$message->first_name;
                                             $prevTime=$currentTime;
 
@@ -304,6 +309,12 @@
                                                 {
                                                     $msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
                                                 }
+																						if($message->is_threaded==1)
+																								{
+																									$thread=$message->threads->threadCount;
+																									$msgStr.=$thread.'repliesss';
+
+																								}
                                             $msgStr.=' </div></div>';
                                             $prevUser=$message->first_name;
                                             $prevTime=$currentTime;
