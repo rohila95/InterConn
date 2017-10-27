@@ -122,10 +122,7 @@ html, body {
 	margin-top: 20%;
 }
 
-/*.messagesList*/
-/*{*/
-  /*z-index: -100;*/
-/*}*/
+
 .currentChannel
 {
     background-color: #4c4b4b;
@@ -259,19 +256,22 @@ pre
    /* width: 87.8%;*/
 
     padding-left: 1%;
-    max-height: 88%;
+    max-height: 86%;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
+.regularMessagesWapper{
+    width: 100%;
+    margin-left: 0%;
+}
 
 
-
-.footerSpace_HP {
-    position: absolute;
+.messageEntrySpace_regularMsg_HP {
+    position: fixed;
     bottom: -0.5%;
-    width: 87.7%;
-    right: 1.82%;
+    width: 86.7%;
+    left: 12.5%;
 }
 .fa-paper-plane
 {
