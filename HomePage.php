@@ -325,7 +325,7 @@
                         <form method="POST" action="./services/sendMessage.php">
                             <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
                             <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
-                            <div class="input-group form-group">
+                            <div class="form-group">
 
 
 
@@ -333,7 +333,7 @@
                                 if(isset($_GET["channel"])){
                                     $currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
                                     if($currentChannel!='')
-                                        echo '<textarea class="form-control inputMessage" rows="2" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
+                                        echo '<textarea class="form-control inputMessage" rows="2" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn hidden"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
                                     else
                                         echo '<textarea class="form-control inputMessage" rows="2" disabled autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
                                 }
