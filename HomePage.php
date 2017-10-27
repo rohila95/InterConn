@@ -192,133 +192,136 @@
 				    <button type="button" class="btn btn-primary threadbutt" title="thread"><i class="fa fa-comments-o"></i></button>
 				    <button type="button" class="btn btn-primary replybutt" title="reply"><i class="fa fa-reply"></i></button>
 			</div>
-			<div class="col-offset-xs-1 mainContent_HP">
-					<?php
-						if(isset($_GET["channel"])){
-							$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
-							if($currentChannel!='')
-							{
-								if($currentChannel[0]->type=='private')
-	   								echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
-	   							else if($currentChannel[0]->type=='public')
-									echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
-								$user_count=$currentChannel[0]->usercount;
-								$purpose=$currentChannel[0]->purpose;
-							}
-							else
-								echo '<div class="headerSpace_HP row">Channel doesn\'t exist </div>';
-						}
-					?>
-					<div class='headerAddon_HP'>
-						<i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i>
-					</div>
-					</div>
-				<div class="row rightContent_wrapper_HP">
-					<div class="messagesList">
-					<div>This is the begining of Chat....</div>
-					<?php
-						if(isset($_GET["channel"])){
-							// echo $web_service->getChannelMessages($_GET["channel"]);
-							$currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"]));
-							// var_dump($currentChannelMessages);
+            <div class="col-xs-11 mainContent_HP"><div class="row">
 
-							$msgStr='';
-							$prevdate='';
-							$prevUser='';
-							$prevTime='';
-							if ($currentChannelMessages!=null)
-							{
-								date_default_timezone_set('America/New_York');
-								$time= time();
-								$today = date("l, F jS, o", $time);
-								foreach ($currentChannelMessages as $message)
-								{
-									$currentDate=$web_service->getFormatDate($message->created_at);
-									$currentTime=$web_service->getFormatTime($message->created_at);
-									$shortName= $message->first_name[0];
-									if($message->last_name == '' || $message->last_name== null){
-										$shortName.= $message->first_name[1];
-									}else{
-										$shortName.= $message->last_name[0];
-									}
-									$defUserPicBGColorArr = ['#3F51B5','#2196F3','#00BCD4','#CDDC39','#FF5722'];
-									$defUserPicBGColor = $defUserPicBGColorArr[((int)$message->user_id)%5];
-									if($currentDate==$today)
-										$currentDate='Today';
+                    <?php
+                        if(isset($_GET["channel"])){
+                            $currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
+                            if($currentChannel!='')
+                            {
+                                if($currentChannel[0]->type=='private')
+                                    echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+                                else if($currentChannel[0]->type=='public')
+                                    echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+                                $user_count=$currentChannel[0]->usercount;
+                                $purpose=$currentChannel[0]->purpose;
+                            }
+                            else
+                                echo '<div class="headerSpace_HP row">Channel doesn\'t exist </div>';
+                        }
+                    ?>
+                        <div class='headerAddon_HP'>
+                            <i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i>
+                        </div>
+                            </div>
+                <div class="col-lg-12 regularMessagesWrapper">
+                    <div class="row rightContent_wrapper_HP">
+                        <div class="messagesList">
+                        <div>This is the begining of Chat....</div>
+                        <?php
+                            if(isset($_GET["channel"])){
+                                // echo $web_service->getChannelMessages($_GET["channel"]);
+                                $currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"]));
+                                // var_dump($currentChannelMessages);
 
-
-									if($prevUser=='' && $prevTime=='')
-									{
-										if($prevdate!=$currentDate)
-										{
-											$msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
-											$prevdate=$currentDate;
-										}
+                                $msgStr='';
+                                $prevdate='';
+                                $prevUser='';
+                                $prevTime='';
+                                if ($currentChannelMessages!=null)
+                                {
+                                    date_default_timezone_set('America/New_York');
+                                    $time= time();
+                                    $today = date("l, F jS, o", $time);
+                                    foreach ($currentChannelMessages as $message)
+                                    {
+                                        $currentDate=$web_service->getFormatDate($message->created_at);
+                                        $currentTime=$web_service->getFormatTime($message->created_at);
+                                        $shortName= $message->first_name[0];
+                                        if($message->last_name == '' || $message->last_name== null){
+                                            $shortName.= $message->first_name[1];
+                                        }else{
+                                            $shortName.= $message->last_name[0];
+                                        }
+                                        $defUserPicBGColorArr = ['#3F51B5','#2196F3','#00BCD4','#CDDC39','#FF5722'];
+                                        $defUserPicBGColor = $defUserPicBGColorArr[((int)$message->user_id)%5];
+                                        if($currentDate==$today)
+                                            $currentDate='Today';
 
 
+                                        if($prevUser=='' && $prevTime=='')
+                                        {
+                                            if($prevdate!=$currentDate)
+                                            {
+                                                $msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
+                                                $prevdate=$currentDate;
+                                            }
 
 
-										$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
-										$msgStr.=htmlspecialchars($message->first_name);
-										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
-										$msgStr.=$currentTime;
-										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
-										// print_r($message->emojis);
-										if($message->emojis!='0')
-											foreach ($message->emojis as $emoji)
-											{
-												$msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
-											}
 
 
-										$msgStr.=' </div></div>';
-										$prevUser=$message->first_name;
-										$prevTime=$currentTime;
+                                            $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
+                                            $msgStr.=htmlspecialchars($message->first_name);
+                                            $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
+                                            $msgStr.=$currentTime;
+                                            $msgStr.='</span></div>';
+                                            $msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
+                                            // print_r($message->emojis);
+                                            if($message->emojis!='0')
+                                                foreach ($message->emojis as $emoji)
+                                                {
+                                                    $msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
+                                                }
 
-									}
-									else if($prevUser==$message->first_name && $prevTime==$currentTime )
-									{
-										$msgStr.='<div class="message_body addOnMessages" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
 
-									}
-									else if($prevUser!=$message->first_name || $prevTime!=$currentTime)
-									{
-										$msgStr.='</div></div>';
-										if($prevdate!=$currentDate)
-										{
-											$msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
-											$prevdate=$currentDate;
-										}
-										$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. strtoupper($shortName) .'</div> </div><div class="col-xs-11 message"><div class="message_header"><b>';
-										$msgStr.=htmlspecialchars($message->first_name);
-										$msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
-										$msgStr.=$currentTime;
-										$msgStr.='</span></div>';
-										$msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
-										// print_r($message->emojis);
-										if($message->emojis!='0')
-											foreach ($message->emojis as $emoji)
-											{
-												$msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
-											}
-										$msgStr.=' </div></div>';
-										$prevUser=$message->first_name;
-										$prevTime=$currentTime;
-									}
-								}
-								$msgStr.='</div></div>';
-							}
-							else
-							{
-								$msgStr="<div>No messages in this channel..</div>";
-							}
-							echo $msgStr;
-						}
-					?>
+                                            $msgStr.=' </div></div>';
+                                            $prevUser=$message->first_name;
+                                            $prevTime=$currentTime;
 
-					</div>
-                    <div class="footerSpace_HP row">
+                                        }
+                                        else if($prevUser==$message->first_name && $prevTime==$currentTime )
+                                        {
+                                            $msgStr.='<div class="message_body addOnMessages" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
+
+                                        }
+                                        else if($prevUser!=$message->first_name || $prevTime!=$currentTime)
+                                        {
+                                            $msgStr.='</div></div>';
+                                            if($prevdate!=$currentDate)
+                                            {
+                                                $msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
+                                                $prevdate=$currentDate;
+                                            }
+                                            $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. strtoupper($shortName) .'</div> </div><div class="col-xs-11 message"><div class="message_header"><b>';
+                                            $msgStr.=htmlspecialchars($message->first_name);
+                                            $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
+                                            $msgStr.=$currentTime;
+                                            $msgStr.='</span></div>';
+                                            $msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
+                                            // print_r($message->emojis);
+                                            if($message->emojis!='0')
+                                                foreach ($message->emojis as $emoji)
+                                                {
+                                                    $msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
+                                                }
+                                            $msgStr.=' </div></div>';
+                                            $prevUser=$message->first_name;
+                                            $prevTime=$currentTime;
+                                        }
+                                    }
+                                    $msgStr.='</div></div>';
+                                }
+                                else
+                                {
+                                    $msgStr="<div>No messages in this channel..</div>";
+                                }
+                                echo $msgStr;
+                            }
+                        ?>
+
+                        </div>
+                    </div>
+                    <div class="messageEntrySpace_regularMsg_HP row">
                         <form method="POST" action="./services/sendMessage.php">
                             <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
                             <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
@@ -330,9 +333,9 @@
                                 if(isset($_GET["channel"])){
                                     $currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
                                     if($currentChannel!='')
-                                        echo '<textarea class="form-control inputMessage" rows="1" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
+                                        echo '<textarea class="form-control inputMessage" rows="2" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
                                     else
-                                        echo '<textarea class="form-control inputMessage" rows="1" disabled autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
+                                        echo '<textarea class="form-control inputMessage" rows="2" disabled autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
                                 }
 
                                 ?>
@@ -341,10 +344,12 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
+               <!-- <div class="col-lg-12 threadMessageWrapper">
+                </div>-->
+            </div>
 
-			</div>
+            </div>
 		</div>
 	</div>
 	<div class="footer row">
