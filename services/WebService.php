@@ -282,7 +282,7 @@ class WebService{
     $result = $conn->query($channel);
     if ($result === TRUE) {
         $channelid = $conn->insert_id;
-        // echo "New record created successfully. Last inserted ID is: " . $last_id;
+        echo "id-" . $channelid.".";
     } else {
         echo "Error: " . $channel . "<br>" . $conn->error;
     }
@@ -290,7 +290,7 @@ class WebService{
     $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
     $result = $conn->query($userChannelMap);
     if ($result === TRUE) {
-        echo "New record created successfully. Last inserted ID is: " ;
+        // echo "New record created successfully. Last inserted ID is: " ;
     } else {
         echo "Error: " . $userChannelMap . "<br>" . $conn->error;
     }
@@ -300,7 +300,7 @@ class WebService{
       $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
       $result = $conn->query($userChannelMap);
       if ($result === TRUE) {
-          echo "New record created successfully. Last inserted ID is: ";
+          // echo "New record created successfully. Last inserted ID is: ";
       } else {
           echo "Error: " . $userChannelMap . "<br>" . $conn->error;
       }

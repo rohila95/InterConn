@@ -134,6 +134,7 @@ function start()
 		      if(!n || n.done) break;
 		      convertedJSON[n.value[0]] = n.value[1];
 		    }
+		    convertedJSON ['invites']=[9,11];
 		    var stringData = JSON.stringify(convertedJSON);
 	     	console.log(convertedJSON);
 		    $.ajax({
@@ -143,33 +144,38 @@ function start()
 		        dataType: 'text',
 		        success: function (data) {
 		        	console.log(data);
-		    //     	if (data.includes("Error"))
-		    //     	{
-		    //     		$('#errorModal .modal-body').html("<p>Email Id already exists. Try with different Email Id.</p>");
-						// $('#errorModal').on('hidden.bs.modal', function (e) {
-						// 	$('#errorModal').off();
-						// });
-						
-						// $("#errorModal").modal("show");
-						// $("#errorModal").css("z-index","1100");
-
-		    //     		// $('.uniqueEmail').html('Email Id already exists. Try with different Id.');
-		    //     	}
-		    //     	else
-		    //     	{
-		    //     		$('#successModal .modal-body').html("<p>Registration Successful. </p>");
-						// $('#successModal').on('hidden.bs.modal', function (e) {  
-						// 	$('#successModal').off();
-						// 	window.location.href = "./index.php";
+		        	if($.trim(data).split(".")[0].split("-")[0]=="id")
+		        	{
+		        		$('#successModal .modal-body').html("<p> Channel created Successfully. </p>");
+						$('#successModal').on('hidden.bs.modal', function (e) {  
+							$('#successModal').off();
+							window.location.href = "./index.php";
 										
-						// });
+						});
 					 
 						 
-						// $("#successModal").modal("show");
-						// $("#successModal").css("z-index","1100");
-
-		    //     		// window.location.href = "./index.php";
-		    //     	}
+						$("#successModal").modal("show");
+						$("#successModal").css("z-index","1100");
+						setTimeout(function() 
+							{
+								$('#successModal').modal('hide');
+								window.location.href = "./index.php?channel="+$.trim(data).split(".")[0].split("-")[1];
+							}, 4000);
+		        		
+		        	}
+		        	else
+		        	{
+		        		$('#errorModal .modal-body').html("<p> Channel not created.</p>");
+						$('#errorModal').on('hidden.bs.modal', function (e) {
+							$('#errorModal').off();
+						});
+						
+						$("#errorModal").modal("show");
+						$("#errorModal").css("z-index","1100");
+						setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+		        		// $('.uniqueEmail').html('Email Id already exists. Try with different Id.');
+		        	}
+		    
 
 		        }
 

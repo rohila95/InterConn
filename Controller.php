@@ -49,11 +49,11 @@ if(isset($_POST["createChannel"]))
 {
   $data=json_decode($_POST["createChannel"]);
   $userid=$_SESSION['userid'];
-  $channelName=$data->$channelName;
-  $type=$data->$type;
-  $purpose=$data->$purpose;
+  $channelName=$data->name;
+  $type=$data->type;
+  $purpose=$data->purpose;
   $timestamp=date('Y-m-d H:i:s', time());
-  $invites=$data->$invites;
-  echo $webService->createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites)
+  $invites=$data->invites;
+  echo $webService->createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites);
 }
 ?>

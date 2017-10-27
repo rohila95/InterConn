@@ -114,6 +114,38 @@
 				</div>
 
 			</div>
+			<div class="modal fade" id="successModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Success</h4>
+			        </div>
+			        <div class="modal-body">
+			          
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+			<div class="modal fade" id="errorModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Error</h4>
+			        </div>
+			        <div class="modal-body">
+			          
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
 			<div class="modal fade" id="createChannel" role="dialog">
 			    <div class="modal-dialog modal-lg">
 			      <div class="modal-content">
@@ -139,10 +171,10 @@
 						<div class="row">
 							<div class="form-group">
 								<label class="radio-inline">
-							      <input type="radio" name="type">Private
+							      <input type="radio" name="type" value="private">Private
 							    </label>
 							    <label class="radio-inline">
-							      <input type="radio" name="type">Public
+							      <input type="radio" name="type" value="public">Public
 							    </label>
 						    </div>
 						</div>
