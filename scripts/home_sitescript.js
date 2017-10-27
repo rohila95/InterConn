@@ -136,9 +136,7 @@ function start()
             $(".regularMessagesWrapper").removeClass("col-xs-12").addClass("col-xs-8");
             $(".threadMessageWrapper").show();
 			$(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
-
-
-
+			
         });
 
 
