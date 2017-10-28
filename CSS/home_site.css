@@ -270,6 +270,23 @@ pre
     display: none;
 }
 
+
+
+.messageentryspace_threadsection{
+    margin-top: 4%;
+    width: 100%;
+    margin-left: 1%;
+}
+
+.threadedContent{
+    margin-left: 2%;
+    width: 100%;
+}
+
+.threadedContent .message{
+    margin-left: -1%;
+}
+
 .messageEntrySpace_regularMsg_HP {
     position: fixed;
     bottom: -0.5%;

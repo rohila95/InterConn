@@ -15,16 +15,36 @@ function start()
             }
         });
 
-		$(".message_body").mouseenter(function() {
+        $(document).on("mouseenter",".regularMessagesWrapper .message_body",function() {
             curMessageId = $(this).attr("id");
 			offset=$(this).offset();
-
-			$(".messageHoverButtons").css({'top': offset.top, 'left' : parseInt($(this).css("width"))})
+            $(".messageHoverButtons").find(".nonthumbbutts").show();
+			//$(".messageHoverButtons").css({'top': offset.top, 'left' : parseInt($(this).css("width"))})
+            $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*30/100)})
 			$(".messageHoverButtons").show();
 
 			//console.log(curMessageId);
 
 		});
+
+        $(document).on("mouseenter",".threadMessageWrapper .message_body",function() {
+            curMessageId = $(this).attr("id");
+            offset=$(this).offset();
+            $(".messageHoverButtons").find(".nonthumbbutts").hide();
+            $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*30/100)})
+            $(".messageHoverButtons").show();
+
+        });
+
+
+        $(document).on("click",".threadMessageWrapper .message_time",function() {
+
+			var curMessageId = $(this).parents(".message").find(".message_body").attr("id");
+			$(".regularMessagesWrapper").find(".messagewithid_"+curMessageId).css("background-color","#dedddd").animate({"background-color": ""},1000,function () {
+				$(this).removeAttr("style");
+            });
+        });
+
 
 		$(".loggedIn_user").click(function(){
 			var id= $('.loggedIn_user').attr('id');
@@ -96,53 +116,40 @@ function start()
 		});
 
 
-		// // var elt = $('input');
-		// // elt.tagsinput({
-		// //   itemValue: 'value',
-		// //   itemText: 'text',
-		// //   typeaheadjs: {
-		// //     name: 'cities',
-		// //     displayKey: 'text',
-		// //     source: cities.ttAdapter()
-		// //   }
-		// // });
-		// // elt.tagsinput('add', { "value": 1 , "text": "Amsterdam"   , "continent": "Europe"    });
-		// // elt.tagsinput('add', { "value": 4 , "text": "Washington"  , "continent": "America"   });
-		// // elt.tagsinput('add', { "value": 7 , "text": "Sydney"      , "continent": "Australia" });
-		// // elt.tagsinput('add', { "value": 10, "text": "Beijing"     , "continent": "Asia"      });
-		// // elt.tagsinput('add', { "value": 13, "text": "Cairo"       , "continent": "Africa"    });
-
-		// var places = [
-		//   {name: "New York"}, 
-		//   {name: "Los Angeles"},
-		//   {name: "Copenhagen"},
-		//   {name: "Albertslund"},
-		//   {name: "Skjern"}  
-		// ];
-
-		// $('.channelInvites').tagsinput({
-		//   typeahead: {
-		//     source: places.map(function(item) { return item.name }),
-		//     afterSelect: function() {
-		//     	this.$element[0].value = '';
-		//     }
-		//   }
-		// });
-
         // this registration takes care of creating a new thread
         $(document).on("click",".messageHoverButtons .threadbutt",function(e){
             e.preventDefault();
+
+            if($(".threadMessageWrapper").css("display") == "block"){
+				$(".threadMessageWrapper .eleToBeCleared").empty();
+			}
+
 			//$(".threadMessageWrapper").html("<h2>Clicked on the thread with messageId: "+curMessageId+"</h2>" );
             $(".messageHoverButtons").hide();
             $(".regularMessagesWrapper").removeClass("col-xs-12").addClass("col-xs-8");
 			$(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
-            var curMsgEle = $(".messagewithid_"+curMessageId);
+            var curMsgEle = $(".regularMessagesWrapper").find(".messagewithid_"+curMessageId);
             var parentsUserPicEle = curMsgEle.parents(".messageSet").eq(0).find(".userPic").clone();
-			// section that prepares the head of the Message Thread
+            var parentsMsgHeaderEle = curMsgEle.parents(".messageSet").eq(0).find(".message_header").clone();
+                // section that prepares the head of the Message Thread
 			var threadHeadParentMsgEle= $("<div class=\"row threadheadmsg messageSet\"></div>");
+
             threadHeadParentMsgEle.addClass("messagewithid_"+curMessageId);
 			$(".threadhead_parentmessage").append(threadHeadParentMsgEle);
+
+
             threadHeadParentMsgEle.append(parentsUserPicEle);
+            threadHeadParentMsgEle.append("<div class='col-xs-11 message'></div>");
+            threadHeadParentMsgEle.find(".message").append(parentsMsgHeaderEle);
+            threadHeadParentMsgEle.find(".message").append(curMsgEle.clone());
+
+            var allPrevElements = curMsgEle.parents(".messageSet").eq(0).prevAll();
+            for(var i=0;i < allPrevElements.length;i++){
+            	if($(allPrevElements[i]).hasClass("dayDividerWrapper")){
+                    threadHeadParentMsgEle.find(".message .message_time").prepend(" "+$(allPrevElements[i]).find(".dayDividerText").html()+" at ");
+						break;
+				}
+			}
 
 
             $(".threadMessageWrapper").show();
