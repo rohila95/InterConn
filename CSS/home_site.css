@@ -89,7 +89,12 @@ html, body {
     background: blue;
     padding: 6px;
 }
-
+.profilePic
+{
+    
+    background-size: 36px 36px !important;
+    background: none !important;
+}
 .headerSpace_HP{
     border-bottom: 1px solid;
     width: 102%;
