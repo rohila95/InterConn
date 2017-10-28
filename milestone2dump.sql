@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 27, 2017 at 03:56 PM
+-- Generation Time: Oct 28, 2017 at 04:42 PM
 -- Server version: 10.0.19-MariaDB-1~trusty-log
 -- PHP Version: 5.5.9-1ubuntu4.9
 
@@ -15,9 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `InterConn` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `InterConn`;
 --
 -- Database: `InterConn`
 --
@@ -102,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `is_active` int(11) NOT NULL DEFAULT '0',
   `edited_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `has_shared_content` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `message`
@@ -204,7 +202,13 @@ INSERT INTO `message` (`message_id`, `created_by`, `created_at`, `message_place`
 (101, 10, '2017-10-27 17:10:07', 0, 'hi', 1, 0, '0000-00-00 00:00:00', 0),
 (102, 10, '2017-10-27 16:39:08', 0, 'welcome', 1, 0, '0000-00-00 00:00:00', 0),
 (103, 10, '2017-10-27 16:20:59', 0, 'vbgjgrf\r\nsuhrtg', 0, 0, '0000-00-00 00:00:00', 0),
-(104, 9, '2017-10-27 19:47:17', 0, 'hello', 0, 0, '0000-00-00 00:00:00', 0);
+(104, 9, '2017-10-27 19:47:17', 0, 'hello', 0, 0, '0000-00-00 00:00:00', 0),
+(105, 9, '2017-10-28 04:08:06', 0, 'hello', 0, 0, '0000-00-00 00:00:00', 0),
+(106, 9, '2017-10-28 04:08:20', 0, 'whats going on', 0, 0, '0000-00-00 00:00:00', 0),
+(107, 9, '2017-10-28 04:10:24', 0, 'hzfdih', 0, 0, '0000-00-00 00:00:00', 0),
+(108, 9, '2017-10-28 04:15:40', 0, '  if(e.which == 13 && !e.shiftKey) {\r\n				if($(this).closest("form")[0].checkValidity()){\r\n					$(".messageEntrySpace_regularMsg_HP button").trigger("click");\r\n				}\r\n            }', 0, 0, '0000-00-00 00:00:00', 0),
+(109, 9, '2017-10-28 04:18:42', 0, 'hfjnyrf', 0, 0, '0000-00-00 00:00:00', 0),
+(110, 9, '2017-10-28 04:20:14', 0, 'khkh', 0, 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -308,7 +312,13 @@ INSERT INTO `message_channel` (`message_id`, `channel_id`) VALUES
 (101, 1),
 (102, 1),
 (103, 1),
-(104, 1);
+(104, 1),
+(105, 1),
+(106, 1),
+(107, 1),
+(108, 1),
+(109, 1),
+(110, 1);
 
 -- --------------------------------------------------------
 
@@ -433,6 +443,30 @@ INSERT INTO `threaded_message` (`id`, `parent_message_id`, `content`, `created_b
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `threadmessage_reaction`
+--
+
+CREATE TABLE IF NOT EXISTS `threadmessage_reaction` (
+  `threadmessage_reaction_id` bigint(20) NOT NULL,
+  `threadmessage_id` bigint(20) NOT NULL,
+  `emoji_id` bigint(20) NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `threadmessage_reaction`
+--
+
+INSERT INTO `threadmessage_reaction` (`threadmessage_reaction_id`, `threadmessage_id`, `emoji_id`, `created_by`, `created_at`) VALUES
+(1, 1, 1, 10, '2017-10-28 01:45:54'),
+(2, 2, 1, 9, '2017-10-28 01:45:54'),
+(3, 1, 2, 10, '2017-10-28 01:47:54'),
+(4, 1, 1, 9, '2017-10-28 01:45:54');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -442,7 +476,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `email_id` varchar(50) NOT NULL,
-  `profile_pic` varchar(150) NOT NULL,
+  `profile_pic` varchar(150) NOT NULL DEFAULT '0',
   `password` varchar(150) NOT NULL,
   `phone_number` varchar(10) NOT NULL,
   `what_i_do` varchar(150) NOT NULL,
@@ -456,24 +490,24 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`) VALUES
-(1, '@mater', 'Tow', 'Mater', 'mater@rsprings.gov', '', 'mater', '1234567890', 'student at ODU', '', 1, ''),
-(2, '@sally', 'Sally', 'Carrera', 'porsche@rsprings.gov', '', 'sally', '', '', '', 1, ''),
-(3, '@doc', 'Doc', 'Hudson', 'hornet@rsprings.gov', '', 'doc', '', '', '', NULL, ''),
-(6, '@mcmissile', 'Finn', 'McMissile', 'topsecret@agent.org', '', 'mcmissile', '', '', '', NULL, ''),
-(7, '@mcqueen', 'Lightning', 'McQueen', 'kachow@rusteze.com', '', 'mcqueen', '', '', '', NULL, ''),
-(8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', '', 'chick', '', '', '', NULL, ''),
-(9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', '', 'rohila', '', '', '', NULL, ''),
-(10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', '', 'maheedhar', '', '', '', NULL, ''),
-(11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', '', 'mahesh', '', '', '', NULL, ''),
-(13, '@new', 'new', 'user', 'rgudi002@odu.edu', ' ', 'rohila', '', '', '', 1, ''),
-(17, '@zfxdbrgd', 'zfxdbrgd', 'dfxhfx', 'rgudi003@odu.edu', ' ', 'rohila', '', '', '', 1, ''),
-(34, '@rohit', 'Rohit', 'Kandhi', 'rkand@odu.edu', ' ', '1234', '', 'student', '', 1, ''),
-(35, '@', '', '', '', ' ', '', '', '', '', 1, ''),
-(40, '@dg', 'dg', 'fh', 'rgudi@odu.edu', ' ', 'rohila', '', '', '', 1, ''),
-(41, '@aaaksh', 'Aaaksh', 'Nunna', 'aakashnunna@gmail.com', ' ', 'aakash123', '1112345678', 'Nothing', 'Single - Looking for ....', 1, ''),
-(42, '@r', 'r', 'r', 'rgu1@odu.edu', ' ', ' " OR 1=1;', '', '', '', 1, ''),
-(45, '@zsdgyr', 'ZSDgyr', 'dszgt', 'mgun1@odu.edu', ' ', 'maheedhar', '', '', '', 1, ''),
-(47, '@fcxhn', 'fcxhn', 'dxzg', 'mgu1@odu.edu', ' ', 'maheedhar', '', '', '', 1, '');
+(1, '@mater', 'Tow', 'Mater', 'mater@rsprings.gov', '0', 'mater', '1234567890', 'student at ODU', '', 1, ''),
+(2, '@sally', 'Sally', 'Carrera', 'porsche@rsprings.gov', '0', 'sally', '', '', '', 1, ''),
+(3, '@doc', 'Doc', 'Hudson', 'hornet@rsprings.gov', '0', 'doc', '', '', '', NULL, ''),
+(6, '@mcmissile', 'Finn', 'McMissile', 'topsecret@agent.org', '0', 'mcmissile', '', '', '', NULL, ''),
+(7, '@mcqueen', 'Lightning', 'McQueen', 'kachow@rusteze.com', '0', 'mcqueen', '', '', '', NULL, ''),
+(8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', '0', 'chick', '', '', '', NULL, ''),
+(9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', './images/9.png', 'rohila', '', '', '', NULL, 'undefined'),
+(10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', '0', 'maheedhar', '', '', '', NULL, ''),
+(11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', '0', 'mahesh', '', '', '', NULL, ''),
+(13, '@new', 'new', 'user', 'rgudi002@odu.edu', ' 0', 'rohila', '', '', '', 1, ''),
+(17, '@zfxdbrgd', 'zfxdbrgd', 'dfxhfx', 'rgudi003@odu.edu', ' 0', 'rohila', '', '', '', 1, ''),
+(34, '@rohit', 'Rohit', 'Kandhi', 'rkand@odu.edu', ' 0', '1234', '', 'student', '', 1, ''),
+(35, '@', '', '', '', ' 0', '', '', '', '', 1, ''),
+(40, '@dg', 'dg', 'fh', 'rgudi@odu.edu', ' 0', 'rohila', '', '', '', 1, ''),
+(41, '@aaaksh', 'Aaaksh', 'Nunna', 'aakashnunna@gmail.com', ' 0', 'aakash123', '1112345678', 'Nothing', 'Single - Looking for ....', 1, ''),
+(42, '@r', 'r', 'r', 'rgu1@odu.edu', ' 0', ' " OR 1=1;', '', '', '', 1, ''),
+(45, '@zsdgyr', 'ZSDgyr', 'dszgt', 'mgun1@odu.edu', ' 0', 'maheedhar', '', '', '', 1, ''),
+(47, '@fcxhn', 'fcxhn', 'dxzg', 'mgu1@odu.edu', ' 0', 'maheedhar', '', '', '', 1, '');
 
 -- --------------------------------------------------------
 
@@ -696,6 +730,15 @@ ALTER TABLE `threaded_message`
   ADD KEY `created_by` (`created_by`);
 
 --
+-- Indexes for table `threadmessage_reaction`
+--
+ALTER TABLE `threadmessage_reaction`
+  ADD PRIMARY KEY (`threadmessage_reaction_id`),
+  ADD KEY `threadmessage_id` (`threadmessage_id`),
+  ADD KEY `emoji_id` (`emoji_id`),
+  ADD KEY `created_by` (`created_by`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -754,7 +797,7 @@ ALTER TABLE `emoji`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `message_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=105;
+  MODIFY `message_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=111;
 --
 -- AUTO_INCREMENT for table `message_reaction`
 --
@@ -770,6 +813,11 @@ ALTER TABLE `shared_message`
 --
 ALTER TABLE `threaded_message`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `threadmessage_reaction`
+--
+ALTER TABLE `threadmessage_reaction`
+  MODIFY `threadmessage_reaction_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -838,6 +886,14 @@ ALTER TABLE `shared_message`
 ALTER TABLE `threaded_message`
   ADD CONSTRAINT `threaded_message_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `threaded_message_ibfk_2` FOREIGN KEY (`parent_message_id`) REFERENCES `message` (`message_id`);
+
+--
+-- Constraints for table `threadmessage_reaction`
+--
+ALTER TABLE `threadmessage_reaction`
+  ADD CONSTRAINT `threadmessage_reaction_ibfk_1` FOREIGN KEY (`threadmessage_id`) REFERENCES `threaded_message` (`id`),
+  ADD CONSTRAINT `threadmessage_reaction_ibfk_2` FOREIGN KEY (`emoji_id`) REFERENCES `emoji` (`emoji_id`),
+  ADD CONSTRAINT `threadmessage_reaction_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `user`
