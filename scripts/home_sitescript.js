@@ -8,6 +8,7 @@ function start()
 		{
 			$('#createChannel').modal('show');
 		});
+
         $(".inputMessage").keypress(function (e) {
             if(e.which == 13 && !e.shiftKey) {
                 $(this).closest("form").submit();
@@ -22,9 +23,7 @@ function start()
 			//$(".messageHoverButtons").css({'top': offset.top, 'left' : parseInt($(this).css("width"))})
             $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*30/100)})
 			$(".messageHoverButtons").show();
-
 			//console.log(curMessageId);
-
 		});
 
         $(document).on("mouseenter",".threadMessageWrapper .message_body",function() {
@@ -33,7 +32,6 @@ function start()
             $(".messageHoverButtons").find(".nonthumbbutts").hide();
             $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*30/100)})
             $(".messageHoverButtons").show();
-
         });
 
 
@@ -123,7 +121,6 @@ function start()
             if($(".threadMessageWrapper").css("display") == "block"){
 				$(".threadMessageWrapper .eleToBeCleared").empty();
 			}
-
 			//$(".threadMessageWrapper").html("<h2>Clicked on the thread with messageId: "+curMessageId+"</h2>" );
             $(".messageHoverButtons").hide();
             $(".regularMessagesWrapper").removeClass("col-xs-12").addClass("col-xs-8");
@@ -150,12 +147,8 @@ function start()
 						break;
 				}
 			}
-
-
             $(".threadMessageWrapper").show();
-
         });
-
 
         // this registration takes care of showing the thread which has replies already
         $(document).on("click",".repliescount",function(e){
@@ -166,9 +159,6 @@ function start()
             $(".threadMessageWrapper").show();
             $(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
         });
-
-
-
 
 		$( ".createChannelBtn" ).on("click",function(e) {
 			console.log("in clickkk");
@@ -200,8 +190,6 @@ function start()
 							window.location.href = "./index.php";
 										
 						});
-					 
-						 
 						$("#successModal").modal("show");
 						$("#successModal").css("z-index","1100");
 						setTimeout(function() 
@@ -209,7 +197,6 @@ function start()
 								$('#successModal').modal('hide');
 								window.location.href = "./index.php?channel="+$.trim(data).split(".")[0].split("-")[1];
 							}, 4000);
-		        		
 		        	}
 		        	else
 		        	{
@@ -217,20 +204,24 @@ function start()
 						$('#errorModal').on('hidden.bs.modal', function (e) {
 							$('#errorModal').off();
 						});
-						
 						$("#errorModal").modal("show");
 						$("#errorModal").css("z-index","1100");
 						setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
 		        		// $('.uniqueEmail').html('Email Id already exists. Try with different Id.');
 		        	}
-		    
-
 		        }
-
 		    });
-
 	 	});
 
+        $(document).on("keypress",".messageentryspace_threadsection",function(e) {
+
+                if(e.which == 13 && !e.shiftKey) {
+                    e.preventDefault();
+                    if($(this).val()!=""){
+
+					}
+                }
+        });
 
 
 	});
