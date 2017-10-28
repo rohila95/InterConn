@@ -29,7 +29,7 @@ if(isset($_POST["register"])){ // to post a react by a
     $firstName = $data->firstName;
     $lastName = $data->lastName;
     $email = $data->email;
-    $password = $data->password;  
+    $password = $data->password;
     $whatIDo = $data->whatIDo;
     $status = $data->status;
     $phoneNumber = $data->phoneNumber;
@@ -38,7 +38,7 @@ if(isset($_POST["register"])){ // to post a react by a
     $timestamp=date('Y-m-d H:i:s', time());
     $workspaceid=$data->workspace;
     $webService->registerNewUser($username,$firstName,$lastName,$email,' ',$password,$phoneNumber,$whatIDo,$status,1,$skype,$workspaceid,$timestamp);
-  
+
     // echo 'register';
 }
 if(isset($_POST["getworkspaces"]))
@@ -56,4 +56,21 @@ if(isset($_POST["createChannel"]))
   $invites=$data->invites;
   echo $webService->createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites);
 }
+
+if(isset($_POST["createThreadReply"]))
+{
+  $data=json_decode($_POST["createThreadReply"]);
+  $userid=$_SESSION['userid'];
+  $content=$data->content;
+  $parent_message_id=$data->parent_message_id;
+  $timestamp=date('Y-m-d H:i:s', time());
+  echo $webService->createThreadReply($userid,$content,$parent_message_id,$timestamp);
+}
+if(isset($_POST["getThreadMessages"]))
+{
+  $data=json_decode($_POST["getThreadMessages"]);
+  $parent_message_id=$data->parentmessageid;
+  echo  $webService->getThreadMessages($parent_message_id);
+}
+
 ?>

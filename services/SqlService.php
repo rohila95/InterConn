@@ -51,12 +51,37 @@ class SqlService{
 
 	public function getChannelMessages($channelid)
 	{
-		$sql="SELECT message.message_id,user.user_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at";
+		$sql="SELECT message.message_id,user.user_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded,user.profile_pic FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at";
 		return $sql;
 	}
 	public function getMessageReactions($messageid)
 	{
 		$sql="SELECT count(*) as count,message_reaction.emoji_id,message_id,emoji.emoji_code,emoji.emoji_pic FROM `message_reaction`,`emoji` where message_reaction.emoji_id=emoji.emoji_id and message_id=".$messageid." group by message_id, message_reaction.emoji_id";
+		return $sql;
+	}
+	public function getThreadMessages($parent_message_id)
+	{
+		$sql="SELECT threaded_message.id,threaded_message.content,threaded_message.created_at,user.first_name,user.last_name,user.profile_pic FROM `threaded_message`,`user` where threaded_message.created_by=user.user_id and parent_message_id=".$parent_message_id." order by threaded_message.created_at";
+		return $sql;
+	}
+	public function getThreadMessageReactions($threadmessage_id)
+	{
+		$sql="SELECT count(*) as count,threadmessage_reaction.emoji_id,threadmessage_id,emoji.emoji_code,emoji.emoji_pic FROM `threadmessage_reaction`,`emoji` where threadmessage_reaction.emoji_id=emoji.emoji_id and threadmessage_id=".$threadmessage_id." group by threadmessage_id, threadmessage_reaction.emoji_id";
+		return $sql;
+	}
+	public function insertReplyThread($parentmessageid,$content,$created_by,$timestamp)
+	{
+		$sql="INSERT INTO `InterConn`.`threaded_message` (`id`, `parent_message_id`, `content`, `created_by`, `created_at`) VALUES (NULL, '".$parentmessageid."', '"$content"', '"$created_by"', '".$timestamp."')";
+		return $sql;
+	}
+	public function updateUserProfile($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype)
+	{
+		$sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `email_id` = '$emailid', `profile_pic` = '$profile_pic', `password` = '$password', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype' WHERE `user`.`user_id` = ".$userid;
+		return $sql;
+	}
+	public function updateParentThread($parentmessageid)
+	{
+		$sql="UPDATE `InterConn`.`message` SET `is_threaded` = '1' WHERE `message`.`message_id` = ".$parentmessageid;
 		return $sql;
 	}
 
