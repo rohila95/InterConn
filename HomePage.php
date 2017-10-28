@@ -214,7 +214,8 @@
                         }
                     ?>
                         <div class='headerAddon_HP'>
-                            <i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i>
+                            <i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i> |
+                            <span class="invitations"><a href="">Invite Members</a></span>
                         </div>
                             </div>
                 <div class="col-xs-12 regularMessagesWrapper">
