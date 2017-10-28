@@ -73,4 +73,32 @@ if(isset($_POST["getThreadMessages"]))
   echo  $webService->getThreadMessages($parent_message_id);
 }
 
+if(isset($_POST["updateProfile"]))
+{
+
+  $fname=$_FILES['filetoUpload']['tmp_name'];
+
+  $file_name=$_POST["file_name"];
+  $file_name=explode('\\', $file_name);
+  $file_ext=explode('.', $file_name[2]);
+  $uploadfile_newname='./images/'.$_SESSION['userid'].'.'.$file_ext[1];
+  $uploadSucess = move_uploaded_file($fname, $uploadfile_newname);
+  if($uploadSucess){
+    echo "success";
+  }else{
+    echo "fail";
+  }
+  $firstName = $_POST["firstName"];
+  $lastName = $_POST["lastName"];
+  $email = $_POST["email"];
+  $password = $_POST["password"];
+  $whatIDo = $_POST["whatIDo"];
+  $status = $_POST["status"];
+  $phoneNumber = $_POST["phoneNumber"];
+  $skype = $_POST["skype"];
+  $userid=$_SESSION['userid'];
+  echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
+
+}
+
 ?>

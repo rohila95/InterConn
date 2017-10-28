@@ -71,7 +71,7 @@ class SqlService{
 	}
 	public function insertReplyThread($parentmessageid,$content,$created_by,$timestamp)
 	{
-		$sql="INSERT INTO `InterConn`.`threaded_message` (`id`, `parent_message_id`, `content`, `created_by`, `created_at`) VALUES (NULL, '".$parentmessageid."', '"$content"', '"$created_by"', '".$timestamp."')";
+		$sql="INSERT INTO `InterConn`.`threaded_message` (`id`, `parent_message_id`, `content`, `created_by`, `created_at`) VALUES (NULL, '".$parentmessageid."', '".$content."', '".$created_by."', '".$timestamp."')";
 		return $sql;
 	}
 	public function updateUserProfile($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype)

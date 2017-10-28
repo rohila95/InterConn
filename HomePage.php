@@ -160,7 +160,7 @@
 					    </div>
 					    <div class="row">
 					      	<div class="form-group">
-						        <input type="password" class="form-control channelPurpose" name="purpose" required>
+						        <input type="text" class="form-control channelPurpose" name="purpose" required>
 						        <label class="form-control-placeholder" for="purpose">Purpose</label>
 						    </div>
 						</div>
