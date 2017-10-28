@@ -254,6 +254,50 @@ class WebService{
     return json_encode($array);
     $conn->close();
   }
+  public function getUsersInWorkspaceInvites($workspaceid,$userid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
+    $sql_service = new SqlService();
+    $users = $sql_service->getUserInWorkspace($workspaceid,$userid);
+    $result = $conn->query($users);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
+  public function getUsersInWorkspaceChannelInvites($workspaceid,$channelid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $channelid=mysqli_real_escape_string($conn,$channelid);
+    $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
+    $sql_service = new SqlService();
+    $users = $sql_service->getUserInWorkspaceNotInChannel($workspaceid,$channelid);
+    $result = $conn->query($users);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
 
   public function createChannelMessage($userid,$content,$channelid,$timestamp)
   {

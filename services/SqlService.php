@@ -61,12 +61,22 @@ class SqlService{
 	}
 	public function getThreadMessages($parent_message_id)
 	{
-		$sql="SELECT threaded_message.id,threaded_message.content,threaded_message.created_at,user.first_name,user.last_name,user.profile_pic FROM `threaded_message`,`user` where threaded_message.created_by=user.user_id and parent_message_id=".$parent_message_id." order by threaded_message.created_at";
+		$sql="SELECT threaded_message.id,threaded_message.content,threaded_message.created_at,user.user_id,user.first_name,user.last_name,user.profile_pic FROM `threaded_message`,`user` where threaded_message.created_by=user.user_id and parent_message_id=".$parent_message_id." order by threaded_message.created_at";
 		return $sql;
 	}
 	public function getThreadMessageReactions($threadmessage_id)
 	{
 		$sql="SELECT count(*) as count,threadmessage_reaction.emoji_id,threadmessage_id,emoji.emoji_code,emoji.emoji_pic FROM `threadmessage_reaction`,`emoji` where threadmessage_reaction.emoji_id=emoji.emoji_id and threadmessage_id=".$threadmessage_id." group by threadmessage_id, threadmessage_reaction.emoji_id";
+		return $sql;
+	}
+	public function getUserInWorkspace($workspaceid,$userid)
+	{
+		$sql="SELECT user.user_id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id<>".$userid;
+		return $sql;
+	}
+	public function getUserInWorkspaceNotInChannel($workspaceid,$channelid)
+	{
+		$sql="SELECT user.user_id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id NOT IN(select user_channel.user_id from user_channel where user_channel.channel_id=".$channelid.")";
 		return $sql;
 	}
 	public function insertReplyThread($parentmessageid,$content,$created_by,$timestamp)
