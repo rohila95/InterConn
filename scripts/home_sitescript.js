@@ -10,10 +10,14 @@ function start()
 		});
 
         $(".inputMessage").keypress(function (e) {
+            // if(e.which == 13 && !e.shiftKey) {
+            //     $(this).closest("form").submit();
+            //     e.preventDefault();
+            // }
+
             if(e.which == 13 && !e.shiftKey) {
-                $(this).closest("form").submit();
-                e.preventDefault();
-            }
+             		$(".messageEntrySpace_regularMsg_HP button").trigger("click");          
+             }
         });
 
         $(document).on("mouseenter",".regularMessagesWrapper .message_body",function() {

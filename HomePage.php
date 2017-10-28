@@ -238,7 +238,7 @@
                                     $today = date("l, F jS, o", $time);
                                     foreach ($currentChannelMessages as $message)
                                     {
-																				// echo json_encode($message);
+										// echo json_encode($message);
                                         $currentDate=$web_service->getFormatDate($message->created_at);
                                         $currentTime=$web_service->getFormatTime($message->created_at);
                                         $shortName= $message->first_name[0];
@@ -261,10 +261,13 @@
                                                 $prevdate=$currentDate;
                                             }
 
+// $msgStr.= $message->profile_pic;
 
+											if($message->profile_pic=='0')
+                                           		 $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
+                                           	else
+                                           		$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;"></div></div><div class="col-xs-11 message"><div class="message_header"><b>';
 
-
-                                            $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
                                             $msgStr.=htmlspecialchars($message->first_name);
                                             $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
                                             $msgStr.=$currentTime;
@@ -303,7 +306,11 @@
                                                 $msgStr.='<div class="row dayDividerWrapper"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
                                                 $prevdate=$currentDate;
                                             }
-                                            $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. strtoupper($shortName) .'</div> </div><div class="col-xs-11 message"><div class="message_header"><b>';
+                                            // $msgStr.= $message->profile_pic;
+                                            if($message->profile_pic=='0')
+                                           		 $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
+                                           	else
+                                           		$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;"></div></div><div class="col-xs-11 message"><div class="message_header"><b>';
                                             $msgStr.=htmlspecialchars($message->first_name);
                                             $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
                                             $msgStr.=$currentTime;
@@ -328,6 +335,7 @@
                                         }
                                     }
                                     $msgStr.='</div></div>';
+
                                 }
                                 else
                                 {
