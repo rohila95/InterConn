@@ -1,7 +1,7 @@
+var curMessageId='';
 function start()
 {
-	var curMessageId='';
-	$(document).ready(function() {
+    $(document).ready(function() {
 		console.log("Inside ready");
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
 		$('.createNewChannelIcon').click(function()
@@ -55,7 +55,7 @@ function start()
 
                 if($.trim(data).split("-")[0] == "success"){
 
-                	var curMsgEle = $(".message_body#"+curMessageId);
+                	var curMsgEle = $(".messagewithid_"+curMessageId);
 					if($.trim(data).split("-")[1] == "inserted"){
 						// Increase the count, the name logic is to be taken care yet
                         if (curMsgEle.find(".msg_reactionsec").find("[emojiid="+emoji_idCLicked+"]").length == 0 ){ //adding a reaction dynamically
@@ -129,16 +129,35 @@ function start()
 		//   }
 		// });
 
-        // this registration takes care of
-        $(".messageHoverButtons .threadbutt").click(function(event) {
-            event.preventDefault();
+        // this registration takes care of creating a new thread
+        $(document).on("click",".messageHoverButtons .threadbutt",function(e){
+            e.preventDefault();
+			//$(".threadMessageWrapper").html("<h2>Clicked on the thread with messageId: "+curMessageId+"</h2>" );
+            $(".messageHoverButtons").hide();
+            $(".regularMessagesWrapper").removeClass("col-xs-12").addClass("col-xs-8");
+			$(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
+            var curMsgEle = $(".messagewithid_"+curMessageId);
+            var parentsUserPicEle = curMsgEle.parents(".messageSet").eq(0).find(".userPic").clone();
+			// section that prepares the head of the Message Thread
+			var threadHeadParentMsgEle= $("<div class=\"row threadheadmsg messageSet\"></div>");
+            threadHeadParentMsgEle.addClass("messagewithid_"+curMessageId);
+			$(".threadhead_parentmessage").append(threadHeadParentMsgEle);
+            threadHeadParentMsgEle.append(parentsUserPicEle);
+
+
+            $(".threadMessageWrapper").show();
+
+        });
+
+
+        // this registration takes care of showing the thread which has replies already
+        $(document).on("click",".repliescount",function(e){
+            e.preventDefault();
+           // $(".threadMessageWrapper").html("<h2>Clicked on the thread with messageId: "+curMessageId+"</h2>" );
             $(".messageHoverButtons").hide();
             $(".regularMessagesWrapper").removeClass("col-xs-12").addClass("col-xs-8");
             $(".threadMessageWrapper").show();
-			$(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
-
-
-
+            $(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
         });
 
 
@@ -204,6 +223,8 @@ function start()
 		    });
 
 	 	});
+
+
 
 	});
 }
