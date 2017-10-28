@@ -353,8 +353,6 @@
                             <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
                             <div class="form-group">
 
-
-
                                 <?php
                                 if(isset($_GET["channel"])){
                                     $currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
@@ -365,7 +363,6 @@
                                 }
 
                                 ?>
-
 
                             </div>
                         </form>
@@ -386,8 +383,9 @@
                            </div>
                            <div class="row messageentryspace_threadsection">
                                <form>
-                                   <textarea placeholder="Reply" required class="form-control"></textarea>
-                                    <button id="thread_MsgEntrySubmit" class="hidden" />
+                                   <textarea placeholder="Reply" required name="threadreply_msgcontent" class="form-control"></textarea>
+                                   <input type="hidden" class="parentmsgidip_threadmsg" name="parent_message_id"/>
+                                   <button id="thread_MsgEntrySubmit" class="hidden" />
                                </form>
 
                            </div>
