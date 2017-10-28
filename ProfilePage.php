@@ -54,7 +54,7 @@
 
 			</div>
 			<div class="row">
-				<form role="form" class="col-xs-8" id="updateForm" method="POST" action="./services/updateProfile.php" enctype='multipart/form-data'>
+				<form role="form" class="col-xs-8" id="updateForm" method="POST" action="./controller.php" enctype='multipart/form-data'>
 					<div class="row">
 						<div class="form-group col-xs-5">
 					        <input type="text" class="form-control firstName" name="firstName" value="<?php echo $userDetails[0]->first_name ?>" required>
@@ -100,7 +100,7 @@
 				    </div>
 				    <div class="row">
 				      	<div class="form-group">
-					        <input type="text" class="form-control" name="skype" value ="<?php echo $userDetails[0]->skype ?>">
+					        <input type="text" class="form-control skype" name="skype" value ="<?php echo $userDetails[0]->skype ?>">
 					        <label class="form-control-placeholder" for="name">Skype</label>
 				      	</div>
 

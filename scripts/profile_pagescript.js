@@ -29,9 +29,20 @@ function start()
 
 				var fileFormData = new FormData();
 		fileFormData.append('filetoUpload', $('.file-upload')[0].files[0]);
-		 fileFormData.append("appointmentID",$.trim(1));
+		fileFormData.append("updateProfile",'');
+		 var file_name=$(".file-upload").val();
+		 fileFormData.append("file_name",file_name);
+
+		 fileFormData.append("firstName",$('.firstName').val());
+		 fileFormData.append("lastName",$('.lastName').val());
+		 fileFormData.append("password",$('.password').val());
+		 fileFormData.append("email",$('.email').val());
+		 fileFormData.append("whatIDo",$('.whatIDo').val());
+		 fileFormData.append("status",$('.status').val());
+		 fileFormData.append("phoneNumber",$('.phoneNumber').val());
+		 fileFormData.append("skype",$('.skype').val());
 		 $.ajax({
-							url: './services/updateProfile.php',
+							url: './Controller.php',
 							type: 'POST',
 							data: fileFormData,
 							processData: false,
