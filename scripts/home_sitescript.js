@@ -42,7 +42,7 @@ function start()
         $(document).on("click",".threadMessageWrapper .message_time",function() {
 
 			var curMessageId = $(this).parents(".message").find(".message_body").attr("id");
-			$(".regularMessagesWrapper").find(".messagewithid_"+curMessageId).css("background-color","#dedddd").animate({"background-color": ""},1000,function () {
+			$(".regularMessagesWrapper").find(".messagewithid_"+curMessageId).css("background-color","#dedddd").animate({"background-color": ""},2000,function () {
 				$(this).removeAttr("style");
             });
         });
@@ -243,6 +243,7 @@ function start()
                                 dataType: 'text',
                                 success: function (data) {
 									console.log(data);
+                                    getAllThreadReplies($(".parentmsgidip_threadmsg").val());
                                 }
                             });
 
@@ -254,3 +255,62 @@ function start()
 	});
 }
 start();
+
+// gets all the the thread replies, by just needing the parentmsgID
+function getAllThreadReplies(parentMsgID){
+    var convertedJSON ={};
+    convertedJSON["parentmessageid"] = parentMsgID;
+
+    var stringData = JSON.stringify(convertedJSON);
+    console.log(convertedJSON);
+    $.ajax({
+        url: './Controller.php',
+        type: 'post',
+        data: {'getThreadMessages':stringData},
+        dataType: 'text',
+        success: function (data) {
+            console.log(data);
+            if(data.split("-")[0]=="success"){
+                var jsonArrRes = $.parseJSON(data.split("-")[1]);
+                var threadReplysUIStr="";
+
+                $.each(jsonArrRes,function(indx,obj){
+                    if(obj['profile_pic'] == ""){
+
+                    }
+                    var defPictureDet = buildDefaultPicture(obj['user_id'],obj['first_name'],obj['last_name']);
+                    var curThreadReplyEle = $('<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background-color: '+defPictureDet.split("-")[0] +';">'+ defPictureDet.split("-")[1]+'</div></div></div>');
+                    curThreadReplyEle.addClass("threadReplyWithId_"+obj['id']);
+                    $(".threadedreplies_content").append(curThreadReplyEle);
+
+                    var curThRepMsgCont='<div class="col-xs-11 message"><div class="message_header"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["timestamp"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div>';
+
+                    $(".threadedreplies_content").find(".threadReplyWithId_"+obj['id']).append(curThRepMsgCont);
+
+                    //threadReplysUIStr  +='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background-color: '+defPictureDet.split("-")[0] +';">'+ defPictureDet.split("-")[1]+'</div></div></div>';
+                });
+
+                /*threadReplysUIStr  +='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url() !important;background-size: 36px 36px !important;">' +
+                    '</div></div><div class="col-xs-11 message"><div class="message_header"><b>'+Rohila Gudipati +'</b><span class="message_time"> 10:31 PM</span></div><div class="message_body messagewithid_97" id="97">
+				"<div class="msg_content">what  else ?</div><div class="msg_reactionsec"> </div></div></div></div>'*/
+
+
+
+
+            }else{
+            	alert("something went wrong while fetching the Thread Replies.")
+			}
+        }
+    });
+
+    function buildDefaultPicture( userID,fName,lName){
+        var shortName ="";
+        if(lName==""){
+            shortName= fName.split("")[0]+fName.split("")[1];
+        }else{
+            shortName= fName.split("")[0]+lName.split("")[0];
+        }
+        var defUserPicBGColorArr = ['#3F51B5','#2196F3','#00BCD4','#CDDC39','#FF5722'];
+        return   defUserPicBGColorArr[parseInt(userID)%5]+"-"+shortName.toUpperCase();
+    }
+}

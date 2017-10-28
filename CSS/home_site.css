@@ -291,6 +291,10 @@ pre
     margin-left: -1%;
 }
 
+.threadhead_parentmessage{
+    border-bottom: 1px solid #bcbcbd;
+}
+
 .messageEntrySpace_regularMsg_HP {
     position: fixed;
     bottom: -0.5%;
