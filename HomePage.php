@@ -385,7 +385,10 @@
 
                            </div>
                            <div class="row messageentryspace_threadsection">
-                               <textarea placeholder="Reply" class="form-control"></textarea>
+                               <form >
+                                   <textarea placeholder="Reply" required class="form-control"></textarea>
+                               </form>
+
                            </div>
 
 
