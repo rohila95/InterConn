@@ -432,6 +432,30 @@ class WebService{
     $conn->close();
   }
 
+  public function updateUserDetails($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $first_name=mysqli_real_escape_string($conn,$first_name);
+    $last_name=mysqli_real_escape_string($conn,$last_name);
+    $emailid=mysqli_real_escape_string($conn,$emailid);
+    $profile_pic=mysqli_real_escape_string($conn,$profile_pic);
+    $password=mysqli_real_escape_string($conn,$password);
+    $phone_number=mysqli_real_escape_string($conn,$phone_number);
+    $whatido=mysqli_real_escape_string($conn,$whatido);
+    $status=mysqli_real_escape_string($conn,$status);
+    // $status_emoji=mysqli_real_escape_string($conn,$status_emoji);
+    $skype=mysqli_real_escape_string($conn,$skype);
+    $sql_service = new SqlService();
+    $user = $sql_service->updateUserProfile($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype);
+    $result = $conn->query($user);
+    if ($result === TRUE) {
+        echo "User updated.";
+    } else {
+        echo "Error: " . $userWorkspaceMap . "<br>" . $conn->error;
+    }
+  }
 
   public function getProfileDetails($userid){
 

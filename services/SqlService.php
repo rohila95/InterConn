@@ -64,6 +64,11 @@ class SqlService{
 		$sql="INSERT INTO `InterConn`.`threaded_message` (`id`, `parent_message_id`, `content`, `created_by`, `created_at`) VALUES (NULL, '".$parentmessageid."', '"$content"', '"$created_by"', '".$timestamp."')";
 		return $sql;
 	}
+	public function updateUserProfile($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype)
+	{
+		$sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `email_id` = '$emailid', `profile_pic` = '$profile_pic', `password` = '$password', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype' WHERE `user`.`user_id` = ".$userid;
+		return $sql;
+	}
 	public function updateParentThread($parentmessageid)
 	{
 		$sql="UPDATE `InterConn`.`message` SET `is_threaded` = '1' WHERE `message`.`message_id` = ".$parentmessageid;
