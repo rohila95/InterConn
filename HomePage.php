@@ -51,6 +51,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+                integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+                crossorigin="anonymous"></script>
 		<script src="./scripts/home_sitescript.js"></script>
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 		<script src="./scripts/tagsinput/bootstrap-tagsinput.min.js"></script>
@@ -189,8 +192,8 @@
 			<div class="btn-group messageHoverButtons">
 				    <button emojiid="1" type="button" class="btn btn-primary thumbsbutt" title="thumbsup"><i class="fa fa-thumbs-o-up"></i></button>
 				    <button emojiid="2" type="button" class="btn btn-primary thumbsbutt" title="thumbsdown"><i class="fa fa-thumbs-o-down"></i></button>
-				    <button type="button" class="btn btn-primary threadbutt" title="thread"><i class="fa fa-comments-o"></i></button>
-				    <button type="button" class="btn btn-primary replybutt" title="reply"><i class="fa fa-reply"></i></button>
+				    <button type="button" class="btn btn-primary threadbutt nonthumbbutts" title="thread"><i class="fa fa-comments-o"></i></button>
+				    <button type="button" class="btn btn-primary replybutt nonthumbbutts " title="reply"><i class="fa fa-reply"></i></button>
 			</div>
             <div class="col-xs-11 mainContent_HP"><div class="row">
 
@@ -254,7 +257,7 @@
                                         {
                                             if($prevdate!=$currentDate)
                                             {
-                                                $msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
+                                                $msgStr.='<div class="row dayDividerWrapper"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
                                                 $prevdate=$currentDate;
                                             }
 
@@ -297,7 +300,7 @@
                                             $msgStr.='</div></div>';
                                             if($prevdate!=$currentDate)
                                             {
-                                                $msgStr.='<div class="row"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
+                                                $msgStr.='<div class="row dayDividerWrapper"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
                                                 $prevdate=$currentDate;
                                             }
                                             $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. strtoupper($shortName) .'</div> </div><div class="col-xs-11 message"><div class="message_header"><b>';
@@ -362,18 +365,21 @@
                 </div>
                <div class="col-xs-4 threadMessageWrapper" >
                    <div class="row threadedContent">
-                       <div class="threadHeader" style="min-height:7%; border:1px solid #F1F1F1;">
+                       <div class="row threadHeader" style="min-height:7%; border:1px solid #F1F1F1;">
                            <h2>Thread</h2>
                        </div>
-                       <div class="row threadhead_parentmessage">
 
-                       </div>
-                       <div class="row threadedreplies_content">
 
-                       </div>
-                       <div class="row messageentryspace_threadsection">
-                           <textarea class="form-control"></textarea>
-                       </div>
+                           <div class="row eleToBeCleared threadhead_parentmessage">
+
+                           </div>
+                           <div class="row eleToBeCleared threadedreplies_content">
+
+                           </div>
+                           <div class="row messageentryspace_threadsection">
+                               <textarea placeholder="Reply" class="form-control"></textarea>
+                           </div>
+
 
                    </div>
                 </div>
