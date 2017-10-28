@@ -284,7 +284,7 @@
                                                 if($message->is_threaded==1)
                                                 {
                                                     $thread=$message->threads->threadCount;
-                                                    $msgStr.="<div class='repliescount' title='view thread'><a href='#'>".$thread.'repliesss'."</a></div>";
+                                                    $msgStr.="<div class='repliescount' title='view thread'><a href='#'><span>".$thread.'</span>repliesss'."</a></div>";
 
                                                 }
                                                 $msgStr.=' </div></div>';
@@ -327,7 +327,7 @@
                                                 if($message->is_threaded==1)
                                                 {
                                                     $thread=$message->threads->threadCount;
-                                                    $msgStr.="<div class='repliescount' title='view thread'><a href='#'>".$thread.'repliesss'."</a></div>";
+                                                    $msgStr.="<div class='repliescount' title='view thread'><a href='#'><span>".$thread.'</span>repliesss'."</a></div>";
 
                                                 }
                                             $msgStr.=' </div></div>';

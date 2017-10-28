@@ -119,7 +119,7 @@ function start()
 
 
         // this registration takes care of creating a new thread
-        $(document).on("click",".messageHoverButtons .threadbutt",function(e){
+        $(document).on("click",".messageHoverButtons .threadbutt, .repliescount",function(e){
             e.preventDefault();
 
             if($(".threadMessageWrapper").css("display") == "block"){
@@ -138,8 +138,6 @@ function start()
 
             threadHeadParentMsgEle.addClass("messagewithid_"+curMessageId);
 			$(".threadhead_parentmessage").append(threadHeadParentMsgEle);
-
-
             threadHeadParentMsgEle.append(parentsUserPicEle);
             threadHeadParentMsgEle.append("<div class='col-xs-11 message'></div>");
             threadHeadParentMsgEle.find(".message").append(parentsMsgHeaderEle);
@@ -152,17 +150,11 @@ function start()
 						break;
 				}
 			}
-            $(".threadMessageWrapper").show();
-        });
+			if(curMsgEle.find(".repliescount").length > 0 ){
+                getAllThreadReplies(curMessageId);
+            }
 
-        // this registration takes care of showing the thread which has replies already
-        $(document).on("click",".repliescount",function(e){
-            e.preventDefault();
-           // $(".threadMessageWrapper").html("<h2>Clicked on the thread with messageId: "+curMessageId+"</h2>" );
-            $(".messageHoverButtons").hide();
-            $(".regularMessagesWrapper").removeClass("col-xs-12").addClass("col-xs-8");
             $(".threadMessageWrapper").show();
-            $(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
         });
 
 		$( ".createChannelBtn" ).on("click",function(e) {
@@ -224,9 +216,6 @@ function start()
                     if (!$('.messageentryspace_threadsection form')[0].checkValidity()) {
                         $('#thread_MsgEntrySubmit').trigger('click');
                     }else{
-
-                    	alert("write ajax post logic");
-
                             var serializedArr = $('.messageentryspace_threadsection form').serializeArray();
                             var convertedJSON ={};
 
@@ -242,8 +231,10 @@ function start()
                                 data: {'createThreadReply':stringData},
                                 dataType: 'text',
                                 success: function (data) {
-									console.log(data);
-                                    getAllThreadReplies($(".parentmsgidip_threadmsg").val());
+									if(data.split("-")[0]=="success"){
+									    $(".messageentryspace_threadsection textarea").val("");
+                                        getAllThreadReplies($(".parentmsgidip_threadmsg").val());
+                                    }
                                 }
                             });
 
@@ -270,20 +261,27 @@ function getAllThreadReplies(parentMsgID){
         dataType: 'text',
         success: function (data) {
             console.log(data);
-            if(data.split("-")[0]=="success"){
-                var jsonArrRes = $.parseJSON(data.split("-")[1]);
+            if(!data.includes("fail")){
+                var jsonArrRes = $.parseJSON(data);
+                // to update the number of replies in case if changed
+                $(".messagewithid_"+parentMsgID).find(".repliescount span").html(jsonArrRes.length);
                 var threadReplysUIStr="";
-
+                $(".threadedreplies_content").empty();
                 $.each(jsonArrRes,function(indx,obj){
-                    if(obj['profile_pic'] == ""){
 
-                    }
                     var defPictureDet = buildDefaultPicture(obj['user_id'],obj['first_name'],obj['last_name']);
+
                     var curThreadReplyEle = $('<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background-color: '+defPictureDet.split("-")[0] +';">'+ defPictureDet.split("-")[1]+'</div></div></div>');
+
                     curThreadReplyEle.addClass("threadReplyWithId_"+obj['id']);
                     $(".threadedreplies_content").append(curThreadReplyEle);
+                    if(obj['profile_pic'] != ""){
+                        curThreadReplyEle.find(".defUserPic").addClass("profilePic").html("");
+                        curThreadReplyEle.find(".profilePic").css("background-image","url("+obj['profile_pic']+")");
+                    }
 
-                    var curThRepMsgCont='<div class="col-xs-11 message"><div class="message_header"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["timestamp"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div>';
+
+                    var curThRepMsgCont='<div class="col-xs-11 message"><div class="message_header"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div>';
 
                     $(".threadedreplies_content").find(".threadReplyWithId_"+obj['id']).append(curThRepMsgCont);
 
@@ -293,8 +291,6 @@ function getAllThreadReplies(parentMsgID){
                 /*threadReplysUIStr  +='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url() !important;background-size: 36px 36px !important;">' +
                     '</div></div><div class="col-xs-11 message"><div class="message_header"><b>'+Rohila Gudipati +'</b><span class="message_time"> 10:31 PM</span></div><div class="message_body messagewithid_97" id="97">
 				"<div class="msg_content">what  else ?</div><div class="msg_reactionsec"> </div></div></div></div>'*/
-
-
 
 
             }else{
