@@ -130,6 +130,7 @@ function start()
             $(".regularMessagesWrapper").removeClass("col-xs-12").addClass("col-xs-8");
 			$(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
             var curMsgEle = $(".regularMessagesWrapper").find(".messagewithid_"+curMessageId);
+            $(".threadMessageWrapper .parentmsgidip_threadmsg").val(curMessageId);
             var parentsUserPicEle = curMsgEle.parents(".messageSet").eq(0).find(".userPic").clone();
             var parentsMsgHeaderEle = curMsgEle.parents(".messageSet").eq(0).find(".message_header").clone();
                 // section that prepares the head of the Message Thread
@@ -218,10 +219,32 @@ function start()
 	 	});
 
         $(document).on("keypress",".messageentryspace_threadsection",function(e) {
-
                 if(e.which == 13 && !e.shiftKey) {
                     e.preventDefault();
-                    if($(this).val()!=""){
+                    if (!$('.messageentryspace_threadsection form')[0].checkValidity()) {
+                        $('#thread_MsgEntrySubmit').trigger('click');
+                    }else{
+
+                    	alert("write ajax post logic");
+
+                            var serializedArr = $('.messageentryspace_threadsection form').serializeArray();
+                            var convertedJSON ={};
+
+							$.each(serializedArr , function( key, value ) {
+                                convertedJSON[value["name"]]= value["value"];
+							});
+
+                            var stringData = JSON.stringify(convertedJSON);
+                            console.log(convertedJSON);
+                            $.ajax({
+                                url: './Controller.php',
+                                type: 'post',
+                                data: {'createThreadReply':stringData},
+                                dataType: 'text',
+                                success: function (data) {
+									console.log(data);
+                                }
+                            });
 
 					}
                 }

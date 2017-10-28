@@ -295,15 +295,18 @@ class WebService{
     $message = $sql_service->insertReplyThread($parent_message_id,$content,$userid,$timestamp);
     $result = $conn->query($message);
     if ($result === TRUE) {
+        $messageid = $conn->insert_id;
         $updateParentMessage = $sql_service->updateParentThread($parent_message_id);
         $innerresult = $conn->query($updateParentMessage);
         if ($innerresult === TRUE) {
-            echo "Updated parent message " ;
+            echo "success-inserted-".$messageid;
+
+           // echo "Updated parent message " ;
         } else {
-            echo "Error: " . $updateParentMessage . "<br>" . $conn->error;
+            echo "fail- " . $updateParentMessage . "<br>" . $conn->error;
         }
     } else {
-        echo "Error: " . $message . "<br>" . $conn->error;
+        echo "fail- " . $message . "<br>" . $conn->error;
     }
     $conn->close();
   }
