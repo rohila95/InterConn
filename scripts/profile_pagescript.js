@@ -42,26 +42,43 @@ function start()
 		 fileFormData.append("phoneNumber",$('.phoneNumber').val());
 		 fileFormData.append("skype",$('.skype').val());
 		 $.ajax({
-							url: './Controller.php',
-							type: 'POST',
-							data: fileFormData,
-							processData: false,
-							contentType: false,
-							success: function(data) {
-						//  $('#cover').hide();
+					url: './Controller.php',
+					type: 'POST',
+					data: fileFormData,
+					processData: false,
+					contentType: false,
+					success: function(data) {
 						console.log(data);
-					// 				if($.trim(data) == "success"){
-					// 			successPopUpWithRD("Existing Appointment Letter uploaded successfully!");
-					// 				}
-					// else{
-					// 	errorPopUp("error: some problem while uploading the existing Appointment letter!");
-					// }
-							},
-							error: function(xhr,error){
-							// 	$('#cover').hide();
-							// errorPopUp("error: some problem while uploading the existing Appointment letter!");
-							console.log(error);
+						if(data.includes("success")){
+							$('#successModal .modal-body').html("<p> Profile updated Successfully. </p>");
+							$('#successModal').on('hidden.bs.modal', function (e) {  
+								$('#successModal').off();
+																		
+							});
+						 
+							 
+							$("#successModal").modal("show");
+							$("#successModal").css("z-index","1100");
+							setTimeout(function() 
+								{
+									$('#successModal').modal('hide');
+									
+								}, 4000);
 							}
+						else{
+								$('#errorModal .modal-body').html("<p> Profile not updated.</p>");
+								$('#errorModal').on('hidden.bs.modal', function (e) {
+									$('#errorModal').off();
+								});
+								
+								$("#errorModal").modal("show");
+								$("#errorModal").css("z-index","1100");
+								setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+							}
+						},
+						error: function(xhr,error){
+							console.log(error);
+						}
 					});
 			});
 
