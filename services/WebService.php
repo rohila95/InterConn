@@ -249,6 +249,30 @@ class WebService{
 
     $conn->close();
   }
+  public function createThreadReply($userid,$content,$parent_message_id,$timestamp)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $content=mysqli_real_escape_string($conn,$content);
+    $parent_message_id=mysqli_real_escape_string($conn,$parent_message_id);
+    $timestamp=mysqli_real_escape_string($conn,$timestamp);
+    $sql_service = new SqlService();
+    $message = $sql_service->insertReplyThread($parent_message_id,$content,$userid,$timestamp);
+    $result = $conn->query($message);
+    if ($result === TRUE) {
+        $updateParentMessage = $sql_service->updateParentThread($parent_message_id);
+        $innerresult = $conn->query($updateParentMessage);
+        if ($innerresult === TRUE) {
+            echo "Updated parent message " ;
+        } else {
+            echo "Error: " . $updateParentMessage . "<br>" . $conn->error;
+        }
+    } else {
+        echo "Error: " . $message . "<br>" . $conn->error;
+    }
+    $conn->close();
+  }
 
   public function createDirectMessage($userid,$content,$receiverid)
   {
