@@ -214,11 +214,12 @@ function start()
 	 	});
 
         $(document).on("keypress",".messageentryspace_threadsection",function(e) {
-
                 if(e.which == 13 && !e.shiftKey) {
                     e.preventDefault();
-                    if($(this).val()!=""){
-
+                    if (!$('.messageentryspace_threadsection form')[0].checkValidity()) {
+                        $('#thread_MsgEntrySubmit').trigger('click');
+                    }else{
+                    	alert("write ajax post logic");
 					}
                 }
         });

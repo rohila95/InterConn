@@ -377,8 +377,9 @@
 
                            </div>
                            <div class="row messageentryspace_threadsection">
-                               <form >
+                               <form>
                                    <textarea placeholder="Reply" required class="form-control"></textarea>
+                                    <button id="thread_MsgEntrySubmit" class="hidden" />
                                </form>
 
                            </div>
