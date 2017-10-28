@@ -148,8 +148,7 @@ class WebService{
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
-            // $row['date']= getFormatDate($row['created_at']);
-            // $row['time']= getFormatTime($row['created_at']);
+          //get emojis
           $messageid=$row['message_id'];
           $emojiArray=[];
           $messageReactions = $sql_service->getMessageReactions($messageid);
@@ -159,14 +158,73 @@ class WebService{
               $emojiArray[]=$innerrow;
             }
             $row['emojis']=$emojiArray;
-          } 
-
+          }
           else {
             $row['emojis']=0;
           }
-          
-            $array[]= $row;
-        }
+          //get threads
+          if($row['is_threaded']==1)
+          {
+            $messageThreads = $sql_service->getThreadReplyCount($messageid);
+            $innerresult = $conn->query($messageThreads);
+            if ($innerresult->num_rows > 0) {
+              while($innerrow = $innerresult->fetch_assoc()) {
+
+                $lastMessageThreads = $sql_service->getLastThreadReply($messageid);
+                $lastThreadresult = $conn->query($lastMessageThreads);
+                if ($lastThreadresult->num_rows > 0) {
+                  while($lastThreadrow = $lastThreadresult->fetch_assoc()) {
+                    $innerrow['content']=$lastThreadrow['content'];
+                    $innerrow['created_at']=$lastThreadrow['created_at'];
+                    $innerrow['first_name']=$lastThreadrow['first_name'];
+                    $innerrow['last_name']=$lastThreadrow['last_name'];
+                    $innerrow['profile_pic']=$lastThreadrow['profile_pic'];
+                  }
+                }
+
+                $row['threads']=$innerrow;
+              }
+            }
+
+
+          }
+
+          $array[]= $row;
+      }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
+
+  public function getThreadMessages($parent_message_id)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $parent_message_id=mysqli_real_escape_string($conn,$parent_message_id);
+    $sql_service = new SqlService();
+    $threadMessages = $sql_service->getThreadMessages($parent_message_id);
+    $result = $conn->query($threadMessages);
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+          //get emojis
+          $messageid=$row['id'];
+          $emojiArray=[];
+          $messageReactions = $sql_service->getThreadMessageReactions($messageid);
+          $innerresult = $conn->query($messageReactions);
+          if ($innerresult->num_rows > 0) {
+            while($innerrow = $innerresult->fetch_assoc()) {
+              $emojiArray[]=$innerrow;
+            }
+            $row['emojis']=$emojiArray;
+          }
+          else {
+            $row['emojis']=0;
+          }
+          $array[]= $row;
+      }
     } else {
         return 'fail';
     }
@@ -223,6 +281,30 @@ class WebService{
     }
 
 
+    $conn->close();
+  }
+  public function createThreadReply($userid,$content,$parent_message_id,$timestamp)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $content=mysqli_real_escape_string($conn,$content);
+    $parent_message_id=mysqli_real_escape_string($conn,$parent_message_id);
+    $timestamp=mysqli_real_escape_string($conn,$timestamp);
+    $sql_service = new SqlService();
+    $message = $sql_service->insertReplyThread($parent_message_id,$content,$userid,$timestamp);
+    $result = $conn->query($message);
+    if ($result === TRUE) {
+        $updateParentMessage = $sql_service->updateParentThread($parent_message_id);
+        $innerresult = $conn->query($updateParentMessage);
+        if ($innerresult === TRUE) {
+            echo "Updated parent message " ;
+        } else {
+            echo "Error: " . $updateParentMessage . "<br>" . $conn->error;
+        }
+    } else {
+        echo "Error: " . $message . "<br>" . $conn->error;
+    }
     $conn->close();
   }
 
@@ -384,6 +466,30 @@ class WebService{
     $conn->close();
   }
 
+  public function updateUserDetails($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $first_name=mysqli_real_escape_string($conn,$first_name);
+    $last_name=mysqli_real_escape_string($conn,$last_name);
+    $emailid=mysqli_real_escape_string($conn,$emailid);
+    $profile_pic=mysqli_real_escape_string($conn,$profile_pic);
+    $password=mysqli_real_escape_string($conn,$password);
+    $phone_number=mysqli_real_escape_string($conn,$phone_number);
+    $whatido=mysqli_real_escape_string($conn,$whatido);
+    $status=mysqli_real_escape_string($conn,$status);
+    // $status_emoji=mysqli_real_escape_string($conn,$status_emoji);
+    $skype=mysqli_real_escape_string($conn,$skype);
+    $sql_service = new SqlService();
+    $user = $sql_service->updateUserProfile($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype);
+    $result = $conn->query($user);
+    if ($result === TRUE) {
+        echo "User updated.";
+    } else {
+        echo "Error: " . $userWorkspaceMap . "<br>" . $conn->error;
+    }
+  }
 
   public function getProfileDetails($userid){
 

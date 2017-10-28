@@ -81,13 +81,13 @@ html, body {
 
 .defUserPic {
     border-radius: 4px;
-    width: 37% !important;
-    height: 4.5% !important;
+    width: 36px !important;
+    height: 35px!important;
     color:white;
     font-weight: bolder;
     font-size: 16px;
     background: blue;
-    padding:7%;
+    padding: 6px;
 }
 
 .headerSpace_HP{
@@ -268,7 +268,6 @@ pre
 
 .threadMessageWrapper{
     display: none;
-    border-left: 1px solid;
 }
 
 .messageEntrySpace_regularMsg_HP {

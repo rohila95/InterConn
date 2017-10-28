@@ -115,7 +115,7 @@
 			          <h4 class="modal-title">Success</h4>
 			        </div>
 			        <div class="modal-body">
-			          
+
 			        </div>
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -131,7 +131,7 @@
 			          <h4 class="modal-title">Error</h4>
 			        </div>
 			        <div class="modal-body">
-			          
+
 			        </div>
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -235,6 +235,7 @@
                                     $today = date("l, F jS, o", $time);
                                     foreach ($currentChannelMessages as $message)
                                     {
+																				// echo json_encode($message);
                                         $currentDate=$web_service->getFormatDate($message->created_at);
                                         $currentTime=$web_service->getFormatTime($message->created_at);
                                         $shortName= $message->first_name[0];
@@ -265,23 +266,30 @@
                                             $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
                                             $msgStr.=$currentTime;
                                             $msgStr.='</span></div>';
-                                            $msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
+                                            $dynamicClassNameWithId = "messagewithid_".$message->message_id;
+                                            $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
                                             // print_r($message->emojis);
                                             if($message->emojis!='0')
                                                 foreach ($message->emojis as $emoji)
                                                 {
                                                     $msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
                                                 }
+                                                if($message->is_threaded==1)
+                                                {
+                                                    $thread=$message->threads->threadCount;
+                                                    $msgStr.="<div class='repliescount' title='view thread'><a href='#'>".$thread.'repliesss'."</a></div>";
 
-
-                                            $msgStr.=' </div></div>';
+                                                }
+                                                $msgStr.=' </div></div>';
                                             $prevUser=$message->first_name;
                                             $prevTime=$currentTime;
 
                                         }
                                         else if($prevUser==$message->first_name && $prevTime==$currentTime )
                                         {
-                                            $msgStr.='<div class="message_body addOnMessages" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
+                                            $dynamicClassNameWithId = "messagewithid_".$message->message_id;
+
+                                            $msgStr.='<div class="message_body addOnMessages '.$dynamicClassNameWithId.'" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
 
                                         }
                                         else if($prevUser!=$message->first_name || $prevTime!=$currentTime)
@@ -297,12 +305,19 @@
                                             $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
                                             $msgStr.=$currentTime;
                                             $msgStr.='</span></div>';
-                                            $msgStr.='<div class="message_body" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
+                                            $dynamicClassNameWithId = "messagewithid_".$message->message_id;
+                                            $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
                                             // print_r($message->emojis);
                                             if($message->emojis!='0')
                                                 foreach ($message->emojis as $emoji)
                                                 {
                                                     $msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
+                                                }
+                                                if($message->is_threaded==1)
+                                                {
+                                                    $thread=$message->threads->threadCount;
+                                                    $msgStr.="<div class='repliescount' title='view thread'><a href='#'>".$thread.'repliesss'."</a></div>";
+
                                                 }
                                             $msgStr.=' </div></div>';
                                             $prevUser=$message->first_name;
@@ -346,7 +361,21 @@
                     </div>
                 </div>
                <div class="col-xs-4 threadMessageWrapper" >
-                   <h3> Heelo I am Thread Space</h3>
+                   <div class="row threadedContent">
+                       <div class="threadHeader" style="min-height:7%; border:1px solid #F1F1F1;">
+                           <h2>Thread</h2>
+                       </div>
+                       <div class="row threadhead_parentmessage">
+
+                       </div>
+                       <div class="row threadedreplies_content">
+
+                       </div>
+                       <div class="row messageentryspace_threadsection">
+                           <textarea class="form-control"></textarea>
+                       </div>
+
+                   </div>
                 </div>
             </div>
 
