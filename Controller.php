@@ -66,4 +66,11 @@ if(isset($_POST["createThreadReply"]))
   $timestamp=date('Y-m-d H:i:s', time());
   echo $webService->createThreadReply($userid,$content,$parent_message_id,$timestamp);
 }
+if(isset($_POST["getThreadMessages"]))
+{
+  $data=json_decode($_POST["getThreadMessages"]);
+  $parent_message_id=$data->parentmessageid;
+  echo  $webService->getThreadMessages($parent_message_id);
+}
+
 ?>

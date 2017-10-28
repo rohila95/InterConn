@@ -198,6 +198,40 @@ class WebService{
     $conn->close();
   }
 
+  public function getThreadMessages($parent_message_id)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $parent_message_id=mysqli_real_escape_string($conn,$parent_message_id);
+    $sql_service = new SqlService();
+    $threadMessages = $sql_service->getThreadMessages($parent_message_id);
+    $result = $conn->query($threadMessages);
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+          //get emojis
+          $messageid=$row['id'];
+          $emojiArray=[];
+          $messageReactions = $sql_service->getThreadMessageReactions($messageid);
+          $innerresult = $conn->query($messageReactions);
+          if ($innerresult->num_rows > 0) {
+            while($innerrow = $innerresult->fetch_assoc()) {
+              $emojiArray[]=$innerrow;
+            }
+            $row['emojis']=$emojiArray;
+          }
+          else {
+            $row['emojis']=0;
+          }
+          $array[]= $row;
+      }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
+
   public function getDirectMessages($userid,$messagerUserid)
   {
     $database_connection = new DatabaseConnection();
