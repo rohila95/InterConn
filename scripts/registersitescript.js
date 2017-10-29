@@ -23,9 +23,9 @@ function start()
 		        dataType: 'text',
 		        success: function (data) {
 		        	// console.log(data);
-		        	if (data.includes("Error"))
+		        	if (d$.trim(data).split("-")[0]=="fail")
 		        	{
-		        		$('#errorModal .modal-body').html("<p>Email Id already exists. Try with different Email Id.</p>");
+		        		$('#errorModal .modal-body').html("<p>"+$.trim(data).split("-")[1]+"</p>");
 						$('#errorModal').on('hidden.bs.modal', function (e) {
 							$('#errorModal').off();
 						});

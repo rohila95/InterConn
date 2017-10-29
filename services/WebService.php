@@ -516,7 +516,7 @@ class WebService{
             return 'fail';
         }
     } else {
-        echo "Error: " . $user . "<br>" . $conn->error;
+        echo "fail-Email Id already exists. Try with different Email Id.";
     }
 
     $conn->close();

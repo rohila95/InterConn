@@ -45,14 +45,44 @@
 	</head>
 	<body>
 		<div class="container mainLoginWrapper well w3-panel w3-card-4">
+			<div class="modal fade" id="successModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Success</h4>
+			        </div>
+			        <div class="modal-body">
+			          
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Sign In</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+			<div class="modal fade" id="errorModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Error</h4>
+			        </div>
+			        <div class="modal-body">
+			          
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
 			<div class="row">
 				<div class="col-sm-12 logo">
 					<span>Edit your Profile</span>
 				</div>
 			</div>
-			<div class="row uniqueEmail">
-
-			</div>
+			
 			<div class="row">
 				<form role="form" class="col-xs-8" id="updateForm" method="POST" action="./controller.php" enctype='multipart/form-data'>
 					<div class="row">
@@ -118,7 +148,7 @@
 				<div class="col-xs-3">
 					<div class="row">
 
-						  <div class="profile-pic" style="background-image: url('./images/userpic.png')" >
+						  <div class="profile-pic" style="background-image: url('<?php echo $userDetails[0]->profile_pic ?>')" >
 
 						      <span class="glyphicon glyphicon-camera"></span>
 						      <span>Change Image</span>

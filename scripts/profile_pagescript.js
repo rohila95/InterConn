@@ -65,8 +65,9 @@ function start()
 									
 								}, 4000);
 							}
-						else{
-								$('#errorModal .modal-body').html("<p> Profile not updated.</p>");
+						else if($.trim(data).split("-")[0]=="fail")
+							{
+								$('#errorModal .modal-body').html("<p>"+ $.trim(data).split("-")[1]+"</p>");
 								$('#errorModal').on('hidden.bs.modal', function (e) {
 									$('#errorModal').off();
 								});

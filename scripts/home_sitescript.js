@@ -39,7 +39,7 @@ function start()
 		var getUsersDataNotInChannel='{"channelid":"'+channelid+'","workspaceid":"'+workspaceid+'"}';
 		$.post('./Controller.php',{"getChannelUsers":getUsersDataNotInChannel},function (data){
 			// console.log(data);
-				usersChannelData=data;
+				usersChannelData=$.parseJSON(data);
 			if(!data.includes('fail'))
 			{
 				usersChannelData=$.parseJSON(data);
@@ -47,7 +47,7 @@ function start()
 			    width: '100%',
 			    allowClear: true,
 			    multiple: true,
-			    data: usersData
+			    data: usersChannelData
 				});
 			}
 		});
@@ -267,9 +267,9 @@ function start()
 								window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
 							}, 4000);
 		        	}
-		        	else
+		        	else if($.trim(data).split("-")[0]=="fail")
 		        	{
-		        		$('#errorModal .modal-body').html("<p>Channel name already exists. Try with different name.</p>");
+		        		$('#errorModal .modal-body').html("<p>"+$.trim(data).split("-")[1]+"</p>");
 						$('#errorModal').on('hidden.bs.modal', function (e) {
 							$('#errorModal').off();
 						});
@@ -321,9 +321,9 @@ function start()
 								// window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
 							}, 4000);
 		        	}
-		        	else
+		        	else if($.trim(data).split("-")[0]=="fail")
 		        	{
-		        		$('#errorModal .modal-body').html("<p>Unable to add Members. Try again.</p>");
+		        		$('#errorModal .modal-body').html("<p>"+$.trim(data).split("-")[1]+"</p>");
 						$('#errorModal').on('hidden.bs.modal', function (e) {
 							$('#errorModal').off();
 						});

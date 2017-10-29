@@ -124,10 +124,13 @@ if(isset($_POST["updateProfile"]))
   $fname=$_FILES['filetoUpload']['tmp_name'];
 
   $file_name=$_POST["file_name"];
-  $file_name=explode('\\', $file_name);
-  $file_ext=explode('.', $file_name[2]);
-  $uploadfile_newname='./images/'.$_SESSION['userid'].'.'.$file_ext[1];
-  
+  $uploadfile_newname ='';
+  if(!$file_name=='')
+  {
+    $file_name=explode('\\', $file_name);
+    $file_ext=explode('.', $file_name[2]);
+    $uploadfile_newname='./images/'.$_SESSION['userid'].'.'.$file_ext[1];
+  }
   $firstName = $_POST["firstName"];
   $lastName = $_POST["lastName"];
   $email = $_POST["email"];
@@ -156,10 +159,11 @@ if(isset($_POST["updateProfile"]))
       {
         echo 'fail-Password cannot be empty.';
       }
-    else if(strlen($phoneNumber)<10 || strlen($phoneNumber)>10 || is_numeric($phoneNumber)==false)
-      {
-        echo 'fail-Phone number should be 10 digits.';
-      }
+    else if(strlen($phoneNumber)!="")
+          if(strlen($phoneNumber)<10 || strlen($phoneNumber)>10 || is_numeric($phoneNumber)==false)
+          {
+            echo 'fail-Phone number should be 10 digits.';
+          }
     else if(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email))
       {
         echo 'fail-Enter a vaild Email id.';
@@ -170,16 +174,18 @@ if(isset($_POST["updateProfile"]))
       
     else
     {
-      $uploadSucess = move_uploaded_file($fname, $uploadfile_newname);
-      if(!$uploadSucess)
-      {
-        echo 'fail-Image too large. Try small image.';
-      } 
-      else
-        echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
-
-    }
-      
+      if($file_name==""){
+          echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
+      }else{
+         $uploadSucess = move_uploaded_file($fname, $uploadfile_newname);
+        if(!$uploadSucess)
+        {
+          echo 'fail-Image too large. Try small image.';
+        }else{
+          echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
+        }
+      }
+    }    
 }
 
 
