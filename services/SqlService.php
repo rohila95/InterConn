@@ -71,7 +71,7 @@ class SqlService{
 	}
 	public function getUserInWorkspace($workspaceid,$userid)
 	{
-		$sql="SELECT user.user_id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id<>".$userid;
+		$sql="SELECT user.user_id as id,user.first_name as text,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id<>".$userid;
 		return $sql;
 	}
 	public function getUserInWorkspaceNotInChannel($workspaceid,$channelid)

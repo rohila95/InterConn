@@ -11,6 +11,7 @@
     $userDetails = json_decode($web_service->getUserDetails($_SESSION['emailid']));
     $workspaceDetails = json_decode($web_service->getWorkspaceDetails($_SESSION['userid']));
     $workspaceName=$workspaceDetails[0]->workspace_name;
+    $workspaceid=$workspaceDetails[0]->workspace_id;
 
     $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid']));
     $directMessagesDetails = json_decode($web_service->getDirectMessagesDetails($workspaceDetails[0]->workspace_id));
@@ -26,7 +27,7 @@
                 else
                     $channelstr.='<li class="active">';
                 if($channel->type=='private')
-                    $channelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'#"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+                    $channelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
                 else
                     $channelstr.='<a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-unlock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
                 $channelstr.='</li>';
@@ -58,6 +59,8 @@
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 		<script src="./scripts/tagsinput/bootstrap-tagsinput.min.js"></script>
 		<link rel="stylesheet" href="./scripts/tagsinput/bootstrap-tagsinput.css">-->
+		<script src="./scripts/select2/select2.js"></script>
+		<link rel="stylesheet" href="./scripts/select2/select2.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./CSS/home_site.css">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -81,7 +84,7 @@
                                     <span class="channelPrivacyLevel" title="Sign Out"><i class="fa fa-sign-out"></i></span>
                                 </a></span>
                             <br>
-							<span class="loggedIn_workspace"><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
+							<span class="loggedIn_workspace" id=<?php echo '"'.$workspaceid.'"';?>><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
 
 
 
@@ -214,8 +217,18 @@
                         }
                     ?>
                         <div class='headerAddon_HP'>
-                            <i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i> |
-                            <span class="invitations"><a href="">Invite Members</a></span>
+                            <i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i>
+                            <?php
+                            	if($currentChannel[0]->created_by==$_SESSION['userid'] && $currentChannel[0]->type=='private')
+                            	{
+                            		echo ' |<span class="invitations"><a href=""> Invite Members</a></span>'; 
+                            	}
+                            	else if($currentChannel[0]->type=='public')
+                            	{
+                            		echo ' |<span class="invitations"><a href=""> Invite Members</a></span>'; 
+                            	}
+                            ?>
+                             
                         </div>
                             </div>
                 <div class="col-xs-12 regularMessagesWrapper">

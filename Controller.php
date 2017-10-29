@@ -101,4 +101,13 @@ if(isset($_POST["updateProfile"]))
 
 }
 
+
+if(isset($_POST["getWorkspaceUsers"]))
+{
+  // echo 'in cont';
+  $data=json_decode($_POST["getWorkspaceUsers"]);
+  $userid=$data->userid;
+  $workspaceid=$data->workspaceid;
+  echo  $webService->getUsersInWorkspaceInvites($workspaceid,$userid);
+}
 ?>
