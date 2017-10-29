@@ -95,6 +95,20 @@ html, body {
     background-size: 36px 36px !important;
     background-color: white !important;
 }
+.closeHover{
+    width: 40px;
+    height: 40px;
+    border-radius: 68px;
+    padding: 2.2%;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.closeHover:hover {
+    display: block;
+    background-color: white;
+}
+
 .headerSpace_HP{
     border-bottom: 1px solid;
     width: 102%;

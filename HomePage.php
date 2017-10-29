@@ -385,8 +385,13 @@
                 </div>
                <div class="col-xs-4 threadMessageWrapper" >
                    <div class="row threadedContent">
-                       <div class="row threadHeader well" style="min-height:7%; border:1px solid #F1F1F1;">
-                           <h2>Thread</h2>
+                       <div class="row threadHeader well" style="min-height:6%; border:1px solid #F1F1F1;">
+                               <div class="col-xs-2"><h2>Thread</h2></div>
+                               <div class="col-xs-10">
+                                   <div class="pull-right closeHover">
+                                        <i class="fa fa-window-close" aria-hidden="true"></i>
+                                   </div>
+                               </div>
                        </div>
 
 

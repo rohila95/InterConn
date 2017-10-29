@@ -24,6 +24,9 @@ function start()
 		    data: usersData
 			});
 		});
+        $(".leftMenuContentWrapper_HP,.inputMessage,.headerSpace_HP,.messageentryspace_threadsection").hover(function (e) {
+            $(".messageHoverButtons").hide();
+        });
 
         $(".inputMessage").keypress(function (e) {
             // if(e.which == 13 && !e.shiftKey) {
@@ -69,14 +72,6 @@ function start()
 			window.location.href = "ProfilePage.php?userid="+id;
 		})
 
-		// $(".message").mouseleave(function() {
-		//   $(".messageHoverButtons").hide();
-		// });
-
-		// $(".messageHoverButtons").hover(function(event) {
-		// 	event.stopPropagation();
-		// 	event.preventDefault();
-		// });
 
 		// this registration takes care of thumbsup and thumbs down functionality
 		$(".messageHoverButtons .thumbsbutt").click(function(event) {
@@ -268,6 +263,15 @@ function start()
 					}
                 }
         });
+
+        $(document).on("click",".closeHover",function(e) {
+            $(".regularMessagesWrapper").removeClass("col-xs-8").addClass("col-xs-12");
+            $(".threadMessageWrapper").hide();
+            $(".messageEntrySpace_regularMsg_HP").css("width", "86.7%");
+            $(".messageHoverButtons").hide();
+            $(".eleToBeCleared").empty();
+        });
+
 
 
 	});
