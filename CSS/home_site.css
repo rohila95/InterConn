@@ -93,7 +93,7 @@ html, body {
 {
     
     background-size: 36px 36px !important;
-    background: none !important;
+    background-color: white !important;
 }
 .headerSpace_HP{
     border-bottom: 1px solid;
@@ -293,6 +293,13 @@ pre
 
 .threadhead_parentmessage{
     border-bottom: 1px solid #bcbcbd;
+}
+
+.threadedreplies_content{
+    padding: 3%;
+    max-height: 70%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .messageEntrySpace_regularMsg_HP {
