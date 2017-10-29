@@ -3,7 +3,10 @@
 @media screen and (min-height: 845px) {
 
 }
-
+.invitations
+{
+  cursor: pointer;
+}
 .form-group {
   position: relative;
   margin-bottom: 1.5rem;

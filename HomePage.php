@@ -145,6 +145,29 @@
 			      </div>
 			    </div>
 			</div>
+			<div class="modal fade" id="existingChannelInvites" role="dialog">
+			    <div class="modal-dialog modal-md">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Invite members to this channel.</h4>
+			        </div>
+			        <div class="modal-body">
+			        <div class="row">
+					      	<div class="form-group">
+					      		<span class='invites'>Invite to Channel</span>
+						        <div class="existingChannelInvites">
+						        </div>
+					      	</div>
+					    </div>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			          <button type="button" class="btn btn-default inviteExistingChannel" data-dismiss="modal">Invite members</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
 			<div class="modal fade" id="createChannel" role="dialog">
 			    <div class="modal-dialog modal-lg">
 			      <div class="modal-content">
@@ -169,6 +192,7 @@
 						    </div>
 						</div>
 						<div class="row">
+							<span class="type">Type of Channel </span>
 							<div class="form-group">
 								<label class="radio-inline">
 							      <input type="radio" name="type" value="private">Private
@@ -180,8 +204,9 @@
 						</div>
 					    <div class="row">
 					      	<div class="form-group">
-						        <input type="text" class="form-control channelInvites" name="invites" required>
-						        <label class="form-control-placeholder" for="invite">Send invites to :</label>
+					      		<span class='invites'>Invite to Channel</span>
+						        <div class="channelInvites">
+						        </div>
 					      	</div>
 					    </div>
 			          </form>
@@ -207,9 +232,9 @@
                             if($currentChannel!='')
                             {
                                 if($currentChannel[0]->type=='private')
-                                    echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+                                    echo '<div class="headerSpace_HP row"><div class="channelTitle currentChannelTitle" id="'.$_GET["channel"].'"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
                                 else if($currentChannel[0]->type=='public')
-                                    echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+                                    echo '<div class="headerSpace_HP row"><div class="channelTitle currentChannelTitle" id="'.$_GET["channel"].'"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
                                 $user_count=$currentChannel[0]->usercount;
                                 $purpose=$currentChannel[0]->purpose;
                             }
@@ -222,11 +247,11 @@
                             <?php
                             	if($currentChannel[0]->created_by==$_SESSION['userid'] && $currentChannel[0]->type=='private')
                             	{
-                            		echo ' |<span class="invitations"><a href=""> Invite Members</a></span>'; 
+                            		echo ' |<span class="invitations"> Invite Members</span>'; 
                             	}
-                            	else if($currentChannel[0]->type=='public')
+                            	else if($currentChannel[0]->type=='public' && $currentChannel[0]->channel_name!='general' && $currentChannel[0]->channel_name!='random')
                             	{
-                            		echo ' |<span class="invitations"><a href=""> Invite Members</a></span>'; 
+                            		echo ' |<span class="invitations"> Invite Members</span>'; 
                             	}
                             ?>
                              
@@ -276,7 +301,6 @@
                                                 $prevdate=$currentDate;
                                             }
 
-// $msgStr.= $message->profile_pic;
 
 											if($message->profile_pic=='0')
                                            		 $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';

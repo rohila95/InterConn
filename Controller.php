@@ -120,4 +120,22 @@ if(isset($_POST["getWorkspaceUsers"]))
   $workspaceid=$data->workspaceid;
   echo  $webService->getUsersInWorkspaceInvites($workspaceid,$userid);
 }
+
+if(isset($_POST["getChannelUsers"]))
+{
+  // echo 'in cont';
+  $data=json_decode($_POST["getChannelUsers"]);
+  $channelid=$data->channelid;
+  $workspaceid=$data->workspaceid;
+  echo  $webService->getUsersInWorkspaceChannelInvites($workspaceid,$channelid);
+}
+if(isset($_POST["inviteToChannel"]))
+{
+  // echo 'in cont';
+  $data=json_decode($_POST["inviteToChannel"]);
+  $ids=$data->ids;
+  $channelid=$data->channelid;
+  $timestamp=date('Y-m-d H:i:s', time());
+  echo  $webService->inviteUser($ids,$channelid,$timestamp);
+}
 ?>

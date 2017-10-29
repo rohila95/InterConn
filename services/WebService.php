@@ -284,6 +284,7 @@ class WebService{
     $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
     $sql_service = new SqlService();
     $users = $sql_service->getUserInWorkspaceNotInChannel($workspaceid,$channelid);
+    // echo $users;
     $result = $conn->query($users);
 
 
@@ -458,7 +459,7 @@ class WebService{
       $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
       $result = $conn->query($userChannelMap);
       if ($result === TRUE) {
-          echo "New record created successfully. Last inserted ID is: ";
+          echo "success";
       } else {
           echo "Error: " . $userChannelMap . "<br>" . $conn->error;
       }
