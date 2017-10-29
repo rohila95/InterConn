@@ -412,7 +412,7 @@ class WebService{
     $channelExist=$sql_service->channelInWorkspace($channelName,$workspaceid);
     $channelExistResult= $conn->query($channelExist);
     if ($channelExistResult->num_rows > 0) {
-      echo 'Error-Channel name already exists';
+      echo 'fail-Channel name already exists';
     }
     else
     {
