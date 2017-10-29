@@ -4,3 +4,4 @@ Message Threads
     -> Have to have another table to capture the reactions for the Thread Messages ✔
 
     -> Make sure to check with validations on both client and server side for Create channel, registration and other where ever ther are forms
+    -> Image dimension ans size validation aswell to be taken care off
