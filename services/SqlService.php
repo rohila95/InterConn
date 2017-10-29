@@ -168,6 +168,12 @@ class SqlService{
         $sql="INSERT INTO `InterConn`.`message_reaction` (`message_id`,`emoji_id`,`created_by`,`created_at`, `message_reaction_id`) VALUES ('".$messageid."', '".$emojid."', '".$userid."','".$timestamp."',NULL )";
         return $sql;
 	}
+    // here a check of whether the user had done the same reaction has to be done, avoiding duplication
+    public function insertThreadMessageReaction($userid, $messageid,$emojid,$timestamp){
+
+        $sql="INSERT INTO `InterConn`.`threadmessage_reaction` (`threadmessage_id`,`emoji_id`,`created_by`,`created_at`, `threadmessage_reaction_id`) VALUES ('".$messageid."', '".$emojid."', '".$userid."','".$timestamp."',NULL )";
+        return $sql;
+    }
 
 	public function deleteIfMessageReactionExist($userid, $messageid,$emojid){
 
@@ -175,11 +181,25 @@ class SqlService{
         return $sql;
 	}
 
+    public function deleteIfThreadMessageReactionExist($userid, $messageid,$emojid){
+
+        $sql= "DELETE FROM `InterConn`.`threadmessage_reaction` WHERE `threadmessage_reaction`.`threadmessage_id` = ".$messageid." and emoji_id=".$emojid." and created_by=".$userid;
+        return $sql;
+    }
+
     public function getSpecificMessageReaction($userid, $messageid,$emojid){
 
         $sql= "SELECT * FROM `InterConn`.`message_reaction` WHERE `message_reaction`.`message_id` = ".$messageid." and emoji_id=".$emojid." and created_by=".$userid;
         return $sql;
     }
+
+
+    public function getSpecificThreadMessageReaction($userid, $messageid,$emojid){
+
+        $sql= "SELECT * FROM `InterConn`.`threadmessage_reaction` WHERE `threadmessage_reaction`.`threadmessage_id` = ".$messageid." and emoji_id=".$emojid." and created_by=".$userid;
+        return $sql;
+    }
+
 
 	public function getSpecificMessageReactionEmojiCount( $messageid,$emojid){
         $sql= "SELECT COUNT (*) FROM `InterConn`.`message_reaction` WHERE `message_reaction`.`message_id` = ".$messageid." and `message_reaction`.`emoji_id`=".$emojid;

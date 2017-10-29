@@ -1,4 +1,5 @@
 var curMessageId='';
+var curThreadReplyId='';
 function start()
 {
 	var usersData='';
@@ -79,6 +80,12 @@ function start()
 
         $(document).on("mouseenter",".threadMessageWrapper .message_body",function() {
             curMessageId = $(this).attr("id");
+
+            if($(this).parents(".messageSet").attr("class").includes("threadReplyWithId")){
+                curThreadReplyId = $(this).parents(".messageSet").attr("threadreplyid");
+                curMessageId = '';
+            }
+
             offset=$(this).offset();
             $(".messageHoverButtons").find(".nonthumbbutts").hide();
             $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*30/100)})
@@ -107,16 +114,31 @@ function start()
             $(".messageHoverButtons").hide();
             var emoji_idCLicked = $(this).attr("emojiid");
             var data= {};
-
+            var isToTreadMsg = false;
             data["setReaction"] = "yes";
-            data["message_id"] = curMessageId;
+            if(curMessageId == ''){
+                data["message_id"] = curThreadReplyId;
+                data["isToThreadReply"] = "yes";
+                isToTreadMsg = true;
+            }else{
+                data["message_id"] = curMessageId;
+            }
+
             data["emoji_id"] = emoji_idCLicked;
 
             $.post('./Controller.php',data,function (data){
 
                 if($.trim(data).split("-")[0] == "success"){
 
-                	var curMsgEle = $(".messagewithid_"+curMessageId);
+
+                	var curMsgEle = "";
+
+                    if(isToTreadMsg == true){
+                        curMsgEle = $(".threadReplyWithId_"+curThreadReplyId);
+                    }else{
+                        curMsgEle = $(".messagewithid_"+curMessageId);
+                    }
+
 					if($.trim(data).split("-")[1] == "inserted"){
 						// Increase the count, the name logic is to be taken care yet
                         if (curMsgEle.find(".msg_reactionsec").find("[emojiid="+emoji_idCLicked+"]").length == 0 ){ //adding a reaction dynamically
@@ -394,6 +416,7 @@ function getAllThreadReplies(parentMsgID){
                     var curThreadReplyEle = $('<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background-color: '+defPictureDet.split("-")[0] +';">'+ defPictureDet.split("-")[1]+'</div></div></div>');
 
                     curThreadReplyEle.addClass("threadReplyWithId_"+obj['id']);
+                    curThreadReplyEle.attr("threadReplyId",obj['id']);
                     $(".threadedreplies_content").append(curThreadReplyEle);
                     if(obj['profile_pic'] != ""){
                         curThreadReplyEle.find(".defUserPic").addClass("profilePic").html("");
@@ -401,16 +424,20 @@ function getAllThreadReplies(parentMsgID){
                     }
 
 
-                    var curThRepMsgCont='<div class="col-xs-11 message"><div class="message_header"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div>';
+                    var curThRepMsgCont=$('<div class="col-xs-11 message"><div class="message_header"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div></div>');
+                    var emojiElementsStr= "";
+                    $.each(obj['emojis'], function (emojiIndx, emojiObj) {
+                        emojiElementsStr += "<div class=\"emojireaction\" emojiid='"+emojiObj['emoji_id'] + "'><i class='"+emojiObj['emoji_pic'] +"'></i><span class=\"reactionCount\">"+ emojiObj['count']+"</span></div>"
+                    });
+                    curThRepMsgCont.find(".msg_reactionsec").append(emojiElementsStr);
+
 
                     $(".threadedreplies_content").find(".threadReplyWithId_"+obj['id']).append(curThRepMsgCont);
 
-                    //threadReplysUIStr  +='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background-color: '+defPictureDet.split("-")[0] +';">'+ defPictureDet.split("-")[1]+'</div></div></div>';
+
                 });
 
-                /*threadReplysUIStr  +='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url() !important;background-size: 36px 36px !important;">' +
-                    '</div></div><div class="col-xs-11 message"><div class="message_header"><b>'+Rohila Gudipati +'</b><span class="message_time"> 10:31 PM</span></div><div class="message_body messagewithid_97" id="97">
-				"<div class="msg_content">what  else ?</div><div class="msg_reactionsec"> </div></div></div></div>'*/
+
 
 
             }else{
