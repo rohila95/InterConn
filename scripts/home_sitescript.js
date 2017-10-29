@@ -2,16 +2,26 @@ var curMessageId='';
 function start()
 {
 	var usersData='';
+	var usersChannelData='';
     $(document).ready(function() {
 		console.log("Inside ready");
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
 		$('.createNewChannelIcon').click(function()
 		{
+			$('.channelInvites').select2('data', null);
 			$('#createChannel').modal('show');
+
+		});
+		
+		$('.invitations').click(function()
+		{
+			$('.existingChannelInvites').select2('data', null);
+			$('#existingChannelInvites').modal('show');
 
 		});
 		var userid=$('.loggedIn_user').attr('id');
 		var workspaceid=$('.loggedIn_workspace').attr('id');
+		var channelid=$('.currentChannelTitle').attr('id');
 		var getusersdata='{"userid":"'+userid+'","workspaceid":"'+workspaceid+'"}';
 		
 		console.log(getusersdata);
@@ -23,6 +33,21 @@ function start()
 		    multiple: true,
 		    data: usersData
 			});
+		});
+		var getUsersDataNotInChannel='{"channelid":"'+channelid+'","workspaceid":"'+workspaceid+'"}';
+		$.post('./Controller.php',{"getChannelUsers":getUsersDataNotInChannel},function (data){
+			// console.log(data);
+				usersChannelData=data;
+			if(!data.includes('fail'))
+			{
+				usersChannelData=$.parseJSON(data);
+				$('.existingChannelInvites').select2({
+			    width: '100%',
+			    allowClear: true,
+			    multiple: true,
+			    data: usersData
+				});
+			}
 		});
 
         $(".inputMessage").keypress(function (e) {
@@ -225,6 +250,60 @@ function start()
 		        	else
 		        	{
 		        		$('#errorModal .modal-body').html("<p>Channel name already exists. Try with different name.</p>");
+						$('#errorModal').on('hidden.bs.modal', function (e) {
+							$('#errorModal').off();
+						});
+						$("#errorModal").modal("show");
+						$("#errorModal").css("z-index","1100");
+						setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+		        		// $('.uniqueChannel').html('Channel name already exists. Try with different name.');
+		        	}
+		        }
+		    });
+	 	});
+		$( ".inviteExistingChannel" ).on("click",function(e) {
+
+			var ids=[];
+			$.each(usersData,function(i,obj){
+
+				$.each($(".select2-choices li div"),function(i,innerobj){
+
+					if(obj['text']==innerobj['outerText'])
+						ids.push(obj['id']);
+				});
+			});
+
+		   	var convertedJSON = {};
+		    convertedJSON ['ids']=ids;
+		    convertedJSON['channelid']=channelid;
+		    var stringData = JSON.stringify(convertedJSON);
+	     	console.log(convertedJSON);
+		    $.ajax({
+		        url: './Controller.php',
+		        type: 'post',
+		        data: {'inviteToChannel':stringData},
+		        dataType: 'text',
+		        success: function (data) {
+		        	console.log(data);
+		        	if(data.includes('success'))
+		        	{
+		        		$('#successModal .modal-body').html("<p> Members invited Successfully. </p>");
+						$('#successModal').on('hidden.bs.modal', function (e) {  
+							$('#successModal').off();
+							
+										
+						});
+						$("#successModal").modal("show");
+						$("#successModal").css("z-index","1100");
+						setTimeout(function() 
+							{
+								$('#successModal').modal('hide');
+								// window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
+							}, 4000);
+		        	}
+		        	else
+		        	{
+		        		$('#errorModal .modal-body').html("<p>Unable to add Members. Try again.</p>");
 						$('#errorModal').on('hidden.bs.modal', function (e) {
 							$('#errorModal').off();
 						});

@@ -76,7 +76,7 @@ class SqlService{
 	}
 	public function getUserInWorkspaceNotInChannel($workspaceid,$channelid)
 	{
-		$sql="SELECT user.user_id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id NOT IN(select user_channel.user_id from user_channel where user_channel.channel_id=".$channelid.")";
+		$sql="SELECT user.user_id as id,user.first_name as text,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id NOT IN(select user_channel.user_id from user_channel where user_channel.channel_id=".$channelid.")";
 		return $sql;
 	}
 	public function insertReplyThread($parentmessageid,$content,$created_by,$timestamp)
