@@ -273,6 +273,8 @@ pre
 
 .threadMessageWrapper{
     display: none;
+    height: 100%;
+    border-left: 1px solid #bcbcbd;
 }
 
 
@@ -283,7 +285,7 @@ pre
 }
 
 .threadedContent{
-    margin-left: 2%;
+    margin-left: 0.2%;
     width: 100%;
 }
 
@@ -299,8 +301,13 @@ pre
     padding: 3%;
     max-height: 70%;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
+
+.threadHeader h2{
+ padding-left: 2%;
+}
+
 
 .messageEntrySpace_regularMsg_HP {
     position: fixed;
@@ -347,4 +354,9 @@ pre
     min-width: 40px;
     align-items: center;
     color: white;
+}
+
+.repliescount{
+    color: #332aa5;
+    font-size: 12px;
 }

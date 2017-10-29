@@ -262,9 +262,16 @@ function getAllThreadReplies(parentMsgID){
         success: function (data) {
             console.log(data);
             if(!data.includes("fail")){
+
                 var jsonArrRes = $.parseJSON(data);
                 // to update the number of replies in case if changed
-                $(".messagewithid_"+parentMsgID).find(".repliescount span").html(jsonArrRes.length);
+				if(jsonArrRes.length > 0 && $(".messagewithid_"+parentMsgID).find(".repliescount").length < 1){
+                    $(".messagewithid_"+parentMsgID).find(".msg_reactionsec").append('<div class="repliescount" title="view thread"><a href="#"><span>'+jsonArrRes.length +'</span> replies</a></div>');
+				}else {
+					$(".messagewithid_"+parentMsgID).find(".repliescount span").html(jsonArrRes.length);
+				}
+
+
                 var threadReplysUIStr="";
                 $(".threadedreplies_content").empty();
                 $.each(jsonArrRes,function(indx,obj){
