@@ -157,6 +157,7 @@
 			          <form role="form" id="createChannelForm">
 			          	<div class="row">
 					      	<div class="form-group">
+					      		<div class="uniqueChannel"></div>
 						        <input type="text" class="form-control channelName" name="name" required>
 						        <label class="form-control-placeholder" for="name">Name</label>
 					      	</div>

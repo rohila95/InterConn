@@ -174,20 +174,17 @@ function start()
         });
 
 		$( ".createChannelBtn" ).on("click",function(e) {
-			console.log("in clickkk");
-			// e.preventDefault();
-			// $(".select2-choices li div")
+
 			var ids=[];
-// $.each($(".select2-choices li div"),function(i,obj){console.log(obj['outerText']);})
 			$.each(usersData,function(i,obj){
-				console.log(obj['text']);
+
 				$.each($(".select2-choices li div"),function(i,innerobj){
-					console.log(innerobj['outerText']);
+
 					if(obj['text']==innerobj['outerText'])
 						ids.push(obj['id']);
 				});
 			});
-			console.log(ids);
+
 
 			var myForm = document.getElementById('createChannelForm');
 		   	var formData = new FormData(myForm),
@@ -199,6 +196,7 @@ function start()
 		      convertedJSON[n.value[0]] = n.value[1];
 		    }
 		    convertedJSON ['invites']=ids;
+		    convertedJSON['workspaceid']=$('.loggedIn_workspace').attr('id');
 		    var stringData = JSON.stringify(convertedJSON);
 	     	console.log(convertedJSON);
 		    $.ajax({
@@ -226,14 +224,14 @@ function start()
 		        	}
 		        	else
 		        	{
-		        		$('#errorModal .modal-body').html("<p> Channel not created.</p>");
+		        		$('#errorModal .modal-body').html("<p>Channel name already exists. Try with different name.</p>");
 						$('#errorModal').on('hidden.bs.modal', function (e) {
 							$('#errorModal').off();
 						});
 						$("#errorModal").modal("show");
 						$("#errorModal").css("z-index","1100");
 						setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
-		        		// $('.uniqueEmail').html('Email Id already exists. Try with different Id.');
+		        		// $('.uniqueChannel').html('Channel name already exists. Try with different name.');
 		        	}
 		        }
 		    });
