@@ -395,7 +395,7 @@ class WebService{
     return $formattedDate;
   }
 
-  public function createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites)
+  public function createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites,$workspaceid)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
@@ -404,34 +404,42 @@ class WebService{
     $type=mysqli_real_escape_string($conn,$type);
     $purpose=mysqli_real_escape_string($conn,$purpose);
     $timestamp=mysqli_real_escape_string($conn,$timestamp);
+    $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
 
     $sql_service = new SqlService();
 
-    $channel = $sql_service->createChannel($channelName,$type,$purpose,$userid,$timestamp);
-    $result = $conn->query($channel);
-    if ($result === TRUE) {
-        $channelid = $conn->insert_id;
-        echo "id-" . $channelid.".";
-    } else {
-        echo "Error: " . $channel . "<br>" . $conn->error;
+    $channelExist=$sql_service->channelInWorkspace($channelName,$workspaceid);
+    $channelExistResult= $conn->query($channelExist);
+    if ($channelExistResult->num_rows > 0) {
+      echo 'Error-Channel name already exists';
     }
-
-    $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
-    $result = $conn->query($userChannelMap);
-    if ($result === TRUE) {
-        // echo "New record created successfully. Last inserted ID is: " ;
-    } else {
-        echo "Error: " . $userChannelMap . "<br>" . $conn->error;
-    }
-
-    foreach ($invites as $id) {
-      $userid=mysqli_real_escape_string($conn,$id);
-      $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
-      $result = $conn->query($userChannelMap);
+    else
+    {
+      $channel = $sql_service->createChannel($channelName,$type,$purpose,$userid,$timestamp);
+      $result = $conn->query($channel);
       if ($result === TRUE) {
-          // echo "New record created successfully. Last inserted ID is: ";
+        $channelid = $conn->insert_id;
+        echo "id-" . $channelid.".";   
+        $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
+        $result = $conn->query($userChannelMap);
+        if ($result === TRUE) {
+            // echo "New record created successfully. Last inserted ID is: " ;
+        } else {
+            echo "Error: " . $userChannelMap . "<br>" . $conn->error;
+        }
+
+        foreach ($invites as $id) {
+          $userid=mysqli_real_escape_string($conn,$id);
+          $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
+          $result = $conn->query($userChannelMap);
+          if ($result === TRUE) {
+              // echo "New record created successfully. Last inserted ID is: ";
+          } else {
+              echo "Error: " . $userChannelMap . "<br>" . $conn->error;
+          }
+        }
       } else {
-          echo "Error: " . $userChannelMap . "<br>" . $conn->error;
+          echo "Error: " . $channel . "<br>" . $conn->error;
       }
     }
     $conn->close();

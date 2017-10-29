@@ -52,9 +52,10 @@ if(isset($_POST["createChannel"]))
   $channelName=$data->name;
   $type=$data->type;
   $purpose=$data->purpose;
+  $workspaceid=$data->workspaceid;
   $timestamp=date('Y-m-d H:i:s', time());
   $invites=$data->invites;
-  echo $webService->createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites);
+  echo $webService->createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites,$workspaceid);
 }
 
 if(isset($_POST["createThreadReply"]))
@@ -101,4 +102,13 @@ if(isset($_POST["updateProfile"]))
 
 }
 
+
+if(isset($_POST["getWorkspaceUsers"]))
+{
+  // echo 'in cont';
+  $data=json_decode($_POST["getWorkspaceUsers"]);
+  $userid=$data->userid;
+  $workspaceid=$data->workspaceid;
+  echo  $webService->getUsersInWorkspaceInvites($workspaceid,$userid);
+}
 ?>

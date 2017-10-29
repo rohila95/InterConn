@@ -1,12 +1,28 @@
 var curMessageId='';
 function start()
 {
+	var usersData='';
     $(document).ready(function() {
 		console.log("Inside ready");
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
 		$('.createNewChannelIcon').click(function()
 		{
 			$('#createChannel').modal('show');
+
+		});
+		var userid=$('.loggedIn_user').attr('id');
+		var workspaceid=$('.loggedIn_workspace').attr('id');
+		var getusersdata='{"userid":"'+userid+'","workspaceid":"'+workspaceid+'"}';
+		
+		console.log(getusersdata);
+		$.post('./Controller.php',{"getWorkspaceUsers":getusersdata},function (data){
+			usersData=$.parseJSON(data);
+			$('.channelInvites').select2({
+		    width: '100%',
+		    allowClear: true,
+		    multiple: true,
+		    data: usersData
+			});
 		});
 
         $(".inputMessage").keypress(function (e) {
@@ -158,8 +174,18 @@ function start()
         });
 
 		$( ".createChannelBtn" ).on("click",function(e) {
-			console.log("in clickkk");
-			// e.preventDefault();
+
+			var ids=[];
+			$.each(usersData,function(i,obj){
+
+				$.each($(".select2-choices li div"),function(i,innerobj){
+
+					if(obj['text']==innerobj['outerText'])
+						ids.push(obj['id']);
+				});
+			});
+
+
 			var myForm = document.getElementById('createChannelForm');
 		   	var formData = new FormData(myForm),
 		   	convertedJSON = {},
@@ -169,7 +195,8 @@ function start()
 		      if(!n || n.done) break;
 		      convertedJSON[n.value[0]] = n.value[1];
 		    }
-		    convertedJSON ['invites']=[9,11];
+		    convertedJSON ['invites']=ids;
+		    convertedJSON['workspaceid']=$('.loggedIn_workspace').attr('id');
 		    var stringData = JSON.stringify(convertedJSON);
 	     	console.log(convertedJSON);
 		    $.ajax({
@@ -184,7 +211,7 @@ function start()
 		        		$('#successModal .modal-body').html("<p> Channel created Successfully. </p>");
 						$('#successModal').on('hidden.bs.modal', function (e) {  
 							$('#successModal').off();
-							window.location.href = "./index.php";
+							
 										
 						});
 						$("#successModal").modal("show");
@@ -192,19 +219,19 @@ function start()
 						setTimeout(function() 
 							{
 								$('#successModal').modal('hide');
-								window.location.href = "./index.php?channel="+$.trim(data).split(".")[0].split("-")[1];
+								window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
 							}, 4000);
 		        	}
 		        	else
 		        	{
-		        		$('#errorModal .modal-body').html("<p> Channel not created.</p>");
+		        		$('#errorModal .modal-body').html("<p>Channel name already exists. Try with different name.</p>");
 						$('#errorModal').on('hidden.bs.modal', function (e) {
 							$('#errorModal').off();
 						});
 						$("#errorModal").modal("show");
 						$("#errorModal").css("z-index","1100");
 						setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
-		        		// $('.uniqueEmail').html('Email Id already exists. Try with different Id.');
+		        		// $('.uniqueChannel').html('Channel name already exists. Try with different name.');
 		        	}
 		        }
 		    });

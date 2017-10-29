@@ -71,7 +71,7 @@ class SqlService{
 	}
 	public function getUserInWorkspace($workspaceid,$userid)
 	{
-		$sql="SELECT user.user_id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id<>".$userid;
+		$sql="SELECT user.user_id as id,user.first_name as text,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id<>".$userid;
 		return $sql;
 	}
 	public function getUserInWorkspaceNotInChannel($workspaceid,$channelid)
@@ -144,7 +144,12 @@ class SqlService{
 		$sql="INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`) VALUES (NULL, '".$username."', '".$first_name."', '".$last_name."', '".$email_id."', '".$profile_pic."', '".$password."', '".$phone_number."', '".$what_i_do."', '".$status."', ".$status_emoji.", '".$skype."')";
 		return $sql;
 	}
-
+	
+	public function channelInWorkspace($channel_name,$workspaceid)
+	{
+		$sql="SELECT * FROM `channel`,`workspace_channel` where channel.channel_id=workspace_channel.channel_id and channel_name='".$channel_name."' and workspace_channel.workspace_id=".$workspaceid;
+		return $sql;
+	}
 	public function userWorkspaceMap($userid,$workspaceid)
 	{
 		$sql="INSERT INTO `InterConn`.`user_workspace` (`user_id`, `workspace_id`) VALUES ('".$userid."', '".$workspaceid."')";
