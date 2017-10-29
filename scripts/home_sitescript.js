@@ -424,16 +424,20 @@ function getAllThreadReplies(parentMsgID){
                     }
 
 
-                    var curThRepMsgCont='<div class="col-xs-11 message"><div class="message_header"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div>';
+                    var curThRepMsgCont=$('<div class="col-xs-11 message"><div class="message_header"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div></div>');
+                    var emojiElementsStr= "";
+                    $.each(obj['emojis'], function (emojiIndx, emojiObj) {
+                        emojiElementsStr += "<div class=\"emojireaction\" emojiid='"+emojiObj['emoji_id'] + "'><i class='"+emojiObj['emoji_pic'] +"'></i><span class=\"reactionCount\">"+ emojiObj['count']+"</span></div>"
+                    });
+                    curThRepMsgCont.find(".msg_reactionsec").append(emojiElementsStr);
+
 
                     $(".threadedreplies_content").find(".threadReplyWithId_"+obj['id']).append(curThRepMsgCont);
 
-                    //threadReplysUIStr  +='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background-color: '+defPictureDet.split("-")[0] +';">'+ defPictureDet.split("-")[1]+'</div></div></div>';
+
                 });
 
-                /*threadReplysUIStr  +='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url() !important;background-size: 36px 36px !important;">' +
-                    '</div></div><div class="col-xs-11 message"><div class="message_header"><b>'+Rohila Gudipati +'</b><span class="message_time"> 10:31 PM</span></div><div class="message_body messagewithid_97" id="97">
-				"<div class="msg_content">what  else ?</div><div class="msg_reactionsec"> </div></div></div></div>'*/
+
 
 
             }else{
