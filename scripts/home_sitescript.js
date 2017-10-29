@@ -105,7 +105,13 @@ function start()
 		$(".loggedIn_user").click(function(){
 			var id= $('.loggedIn_user').attr('id');
 			window.location.href = "ProfilePage.php?userid="+id;
-		})
+		});
+
+        $(document).on("click",".message_header",function() {
+                var id= $(this).attr('userid');
+                window.location.href = "ProfilePage.php?userid="+id;
+        });
+
 
 
 		// this registration takes care of thumbsup and thumbs down functionality
@@ -424,7 +430,7 @@ function getAllThreadReplies(parentMsgID){
                     }
 
 
-                    var curThRepMsgCont=$('<div class="col-xs-11 message"><div class="message_header"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div></div>');
+                    var curThRepMsgCont=$('<div class="col-xs-11 message"><div class="message_header" userid="'+obj['user_id'] +'"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div></div>');
                     var emojiElementsStr= "";
                     $.each(obj['emojis'], function (emojiIndx, emojiObj) {
                         emojiElementsStr += "<div class=\"emojireaction\" emojiid='"+emojiObj['emoji_id'] + "'><i class='"+emojiObj['emoji_pic'] +"'></i><span class=\"reactionCount\">"+ emojiObj['count']+"</span></div>"
