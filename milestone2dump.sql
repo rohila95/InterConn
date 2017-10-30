@@ -515,7 +515,7 @@ INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id
 (6, '@mcmissile', 'Finn', 'McMissile', 'topsecret@agent.org', './images/0.jpeg', 'mcmissile', '', '', '', NULL, ''),
 (7, '@mcqueen', 'Lightning', 'McQueen', 'kachow@rusteze.com', './images/0.jpeg', 'mcqueen', '', '', '', NULL, ''),
 (8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', './images/0.jpeg', 'chick', '', '', '', NULL, ''),
-(9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', './images/9.jpg', 'rohila', '', '', '', NULL, ' '),
+(9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', './images/9.JPG', 'rohila', '', '', '', NULL, ' '),
 (10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', './images/0.jpeg', 'maheedhar', '', '', '', NULL, ''),
 (11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', './images/0.jpeg', 'mahesh', '', '', '', NULL, ''),
 (34, '@rohit', 'Rohit', 'Kandhi', 'rkand@odu.edu', './images/0.jpeg', '1234', '', 'student', '', 1, ''),

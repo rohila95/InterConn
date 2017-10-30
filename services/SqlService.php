@@ -153,7 +153,7 @@ class SqlService{
 
 	public function registerNewUser($username,$first_name,$last_name,$email_id,$profile_pic,$password,$phone_number,$what_i_do,$status,$status_emoji,$skype)
 	{
-		$sql="INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`) VALUES (NULL, '".$username."', '".$first_name."', '".$last_name."', '".$email_id."', NULL, '".$password."', '".$phone_number."', '".$what_i_do."', '".$status."', ".$status_emoji.", '".$skype."')";
+		$sql="INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`) VALUES (NULL, '".$username."', '".$first_name."', '".$last_name."', '".$email_id."', '".$profile_pic."', '".$password."', '".$phone_number."', '".$what_i_do."', '".$status."', ".$status_emoji.", '".$skype."')";
 		return $sql;
 	}
 

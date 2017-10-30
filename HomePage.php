@@ -250,14 +250,14 @@
                             <?php
                             	if($currentChannel[0]->created_by==$_SESSION['userid'] && $currentChannel[0]->type=='private')
                             	{
-                            		echo ' |<span class="invitations"> Invite Members</span>'; 
+                            		echo ' |<span class="invitations"> Invite Members</span>';
                             	}
                             	else if($currentChannel[0]->type=='public' && $currentChannel[0]->channel_name!='general' && $currentChannel[0]->channel_name!='random')
                             	{
-                            		echo ' |<span class="invitations"> Invite Members</span>'; 
+                            		echo ' |<span class="invitations"> Invite Members</span>';
                             	}
                             ?>
-                             
+
                         </div>
                             </div>
                 <div class="col-xs-12 regularMessagesWrapper">

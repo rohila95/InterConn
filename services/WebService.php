@@ -443,7 +443,7 @@ class WebService{
       $result = $conn->query($channel);
       if ($result === TRUE) {
         $channelid = $conn->insert_id;
-        echo "id-" . $channelid.".";   
+        echo "id-" . $channelid.".";
         $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
         $result1 = $conn->query($userChannelMap);
         if ($result1 === TRUE) {
@@ -504,7 +504,7 @@ class WebService{
     $first_name=mysqli_real_escape_string($conn,$first_name);
     $last_name=mysqli_real_escape_string($conn,$last_name);
     $email_id=mysqli_real_escape_string($conn,$email_id);
-    $profile_pic=mysqli_real_escape_string($conn,$profile_pic);
+    $profile_pic='./images/0.jpeg';
     $password=mysqli_real_escape_string($conn,$password);
     $phone_number=mysqli_real_escape_string($conn,$phone_number);
     $what_i_do=mysqli_real_escape_string($conn,$what_i_do);
