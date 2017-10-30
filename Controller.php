@@ -59,16 +59,15 @@ if(isset($_POST["register"])){ // to post a react by a
       {
         echo 'fail-Password cannot be empty.';
       }
-    else if(strlen($phoneNumber)!=""){
-        if(strlen($phoneNumber)<10 || strlen($phoneNumber)>10 || is_numeric($phoneNumber)==false)
-        {
-            echo 'fail-Phone number should be 10 digits.';
-        }
-    }
+
     else if(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email))
       {
         echo 'fail-Enter a vaild Email id.';
       }
+      else if(strlen($phoneNumber)!='' && (strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1)))
+          {
+              echo 'fail-Phone number should be 10 digits.';
+          }    
     else
       {
         $username='@'.strtolower($firstName);
@@ -164,7 +163,7 @@ if(isset($_POST["updateProfile"]))
 //            echo "in esle of phone check ";
 //        }
 //    }
-    else if(strlen($phoneNumber)!=0 && (strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1)))
+    else if(strlen($phoneNumber)!='' && (strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1)))
     {
             echo 'fail-Phone number should be of  10 to 12 digits long.';
     }
@@ -173,7 +172,7 @@ if(isset($_POST["updateProfile"]))
         echo 'fail-Enter a vaild Email id.';
       }
 
-      
+
     else
     {
       if($file_name==""){
@@ -199,7 +198,7 @@ if(isset($_POST["updateProfile"]))
           }
 
       }
-    }    
+    }
 }
 
 

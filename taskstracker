@@ -13,7 +13,7 @@ Message Threads
 -> Make sure to check with validations on both client and server side for Create channel,
         registration and other where ever there are forms.
     -> Style the input box of invite channel mamber from a channel itself.
-    -> Get the memebers list(names list) when in a channel
+
     -> Liked ppl names listing
     -> oninvalid="this.setCustomValidity('Enter Phone number preceding with country code, "-" not required')"
     -> Profile page editing not working when even phone number

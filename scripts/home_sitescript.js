@@ -6,7 +6,7 @@ function start()
 	var usersChannelData='';
     $(document).ready(function() {
 		console.log("Inside ready");
-		// $('[data-toggle="tooltip"]').tooltip();   
+		// $('[data-toggle="tooltip"]').tooltip();
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
 		$('.createNewChannelIcon').click(function()
 		{
@@ -14,7 +14,7 @@ function start()
 			$('#createChannel').modal('show');
 
 		});
-		
+
 		$('.invitations').click(function()
 		{
 			$('.existingChannelInvites').select2('data', null);
@@ -25,7 +25,7 @@ function start()
 		var workspaceid=$('.loggedIn_workspace').attr('id');
 		var channelid=$('.currentChannelTitle').attr('id');
 		var getusersdata='{"userid":"'+userid+'","workspaceid":"'+workspaceid+'"}';
-		
+
 		console.log(getusersdata);
 		$.post('./Controller.php',{"getWorkspaceUsers":getusersdata},function (data){
 			usersData=$.parseJSON(data);
@@ -65,7 +65,7 @@ function start()
             // }
 
             if(e.which == 13 && !e.shiftKey) {
-             		$(".messageEntrySpace_regularMsg_HP button").trigger("click");          
+             		$(".messageEntrySpace_regularMsg_HP button").trigger("click");
              }
         });
 
@@ -184,7 +184,7 @@ function start()
             });
 
 		});
-		
+
 
         // this registration takes care of creating a new thread
         $(document).on("click",".messageHoverButtons .threadbutt, .repliescount",function(e){
@@ -261,14 +261,14 @@ function start()
 		        	if($.trim(data).split(".")[0].split("-")[0]=="id")
 		        	{
 		        		$('#successModal .modal-body').html("<p> Channel created Successfully. </p>");
-						$('#successModal').on('hidden.bs.modal', function (e) {  
+						$('#successModal').on('hidden.bs.modal', function (e) {
 							$('#successModal').off();
-							
-										
+
+
 						});
 						$("#successModal").modal("show");
 						$("#successModal").css("z-index","1100");
-						setTimeout(function() 
+						setTimeout(function()
 							{
 								$('#successModal').modal('hide');
 								window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
@@ -315,17 +315,17 @@ function start()
 		        	if(data.includes('success'))
 		        	{
 		        		$('#successModal .modal-body').html("<p> Members invited Successfully. </p>");
-						$('#successModal').on('hidden.bs.modal', function (e) {  
+						$('#successModal').on('hidden.bs.modal', function (e) {
 							$('#successModal').off();
 							location.reload();
-										
+
 						});
 						$("#successModal").modal("show");
 						$("#successModal").css("z-index","1100");
-						setTimeout(function() 
+						setTimeout(function()
 							{
 								$('#successModal').modal('hide');
-								
+
 							}, 4000);
 		        	}
 		        	else if($.trim(data).split("-")[0]=="fail")
@@ -442,11 +442,12 @@ function getAllThreadReplies(parentMsgID){
                         curThreadReplyEle.find(".profilePic").css("background-image","url("+obj['profile_pic']+")");
                     }
 
-     //                var datetime=obj["created_at"].split(" ");
-					// var date=datetime[0].split("-");
-					// var time=datetime[1].split(":");
-					// var date = new Date(date[0],(date[1]-1),date[2],date[0],time[1],time[2]);
-					// console.log(date);
+                    // var datetime=obj["created_at"].split(" ");
+										// var date=datetime[0].split("-");
+										// var time=datetime[1].split(":");
+										// var date = new Date(date[0],(date[1]-1),date[2],date[0],time[1],time[2]);
+										// console.log(date);
+
                     var curThRepMsgCont=$('<div class="col-xs-11 message"><div class="message_header" userid="'+obj['user_id'] +'"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+escapeHtml(obj["content"])+'</div><div class="msg_reactionsec"></div></div>');
                     var emojiElementsStr= "";
                     $.each(obj['emojis'], function (emojiIndx, emojiObj) {
