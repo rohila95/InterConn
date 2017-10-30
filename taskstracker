@@ -1,7 +1,11 @@
 Message Threads
-    -> every message must have a idicator saying whether its a parent of any thread
+    -> every message must have a inicator saying whether its a parent of any thread ✔
     -> Working on getting the side column for threads. ✔
     -> Have to have another table to capture the reactions for the Thread Messages ✔
 
-    -> Make sure to check with validations on both client and server side for Create channel, registration and other where ever ther are forms
-    -> Image dimension ans size validation aswell to be taken care off
+    -> Make sure to check with validations on both client and server side for Create channel,
+        registration and other where ever there are forms.
+    -> Image dimension ans size validation aswell to be taken care off ✔
+
+    -> where there are nearly no messages in a channel, the very few mesages  present must be alligned to
+        the bottom of the page.
