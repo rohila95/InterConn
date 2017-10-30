@@ -550,7 +550,7 @@ class WebService{
     }else{
         $updateUPQuery = $sql_service->updateUserProfile($userid, $first_name, $last_name, $emailid, $profile_pic, $password, $phone_number, $whatido, $status, $skype);
     }
-    //echo $updateUPQuery;
+   // echo $updateUPQuery;
 
     $result = $conn->query($updateUPQuery);
     if ($result === TRUE) {

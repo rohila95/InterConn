@@ -100,7 +100,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" class="form-control email" name="email" value ="<?php echo $userDetails[0]->email_id ?>" required>
+                                <input type="email" class="form-control email" name="email" value ="<?php echo $userDetails[0]->email_id ?>" required>
                                 <label class="form-control-placeholder" for="name">E-mail</label>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input type="tel" class="form-control phoneNumber not_reallyrequired " size="10" name="phoneNumber" value ="<?php echo $userDetails[0]->phone_number ?>" required>
+                                <input type="number" class="form-control phoneNumber not_reallyrequired " size="12"  name="phoneNumber" value ="<?php echo $userDetails[0]->phone_number ?>" required>
                                 <label class="form-control-placeholder"  for="name">Phone Number</label>
 
                             </div>
