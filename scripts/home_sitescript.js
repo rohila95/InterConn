@@ -39,7 +39,7 @@ function start()
 		var getUsersDataNotInChannel='{"channelid":"'+channelid+'","workspaceid":"'+workspaceid+'"}';
 		$.post('./Controller.php',{"getChannelUsers":getUsersDataNotInChannel},function (data){
 			// console.log(data);
-				usersChannelData=$.parseJSON(data);
+				// usersChannelData=$.parseJSON(data);
 			if(!data.includes('fail'))
 			{
 				usersChannelData=$.parseJSON(data);

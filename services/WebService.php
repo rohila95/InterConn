@@ -422,13 +422,19 @@ class WebService{
         $channelid = $conn->insert_id;
         echo "id-" . $channelid.".";   
         $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
-        $result = $conn->query($userChannelMap);
-        if ($result === TRUE) {
+        $result1 = $conn->query($userChannelMap);
+        if ($result1 === TRUE) {
             // echo "New record created successfully. Last inserted ID is: " ;
         } else {
             echo "Error: " . $userChannelMap . "<br>" . $conn->error;
         }
-
+        $channelWorkspaceMap=$sql_service->channelWorkspaceMap($channelid,$workspaceid);
+        $result1 = $conn->query($channelWorkspaceMap);
+        if ($result1 === TRUE) {
+            // echo "New record created successfully. Last inserted ID is: " ;
+        } else {
+            echo "Error: " . $channelWorkspaceMap . "<br>" . $conn->error;
+        }
         foreach ($invites as $id) {
           $userid=mysqli_real_escape_string($conn,$id);
           $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);

@@ -59,10 +59,12 @@ if(isset($_POST["register"])){ // to post a react by a
       {
         echo 'fail-Password cannot be empty.';
       }
-    else if(strlen($phoneNumber)<10 || strlen($phoneNumber)>10 || is_numeric($phoneNumber)==false)
-      {
-        echo 'fail-Phone number should be 10 digits.';
-      }
+    else if(strlen($phoneNumber)!=""){
+        if(strlen($phoneNumber)<10 || strlen($phoneNumber)>10 || is_numeric($phoneNumber)==false)
+        {
+            echo 'fail-Phone number should be 10 digits.';
+        }
+    }
     else if(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email))
       {
         echo 'fail-Enter a vaild Email id.';
@@ -222,5 +224,9 @@ if(isset($_POST["inviteToChannel"]))
     echo  $webService->inviteUser($ids,$channelid,$timestamp);
   else
     echo 'fail-Please select atleast one member to invite.';
+}
+if(isset($_POST["getProfileDetails"]))
+{
+  echo $webService->getProfileDetails($_SESSION['userid']);
 }
 ?>

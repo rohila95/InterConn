@@ -120,6 +120,19 @@ function start()
 						}
 					});
 			});
+		$(document).on("click",".editProfile",function() {
+            $(".editProfile").hide();
+            $(".displayProfile").hide();
+            $.post('./Controller.php',{"getProfileDetails":''},function (data){
+				console.log(data);
+            		var userData=$.parseJSON(data);
+            		$('.password').val(userData[0]['password']);
+            		
+				
+			});
+            
+            $(".updateProfile").show();
+		});
 
 	});
 

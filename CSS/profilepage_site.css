@@ -20,6 +20,15 @@
 	font-family: buxton sketch;
 	font-size: 56px;
 }
+.editProfile
+{
+  font-size: 28px;
+  cursor:pointer;
+}
+.updateProfile
+{
+  display:none;
+}
 .footer
 {
     position: fixed;

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 28, 2017 at 04:42 PM
+-- Generation Time: Oct 30, 2017 at 12:54 AM
 -- Server version: 10.0.19-MariaDB-1~trusty-log
 -- PHP Version: 5.5.9-1ubuntu4.9
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `channel` (
   `purpose` text NOT NULL,
   `created_by` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `channel`
@@ -49,9 +49,9 @@ INSERT INTO `channel` (`channel_id`, `channel_name`, `type`, `purpose`, `created
 (5, 'Rust-eze', 'private', 'Private group talks', 7, '2017-10-16 00:53:54'),
 (6, 'Piston Cup competitors', 'private', 'For participants only!!!!', 7, '2017-10-16 00:55:13'),
 (7, 'Radiator Springs', 'private', 'In town guys gossips', 1, '2017-10-16 00:56:46'),
-(10, 'mgunn001@odu.edu', 'public', 'maheedhar', 10, '2017-10-26 23:57:27'),
-(11, 'mgunn001@odu.edu', 'public', 'maheedhar', 10, '2017-10-26 23:57:27'),
-(12, 'ussssshSecret', 'private', 'top secret ', 10, '2017-10-27 01:12:21');
+(12, 'ussssshSecret', 'private', 'top secret ', 10, '2017-10-27 01:12:21'),
+(31, 'fvhhhhcg <!--fxc', 'private', '', 10, '2017-10-30 02:48:07'),
+(32, 'test1', 'private', 'test', 9, '2017-10-30 03:08:18');
 
 -- --------------------------------------------------------
 
@@ -102,14 +102,14 @@ CREATE TABLE IF NOT EXISTS `message` (
   `is_active` int(11) NOT NULL DEFAULT '0',
   `edited_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `has_shared_content` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `message`
 --
 
 INSERT INTO `message` (`message_id`, `created_by`, `created_at`, `message_place`, `content`, `is_threaded`, `is_active`, `edited_at`, `has_shared_content`) VALUES
-(5, 9, '2017-10-27 17:13:47', 0, 'hello', 0, 0, '0000-00-00 00:00:00', 0),
+(5, 9, '2017-10-27 17:13:47', 0, 'hello', 1, 0, '0000-00-00 00:00:00', 0),
 (6, 10, '2017-10-27 17:13:50', 0, 'hi how are u', 0, 0, '0000-00-00 00:00:00', 0),
 (7, 11, '2017-10-04 17:35:27', 0, 'good', 1, 0, '0000-00-00 00:00:00', 0),
 (8, 9, '2017-10-04 17:34:48', 0, 'hi direct message', 0, 0, '0000-00-00 00:00:00', 0),
@@ -121,7 +121,7 @@ INSERT INTO `message` (`message_id`, `created_by`, `created_at`, `message_place`
 (18, 10, '2017-10-05 21:24:20', 0, '<!--jzsdhfj-->', 0, 0, '0000-00-00 00:00:00', 0),
 (19, 10, '2017-10-05 21:24:30', 0, '><:"#%$(#$)%^_$E_', 0, 0, '0000-00-00 00:00:00', 0),
 (20, 10, '2017-10-05 21:24:57', 0, 'hiii', 0, 0, '0000-00-00 00:00:00', 0),
-(21, 10, '2017-10-05 21:25:10', 0, 'good job', 0, 0, '0000-00-00 00:00:00', 0),
+(21, 10, '2017-10-05 21:25:10', 0, 'good job', 1, 0, '0000-00-00 00:00:00', 0),
 (22, 11, '2017-10-05 21:28:07', 0, 'fgdfg', 0, 0, '0000-00-00 00:00:00', 0),
 (23, 11, '2017-10-05 21:28:56', 0, '', 0, 0, '0000-00-00 00:00:00', 0),
 (24, 10, '2017-10-05 21:32:23', 0, 'hiii', 0, 0, '0000-00-00 00:00:00', 0),
@@ -145,7 +145,7 @@ INSERT INTO `message` (`message_id`, `created_by`, `created_at`, `message_place`
 (42, 9, '2017-10-06 19:10:52', 0, '', 0, 0, '0000-00-00 00:00:00', 0),
 (43, 9, '2017-10-06 20:15:52', 0, '35y45yjhopi54yoi54oyu54iyuoi[45uy[45uyw45oyu45[oiyuio[54uy[oi45uyoi[45wuyoi[w45uyoi[w45uio[yuw54oi[yuw45o[iyu4w5[yu45o[iyu45oi[yu45io[yu[4oi5uy[i4o5uy[o4i5wuy[o4iuy[oi45uyoi[45uy45', 0, 0, '0000-00-00 00:00:00', 0),
 (44, 10, '2017-10-07 04:12:31', 0, 'Hello people ', 0, 0, '0000-00-00 00:00:00', 0),
-(45, 9, '2017-10-10 03:51:03', 0, '32', 0, 0, '0000-00-00 00:00:00', 0),
+(45, 9, '2017-10-10 03:51:03', 0, '32', 1, 0, '0000-00-00 00:00:00', 0),
 (46, 1, '2017-10-10 19:47:23', 0, '', 0, 0, '0000-00-00 00:00:00', 0),
 (47, 1, '2017-10-10 19:49:23', 0, '', 0, 0, '0000-00-00 00:00:00', 0),
 (48, 9, '2017-10-10 19:56:32', 0, 'dkfjigi', 0, 0, '0000-00-00 00:00:00', 0),
@@ -210,7 +210,13 @@ INSERT INTO `message` (`message_id`, `created_by`, `created_at`, `message_place`
 (107, 9, '2017-10-28 04:10:24', 0, 'hzfdih', 0, 0, '0000-00-00 00:00:00', 0),
 (108, 9, '2017-10-28 04:15:40', 0, '  if(e.which == 13 && !e.shiftKey) {\r\n				if($(this).closest("form")[0].checkValidity()){\r\n					$(".messageEntrySpace_regularMsg_HP button").trigger("click");\r\n				}\r\n            }', 0, 0, '0000-00-00 00:00:00', 0),
 (109, 9, '2017-10-28 04:18:42', 0, 'hfjnyrf', 0, 0, '0000-00-00 00:00:00', 0),
-(110, 9, '2017-10-28 04:20:14', 0, 'khkh', 0, 0, '0000-00-00 00:00:00', 0);
+(110, 9, '2017-10-28 04:20:14', 0, 'khkh', 0, 0, '0000-00-00 00:00:00', 0),
+(111, 9, '2017-10-29 00:40:28', 0, '\r\nhello', 0, 0, '0000-00-00 00:00:00', 0),
+(112, 9, '2017-10-29 00:40:32', 0, '\r\njkhszeF', 0, 0, '0000-00-00 00:00:00', 0),
+(113, 9, '2017-10-29 00:40:40', 0, 'hgkhjuk\r\n\r\n\r\n', 0, 0, '0000-00-00 00:00:00', 0),
+(114, 10, '2017-10-30 04:28:39', 0, 'hello', 0, 0, '0000-00-00 00:00:00', 0),
+(115, 9, '2017-10-30 04:53:32', 0, 'hiii', 0, 0, '0000-00-00 00:00:00', 0),
+(116, 10, '2017-10-30 04:53:46', 0, 'welcome', 0, 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -320,7 +326,13 @@ INSERT INTO `message_channel` (`message_id`, `channel_id`) VALUES
 (107, 1),
 (108, 1),
 (109, 1),
-(110, 1);
+(110, 1),
+(111, 1),
+(112, 1),
+(113, 1),
+(114, 12),
+(115, 2),
+(116, 2);
 
 -- --------------------------------------------------------
 
@@ -427,7 +439,7 @@ CREATE TABLE IF NOT EXISTS `threaded_message` (
   `content` varchar(1000) NOT NULL,
   `created_by` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `threaded_message`
@@ -440,7 +452,12 @@ INSERT INTO `threaded_message` (`id`, `parent_message_id`, `content`, `created_b
 (4, 101, 'yupppp', 11, '2017-10-27 16:41:22'),
 (5, 7, 'zsdgbfzdh', 10, '2017-10-27 17:15:25'),
 (6, 7, 'dfhtnxf', 11, '2017-10-27 17:15:29'),
-(7, 101, 'xgfthnfcgxj', 11, '2017-10-27 16:48:22');
+(7, 101, 'xgfthnfcgxj', 11, '2017-10-27 16:48:22'),
+(8, 21, 'aer', 10, '2017-10-29 01:00:20'),
+(9, 5, 'hello', 9, '2017-10-29 01:09:14'),
+(10, 5, 'jzdrgjhsdf', 10, '2017-10-30 02:21:20'),
+(11, 45, 'hi', 10, '2017-10-30 02:25:00'),
+(12, 5, 'hi', 10, '2017-10-30 02:25:09');
 
 -- --------------------------------------------------------
 
@@ -478,38 +495,32 @@ CREATE TABLE IF NOT EXISTS `user` (
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `email_id` varchar(50) NOT NULL,
-  `profile_pic` varchar(150) NOT NULL DEFAULT '0',
+  `profile_pic` varchar(150) NOT NULL DEFAULT './images/0.jpeg',
   `password` varchar(150) NOT NULL,
   `phone_number` varchar(10) NOT NULL,
   `what_i_do` varchar(150) NOT NULL,
   `status` varchar(150) NOT NULL,
   `status_emoji` bigint(20) DEFAULT NULL,
   `skype` varchar(150) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`) VALUES
-(1, '@mater', 'Tow', 'Mater', 'mater@rsprings.gov', '0', 'mater', '1234567890', 'student at ODU', '', 1, ''),
-(2, '@sally', 'Sally', 'Carrera', 'porsche@rsprings.gov', '0', 'sally', '', '', '', 1, ''),
-(3, '@doc', 'Doc', 'Hudson', 'hornet@rsprings.gov', '0', 'doc', '', '', '', NULL, ''),
-(6, '@mcmissile', 'Finn', 'McMissile', 'topsecret@agent.org', '0', 'mcmissile', '', '', '', NULL, ''),
-(7, '@mcqueen', 'Lightning', 'McQueen', 'kachow@rusteze.com', '0', 'mcqueen', '', '', '', NULL, ''),
-(8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', '0', 'chick', '', '', '', NULL, ''),
-(9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', './images/9.png', 'rohila', '', '', '', NULL, 'undefined'),
-(10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', '0', 'maheedhar', '', '', '', NULL, ''),
-(11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', '0', 'mahesh', '', '', '', NULL, ''),
-(13, '@new', 'new', 'user', 'rgudi002@odu.edu', ' 0', 'rohila', '', '', '', 1, ''),
-(17, '@zfxdbrgd', 'zfxdbrgd', 'dfxhfx', 'rgudi003@odu.edu', ' 0', 'rohila', '', '', '', 1, ''),
+(1, '@mater', 'Tow', 'Mater', 'mater@rsprings.gov', './images/0.jpeg', 'mater', '1234567890', 'student at ODU', '', 1, ''),
+(2, '@sally', 'Sally', 'Carrera', 'porsche@rsprings.gov', './images/0.jpeg', 'sally', '', '', '', 1, ''),
+(3, '@doc', 'Doc', 'Hudson', 'hornet@rsprings.gov', './images/0.jpeg', 'doc', '', '', '', NULL, ''),
+(6, '@mcmissile', 'Finn', 'McMissile', 'topsecret@agent.org', './images/0.jpeg', 'mcmissile', '', '', '', NULL, ''),
+(7, '@mcqueen', 'Lightning', 'McQueen', 'kachow@rusteze.com', './images/0.jpeg', 'mcqueen', '', '', '', NULL, ''),
+(8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', './images/0.jpeg', 'chick', '', '', '', NULL, ''),
+(9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', './images/9.jpg', 'rohila', '', '', '', NULL, ' '),
+(10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', './images/0.jpeg', 'maheedhar', '', '', '', NULL, ''),
+(11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', './images/0.jpeg', 'mahesh', '', '', '', NULL, ''),
 (34, '@rohit', 'Rohit', 'Kandhi', 'rkand@odu.edu', ' 0', '1234', '', 'student', '', 1, ''),
-(35, '@', '', '', '', ' 0', '', '', '', '', 1, ''),
 (40, '@dg', 'dg', 'fh', 'rgudi@odu.edu', ' 0', 'rohila', '', '', '', 1, ''),
-(41, '@aaaksh', 'Aaaksh', 'Nunna', 'aakashnunna@gmail.com', ' 0', 'aakash123', '1112345678', 'Nothing', 'Single - Looking for ....', 1, ''),
-(42, '@r', 'r', 'r', 'rgu1@odu.edu', ' 0', ' " OR 1=1;', '', '', '', 1, ''),
-(45, '@zsdgyr', 'ZSDgyr', 'dszgt', 'mgun1@odu.edu', ' 0', 'maheedhar', '', '', '', 1, ''),
-(47, '@fcxhn', 'fcxhn', 'dxzg', 'mgu1@odu.edu', ' 0', 'maheedhar', '', '', '', 1, '');
+(41, '@aaaksh', 'Aaaksh', 'Nunna', 'aakashnunna@gmail.com', ' 0', 'aakash123', '1112345678', 'Nothing', 'Single - Looking for ....', 1, '');
 
 -- --------------------------------------------------------
 
@@ -552,32 +563,10 @@ INSERT INTO `user_channel` (`user_id`, `channel_id`, `joined_at`, `left_at`, `st
 (8, 6, '2017-10-16 01:03:45', '0000-00-00 00:00:00', 0),
 (9, 1, '2017-10-03 01:41:31', '0000-00-00 00:00:00', 0),
 (9, 2, '2017-10-03 01:41:31', '0000-00-00 00:00:00', 0),
-(9, 10, '2017-10-26 23:57:27', '0000-00-00 00:00:00', 0),
 (10, 1, '2017-10-03 01:41:31', '0000-00-00 00:00:00', 0),
 (10, 2, '2017-10-03 01:41:31', '0000-00-00 00:00:00', 0),
-(10, 10, '2017-10-26 23:57:27', '0000-00-00 00:00:00', 0),
-(10, 12, '2017-10-27 01:12:21', '0000-00-00 00:00:00', 0),
 (11, 1, '2017-10-03 01:41:31', '0000-00-00 00:00:00', 0),
-(11, 2, '2017-10-03 01:41:39', '0000-00-00 00:00:00', 0),
-(11, 10, '2017-10-26 23:57:27', '0000-00-00 00:00:00', 0),
-(13, 1, '2017-10-24 16:12:54', '0000-00-00 00:00:00', 0),
-(13, 2, '2017-10-24 16:12:54', '0000-00-00 00:00:00', 0),
-(17, 1, '2017-10-24 16:21:33', '0000-00-00 00:00:00', 0),
-(17, 2, '2017-10-24 16:21:33', '0000-00-00 00:00:00', 0),
-(34, 1, '2017-10-24 20:08:52', '0000-00-00 00:00:00', 0),
-(34, 2, '2017-10-24 20:08:52', '0000-00-00 00:00:00', 0),
-(35, 1, '2017-10-24 20:44:30', '0000-00-00 00:00:00', 0),
-(35, 2, '2017-10-24 20:44:30', '0000-00-00 00:00:00', 0),
-(40, 1, '2017-10-24 20:56:35', '0000-00-00 00:00:00', 0),
-(40, 2, '2017-10-24 20:56:35', '0000-00-00 00:00:00', 0),
-(41, 1, '2017-10-26 02:28:52', '0000-00-00 00:00:00', 0),
-(41, 2, '2017-10-26 02:28:52', '0000-00-00 00:00:00', 0),
-(42, 1, '2017-10-26 04:33:10', '0000-00-00 00:00:00', 0),
-(42, 2, '2017-10-26 04:33:10', '0000-00-00 00:00:00', 0),
-(45, 1, '2017-10-26 22:24:23', '0000-00-00 00:00:00', 0),
-(45, 2, '2017-10-26 22:24:23', '0000-00-00 00:00:00', 0),
-(47, 1, '2017-10-26 22:44:20', '0000-00-00 00:00:00', 0),
-(47, 2, '2017-10-26 22:44:20', '0000-00-00 00:00:00', 0);
+(11, 2, '2017-10-03 01:41:39', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -603,16 +592,7 @@ INSERT INTO `user_workspace` (`user_id`, `workspace_id`) VALUES
 (8, 2),
 (9, 1),
 (10, 1),
-(11, 1),
-(13, 1),
-(17, 1),
-(34, 1),
-(35, 1),
-(40, 1),
-(41, 1),
-(42, 1),
-(45, 1),
-(47, 1);
+(11, 1);
 
 -- --------------------------------------------------------
 
@@ -784,7 +764,7 @@ ALTER TABLE `workspace_channel`
 -- AUTO_INCREMENT for table `channel`
 --
 ALTER TABLE `channel`
-  MODIFY `channel_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `channel_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `channel_invitation`
 --
@@ -799,7 +779,7 @@ ALTER TABLE `emoji`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `message_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=111;
+  MODIFY `message_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=117;
 --
 -- AUTO_INCREMENT for table `message_reaction`
 --
@@ -814,7 +794,7 @@ ALTER TABLE `shared_message`
 -- AUTO_INCREMENT for table `threaded_message`
 --
 ALTER TABLE `threaded_message`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `threadmessage_reaction`
 --
@@ -824,7 +804,7 @@ ALTER TABLE `threadmessage_reaction`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `workspace`
 --

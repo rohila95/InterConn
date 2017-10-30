@@ -4,14 +4,14 @@
 	error_reporting(E_ALL);
 	session_start();
 	include_once "./services/WebService.php";
-	if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
-	{
+	
 		$web_service = new WebService();
 
-    	$userDetails = json_decode($web_service->getProfileDetails($_SESSION['userid']));
-		$channelDetails = json_decode($web_service->getPublicChannelsDetails($_SESSION['userid']));
+    	$userDetails = json_decode($web_service->getProfileDetails($_GET['userid']));
+		$channelDetails = json_decode($web_service->getPublicChannelsDetails($_GET['userid']));
 
 		$channelstr='';
+		$displayChannelList='';
 		if ($channelDetails!='')
 		{
            foreach($channelDetails as $channel)
@@ -19,14 +19,11 @@
                 $channelstr.='<li >';
 								$channelstr.='<a class="channelsProfilePage" href="./HomePage.php?channel='.$channel->channel_id.'#">';
                 $channelstr.=$channel->channel_name;
-            		$channelstr.='</a></li>';
+            	$channelstr.='</a></li>';
+            	$displayChannelList.=$channel->channel_name.'<br>';
            }
         }
-	}
-	else
-	{
-		header("location: ./index.php?status=notloggedin");
-	}
+	
 ?>
 
 <html>
@@ -78,12 +75,20 @@
 			    </div>
 			</div>
 			<div class="row">
-				<div class="col-sm-12 logo">
-					<span>Edit your Profile</span>
+				<div class="col-sm-11 logo">
+					<span>Profile</span>
 				</div>
+				<?php
+					if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
+					{
+						echo '<div class="col-sm-1 editProfile"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+						</div>';
+					}
+				?>
+				
 			</div>
 			
-			<div class="row">
+			<div class="row updateProfile">
 				<form role="form" id="updateForm" enctype='multipart/form-data'>
 					<div class="col-xs-8">
                         <div class="row">
@@ -149,10 +154,7 @@
                             <input class="file-upload" name="imgToUpload" type="file" accept="image/*" />
 
                         </div>
-                        <div class="row">
-                            <h4> Public Channels</h4>
-                            <?php echo $channelstr?>
-                        </div>
+                        
                     </div>
 
 					<div class="row">
@@ -168,6 +170,54 @@
 
 
 				</form>
+			</div>
+
+
+			<div class="row displayProfile">
+				<div class="col-md-3 col-lg-3 " align="center">
+						<img alt="User Pic" src="<?php echo $userDetails[0]->profile_pic ?>" class="profile-pic">
+				</div>	
+				<div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Email id:</td>
+                        <td><?php echo $userDetails[0]->email_id ?></td>
+                      </tr>
+                      <tr>
+                        <td>First Name:</td>
+                        <td><?php echo $userDetails[0]->first_name ?></td>
+                      </tr>
+                      <tr>
+                        <td>Last Name:</td>
+                        <td><?php echo $userDetails[0]->last_name ?></td>
+                      </tr>
+                   
+                      <tr>
+                        <td>What I Do:</td>
+                        <td><?php echo $userDetails[0]->what_i_do ?></td>
+                      </tr>
+                      <tr>
+                        <td>Status:</td>
+                        <td><?php echo $userDetails[0]->status ?></td>
+                      </tr>
+                      <tr>
+                        <td>Channels: </td>
+                        <td><?php 
+                        if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
+							{
+								
+                        		echo $channelstr;
+                        	}
+                        else
+                        	echo $displayChannelList;
+                        ?></td>
+                      </tr>
+                        
+                     
+                    </tbody>
+                  </table>
+				 </div>	
 			</div>
 		</div>
 		<div class="footer row">
