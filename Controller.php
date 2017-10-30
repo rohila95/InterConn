@@ -90,11 +90,12 @@ if(isset($_POST["createChannel"]))
   $workspaceid=$data->workspaceid;
   $timestamp=date('Y-m-d H:i:s', time());
   $invites=$data->invites;
+  // echo $type;
   if($channelName=="" || $channelName==" ")
     {
       echo 'fail-Channel Name cannot be empty.';
     }
-  else if($type="")
+  else if($type=="")
     {
       echo 'fail-Please select type of channel.';
     }

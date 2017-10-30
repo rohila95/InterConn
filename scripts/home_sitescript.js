@@ -316,7 +316,7 @@ function start()
 		        		$('#successModal .modal-body').html("<p> Members invited Successfully. </p>");
 						$('#successModal').on('hidden.bs.modal', function (e) {  
 							$('#successModal').off();
-							
+							location.reload();
 										
 						});
 						$("#successModal").modal("show");
@@ -324,7 +324,7 @@ function start()
 						setTimeout(function() 
 							{
 								$('#successModal').modal('hide');
-								// window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
+								
 							}, 4000);
 		        	}
 		        	else if($.trim(data).split("-")[0]=="fail")
@@ -429,7 +429,11 @@ function getAllThreadReplies(parentMsgID){
                         curThreadReplyEle.find(".profilePic").css("background-image","url("+obj['profile_pic']+")");
                     }
 
-
+     //                var datetime=obj["created_at"].split(" ");
+					// var date=datetime[0].split("-");
+					// var time=datetime[1].split(":");
+					// var date = new Date(date[0],(date[1]-1),date[2],date[0],time[1],time[2]);
+					// console.log(date);
                     var curThRepMsgCont=$('<div class="col-xs-11 message"><div class="message_header" userid="'+obj['user_id'] +'"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div></div>');
                     var emojiElementsStr= "";
                     $.each(obj['emojis'], function (emojiIndx, emojiObj) {

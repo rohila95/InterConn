@@ -17,6 +17,11 @@
   display:block;
   background-color: #dedddd;
 }
+#existingChannelInvites
+{
+  padding-right: 5%;
+  padding-left: 5%;
+}
 .newChannelDetails
 {
       margin-left: 0px;

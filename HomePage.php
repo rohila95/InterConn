@@ -15,7 +15,7 @@
 
     $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid']));
     $directMessagesDetails = json_decode($web_service->getDirectMessagesDetails($workspaceDetails[0]->workspace_id));
-
+// echo $web_service->getChannelsDetails($_SESSION['userid']);
    	$channelstr='';
    	$directMessagestr='';
 		if ($channelDetails!='')
@@ -231,6 +231,7 @@
                             $currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
                             if($currentChannel!='')
                             {
+
                                 if($currentChannel[0]->type=='private')
                                     echo '<div class="headerSpace_HP row"><div class="channelTitle currentChannelTitle" id="'.$_GET["channel"].'"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
                                 else if($currentChannel[0]->type=='public')
