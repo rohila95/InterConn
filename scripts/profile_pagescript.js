@@ -55,23 +55,31 @@ function start()
 
 
 		$(document).on("click",".updateUser",function(e){
-							// var recruitmentId = $(this).attr("recid");
-							e.preventDefault();
+			// var recruitmentId = $(this).attr("recid");
+			e.preventDefault();
 			var fileFormData = new FormData();
-		fileFormData.append('filetoUpload', $('.file-upload')[0].files[0]);
-		fileFormData.append("updateProfile",'');
-		 var file_name=$(".file-upload").val();
-		 fileFormData.append("file_name",file_name);
+			fileFormData.append('filetoUpload', $('.file-upload')[0].files[0]);
+			fileFormData.append("updateProfile",'');
+			 var file_name=$(".file-upload").val();
+			 fileFormData.append("file_name",file_name);
 
-		 fileFormData.append("firstName",$('.firstName').val());
-		 fileFormData.append("lastName",$('.lastName').val());
-		 fileFormData.append("password",$('.password').val());
-		 fileFormData.append("email",$('.email').val());
-		 fileFormData.append("whatIDo",$('.whatIDo').val());
-		 fileFormData.append("status",$('.status').val());
-		 fileFormData.append("phoneNumber",$('.phoneNumber').val());
-		 fileFormData.append("skype",$('.skype').val());
-		 $.ajax({
+			 fileFormData.append("firstName",$('.firstName').val());
+			 fileFormData.append("lastName",$('.lastName').val());
+			 fileFormData.append("password",$('.password').val());
+			 fileFormData.append("email",$('.email').val());
+			 fileFormData.append("whatIDo",$('.whatIDo').val());
+			 fileFormData.append("status",$('.status').val());
+			 fileFormData.append("phoneNumber",$('.phoneNumber').val());
+			 fileFormData.append("skype",$('.skype').val());
+
+			 $(".not_reallyrequired").removeAttr("required");
+			 if(!$("#updateForm")[0].checkValidity()){
+                 $("#dummysubmit").trigger("click");
+                 $(".not_reallyrequired").attr("required",true);
+                 return;
+			 }
+            $(".not_reallyrequired").attr("required",true);
+		 	$.ajax({
 					url: './Controller.php',
 					type: 'POST',
 					data: fileFormData,
@@ -79,7 +87,7 @@ function start()
 					contentType: false,
 					success: function(data) {
 						console.log(data);
-						if(data.includes("success")){
+                        if(data.includes("success")){
 							$('#successModal .modal-body').html("<p> Profile updated Successfully. </p>");
 							$('#successModal').on('hidden.bs.modal', function (e) {  
 								$('#successModal').off();

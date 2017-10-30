@@ -84,7 +84,7 @@
 			</div>
 			
 			<div class="row">
-				<form role="form" id="updateForm" method="POST" action="./controller.php" enctype='multipart/form-data'>
+				<form role="form" id="updateForm" enctype='multipart/form-data'>
 					<div class="col-xs-8">
                         <div class="row">
                             <div class="form-group col-xs-5">
@@ -112,26 +112,26 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" class="form-control whatIDo" name="whatIDo" value ="<?php echo $userDetails[0]->what_i_do ?>">
+                                <input type="text" class="form-control whatIDo not_reallyrequired" name="whatIDo" value ="<?php echo $userDetails[0]->what_i_do ?>" required>
                                 <label class="form-control-placeholder" for="name">What I do</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" class="form-control status" name="status" value ="<?php echo $userDetails[0]->status ?>">
+                                <input type="text" class="form-control status not_reallyrequired" name="status" value ="<?php echo $userDetails[0]->status ?>" required>
                                 <label class="form-control-placeholder" for="name">Status</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input type="tel" class="form-control phoneNumber" size="10" name="phoneNumber" value ="<?php echo $userDetails[0]->phone_number ?>">
+                                <input type="tel" class="form-control phoneNumber not_reallyrequired " size="10" name="phoneNumber" value ="<?php echo $userDetails[0]->phone_number ?>" required>
                                 <label class="form-control-placeholder"  for="name">Phone Number</label>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" class="form-control skype" name="skype" value ="<?php echo $userDetails[0]->skype ?>" required>
+                                <input type="text" class="form-control skype not_reallyrequired" name="skype" value ="<?php echo $userDetails[0]->skype ?>" required>
                                 <label class="form-control-placeholder" for="name">Skype</label>
                             </div>
 
@@ -158,9 +158,11 @@
 					<div class="row">
 						<div class="col-xs-6">
 							<button type="reset" class="btn btn-block" value="reset">Reset</button>
-						</div>
+
+                        </div>
 						<div class="col-xs-6">
-							<button type="submit" class="btn btn-primary btn-block updateUser">Save Changes</button>
+                            <button type="submit" id="dummysubmit" class="btn hidden" value="DummySubmit">Dummy</button>
+                            <button type="submit" class="btn btn-primary btn-block updateUser">Save Changes</button>
 						</div>
 					</div>
 
