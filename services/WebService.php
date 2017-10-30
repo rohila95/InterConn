@@ -530,7 +530,9 @@ class WebService{
     $first_name=mysqli_real_escape_string($conn,$first_name);
     $last_name=mysqli_real_escape_string($conn,$last_name);
     $emailid=mysqli_real_escape_string($conn,$emailid);
+
     $profile_pic=mysqli_real_escape_string($conn,$profile_pic);
+    
     $password=mysqli_real_escape_string($conn,$password);
     $phone_number=mysqli_real_escape_string($conn,$phone_number);
     $whatido=mysqli_real_escape_string($conn,$whatido);
