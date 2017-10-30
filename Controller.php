@@ -123,7 +123,7 @@ if(isset($_POST["getThreadMessages"]))
 
 if(isset($_POST["updateProfile"]))
 {
-//    print_r(json_encode($postInputObj));
+   // print_r(json_encode($postInputObj));
 
     $file_name=$_POST["file_name"];
     $uploadfile_newname ='';
@@ -137,9 +137,9 @@ if(isset($_POST["updateProfile"]))
       $skype = $_POST["skype"];
       $userid=$_SESSION['userid'];
       $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG");
-    
-    
-  if($firstName=="" || $firstName==" ")
+   // echo "strlen phoneNumber :".strlen($phoneNumber).is_numeric($phoneNumber);
+
+    if($firstName=="" || $firstName==" ")
     {
       echo 'fail-First Name cannot be empty.';
     }
@@ -155,11 +155,18 @@ if(isset($_POST["updateProfile"]))
       {
         echo 'fail-Password cannot be empty.';
       }
-    else if(strlen($phoneNumber)!=""){
-        if(strlen($phoneNumber)<10 || strlen($phoneNumber)>10 || is_numeric($phoneNumber)==false)
-        {
-            echo 'fail-Phone number should be 10 digits.';
-        }
+//    else if(strlen($phoneNumber)!="" || ){
+//        echo "is_numeric(phoneNumber):".is_numeric($phoneNumber);
+//        if(strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1))
+//        {
+//            echo 'fail-Phone number should not 10 to 12 digits long.';
+//        }else{
+//            echo "in esle of phone check ";
+//        }
+//    }
+    else if(strlen($phoneNumber)!=0 && (strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1)))
+    {
+            echo 'fail-Phone number should be of  10 to 12 digits long.';
     }
     else if(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email))
       {
