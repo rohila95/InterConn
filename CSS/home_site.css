@@ -377,3 +377,12 @@ pre
     color: #332aa5;
     font-size: 12px;
 }
+
+#successModal .modal-header
+{
+    background-color: green;
+}
+#errorModal .modal-header
+{
+    background-color: red;
+}

@@ -37,6 +37,7 @@
   margin-bottom: 1.5rem;
   padding-right: 0px;
   padding-left: 0px;
+    margin-top: 2%;
 }
 
 .form-control-placeholder {
@@ -82,3 +83,12 @@
   margin-left: -2%;
 }
 /*#e87e7e;*/
+
+#successModal .modal-header
+{
+    background-color: green;
+}
+#errorModal .modal-header
+{
+    background-color: red;
+}

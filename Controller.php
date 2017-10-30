@@ -120,30 +120,23 @@ if(isset($_POST["getThreadMessages"]))
 
 if(isset($_POST["updateProfile"]))
 {
+   // print_r(json_encode($postInputObj));
 
-  $fname=$_FILES['filetoUpload']['tmp_name'];
+    $file_name=$_POST["file_name"];
+    $uploadfile_newname ='';
+      $firstName = $_POST["firstName"];
+      $lastName = $_POST["lastName"];
+      $email = $_POST["email"];
+      $password = $_POST["password"];
+      $whatIDo = $_POST["whatIDo"];
+      $status = $_POST["status"];
+      $phoneNumber = $_POST["phoneNumber"];
+      $skype = $_POST["skype"];
+      $userid=$_SESSION['userid'];
+      $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG");
+   // echo "strlen phoneNumber :".strlen($phoneNumber).is_numeric($phoneNumber);
 
-  $file_name=$_POST["file_name"];
-  $uploadfile_newname ='';
-  if(!$file_name=='')
-  {
-    $file_name=explode('\\', $file_name);
-    $file_ext=explode('.', $file_name[2]);
-    $uploadfile_newname='./images/'.$_SESSION['userid'].'.'.$file_ext[1];
-  }
-  $firstName = $_POST["firstName"];
-  $lastName = $_POST["lastName"];
-  $email = $_POST["email"];
-  $password = $_POST["password"];
-  $whatIDo = $_POST["whatIDo"];
-  $status = $_POST["status"];
-  $phoneNumber = $_POST["phoneNumber"];
-  $skype = $_POST["skype"];
-  $userid=$_SESSION['userid'];
-  $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG");
-    
-    
-  if($firstName=="" || $firstName==" ")
+    if($firstName=="" || $firstName==" ")
     {
       echo 'fail-First Name cannot be empty.';
     }
@@ -159,31 +152,49 @@ if(isset($_POST["updateProfile"]))
       {
         echo 'fail-Password cannot be empty.';
       }
-    else if(strlen($phoneNumber)!="")
-          if(strlen($phoneNumber)<10 || strlen($phoneNumber)>10 || is_numeric($phoneNumber)==false)
-          {
-            echo 'fail-Phone number should be 10 digits.';
-          }
+//    else if(strlen($phoneNumber)!="" || ){
+//        echo "is_numeric(phoneNumber):".is_numeric($phoneNumber);
+//        if(strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1))
+//        {
+//            echo 'fail-Phone number should not 10 to 12 digits long.';
+//        }else{
+//            echo "in esle of phone check ";
+//        }
+//    }
+    else if(strlen($phoneNumber)!=0 && (strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1)))
+    {
+            echo 'fail-Phone number should be of  10 to 12 digits long.';
+    }
     else if(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email))
       {
         echo 'fail-Enter a vaild Email id.';
       }
-    else if (!in_array($file_ext, $valid_file_extensions)) {
-        echo 'fail-Invalid Image. Try another image.';
-      }
+
       
     else
     {
       if($file_name==""){
+
           echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
       }else{
-         $uploadSucess = move_uploaded_file($fname, $uploadfile_newname);
-        if(!$uploadSucess)
-        {
-          echo 'fail-Image too large. Try small image.';
-        }else{
-          echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
-        }
+          $fname=$_FILES['filetoUpload']['tmp_name'];
+          $file_name=explode('\\', $file_name);
+          $file_ext=explode('.', $file_name[2]);
+          $uploadfile_newname='./images/'.$_SESSION['userid'].'.'.$file_ext[1];
+//          echo $file_ext[1];
+          if (!in_array($file_ext[1], $valid_file_extensions)) {
+              echo 'fail-Invalid Image. Try another image.';
+          }else{
+
+              $uploadSucess = move_uploaded_file($fname, $uploadfile_newname);
+              if(!$uploadSucess)
+              {
+                  echo 'fail-Image too large. Try small image.';
+              }else{
+                  echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
+              }
+          }
+
       }
     }    
 }
