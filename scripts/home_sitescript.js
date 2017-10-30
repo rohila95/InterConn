@@ -6,6 +6,7 @@ function start()
 	var usersChannelData='';
     $(document).ready(function() {
 		console.log("Inside ready");
+		// $('[data-toggle="tooltip"]').tooltip();   
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
 		$('.createNewChannelIcon').click(function()
 		{
@@ -183,12 +184,12 @@ function start()
             });
 
 		});
-
+		
 
         // this registration takes care of creating a new thread
         $(document).on("click",".messageHoverButtons .threadbutt, .repliescount",function(e){
             e.preventDefault();
-
+            $(".message").addClass('messageThread');
             if($(".threadMessageWrapper").css("display") == "block"){
 				$(".threadMessageWrapper .eleToBeCleared").empty();
 			}
@@ -375,6 +376,7 @@ function start()
         });
 
         $(document).on("click",".closeHover",function(e) {
+        	$(".message").removeClass('messageThread');
             $(".regularMessagesWrapper").removeClass("col-xs-8").addClass("col-xs-12");
             $(".threadMessageWrapper").hide();
             $(".messageEntrySpace_regularMsg_HP").css("width", "86.7%");
@@ -387,7 +389,18 @@ function start()
 	});
 }
 start();
-
+function escapeHtml(str)
+		{
+		    var map =
+		    {
+		        '&': '&amp;',
+		        '<': '&lt;',
+		        '>': '&gt;',
+		        '"': '&quot;',
+		        "'": '&#039;'
+		    };
+		    return str.replace(/[&<>"']/g, function(m) {return map[m];});
+		}
 // gets all the the thread replies, by just needing the parentmsgID
 function getAllThreadReplies(parentMsgID){
     var convertedJSON ={};
@@ -434,7 +447,7 @@ function getAllThreadReplies(parentMsgID){
 					// var time=datetime[1].split(":");
 					// var date = new Date(date[0],(date[1]-1),date[2],date[0],time[1],time[2]);
 					// console.log(date);
-                    var curThRepMsgCont=$('<div class="col-xs-11 message"><div class="message_header" userid="'+obj['user_id'] +'"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div></div>');
+                    var curThRepMsgCont=$('<div class="col-xs-11 message"><div class="message_header" userid="'+obj['user_id'] +'"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+escapeHtml(obj["content"])+'</div><div class="msg_reactionsec"></div></div>');
                     var emojiElementsStr= "";
                     $.each(obj['emojis'], function (emojiIndx, emojiObj) {
                         emojiElementsStr += "<div class=\"emojireaction\" emojiid='"+emojiObj['emoji_id'] + "'><i class='"+emojiObj['emoji_pic'] +"'></i><span class=\"reactionCount\">"+ emojiObj['count']+"</span></div>"

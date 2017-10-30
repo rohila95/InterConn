@@ -436,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `shared_message` (
 CREATE TABLE IF NOT EXISTS `threaded_message` (
   `id` bigint(20) NOT NULL,
   `parent_message_id` bigint(20) NOT NULL,
-  `content` varchar(1000) NOT NULL,
+  `content` text NOT NULL,
   `created_by` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
@@ -518,9 +518,9 @@ INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id
 (9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', './images/9.jpg', 'rohila', '', '', '', NULL, ' '),
 (10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', './images/0.jpeg', 'maheedhar', '', '', '', NULL, ''),
 (11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', './images/0.jpeg', 'mahesh', '', '', '', NULL, ''),
-(34, '@rohit', 'Rohit', 'Kandhi', 'rkand@odu.edu', ' 0', '1234', '', 'student', '', 1, ''),
-(40, '@dg', 'dg', 'fh', 'rgudi@odu.edu', ' 0', 'rohila', '', '', '', 1, ''),
-(41, '@aaaksh', 'Aaaksh', 'Nunna', 'aakashnunna@gmail.com', ' 0', 'aakash123', '1112345678', 'Nothing', 'Single - Looking for ....', 1, '');
+(34, '@rohit', 'Rohit', 'Kandhi', 'rkand@odu.edu', './images/0.jpeg', '1234', '', 'student', '', 1, ''),
+(40, '@dg', 'dg', 'fh', 'rgudi@odu.edu', './images/0.jpeg', 'rohila', '', '', '', 1, ''),
+(41, '@aaaksh', 'Aaaksh', 'Nunna', 'aakashnunna@gmail.com', './images/0.jpeg', 'aakash123', '1112345678', 'Nothing', 'Single - Looking for ....', 1, '');
 
 -- --------------------------------------------------------
 

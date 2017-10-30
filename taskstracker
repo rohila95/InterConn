@@ -3,16 +3,15 @@ Message Threads
     -> Working on getting the side column for threads. ✔
     -> Have to have another table to capture the reactions for the Thread Messages ✔
 
-    -> Make sure to check with validations on both client and server side for Create channel,
-        registration and other where ever there are forms.
     -> Image dimension ans size validation aswell to be taken care off ✔
 
     -> where there are nearly no messages in a channel, the very few mesages  present must be alligned to
         the bottom of the page.
 
      -> date format in thread reply's
-
-
+->thread images
+-> Make sure to check with validations on both client and server side for Create channel,
+        registration and other where ever there are forms.
     -> Style the input box of invite channel mamber from a channel itself.
     -> Get the memebers list(names list) when in a channel
     -> Liked ppl names listing
@@ -20,3 +19,4 @@ Message Threads
     -> Profile page editing not working when even phone number
     -> After the registration is success, sing in button must lead to sign in page if time permits
 
+-> thread likes...one after other issue

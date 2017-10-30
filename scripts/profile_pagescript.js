@@ -13,8 +13,8 @@ function start()
                     img = new Image();
                     var imgwidth = 0;
                     var imgheight = 0;
-                    var maxwidth = 750;
-                    var maxheight = 750;
+                    var maxwidth = 1100;
+                    var maxheight = 1100;
 
                     img.src = _URL.createObjectURL(file);
                     img.onload = function() {
@@ -52,8 +52,7 @@ function start()
 		$(".profile-pic").on('click', function(){
 			$(".file-upload").trigger('click');
 		});
-
-
+		
 		$(document).on("click",".updateUser",function(e){
 			// var recruitmentId = $(this).attr("recid");
 			e.preventDefault();

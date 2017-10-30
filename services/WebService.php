@@ -254,6 +254,27 @@ class WebService{
     return json_encode($array);
     $conn->close();
   }
+  public function getSpecificChannelUserDetails($channelid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $channelid=mysqli_real_escape_string($conn,$channelid);
+    $sql_service = new SqlService();
+    $channelUsers = $sql_service->getSpecificChannelUserDetails($channelid);
+    $result = $conn->query($channelUsers);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
   public function getUsersInWorkspaceInvites($workspaceid,$userid)
   {
     $database_connection = new DatabaseConnection();
@@ -268,6 +289,7 @@ class WebService{
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
+              $row['text']=$row['first_name'].' '.$row['last_name'];
               $array[]= $row;
         }
     } else {
@@ -291,6 +313,7 @@ class WebService{
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
+          $row['text']=$row['first_name'].' '.$row['last_name'];
               $array[]= $row;
         }
     } else {

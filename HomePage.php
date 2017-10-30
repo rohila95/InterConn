@@ -16,6 +16,8 @@
     $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid']));
     $directMessagesDetails = json_decode($web_service->getDirectMessagesDetails($workspaceDetails[0]->workspace_id));
 // echo $web_service->getChannelsDetails($_SESSION['userid']);
+    $_SESSION['channelid']=$_GET["channel"];
+    $groupMembers=json_decode($web_service->getSpecificChannelUserDetails($_GET["channel"]));
    	$channelstr='';
    	$directMessagestr='';
 		if ($channelDetails!='')
@@ -37,7 +39,7 @@
 		{
            foreach($directMessagesDetails as $directMessage)
            {
-                $directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"><i class="fa fa-dot-circle-o"></i></span><span class="'.$directMessage->first_name.'" >'.htmlspecialchars($directMessage->first_name).' '.htmlspecialchars($directMessage->last_name).'</span></a></li>';
+                $directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"><i class="fa fa-dot-circle-o"></i></span><span class="" >'.htmlspecialchars($directMessage->first_name).' '.htmlspecialchars($directMessage->last_name).'</span></a></li>';
            }
         }
 	}
@@ -79,12 +81,12 @@
 							<h3> InterConn  </h3>
 						</div>
 						<div class="loginDetails">
-							<span class="loggedIn_user" id=<?php  echo '"'.$userDetails[0]->user_id.'"'?>><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name.' '.$userDetails[0]->last_name; ?>
+							<span class="loggedIn_user" id=<?php  echo '"'.$userDetails[0]->user_id.'"'?>><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo htmlspecialchars($userDetails[0]->first_name).' '.htmlspecialchars($userDetails[0]->last_name); ?>
                                 <a class="signOut" href="./index.php?status=signout" title="Sign Out">
                                     <span class="channelPrivacyLevel" title="Sign Out"><i class="fa fa-sign-out"></i></span>
                                 </a></span>
                             <br>
-							<span class="loggedIn_workspace" id=<?php echo '"'.$workspaceid.'"';?>><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
+							<span class="loggedIn_workspace" id=<?php echo '"'.$workspaceid.'"';?>><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo htmlspecialchars($workspaceName); ?></span> <br>
 
 
 
@@ -244,7 +246,7 @@
                         }
                     ?>
                         <div class='headerAddon_HP'>
-                            <i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i>
+                            <i class="fa fa-star-o"></i> | <a href="#" data-toggle="tooltip" data-placement="bottom" title=<?php echo '"'.htmlspecialchars($groupMembers[0]->names).'"';?>><i class="fa fa-users"></i></a> <?php echo $user_count;?>| Purpose: <i><?php echo htmlspecialchars($purpose);?></i>
                             <?php
                             	if($currentChannel[0]->created_by==$_SESSION['userid'] && $currentChannel[0]->type=='private')
                             	{

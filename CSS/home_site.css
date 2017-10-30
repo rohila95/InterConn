@@ -237,7 +237,10 @@ html, body {
 	margin-left: -5%;
 }
 
-
+.messageThread
+{
+  margin-left: -4% !important;
+}
 
 
 

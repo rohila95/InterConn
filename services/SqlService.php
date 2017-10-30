@@ -49,6 +49,11 @@ class SqlService{
 		return $sql;
 	}
 
+	public function getSpecificChannelUserDetails($channelid)
+	{
+		$sql="SELECT GROUP_CONCAT(first_name,' ') as names FROM `user`,`user_channel` where user_channel.user_id=user.user_id and user_channel.channel_id=".$channelid;
+		return $sql;
+	}
 	public function getChannelMessages($channelid)
 	{
 		$sql="SELECT message.message_id,user.user_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded,user.profile_pic FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at";
@@ -71,12 +76,12 @@ class SqlService{
 	}
 	public function getUserInWorkspace($workspaceid,$userid)
 	{
-		$sql="SELECT user.user_id as id,user.first_name as text,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id<>".$userid;
+		$sql="SELECT user.user_id as id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id<>".$userid;
 		return $sql;
 	}
 	public function getUserInWorkspaceNotInChannel($workspaceid,$channelid)
 	{
-		$sql="SELECT user.user_id as id,user.first_name as text,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id NOT IN(select user_channel.user_id from user_channel where user_channel.channel_id=".$channelid.")";
+		$sql="SELECT user.user_id as id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id NOT IN(select user_channel.user_id from user_channel where user_channel.channel_id=".$channelid.")";
 		return $sql;
 	}
 	public function insertReplyThread($parentmessageid,$content,$created_by,$timestamp)

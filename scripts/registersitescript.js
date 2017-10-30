@@ -2,6 +2,10 @@ function start()
 {
 	$(document).ready(function() {
 		console.log("Inside ready"); 
+		
+		$(".signIn").on('click', function(){
+			window.location.href = "./index.php";
+		});
 		$( ".createUser" ).on("click",function(e) {
 			console.log("in clickkk");
 			e.preventDefault();

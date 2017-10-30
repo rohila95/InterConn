@@ -24,6 +24,15 @@
 {
   font-size: 28px;
   cursor:pointer;
+      margin-top: 3%;
+    margin-left: 4%;
+}
+.goBack
+{
+  font-size: 28px;
+  cursor:pointer;
+      margin-top: 3%;
+    margin-left: -4%;
 }
 .updateProfile
 {
@@ -69,7 +78,20 @@
     transition: all .3s ease;
     text-decoration: none;
 }
-
+.profilePicDisplay
+{
+   border-radius: 15%;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all .3s ease;
+    text-decoration: none;
+}
 .profile-pic:hover {
     background-color: rgba(0,0,0,.5);
     z-index: 10000;

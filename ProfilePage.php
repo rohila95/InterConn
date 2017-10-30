@@ -4,25 +4,39 @@
 	error_reporting(E_ALL);
 	session_start();
 	include_once "./services/WebService.php";
-	
+	if($_SESSION['loggedIn'])
+	{
 		$web_service = new WebService();
-
-    	$userDetails = json_decode($web_service->getProfileDetails($_GET['userid']));
-		$channelDetails = json_decode($web_service->getPublicChannelsDetails($_GET['userid']));
-
-		$channelstr='';
-		$displayChannelList='';
-		if ($channelDetails!='')
+		$userDetails=$web_service->getProfileDetails($_GET['userid']);
+		if(strpos($userDetails, 'fail') !== false)
 		{
-           foreach($channelDetails as $channel)
-           {
-                $channelstr.='<li >';
-								$channelstr.='<a class="channelsProfilePage" href="./HomePage.php?channel='.$channel->channel_id.'#">';
-                $channelstr.=$channel->channel_name;
-            	$channelstr.='</a></li>';
-            	$displayChannelList.=$channel->channel_name.'<br>';
-           }
+			header("location: ./index.php?status=notloggedin");
+		}
+		else
+		{
+	    	$userDetails = json_decode($userDetails);
+			$channelDetails = json_decode($web_service->getPublicChannelsDetails($_GET['userid']));
+
+			$channelstr='';
+			$displayChannelList='';
+			if ($channelDetails!='')
+			{
+	           foreach($channelDetails as $channel)
+	           {
+	                $channelstr.='<li >';
+									$channelstr.='<a class="channelsProfilePage" href="./HomePage.php?channel='.$channel->channel_id.'#">';
+	                $channelstr.=$channel->channel_name;
+	            	$channelstr.='</a></li>';
+	            	$displayChannelList.=$channel->channel_name.'<br>';
+	           }
+	        }
         }
+    }
+    else
+    {
+    	header("location: ./index.php?status=notloggedin");
+    }
+
 	
 ?>
 
@@ -75,14 +89,20 @@
 			    </div>
 			</div>
 			<div class="row">
-				<div class="col-sm-11 logo">
+				<div class="col-sm-1 goBack">
+					<a href='./HomePage.php?channel=<?php echo $_SESSION['channelid']?>'><i class="fa fa-arrow-left"></i></a>
+				</div>
+
+				<div class="col-sm-10 logo">
 					<span>Profile</span>
 				</div>
+				
 				<?php
 					if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
 					{
 						echo '<div class="col-sm-1 editProfile"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
 						</div>';
+
 					}
 				?>
 				
@@ -175,7 +195,7 @@
 
 			<div class="row displayProfile">
 				<div class="col-md-3 col-lg-3 " align="center">
-						<img alt="User Pic" src="<?php echo $userDetails[0]->profile_pic ?>" class="profile-pic">
+						<img alt="User Pic" src="<?php echo $userDetails[0]->profile_pic ?>" class="profilePicDisplay">
 				</div>	
 				<div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
