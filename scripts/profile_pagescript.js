@@ -13,8 +13,8 @@ function start()
                     img = new Image();
                     var imgwidth = 0;
                     var imgheight = 0;
-                    var maxwidth = 1100;
-                    var maxheight = 1100;
+                    var maxwidth = 1250;
+                    var maxheight = 1250;
 
                     img.src = _URL.createObjectURL(file);
                     img.onload = function() {
@@ -26,7 +26,7 @@ function start()
                          if(imgwidth <= maxwidth && imgheight <= maxheight){
                              $('.profile-pic').css('background-image',"url("+imageBlob+")");
                          }else{
-                             $('#errorModal .modal-body').html("<p>Dimensions of the image are too weird!! Try the one with both width & height are less than 750px..</p>");
+                             $('#errorModal .modal-body').html("<p>Dimensions of the image are too weird!! Try the one with both width & height are less than 1250px..</p>");
                              $('#errorModal').on('hidden.bs.modal', function (e) {
                                  $('#errorModal').off();
                              });
@@ -52,7 +52,7 @@ function start()
 		$(".profile-pic").on('click', function(){
 			$(".file-upload").trigger('click');
 		});
-		
+
 		$(document).on("click",".updateUser",function(e){
 			// var recruitmentId = $(this).attr("recid");
 			e.preventDefault();
@@ -88,18 +88,18 @@ function start()
 						console.log(data);
                         if(data.includes("success")){
 							$('#successModal .modal-body').html("<p> Profile updated Successfully. </p>");
-							$('#successModal').on('hidden.bs.modal', function (e) {  
+							$('#successModal').on('hidden.bs.modal', function (e) {
 								$('#successModal').off();
-																		
+
 							});
-						 
-							 
+
+
 							$("#successModal").modal("show");
 							$("#successModal").css("z-index","1100");
-							setTimeout(function() 
+							setTimeout(function()
 								{
 									$('#successModal').modal('hide');
-									
+
 								}, 4000);
 							}
 						else if($.trim(data).split("-")[0]=="fail")
@@ -108,7 +108,7 @@ function start()
 								$('#errorModal').on('hidden.bs.modal', function (e) {
 									$('#errorModal').off();
 								});
-								
+
 								$("#errorModal").modal("show");
 								$("#errorModal").css("z-index","1100");
 								setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
@@ -126,10 +126,10 @@ function start()
 				console.log(data);
             		var userData=$.parseJSON(data);
             		$('.password').val(userData[0]['password']);
-            		
-				
+
+
 			});
-            
+
             $(".updateProfile").show();
 		});
 
