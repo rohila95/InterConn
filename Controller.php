@@ -67,7 +67,7 @@ if(isset($_POST["register"])){ // to post a react by a
       else if(strlen($phoneNumber)!='' && (strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1)))
           {
               echo 'fail-Phone number should be 10 digits.';
-          }    
+          }
     else
       {
         $username='@'.strtolower($firstName);

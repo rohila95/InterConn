@@ -94,12 +94,12 @@ function start()
         });
 
 
-        $(document).on("click",".threadMessageWrapper .message_time",function() {
+        $(document).on("click",".threadheadmsg .msg_content",function() {
 
-			var curMessageId = $(this).parents(".message").find(".message_body").attr("id");
-			$(".regularMessagesWrapper").find(".messagewithid_"+curMessageId).css("background-color","#dedddd").animate({"background-color": ""},2000,function () {
-				$(this).removeAttr("style");
-            });
+					var curMessageId = $(this).parents(".message").find(".message_body").attr("id");
+					$(".regularMessagesWrapper").find(".messagewithid_"+curMessageId).css("background-color","#dedddd").animate({"background-color": ""},2000,function () {
+							$(this).removeAttr("style");
+		          });
         });
 
 

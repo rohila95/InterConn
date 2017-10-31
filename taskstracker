@@ -14,7 +14,7 @@ Message Threads
     -> Make sure to check with validations on both client and server side for Create channel,
         registration and other where ever there are forms - OnGoing
 
-    -> Style the input box of invite channel mamber from a channel itself.
+    -> Style the input box of invite channel mamber from a channel itself.  ✔
 
     -> Liked ppl names listing
     -> oninvalid="this.setCustomValidity('Enter Phone number preceding with country code, "-" not required')"
@@ -25,5 +25,6 @@ Message Threads
 
     -> thread likes...one after other issue
 
-    -> Random channel Id Fix- OnGoing Rohila Working
-    ->
+    -> Random channel Id Fix ✔
+
+    -> clicking a thread header redirecting to profile page, without highliting the main message - OnGoing
