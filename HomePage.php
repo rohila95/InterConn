@@ -12,10 +12,12 @@
     $workspaceDetails = json_decode($web_service->getWorkspaceDetails($_SESSION['userid']));
     $workspaceName=$workspaceDetails[0]->workspace_name;
     $workspaceid=$workspaceDetails[0]->workspace_id;
-
+		$flag=0;
     $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid']));
     $directMessagesDetails = json_decode($web_service->getDirectMessagesDetails($workspaceDetails[0]->workspace_id));
-
+// echo $web_service->getChannelsDetails($_SESSION['userid']);
+    $_SESSION['channelid']=$_GET["channel"];
+    $groupMembers=json_decode($web_service->getSpecificChannelUserDetails($_GET["channel"]));
    	$channelstr='';
    	$directMessagestr='';
 		if ($channelDetails!='')
@@ -23,7 +25,10 @@
            foreach($channelDetails as $channel)
            {
                 if($channel->channel_id==$_GET["channel"])
+								{
                     $channelstr.='<li class="active currentChannel">';
+										$flag=1;
+									}
                 else
                     $channelstr.='<li class="active">';
                 if($channel->type=='private')
@@ -37,11 +42,11 @@
 		{
            foreach($directMessagesDetails as $directMessage)
            {
-                $directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"><i class="fa fa-dot-circle-o"></i></span><span class="'.$directMessage->first_name.'" >'.htmlspecialchars($directMessage->first_name).' '.htmlspecialchars($directMessage->last_name).'</span></a></li>';
+                $directMessagestr.=' <li touserid="" class="active"><a href="#"> <span class="channelPrivacyLevel"><i class="fa fa-dot-circle-o"></i></span><span class="" >'.htmlspecialchars($directMessage->first_name).' '.htmlspecialchars($directMessage->last_name).'</span></a></li>';
            }
         }
 	}
-	if(!$_SESSION['loggedIn'] || !isset($_GET["channel"]) || $_GET["channel"]=='')
+	if(!$_SESSION['loggedIn'] || !isset($_GET["channel"]) || $_GET["channel"]=='' || $flag==0)
 	{
 		header("location: ./index.php?status=notloggedin");
 	}
@@ -79,12 +84,12 @@
 							<h3> InterConn  </h3>
 						</div>
 						<div class="loginDetails">
-							<span class="loggedIn_user" id=<?php  echo '"'.$userDetails[0]->user_id.'"'?>><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo $userDetails[0]->first_name.' '.$userDetails[0]->last_name; ?>
+							<span class="loggedIn_user" id=<?php  echo '"'.$userDetails[0]->user_id.'"'?>><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo htmlspecialchars($userDetails[0]->first_name).' '.htmlspecialchars($userDetails[0]->last_name); ?>
                                 <a class="signOut" href="./index.php?status=signout" title="Sign Out">
                                     <span class="channelPrivacyLevel" title="Sign Out"><i class="fa fa-sign-out"></i></span>
                                 </a></span>
                             <br>
-							<span class="loggedIn_workspace" id=<?php echo '"'.$workspaceid.'"';?>><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo $workspaceName; ?></span> <br>
+							<span class="loggedIn_workspace" id=<?php echo '"'.$workspaceid.'"';?>><i class="fa fa-globe"></i>&nbsp;&nbsp;<?php  echo htmlspecialchars($workspaceName); ?></span> <br>
 
 
 
@@ -145,6 +150,29 @@
 			      </div>
 			    </div>
 			</div>
+			<div class="modal fade" id="existingChannelInvites" role="dialog">
+			    <div class="modal-dialog modal-md">
+			      <div class="modal-content">
+			        <div class="modal-header regularModal">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Channel Invitation</h4>
+			        </div>
+			        <div class="modal-body">
+			        <div class="row">
+					      	<div class="form-group inviteFromChannelPageFG">
+					      		<span class='invites'><b>Invite members</b></span>
+						        <div class="existingChannelInvites">
+						        </div>
+					      	</div>
+					    </div>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			          <button type="button" class="btn btn-default inviteExistingChannel" data-dismiss="modal">Invite members</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
 			<div class="modal fade" id="createChannel" role="dialog">
 			    <div class="modal-dialog modal-lg">
 			      <div class="modal-content">
@@ -169,9 +197,10 @@
 						    </div>
 						</div>
 						<div class="row">
+							<span class="type">Type of Channel </span>
 							<div class="form-group">
 								<label class="radio-inline">
-							      <input type="radio" name="type" value="private">Private
+							      <input type="radio" name="type" value="private" checked>Private
 							    </label>
 							    <label class="radio-inline">
 							      <input type="radio" name="type" value="public">Public
@@ -180,8 +209,9 @@
 						</div>
 					    <div class="row">
 					      	<div class="form-group">
-						        <input type="text" class="form-control channelInvites" name="invites" required>
-						        <label class="form-control-placeholder" for="invite">Send invites to :</label>
+					      		<span class='invites'>Invite to Channel</span>
+						        <div class="channelInvites">
+						        </div>
 					      	</div>
 					    </div>
 			          </form>
@@ -206,10 +236,11 @@
                             $currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
                             if($currentChannel!='')
                             {
+
                                 if($currentChannel[0]->type=='private')
-                                    echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+                                    echo '<div class="headerSpace_HP row"><div class="channelTitle currentChannelTitle" id="'.$_GET["channel"].'"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
                                 else if($currentChannel[0]->type=='public')
-                                    echo '<div class="headerSpace_HP row"><div class="channelTitle"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+                                    echo '<div class="headerSpace_HP row"><div class="channelTitle currentChannelTitle" id="'.$_GET["channel"].'"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
                                 $user_count=$currentChannel[0]->usercount;
                                 $purpose=$currentChannel[0]->purpose;
                             }
@@ -218,18 +249,18 @@
                         }
                     ?>
                         <div class='headerAddon_HP'>
-                            <i class="fa fa-star-o"></i> | <i class="fa fa-users"></i> <?php echo $user_count;?>| Purpose: <i><?php echo $purpose;?></i>
+                            <i class="fa fa-star-o"></i> | <a href="#" data-toggle="tooltip" data-placement="bottom" title=<?php echo '"'.htmlspecialchars($groupMembers[0]->names).'"';?>><i class="fa fa-users"></i></a> <?php echo $user_count;?>| Purpose: <i><?php echo htmlspecialchars($purpose);?></i>
                             <?php
                             	if($currentChannel[0]->created_by==$_SESSION['userid'] && $currentChannel[0]->type=='private')
                             	{
-                            		echo ' |<span class="invitations"><a href=""> Invite Members</a></span>'; 
+                            		echo ' |<span class="invitations"> Invite Members</span>';
                             	}
-                            	else if($currentChannel[0]->type=='public')
+                            	else if($currentChannel[0]->type=='public' && $currentChannel[0]->channel_name!='general' && $currentChannel[0]->channel_name!='random')
                             	{
-                            		echo ' |<span class="invitations"><a href=""> Invite Members</a></span>'; 
+                            		echo ' |<span class="invitations"> Invite Members</span>';
                             	}
                             ?>
-                             
+
                         </div>
                             </div>
                 <div class="col-xs-12 regularMessagesWrapper">
@@ -276,12 +307,11 @@
                                                 $prevdate=$currentDate;
                                             }
 
-// $msgStr.= $message->profile_pic;
 
-											if($message->profile_pic=='0')
-                                           		 $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
+											if($message->profile_pic=='./images/0.jpeg')
+                                           		 $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header" userid="'.$message->user_id .'"  ><b>';
                                            	else
-                                           		$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;"></div></div><div class="col-xs-11 message"><div class="message_header"><b>';
+                                           		$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;"></div></div><div class="col-xs-11 message"><div class="message_header" userid="'.$message->user_id .'"><b>';
 
                                             $msgStr.=htmlspecialchars($message->first_name);
                                             $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
@@ -322,10 +352,10 @@
                                                 $prevdate=$currentDate;
                                             }
                                             // $msgStr.= $message->profile_pic;
-                                            if($message->profile_pic=='0')
-                                           		 $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header"><b>';
+                                            if($message->profile_pic=='./images/0.jpeg')
+                                           		 $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header" userid="'.$message->user_id .'"  ><b>';
                                            	else
-                                           		$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;"></div></div><div class="col-xs-11 message"><div class="message_header"><b>';
+                                           		$msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;"></div></div><div class="col-xs-11 message"><div class="message_header" userid="'. $message->user_id .'" ><b>';
                                             $msgStr.=htmlspecialchars($message->first_name);
                                             $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
                                             $msgStr.=$currentTime;
@@ -385,8 +415,13 @@
                 </div>
                <div class="col-xs-4 threadMessageWrapper" >
                    <div class="row threadedContent">
-                       <div class="row threadHeader well" style="min-height:7%; border:1px solid #F1F1F1;">
-                           <h2>Thread</h2>
+                       <div class="row threadHeader well" style="min-height:6%; border:1px solid #F1F1F1;">
+                               <div class="col-xs-2"><h2>Thread</h2></div>
+                               <div class="col-xs-10">
+                                   <div class="pull-right closeHover">
+                                        <i class="fa fa-window-close" aria-hidden="true"></i>
+                                   </div>
+                               </div>
                        </div>
 
 

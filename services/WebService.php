@@ -254,6 +254,27 @@ class WebService{
     return json_encode($array);
     $conn->close();
   }
+  public function getSpecificChannelUserDetails($channelid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $channelid=mysqli_real_escape_string($conn,$channelid);
+    $sql_service = new SqlService();
+    $channelUsers = $sql_service->getSpecificChannelUserDetails($channelid);
+    $result = $conn->query($channelUsers);
+
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
   public function getUsersInWorkspaceInvites($workspaceid,$userid)
   {
     $database_connection = new DatabaseConnection();
@@ -268,6 +289,7 @@ class WebService{
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
+              $row['text']=$row['first_name'].' '.$row['last_name'];
               $array[]= $row;
         }
     } else {
@@ -284,12 +306,14 @@ class WebService{
     $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
     $sql_service = new SqlService();
     $users = $sql_service->getUserInWorkspaceNotInChannel($workspaceid,$channelid);
+    // echo $users;
     $result = $conn->query($users);
 
 
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
+          $row['text']=$row['first_name'].' '.$row['last_name'];
               $array[]= $row;
         }
     } else {
@@ -411,7 +435,7 @@ class WebService{
     $channelExist=$sql_service->channelInWorkspace($channelName,$workspaceid);
     $channelExistResult= $conn->query($channelExist);
     if ($channelExistResult->num_rows > 0) {
-      echo 'Error-Channel name already exists';
+      echo 'fail-Channel name already exists';
     }
     else
     {
@@ -419,15 +443,21 @@ class WebService{
       $result = $conn->query($channel);
       if ($result === TRUE) {
         $channelid = $conn->insert_id;
-        echo "id-" . $channelid.".";   
+        echo "id-" . $channelid.".";
         $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
-        $result = $conn->query($userChannelMap);
-        if ($result === TRUE) {
+        $result1 = $conn->query($userChannelMap);
+        if ($result1 === TRUE) {
             // echo "New record created successfully. Last inserted ID is: " ;
         } else {
             echo "Error: " . $userChannelMap . "<br>" . $conn->error;
         }
-
+        $channelWorkspaceMap=$sql_service->channelWorkspaceMap($channelid,$workspaceid);
+        $result1 = $conn->query($channelWorkspaceMap);
+        if ($result1 === TRUE) {
+            // echo "New record created successfully. Last inserted ID is: " ;
+        } else {
+            echo "Error: " . $channelWorkspaceMap . "<br>" . $conn->error;
+        }
         foreach ($invites as $id) {
           $userid=mysqli_real_escape_string($conn,$id);
           $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
@@ -458,7 +488,7 @@ class WebService{
       $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
       $result = $conn->query($userChannelMap);
       if ($result === TRUE) {
-          echo "New record created successfully. Last inserted ID is: ";
+          echo "success";
       } else {
           echo "Error: " . $userChannelMap . "<br>" . $conn->error;
       }
@@ -474,7 +504,7 @@ class WebService{
     $first_name=mysqli_real_escape_string($conn,$first_name);
     $last_name=mysqli_real_escape_string($conn,$last_name);
     $email_id=mysqli_real_escape_string($conn,$email_id);
-    $profile_pic=mysqli_real_escape_string($conn,$profile_pic);
+    $profile_pic='./images/0.jpeg';
     $password=mysqli_real_escape_string($conn,$password);
     $phone_number=mysqli_real_escape_string($conn,$phone_number);
     $what_i_do=mysqli_real_escape_string($conn,$what_i_do);
@@ -515,7 +545,7 @@ class WebService{
             return 'fail';
         }
     } else {
-        echo "Error: " . $user . "<br>" . $conn->error;
+        echo "fail-Email Id already exists. Try with different Email Id.";
     }
 
     $conn->close();
@@ -529,7 +559,13 @@ class WebService{
     $first_name=mysqli_real_escape_string($conn,$first_name);
     $last_name=mysqli_real_escape_string($conn,$last_name);
     $emailid=mysqli_real_escape_string($conn,$emailid);
-    $profile_pic=mysqli_real_escape_string($conn,$profile_pic);
+
+    if($profile_pic == ""){
+
+    }else{
+        $profile_pic=mysqli_real_escape_string($conn,$profile_pic);
+
+    }
     $password=mysqli_real_escape_string($conn,$password);
     $phone_number=mysqli_real_escape_string($conn,$phone_number);
     $whatido=mysqli_real_escape_string($conn,$whatido);
@@ -537,12 +573,19 @@ class WebService{
     // $status_emoji=mysqli_real_escape_string($conn,$status_emoji);
     $skype=mysqli_real_escape_string($conn,$skype);
     $sql_service = new SqlService();
-    $user = $sql_service->updateUserProfile($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype);
-    $result = $conn->query($user);
+
+    if($profile_pic == "") {
+        $updateUPQuery = $sql_service->updateUserProfileWOPP($userid, $first_name, $last_name, $emailid, $password, $phone_number, $whatido, $status, $skype);
+    }else{
+        $updateUPQuery = $sql_service->updateUserProfile($userid, $first_name, $last_name, $emailid, $profile_pic, $password, $phone_number, $whatido, $status, $skype);
+    }
+   // echo $updateUPQuery;
+
+    $result = $conn->query($updateUPQuery);
     if ($result === TRUE) {
-        echo "User updated.";
+        echo "success-User updated.";
     } else {
-        echo "Error: " . $userWorkspaceMap . "<br>" . $conn->error;
+        echo "Error: ".$updateUPQuery . "<br>" . $conn->error;
     }
   }
 

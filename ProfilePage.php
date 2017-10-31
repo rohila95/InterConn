@@ -4,29 +4,40 @@
 	error_reporting(E_ALL);
 	session_start();
 	include_once "./services/WebService.php";
-	if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
+	if($_SESSION['loggedIn'])
 	{
 		$web_service = new WebService();
-
-    	$userDetails = json_decode($web_service->getProfileDetails($_SESSION['userid']));
-		$channelDetails = json_decode($web_service->getPublicChannelsDetails($_SESSION['userid']));
-
-		$channelstr='';
-		if ($channelDetails!='')
+		$userDetails=$web_service->getProfileDetails($_GET['userid']);
+		if(strpos($userDetails, 'fail') !== false)
 		{
-           foreach($channelDetails as $channel)
-           {
-                $channelstr.='<li >';
-								$channelstr.='<a class="channelsProfilePage" href="./HomePage.php?channel='.$channel->channel_id.'#">';
-                $channelstr.=$channel->channel_name;
-            		$channelstr.='</a></li>';
-           }
+			header("location: ./index.php?status=notloggedin");
+		}
+		else
+		{
+	    	$userDetails = json_decode($userDetails);
+			$channelDetails = json_decode($web_service->getPublicChannelsDetails($_GET['userid']));
+
+			$channelstr='';
+			$displayChannelList='';
+			if ($channelDetails!='')
+			{
+	           foreach($channelDetails as $channel)
+	           {
+	                $channelstr.='<li >';
+									$channelstr.='<a class="channelsProfilePage" href="./HomePage.php?channel='.$channel->channel_id.'#">';
+	                $channelstr.=$channel->channel_name;
+	            	$channelstr.='</a></li>';
+	            	$displayChannelList.=$channel->channel_name.'<br>';
+	           }
+	        }
         }
-	}
-	else
-	{
-		header("location: ./index.php?status=notloggedin");
-	}
+    }
+    else
+    {
+    	header("location: ./index.php?status=notloggedin");
+    }
+
+	
 ?>
 
 <html>
@@ -45,93 +56,188 @@
 	</head>
 	<body>
 		<div class="container mainLoginWrapper well w3-panel w3-card-4">
+			<div class="modal fade" id="successModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Success</h4>
+			        </div>
+			        <div class="modal-body">
+			          
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+			<div class="modal fade" id="errorModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Error</h4>
+			        </div>
+			        <div class="modal-body">
+			          
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
 			<div class="row">
-				<div class="col-sm-12 logo">
-					<span>Edit your Profile</span>
+				<div class="col-sm-1 goBack">
+					<a href='./HomePage.php?channel=<?php echo $_SESSION['channelid']?>'><i class="fa fa-arrow-left"></i></a>
 				</div>
+
+				<div class="col-sm-10 logo">
+					<span>Profile</span>
+				</div>
+				
+				<?php
+					if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
+					{
+						echo '<div class="col-sm-1 editProfile"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+						</div>';
+
+					}
+				?>
+				
 			</div>
-			<div class="row uniqueEmail">
+			
+			<div class="row updateProfile">
+				<form role="form" id="updateForm" enctype='multipart/form-data'>
+					<div class="col-xs-8">
+                        <div class="row">
+                            <div class="form-group col-xs-5">
+                                <input type="text" class="form-control firstName" name="firstName" value="<?php echo $userDetails[0]->first_name ?>" required>
+                                <label class="form-control-placeholder" for="name">First Name</label>
+                            </div>
+                            <div class="form-group col-xs-1">
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <input type="text" class="form-control lastName" name="lastName" value="<?php echo $userDetails[0]->last_name ?>" required>
+                                <label class="form-control-placeholder" for="name">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="email" class="form-control email" name="email" value ="<?php echo $userDetails[0]->email_id ?>" required>
+                                <label class="form-control-placeholder" for="name">E-mail</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="password" class="form-control password" name="password" required>
+                                <label class="form-control-placeholder" for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control whatIDo not_reallyrequired" name="whatIDo" value ="<?php echo $userDetails[0]->what_i_do ?>" required>
+                                <label class="form-control-placeholder" for="name">What I do</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control status not_reallyrequired" name="status" value ="<?php echo $userDetails[0]->status ?>" required>
+                                <label class="form-control-placeholder" for="name">Status</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="number" class="form-control phoneNumber not_reallyrequired " size="12"  name="phoneNumber" value ="<?php echo $userDetails[0]->phone_number ?>" required>
+                                <label class="form-control-placeholder"  for="name">Phone Number</label>
 
-			</div>
-			<div class="row">
-				<form role="form" class="col-xs-8" id="updateForm" method="POST" action="./controller.php" enctype='multipart/form-data'>
-					<div class="row">
-						<div class="form-group col-xs-5">
-					        <input type="text" class="form-control firstName" name="firstName" value="<?php echo $userDetails[0]->first_name ?>" required>
-					        <label class="form-control-placeholder" for="name">First Name</label>
-				      	</div>
-				      	<div class="form-group col-xs-1">
-				      	</div>
-				      	<div class="form-group col-xs-6">
-					        <input type="text" class="form-control lastName" name="lastName" value="<?php echo $userDetails[0]->last_name ?>" required>
-					        <label class="form-control-placeholder" for="name">Last Name</label>
-				      	</div>
-				    </div>
-				    <div class="row">
-				      	<div class="form-group">
-					        <input type="text" class="form-control email" name="email" value ="<?php echo $userDetails[0]->email_id ?>" required>
-					        <label class="form-control-placeholder" for="name">E-mail</label>
-				      	</div>
-				    </div>
-				    <div class="row">
-				      	<div class="form-group">
-					        <input type="password" class="form-control password" name="password" required>
-					        <label class="form-control-placeholder" for="password">Password</label>
-					    </div>
-					</div>
-				    <div class="row">
-				      	<div class="form-group">
-					        <input type="text" class="form-control whatIDo" name="whatIDo" value ="<?php echo $userDetails[0]->what_i_do ?>">
-					        <label class="form-control-placeholder" for="name">What I do</label>
-				      	</div>
-				    </div>
-				    <div class="row">
-				      	<div class="form-group">
-					        <input type="text" class="form-control status" name="status" value ="<?php echo $userDetails[0]->status ?>">
-					        <label class="form-control-placeholder" for="name">Status</label>
-				      	</div>
-				    </div>
-				    <div class="row">
-				      	<div class="form-group">
-					        <input type="tel" class="form-control phoneNumber" size="10" name="phoneNumber" value ="<?php echo $userDetails[0]->phone_number ?>">
-					        <label class="form-control-placeholder"  for="name">Phone Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control skype not_reallyrequired" name="skype" value ="<?php echo $userDetails[0]->skype ?>" required>
+                                <label class="form-control-placeholder" for="name">Skype</label>
+                            </div>
 
-				      	</div>
-				    </div>
-				    <div class="row">
-				      	<div class="form-group">
-					        <input type="text" class="form-control skype" name="skype" value ="<?php echo $userDetails[0]->skype ?>">
-					        <label class="form-control-placeholder" for="name">Skype</label>
-				      	</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-3">
+                        <div class="row">
 
-					</div>
+                            <div class="profile-pic" style="background-image: url('<?php echo $userDetails[0]->profile_pic ?>')" >
+
+                                <span class="glyphicon glyphicon-camera"></span>
+                                <span>Change Image</span>
+                            </div>
+                            <input class="file-upload" name="imgToUpload" type="file" accept="image/*" />
+
+                        </div>
+                        
+                    </div>
+
 					<div class="row">
 						<div class="col-xs-6">
 							<button type="reset" class="btn btn-block" value="reset">Reset</button>
-						</div>
+
+                        </div>
 						<div class="col-xs-6">
-							<button type="submit" class="btn btn-primary btn-block updateUser">Save Changes</button>
+                            <button type="submit" id="dummysubmit" class="btn hidden" value="DummySubmit">Dummy</button>
+                            <button type="submit" class="btn btn-primary btn-block updateUser">Save Changes</button>
 						</div>
 					</div>
 
-				<div class="col-xs-1"></div>
-				<div class="col-xs-3">
-					<div class="row">
 
-						  <div class="profile-pic" style="background-image: url('./images/userpic.png')" >
-
-						      <span class="glyphicon glyphicon-camera"></span>
-						      <span>Change Image</span>
-						  </div>
-							<input class="file-upload" name="imgToUpload" type="file" accept="image/*" />
-
-					</div>
-					<div class="row">
-						<h4> Public Channels</h4>
-						<?php echo $channelstr?>
-					</div>
-				</div>
 				</form>
+			</div>
+
+
+			<div class="row displayProfile">
+				<div class="col-md-3 col-lg-3 " align="center">
+						<img alt="User Pic" src="<?php echo $userDetails[0]->profile_pic ?>" class="profilePicDisplay">
+				</div>	
+				<div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Email id:</td>
+                        <td><?php echo $userDetails[0]->email_id ?></td>
+                      </tr>
+                      <tr>
+                        <td>First Name:</td>
+                        <td><?php echo $userDetails[0]->first_name ?></td>
+                      </tr>
+                      <tr>
+                        <td>Last Name:</td>
+                        <td><?php echo $userDetails[0]->last_name ?></td>
+                      </tr>
+                   
+                      <tr>
+                        <td>What I Do:</td>
+                        <td><?php echo $userDetails[0]->what_i_do ?></td>
+                      </tr>
+                      <tr>
+                        <td>Status:</td>
+                        <td><?php echo $userDetails[0]->status ?></td>
+                      </tr>
+                      <tr>
+                        <td>Channels: </td>
+                        <td><?php 
+                        if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
+							{
+								
+                        		echo $channelstr;
+                        	}
+                        else
+                        	echo $displayChannelList;
+                        ?></td>
+                      </tr>
+                        
+                     
+                    </tbody>
+                  </table>
+				 </div>	
 			</div>
 		</div>
 		<div class="footer row">

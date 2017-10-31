@@ -20,6 +20,24 @@
 	font-family: buxton sketch;
 	font-size: 56px;
 }
+.editProfile
+{
+  font-size: 28px;
+  cursor:pointer;
+      margin-top: 3%;
+    margin-left: 4%;
+}
+.goBack
+{
+  font-size: 28px;
+  cursor:pointer;
+      margin-top: 3%;
+    margin-left: -4%;
+}
+.updateProfile
+{
+  display:none;
+}
 .footer
 {
     position: fixed;
@@ -37,6 +55,7 @@
   margin-bottom: 1.5rem;
   padding-right: 0px;
   padding-left: 0px;
+    margin-top: 2%;
 }
 
 .form-control-placeholder {
@@ -59,7 +78,20 @@
     transition: all .3s ease;
     text-decoration: none;
 }
-
+.profilePicDisplay
+{
+   border-radius: 15%;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all .3s ease;
+    text-decoration: none;
+}
 .profile-pic:hover {
     background-color: rgba(0,0,0,.5);
     z-index: 10000;
@@ -82,3 +114,12 @@
   margin-left: -2%;
 }
 /*#e87e7e;*/
+
+#successModal .modal-header
+{
+    background-color: green;
+}
+#errorModal .modal-header
+{
+    background-color: red;
+}

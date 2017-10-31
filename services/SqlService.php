@@ -49,6 +49,11 @@ class SqlService{
 		return $sql;
 	}
 
+	public function getSpecificChannelUserDetails($channelid)
+	{
+		$sql="SELECT GROUP_CONCAT(first_name,' ') as names FROM `user`,`user_channel` where user_channel.user_id=user.user_id and user_channel.channel_id=".$channelid;
+		return $sql;
+	}
 	public function getChannelMessages($channelid)
 	{
 		$sql="SELECT message.message_id,user.user_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded,user.profile_pic FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at";
@@ -71,12 +76,12 @@ class SqlService{
 	}
 	public function getUserInWorkspace($workspaceid,$userid)
 	{
-		$sql="SELECT user.user_id as id,user.first_name as text,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id<>".$userid;
+		$sql="SELECT user.user_id as id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id<>".$userid;
 		return $sql;
 	}
 	public function getUserInWorkspaceNotInChannel($workspaceid,$channelid)
 	{
-		$sql="SELECT user.user_id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id NOT IN(select user_channel.user_id from user_channel where user_channel.channel_id=".$channelid.")";
+		$sql="SELECT user.user_id as id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id NOT IN(select user_channel.user_id from user_channel where user_channel.channel_id=".$channelid.")";
 		return $sql;
 	}
 	public function insertReplyThread($parentmessageid,$content,$created_by,$timestamp)
@@ -89,6 +94,13 @@ class SqlService{
 		$sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `email_id` = '$emailid', `profile_pic` = '$profile_pic', `password` = '$password', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype' WHERE `user`.`user_id` = ".$userid;
 		return $sql;
 	}
+    public function updateUserProfileWOPP($userid,$first_name,$last_name,$emailid,$password,$phone_number,$whatido,$status,$skype)
+    {
+        $sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `email_id` = '$emailid',`password` = '$password', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype' WHERE `user`.`user_id` = ".$userid;
+        return $sql;
+    }
+
+
 	public function updateParentThread($parentmessageid)
 	{
 		$sql="UPDATE `InterConn`.`message` SET `is_threaded` = '1' WHERE `message`.`message_id` = ".$parentmessageid;
@@ -144,7 +156,7 @@ class SqlService{
 		$sql="INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`) VALUES (NULL, '".$username."', '".$first_name."', '".$last_name."', '".$email_id."', '".$profile_pic."', '".$password."', '".$phone_number."', '".$what_i_do."', '".$status."', ".$status_emoji.", '".$skype."')";
 		return $sql;
 	}
-	
+
 	public function channelInWorkspace($channel_name,$workspaceid)
 	{
 		$sql="SELECT * FROM `channel`,`workspace_channel` where channel.channel_id=workspace_channel.channel_id and channel_name='".$channel_name."' and workspace_channel.workspace_id=".$workspaceid;
@@ -153,6 +165,11 @@ class SqlService{
 	public function userWorkspaceMap($userid,$workspaceid)
 	{
 		$sql="INSERT INTO `InterConn`.`user_workspace` (`user_id`, `workspace_id`) VALUES ('".$userid."', '".$workspaceid."')";
+		return $sql;
+	}
+	public function channelWorkspaceMap($channelid,$workspaceid)
+	{
+		$sql="INSERT INTO `InterConn`.`workspace_channel` (`workspace_id`, `channel_id`) VALUES ('".$channelid."', '".$workspaceid."')";
 		return $sql;
 	}
 
@@ -168,6 +185,12 @@ class SqlService{
         $sql="INSERT INTO `InterConn`.`message_reaction` (`message_id`,`emoji_id`,`created_by`,`created_at`, `message_reaction_id`) VALUES ('".$messageid."', '".$emojid."', '".$userid."','".$timestamp."',NULL )";
         return $sql;
 	}
+    // here a check of whether the user had done the same reaction has to be done, avoiding duplication
+    public function insertThreadMessageReaction($userid, $messageid,$emojid,$timestamp){
+
+        $sql="INSERT INTO `InterConn`.`threadmessage_reaction` (`threadmessage_id`,`emoji_id`,`created_by`,`created_at`, `threadmessage_reaction_id`) VALUES ('".$messageid."', '".$emojid."', '".$userid."','".$timestamp."',NULL )";
+        return $sql;
+    }
 
 	public function deleteIfMessageReactionExist($userid, $messageid,$emojid){
 
@@ -175,11 +198,25 @@ class SqlService{
         return $sql;
 	}
 
+    public function deleteIfThreadMessageReactionExist($userid, $messageid,$emojid){
+
+        $sql= "DELETE FROM `InterConn`.`threadmessage_reaction` WHERE `threadmessage_reaction`.`threadmessage_id` = ".$messageid." and emoji_id=".$emojid." and created_by=".$userid;
+        return $sql;
+    }
+
     public function getSpecificMessageReaction($userid, $messageid,$emojid){
 
         $sql= "SELECT * FROM `InterConn`.`message_reaction` WHERE `message_reaction`.`message_id` = ".$messageid." and emoji_id=".$emojid." and created_by=".$userid;
         return $sql;
     }
+
+
+    public function getSpecificThreadMessageReaction($userid, $messageid,$emojid){
+
+        $sql= "SELECT * FROM `InterConn`.`threadmessage_reaction` WHERE `threadmessage_reaction`.`threadmessage_id` = ".$messageid." and emoji_id=".$emojid." and created_by=".$userid;
+        return $sql;
+    }
+
 
 	public function getSpecificMessageReactionEmojiCount( $messageid,$emojid){
         $sql= "SELECT COUNT (*) FROM `InterConn`.`message_reaction` WHERE `message_reaction`.`message_id` = ".$messageid." and `message_reaction`.`emoji_id`=".$emojid;

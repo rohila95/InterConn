@@ -1,19 +1,31 @@
 var curMessageId='';
+var curThreadReplyId='';
 function start()
 {
 	var usersData='';
+	var usersChannelData='';
     $(document).ready(function() {
 		console.log("Inside ready");
+		// $('[data-toggle="tooltip"]').tooltip();
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
 		$('.createNewChannelIcon').click(function()
 		{
+			$('.channelInvites').select2('data', null);
 			$('#createChannel').modal('show');
+
+		});
+
+		$('.invitations').click(function()
+		{
+			$('.existingChannelInvites').select2('data', null);
+			$('#existingChannelInvites').modal('show');
 
 		});
 		var userid=$('.loggedIn_user').attr('id');
 		var workspaceid=$('.loggedIn_workspace').attr('id');
+		var channelid=$('.currentChannelTitle').attr('id');
 		var getusersdata='{"userid":"'+userid+'","workspaceid":"'+workspaceid+'"}';
-		
+
 		console.log(getusersdata);
 		$.post('./Controller.php',{"getWorkspaceUsers":getusersdata},function (data){
 			usersData=$.parseJSON(data);
@@ -25,6 +37,27 @@ function start()
 			});
 		});
 
+		var getUsersDataNotInChannel='{"channelid":"'+channelid+'","workspaceid":"'+workspaceid+'"}';
+		$.post('./Controller.php',{"getChannelUsers":getUsersDataNotInChannel},function (data){
+			// console.log(data);
+				// usersChannelData=$.parseJSON(data);
+			if(!data.includes('fail'))
+			{
+				usersChannelData=$.parseJSON(data);
+				$('.existingChannelInvites').select2({
+			    width: '100%',
+			    allowClear: true,
+			    multiple: true,
+			    data: usersChannelData
+				});
+			}
+		});
+
+        $(".leftMenuContentWrapper_HP,.inputMessage,.headerSpace_HP,.messageentryspace_threadsection").hover(function (e) {
+            $(".messageHoverButtons").hide();
+        });
+
+
         $(".inputMessage").keypress(function (e) {
             // if(e.which == 13 && !e.shiftKey) {
             //     $(this).closest("form").submit();
@@ -32,7 +65,7 @@ function start()
             // }
 
             if(e.which == 13 && !e.shiftKey) {
-             		$(".messageEntrySpace_regularMsg_HP button").trigger("click");          
+             		$(".messageEntrySpace_regularMsg_HP button").trigger("click");
              }
         });
 
@@ -48,6 +81,12 @@ function start()
 
         $(document).on("mouseenter",".threadMessageWrapper .message_body",function() {
             curMessageId = $(this).attr("id");
+
+            if($(this).parents(".messageSet").attr("class").includes("threadReplyWithId")){
+                curThreadReplyId = $(this).parents(".messageSet").attr("threadreplyid");
+                curMessageId = '';
+            }
+
             offset=$(this).offset();
             $(".messageHoverButtons").find(".nonthumbbutts").hide();
             $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*30/100)})
@@ -55,28 +94,26 @@ function start()
         });
 
 
-        $(document).on("click",".threadMessageWrapper .message_time",function() {
+        $(document).on("click",".threadheadmsg .msg_content",function() {
 
-			var curMessageId = $(this).parents(".message").find(".message_body").attr("id");
-			$(".regularMessagesWrapper").find(".messagewithid_"+curMessageId).css("background-color","#dedddd").animate({"background-color": ""},2000,function () {
-				$(this).removeAttr("style");
-            });
+					var curMessageId = $(this).parents(".message").find(".message_body").attr("id");
+					$(".regularMessagesWrapper").find(".messagewithid_"+curMessageId).css("background-color","#dedddd").animate({"background-color": ""},2000,function () {
+							$(this).removeAttr("style");
+		          });
         });
 
 
 		$(".loggedIn_user").click(function(){
 			var id= $('.loggedIn_user').attr('id');
 			window.location.href = "ProfilePage.php?userid="+id;
-		})
+		});
 
-		// $(".message").mouseleave(function() {
-		//   $(".messageHoverButtons").hide();
-		// });
+        $(document).on("click",".message_header",function() {
+                var id= $(this).attr('userid');
+                window.location.href = "ProfilePage.php?userid="+id;
+        });
 
-		// $(".messageHoverButtons").hover(function(event) {
-		// 	event.stopPropagation();
-		// 	event.preventDefault();
-		// });
+
 
 		// this registration takes care of thumbsup and thumbs down functionality
 		$(".messageHoverButtons .thumbsbutt").click(function(event) {
@@ -84,16 +121,31 @@ function start()
             $(".messageHoverButtons").hide();
             var emoji_idCLicked = $(this).attr("emojiid");
             var data= {};
-
+            var isToTreadMsg = false;
             data["setReaction"] = "yes";
-            data["message_id"] = curMessageId;
+            if(curMessageId == ''){
+                data["message_id"] = curThreadReplyId;
+                data["isToThreadReply"] = "yes";
+                isToTreadMsg = true;
+            }else{
+                data["message_id"] = curMessageId;
+            }
+
             data["emoji_id"] = emoji_idCLicked;
 
             $.post('./Controller.php',data,function (data){
 
                 if($.trim(data).split("-")[0] == "success"){
 
-                	var curMsgEle = $(".messagewithid_"+curMessageId);
+
+                	var curMsgEle = "";
+
+                    if(isToTreadMsg == true){
+                        curMsgEle = $(".threadReplyWithId_"+curThreadReplyId);
+                    }else{
+                        curMsgEle = $(".messagewithid_"+curMessageId);
+                    }
+
 					if($.trim(data).split("-")[1] == "inserted"){
 						// Increase the count, the name logic is to be taken care yet
                         if (curMsgEle.find(".msg_reactionsec").find("[emojiid="+emoji_idCLicked+"]").length == 0 ){ //adding a reaction dynamically
@@ -137,7 +189,7 @@ function start()
         // this registration takes care of creating a new thread
         $(document).on("click",".messageHoverButtons .threadbutt, .repliescount",function(e){
             e.preventDefault();
-
+            $(".message").addClass('messageThread');
             if($(".threadMessageWrapper").css("display") == "block"){
 				$(".threadMessageWrapper .eleToBeCleared").empty();
 			}
@@ -209,22 +261,76 @@ function start()
 		        	if($.trim(data).split(".")[0].split("-")[0]=="id")
 		        	{
 		        		$('#successModal .modal-body').html("<p> Channel created Successfully. </p>");
-						$('#successModal').on('hidden.bs.modal', function (e) {  
+						$('#successModal').on('hidden.bs.modal', function (e) {
 							$('#successModal').off();
-							
-										
+
+
 						});
 						$("#successModal").modal("show");
 						$("#successModal").css("z-index","1100");
-						setTimeout(function() 
+						setTimeout(function()
 							{
 								$('#successModal').modal('hide');
 								window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
 							}, 4000);
 		        	}
-		        	else
+		        	else if($.trim(data).split("-")[0]=="fail")
 		        	{
-		        		$('#errorModal .modal-body').html("<p>Channel name already exists. Try with different name.</p>");
+		        		$('#errorModal .modal-body').html("<p>"+$.trim(data).split("-")[1]+"</p>");
+						$('#errorModal').on('hidden.bs.modal', function (e) {
+							$('#errorModal').off();
+						});
+						$("#errorModal").modal("show");
+						$("#errorModal").css("z-index","1100");
+						setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+		        		// $('.uniqueChannel').html('Channel name already exists. Try with different name.');
+		        	}
+		        }
+		    });
+	 	});
+		$( ".inviteExistingChannel" ).on("click",function(e) {
+
+			var ids=[];
+			$.each(usersData,function(i,obj){
+
+				$.each($(".select2-choices li div"),function(i,innerobj){
+
+					if(obj['text']==innerobj['outerText'])
+						ids.push(obj['id']);
+				});
+			});
+
+		   	var convertedJSON = {};
+		    convertedJSON ['ids']=ids;
+		    convertedJSON['channelid']=channelid;
+		    var stringData = JSON.stringify(convertedJSON);
+	     	console.log(convertedJSON);
+		    $.ajax({
+		        url: './Controller.php',
+		        type: 'post',
+		        data: {'inviteToChannel':stringData},
+		        dataType: 'text',
+		        success: function (data) {
+		        	console.log(data);
+		        	if(data.includes('success'))
+		        	{
+		        		$('#successModal .modal-body').html("<p> Members invited Successfully. </p>");
+						$('#successModal').on('hidden.bs.modal', function (e) {
+							$('#successModal').off();
+							location.reload();
+
+						});
+						$("#successModal").modal("show");
+						$("#successModal").css("z-index","1100");
+						setTimeout(function()
+							{
+								$('#successModal').modal('hide');
+
+							}, 4000);
+		        	}
+		        	else if($.trim(data).split("-")[0]=="fail")
+		        	{
+		        		$('#errorModal .modal-body').html("<p>"+$.trim(data).split("-")[1]+"</p>");
 						$('#errorModal').on('hidden.bs.modal', function (e) {
 							$('#errorModal').off();
 						});
@@ -269,11 +375,32 @@ function start()
                 }
         });
 
+        $(document).on("click",".closeHover",function(e) {
+        	$(".message").removeClass('messageThread');
+            $(".regularMessagesWrapper").removeClass("col-xs-8").addClass("col-xs-12");
+            $(".threadMessageWrapper").hide();
+            $(".messageEntrySpace_regularMsg_HP").css("width", "86.7%");
+            $(".messageHoverButtons").hide();
+            $(".eleToBeCleared").empty();
+        });
+
+
 
 	});
 }
 start();
-
+function escapeHtml(str)
+		{
+		    var map =
+		    {
+		        '&': '&amp;',
+		        '<': '&lt;',
+		        '>': '&gt;',
+		        '"': '&quot;',
+		        "'": '&#039;'
+		    };
+		    return str.replace(/[&<>"']/g, function(m) {return map[m];});
+		}
 // gets all the the thread replies, by just needing the parentmsgID
 function getAllThreadReplies(parentMsgID){
     var convertedJSON ={};
@@ -292,12 +419,11 @@ function getAllThreadReplies(parentMsgID){
 
                 var jsonArrRes = $.parseJSON(data);
                 // to update the number of replies in case if changed
-				if(jsonArrRes.length > 0 && $(".messagewithid_"+parentMsgID).find(".repliescount").length < 1){
-                    $(".messagewithid_"+parentMsgID).find(".msg_reactionsec").append('<div class="repliescount" title="view thread"><a href="#"><span>'+jsonArrRes.length +'</span> replies</a></div>');
-				}else {
-					$(".messagewithid_"+parentMsgID).find(".repliescount span").html(jsonArrRes.length);
-				}
-
+								if(jsonArrRes.length > 0 && $(".messagewithid_"+parentMsgID).find(".repliescount").length < 1){
+				                    $(".messagewithid_"+parentMsgID).find(".msg_reactionsec").append('<div class="repliescount" title="view thread"><a href="#"><span>'+jsonArrRes.length +'</span> replies</a></div>');
+								}else {
+									$(".messagewithid_"+parentMsgID).find(".repliescount span").html(jsonArrRes.length);
+								}
 
                 var threadReplysUIStr="";
                 $(".threadedreplies_content").empty();
@@ -308,23 +434,29 @@ function getAllThreadReplies(parentMsgID){
                     var curThreadReplyEle = $('<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background-color: '+defPictureDet.split("-")[0] +';">'+ defPictureDet.split("-")[1]+'</div></div></div>');
 
                     curThreadReplyEle.addClass("threadReplyWithId_"+obj['id']);
+                    curThreadReplyEle.attr("threadReplyId",obj['id']);
                     $(".threadedreplies_content").append(curThreadReplyEle);
-                    if(obj['profile_pic'] != ""){
+                    if(obj['profile_pic'] != "./images/0.jpeg"){
                         curThreadReplyEle.find(".defUserPic").addClass("profilePic").html("");
                         curThreadReplyEle.find(".profilePic").css("background-image","url("+obj['profile_pic']+")");
                     }
 
+                    // var datetime=obj["created_at"].split(" ");
+										// var date=datetime[0].split("-");
+										// var time=datetime[1].split(":");
+										// var date = new Date(date[0],(date[1]-1),date[2],date[0],time[1],time[2]);
+										// console.log(date);
 
-                    var curThRepMsgCont='<div class="col-xs-11 message"><div class="message_header"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+obj["content"]+'</div><div class="msg_reactionsec"></div>';
-
+                    var curThRepMsgCont=$('<div class="col-xs-11 message"><div class="message_header" userid="'+obj['user_id'] +'"><b>'+ obj["first_name"]+' '+obj["last_name"] +'</b><span class="message_time"> '+ obj["created_at"]+ '</span></div><div class="message_body"> <div class="msg_content">'+escapeHtml(obj["content"])+'</div><div class="msg_reactionsec"></div></div>');
+                    var emojiElementsStr= "";
+                    $.each(obj['emojis'], function (emojiIndx, emojiObj) {
+                        emojiElementsStr += "<div class=\"emojireaction\" emojiid='"+emojiObj['emoji_id'] + "'><i class='"+emojiObj['emoji_pic'] +"'></i><span class=\"reactionCount\">"+ emojiObj['count']+"</span></div>"
+                    });
+                    curThRepMsgCont.find(".msg_reactionsec").append(emojiElementsStr);
                     $(".threadedreplies_content").find(".threadReplyWithId_"+obj['id']).append(curThRepMsgCont);
-
-                    //threadReplysUIStr  +='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background-color: '+defPictureDet.split("-")[0] +';">'+ defPictureDet.split("-")[1]+'</div></div></div>';
                 });
 
-                /*threadReplysUIStr  +='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url() !important;background-size: 36px 36px !important;">' +
-                    '</div></div><div class="col-xs-11 message"><div class="message_header"><b>'+Rohila Gudipati +'</b><span class="message_time"> 10:31 PM</span></div><div class="message_body messagewithid_97" id="97">
-				"<div class="msg_content">what  else ?</div><div class="msg_reactionsec"> </div></div></div></div>'*/
+
 
 
             }else{

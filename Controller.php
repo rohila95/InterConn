@@ -18,9 +18,18 @@ $reactionService = new ReactionService();
 $webService = new WebService();
 if(isset($_POST["setReaction"])){ // to post a react by a
 
+    if(isset($_POST["isToThreadReply"])){ //
+        $isToThreadReply = true;
+        echo  $reactionService -> postReactionToThreadIfNotExist($postInputObj, $_SESSION['userid']);
+
+    }else{
+        echo  $reactionService -> postReactionIfNotExist($postInputObj, $_SESSION['userid']);
+
+    }
    //echo "inside controller";
   //print_r(json_encode($postInputObj));
-  echo  $reactionService -> postReactionIfNotExist($postInputObj, $_SESSION['userid']);
+
+
 }
 
 if(isset($_POST["register"])){ // to post a react by a
@@ -34,12 +43,39 @@ if(isset($_POST["register"])){ // to post a react by a
     $status = $data->status;
     $phoneNumber = $data->phoneNumber;
     $skype = $data->skype;
-    $username='@'.strtolower($firstName);
-    $timestamp=date('Y-m-d H:i:s', time());
-    $workspaceid=$data->workspace;
-    $webService->registerNewUser($username,$firstName,$lastName,$email,' ',$password,$phoneNumber,$whatIDo,$status,1,$skype,$workspaceid,$timestamp);
+    if($firstName=="" || $firstName==" ")
+    {
+      echo 'fail-First Name cannot be empty.';
+    }
+    else if($lastName=="" || $lastName==" ")
+      {
+        echo 'fail-Last Name cannot be empty.';
+      }
+    else if($email=="" || $email==" ")
+      {
+        echo 'fail-Email cannot be empty.';
+      }
+    else if($password=="" || $password==" ")
+      {
+        echo 'fail-Password cannot be empty.';
+      }
 
-    // echo 'register';
+    else if(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email))
+      {
+        echo 'fail-Enter a vaild Email id.';
+      }
+      else if(strlen($phoneNumber)!='' && (strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1)))
+          {
+              echo 'fail-Phone number should be 10 digits.';
+          }
+    else
+      {
+        $username='@'.strtolower($firstName);
+        $timestamp=date('Y-m-d H:i:s', time());
+        $workspaceid=$data->workspace;
+        $webService->registerNewUser($username,$firstName,$lastName,$email,' ',$password,$phoneNumber,$whatIDo,$status,1,$skype,$workspaceid,$timestamp);
+
+      }
 }
 if(isset($_POST["getworkspaces"]))
 {
@@ -55,7 +91,17 @@ if(isset($_POST["createChannel"]))
   $workspaceid=$data->workspaceid;
   $timestamp=date('Y-m-d H:i:s', time());
   $invites=$data->invites;
-  echo $webService->createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites,$workspaceid);
+  // echo $type;
+  if($channelName=="" || $channelName==" ")
+    {
+      echo 'fail-Channel Name cannot be empty.';
+    }
+  else if($type=="")
+    {
+      echo 'fail-Please select type of channel.';
+    }
+  else
+    echo $webService->createChannel($userid,$channelName,$type,$purpose,$timestamp,$invites,$workspaceid);
 }
 
 if(isset($_POST["createThreadReply"]))
@@ -76,30 +122,83 @@ if(isset($_POST["getThreadMessages"]))
 
 if(isset($_POST["updateProfile"]))
 {
+   // print_r(json_encode($postInputObj));
 
-  $fname=$_FILES['filetoUpload']['tmp_name'];
+    $file_name=$_POST["file_name"];
+    $uploadfile_newname ='';
+      $firstName = $_POST["firstName"];
+      $lastName = $_POST["lastName"];
+      $email = $_POST["email"];
+      $password = $_POST["password"];
+      $whatIDo = $_POST["whatIDo"];
+      $status = $_POST["status"];
+      $phoneNumber = $_POST["phoneNumber"];
+      $skype = $_POST["skype"];
+      $userid=$_SESSION['userid'];
+      $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG");
+   // echo "strlen phoneNumber :".strlen($phoneNumber).is_numeric($phoneNumber);
 
-  $file_name=$_POST["file_name"];
-  $file_name=explode('\\', $file_name);
-  $file_ext=explode('.', $file_name[2]);
-  $uploadfile_newname='./images/'.$_SESSION['userid'].'.'.$file_ext[1];
-  $uploadSucess = move_uploaded_file($fname, $uploadfile_newname);
-  if($uploadSucess){
-    echo "success";
-  }else{
-    echo "fail";
-  }
-  $firstName = $_POST["firstName"];
-  $lastName = $_POST["lastName"];
-  $email = $_POST["email"];
-  $password = $_POST["password"];
-  $whatIDo = $_POST["whatIDo"];
-  $status = $_POST["status"];
-  $phoneNumber = $_POST["phoneNumber"];
-  $skype = $_POST["skype"];
-  $userid=$_SESSION['userid'];
-  echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
+    if($firstName=="" || $firstName==" ")
+    {
+      echo 'fail-First Name cannot be empty.';
+    }
+    else if($lastName=="" || $lastName==" ")
+      {
+        echo 'fail-Last Name cannot be empty.';
+      }
+    else if($email=="" || $email==" ")
+      {
+        echo 'fail-Email cannot be empty.';
+      }
+    else if($password=="" || $password==" ")
+      {
+        echo 'fail-Password cannot be empty.';
+      }
+//    else if(strlen($phoneNumber)!="" || ){
+//        echo "is_numeric(phoneNumber):".is_numeric($phoneNumber);
+//        if(strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1))
+//        {
+//            echo 'fail-Phone number should not 10 to 12 digits long.';
+//        }else{
+//            echo "in esle of phone check ";
+//        }
+//    }
+    else if(strlen($phoneNumber)!='' && (strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1)))
+    {
+            echo 'fail-Phone number should be of  10 to 12 digits long.';
+    }
+    else if(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email))
+      {
+        echo 'fail-Enter a vaild Email id.';
+      }
 
+
+    else
+    {
+      if($file_name==""){
+
+          echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
+      }else{
+          $fname=$_FILES['filetoUpload']['tmp_name'];
+          $file_name=explode('\\', $file_name);
+          $file_ext=explode('.', $file_name[2]);
+          $uploadfile_newname='./images/'.$_SESSION['userid'].'.'.$file_ext[1];
+//          echo $file_ext[1];
+          if (!in_array($file_ext[1], $valid_file_extensions)) {
+              echo 'fail-Invalid Image. Try another image.';
+          }else{
+
+              $uploadSucess = move_uploaded_file($fname, $uploadfile_newname);
+              if(!$uploadSucess)
+              {
+                  echo 'fail-Image too large. Try small image.';
+              }else{
+                  echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
+              }
+          }
+
+      }
+    }
 }
 
 
@@ -110,5 +209,30 @@ if(isset($_POST["getWorkspaceUsers"]))
   $userid=$data->userid;
   $workspaceid=$data->workspaceid;
   echo  $webService->getUsersInWorkspaceInvites($workspaceid,$userid);
+}
+
+if(isset($_POST["getChannelUsers"]))
+{
+  // echo 'in cont';
+  $data=json_decode($_POST["getChannelUsers"]);
+  $channelid=$data->channelid;
+  $workspaceid=$data->workspaceid;
+  echo  $webService->getUsersInWorkspaceChannelInvites($workspaceid,$channelid);
+}
+if(isset($_POST["inviteToChannel"]))
+{
+  // echo 'in cont';
+  $data=json_decode($_POST["inviteToChannel"]);
+  $ids=$data->ids;
+  $channelid=$data->channelid;
+  $timestamp=date('Y-m-d H:i:s', time());
+  if(ids!=[])
+    echo  $webService->inviteUser($ids,$channelid,$timestamp);
+  else
+    echo 'fail-Please select atleast one member to invite.';
+}
+if(isset($_POST["getProfileDetails"]))
+{
+  echo $webService->getProfileDetails($_SESSION['userid']);
 }
 ?>
