@@ -419,12 +419,11 @@ function getAllThreadReplies(parentMsgID){
 
                 var jsonArrRes = $.parseJSON(data);
                 // to update the number of replies in case if changed
-				if(jsonArrRes.length > 0 && $(".messagewithid_"+parentMsgID).find(".repliescount").length < 1){
-                    $(".messagewithid_"+parentMsgID).find(".msg_reactionsec").append('<div class="repliescount" title="view thread"><a href="#"><span>'+jsonArrRes.length +'</span> replies</a></div>');
-				}else {
-					$(".messagewithid_"+parentMsgID).find(".repliescount span").html(jsonArrRes.length);
-				}
-
+								if(jsonArrRes.length > 0 && $(".messagewithid_"+parentMsgID).find(".repliescount").length < 1){
+				                    $(".messagewithid_"+parentMsgID).find(".msg_reactionsec").append('<div class="repliescount" title="view thread"><a href="#"><span>'+jsonArrRes.length +'</span> replies</a></div>');
+								}else {
+									$(".messagewithid_"+parentMsgID).find(".repliescount span").html(jsonArrRes.length);
+								}
 
                 var threadReplysUIStr="";
                 $(".threadedreplies_content").empty();
@@ -437,7 +436,7 @@ function getAllThreadReplies(parentMsgID){
                     curThreadReplyEle.addClass("threadReplyWithId_"+obj['id']);
                     curThreadReplyEle.attr("threadReplyId",obj['id']);
                     $(".threadedreplies_content").append(curThreadReplyEle);
-                    if(obj['profile_pic'] != ""){
+                    if(obj['profile_pic'] != "./images/0.jpeg"){
                         curThreadReplyEle.find(".defUserPic").addClass("profilePic").html("");
                         curThreadReplyEle.find(".profilePic").css("background-image","url("+obj['profile_pic']+")");
                     }
@@ -454,11 +453,7 @@ function getAllThreadReplies(parentMsgID){
                         emojiElementsStr += "<div class=\"emojireaction\" emojiid='"+emojiObj['emoji_id'] + "'><i class='"+emojiObj['emoji_pic'] +"'></i><span class=\"reactionCount\">"+ emojiObj['count']+"</span></div>"
                     });
                     curThRepMsgCont.find(".msg_reactionsec").append(emojiElementsStr);
-
-
                     $(".threadedreplies_content").find(".threadReplyWithId_"+obj['id']).append(curThRepMsgCont);
-
-
                 });
 
 

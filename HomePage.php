@@ -150,14 +150,14 @@
 			<div class="modal fade" id="existingChannelInvites" role="dialog">
 			    <div class="modal-dialog modal-md">
 			      <div class="modal-content">
-			        <div class="modal-header">
+			        <div class="modal-header regularModal">
 			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 class="modal-title">Invite members to this channel.</h4>
+			          <h4 class="modal-title">Channel Invitation</h4>
 			        </div>
 			        <div class="modal-body">
 			        <div class="row">
-					      	<div class="form-group">
-					      		<span class='invites'>Invite to Channel</span>
+					      	<div class="form-group inviteFromChannelPageFG">
+					      		<span class='invites'><b>Invite members</b></span>
 						        <div class="existingChannelInvites">
 						        </div>
 					      	</div>
@@ -197,7 +197,7 @@
 							<span class="type">Type of Channel </span>
 							<div class="form-group">
 								<label class="radio-inline">
-							      <input type="radio" name="type" value="private">Private
+							      <input type="radio" name="type" value="private" checked>Private
 							    </label>
 							    <label class="radio-inline">
 							      <input type="radio" name="type" value="public">Public

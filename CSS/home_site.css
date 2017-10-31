@@ -22,6 +22,20 @@
   padding-right: 5%;
   padding-left: 5%;
 }
+.threadheadmsg {
+  padding-left: 2%;
+}
+
+.existingChannelInvites{
+  width: 80% !important;
+}
+.inviteFromChannelPageFG{
+  margin-left: 5%;
+}
+.regularModal{
+  background: #38a3a9;
+  color: white;
+}
 
 .newChannelDetails
 {
