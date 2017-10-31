@@ -351,7 +351,7 @@ pre
 
 .threadedreplies_content{
     padding: 3%;
-    max-height: 70%;
+    max-height: 62%;
     overflow-x: hidden;
     overflow-y: auto;
 }
