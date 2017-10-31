@@ -402,6 +402,18 @@ function escapeHtml(str)
 		    };
 		    return str.replace(/[&<>"']/g, function(m) {return map[m];});
 		}
+function decodeHtml(str)
+{
+    var map =
+    {
+        '&amp;': '&',
+        '&lt;': '<',
+        '&gt;': '>',
+        '&quot;': '"',
+        '&#039;': "'"
+    };
+    return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m) {return map[m];});
+}
 // gets all the the thread replies, by just needing the parentmsgID
 function getAllThreadReplies(parentMsgID){
     var convertedJSON ={};
@@ -416,7 +428,7 @@ function getAllThreadReplies(parentMsgID){
         dataType: 'text',
         success: function (data) {
             console.log(data);
-            if(!data.includes("fail")){
+            if(data!=("fail")){
 
                 var jsonArrRes = $.parseJSON(data);
                 // to update the number of replies in case if changed
