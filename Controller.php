@@ -43,26 +43,38 @@ if(isset($_POST["register"])){ // to post a react by a
     $status = $data->status;
     $phoneNumber = $data->phoneNumber;
     $skype = $data->skype;
-    if($firstName=="" || $firstName==" ")
+    if($firstName=="" || $firstName==" " || strlen($firstName)>20)
     {
-      echo 'fail-First Name cannot be empty.';
+      echo 'fail-First Name cannot be empty. First Name can\'t be more than 20 characters.';
     }
-    else if($lastName=="" || $lastName==" ")
+    else if($lastName=="" || $lastName==" " || strlen($lastName)>20)
       {
-        echo 'fail-Last Name cannot be empty.';
+        echo 'fail-Last Name cannot be empty. Last Name can\'t be more than 20 characters.';
       }
-    else if($email=="" || $email==" ")
+    else if($email=="" || $email==" " || strlen($email)>50)
       {
-        echo 'fail-Email cannot be empty.';
+        echo 'fail-Email cannot be empty. Email can\'t be more than 50 characters.';
       }
-    else if($password=="" || $password==" ")
+    else if($password=="" || $password==" " || strlen($password)>20)
       {
-        echo 'fail-Password cannot be empty.';
+        echo 'fail-Password cannot be empty. Password can\'t be more than 20 characters.';
       }
 
     else if(!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email))
       {
         echo 'fail-Enter a vaild Email id.';
+      }
+      else if(strlen($whatIDo)>200)
+      {
+        echo 'fail-What I Do can\'t be more than 200 characters.';
+      }
+      else if(strlen($status)>200)
+      {
+        echo 'fail-Status can\'t be more than 200 characters.';
+      }
+      else if(strlen($skype)>50)
+      {
+        echo 'fail-Skype can\'t be more than 50 characters.';
       }
       else if(strlen($phoneNumber)!='' && (strlen($phoneNumber)<10 || strlen($phoneNumber)>12 || !(is_numeric($phoneNumber)== 1)))
           {
@@ -92,9 +104,13 @@ if(isset($_POST["createChannel"]))
   $timestamp=date('Y-m-d H:i:s', time());
   $invites=$data->invites;
   // echo $type;
-  if($channelName=="" || $channelName==" ")
+  if($channelName=="" || $channelName==" " || strlen($channelName)>40)
     {
-      echo 'fail-Channel Name cannot be empty.';
+      echo 'fail-Channel Name cannot be empty. Channel Name can\'t be more than 40 characters.';
+    }
+    else if(strlen($purpose)>40)
+    {
+      echo 'fail-Purpose can\'t be more than 40 characters.';
     }
   else if($type=="")
     {
@@ -138,21 +154,21 @@ if(isset($_POST["updateProfile"]))
       $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG");
    // echo "strlen phoneNumber :".strlen($phoneNumber).is_numeric($phoneNumber);
 
-    if($firstName=="" || $firstName==" ")
+    if($firstName=="" || $firstName==" " || strlen($firstName)>20)
     {
-      echo 'fail-First Name cannot be empty.';
+      echo 'fail-First Name cannot be empty. First Name can\'t be more than 20 characters.';
     }
-    else if($lastName=="" || $lastName==" ")
+    else if($lastName=="" || $lastName==" " || strlen($lastName)>20)
       {
-        echo 'fail-Last Name cannot be empty.';
+        echo 'fail-Last Name cannot be empty. Last Name can\'t be more than 20 characters.';
       }
-    else if($email=="" || $email==" ")
+    else if($email=="" || $email==" " || strlen($email)>50)
       {
-        echo 'fail-Email cannot be empty.';
+        echo 'fail-Email cannot be empty.  Email can\'t be more than 50 characters.';
       }
-    else if($password=="" || $password==" ")
+    else if($password=="" || $password==" " || strlen($password)>20)
       {
-        echo 'fail-Password cannot be empty.';
+        echo 'fail-Password cannot be empty. Password can\'t be more than 20 characters.';
       }
 //    else if(strlen($phoneNumber)!="" || ){
 //        echo "is_numeric(phoneNumber):".is_numeric($phoneNumber);
@@ -171,7 +187,18 @@ if(isset($_POST["updateProfile"]))
       {
         echo 'fail-Enter a vaild Email id.';
       }
-
+    else if(strlen($whatIDo)>200)
+      {
+        echo 'fail-What I Do can\'t be more than 200 characters.';
+      }
+      else if(strlen($status)>200)
+      {
+        echo 'fail-Status can\'t be more than 200 characters.';
+      }
+      else if(strlen($skype)>50)
+      {
+        echo 'fail-Skype can\'t be more than 50 characters.';
+      }
 
     else
     {

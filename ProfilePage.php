@@ -130,7 +130,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input type="email" class="form-control email" name="email" value ="<?php echo $userDetails[0]->email_id ?>" maxlength="40" required>
+                                <input type="email" class="form-control email" name="email" value ="<?php echo $userDetails[0]->email_id ?>" maxlength="50" required>
                                 <label class="form-control-placeholder" for="name">E-mail</label>
                             </div>
                         </div>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" class="form-control skype not_reallyrequired" name="skype" value ="<?php echo $userDetails[0]->skype ?>" maxlength="40" required>
+                                <input type="text" class="form-control skype not_reallyrequired" name="skype" value ="<?php echo $userDetails[0]->skype ?>" maxlength="50" required>
                                 <label class="form-control-placeholder" for="name">Skype</label>
                             </div>
 
