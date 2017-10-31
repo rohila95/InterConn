@@ -186,7 +186,7 @@ if(isset($_POST["updateProfile"]))
               $file_ext[1] == "PNG";
           }
           $uploadfile_newname='./images/'.$_SESSION['userid'].'.'.$file_ext[1];
-//          echo $file_ext[1];
+          echo $file_ext[1];
           if (!in_array($file_ext[1], $valid_file_extensions)) {
               echo 'fail-Invalid Image. Try another image.';
           }else{

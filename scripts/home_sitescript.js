@@ -263,7 +263,7 @@ function start()
 		        		$('#successModal .modal-body').html("<p> Channel created Successfully. </p>");
 						$('#successModal').on('hidden.bs.modal', function (e) {
 							$('#successModal').off();
-
+                            window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
 
 						});
 						$("#successModal").modal("show");
@@ -325,6 +325,7 @@ function start()
 						setTimeout(function()
 							{
 								$('#successModal').modal('hide');
+                                location.reload();
 
 							}, 4000);
 		        	}
