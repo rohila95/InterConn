@@ -1,4 +1,11 @@
 Message Threads
+
+    --------------------------------- After Mile stone 2 ------------------------------------
+    -> Auto scroll to recent msg in the thread.
+    -> Fix the reactions order
+
+    --------------------------------- Before milestone 2 ------------------------------------
+
     -> every message must have a inicator saying whether its a parent of any thread ✔
     -> Working on getting the side column for threads. ✔
     -> Have to have another table to capture the reactions for the Thread Messages ✔
@@ -9,6 +16,7 @@ Message Threads
         the bottom of the page.  ✔
 
     -> date format in thread reply's
+
     -> thread images ✔
 
     -> Make sure to check with validations on both client and server side for Create channel,
@@ -20,11 +28,11 @@ Message Threads
     -> oninvalid="this.setCustomValidity('Enter Phone number preceding with country code, "-" not required')"
 
 
-    -> Profile page editing not working when even phone number
+    -> Profile page editing not working when even phone number  ✔
     -> After the registration is success, sing in button must lead to sign in page if time permits
 
     -> thread likes...one after other issue
 
     -> Random channel Id Fix ✔
 
-    -> clicking a thread header redirecting to profile page, without highliting the main message - OnGoing
+    -> clicking a thread header redirecting to profile page, without highliting the main message ✔
