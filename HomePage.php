@@ -12,7 +12,7 @@
     $workspaceDetails = json_decode($web_service->getWorkspaceDetails($_SESSION['userid']));
     $workspaceName=$workspaceDetails[0]->workspace_name;
     $workspaceid=$workspaceDetails[0]->workspace_id;
-
+		$flag=0;
     $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid']));
     $directMessagesDetails = json_decode($web_service->getDirectMessagesDetails($workspaceDetails[0]->workspace_id));
 // echo $web_service->getChannelsDetails($_SESSION['userid']);
@@ -25,7 +25,10 @@
            foreach($channelDetails as $channel)
            {
                 if($channel->channel_id==$_GET["channel"])
+								{
                     $channelstr.='<li class="active currentChannel">';
+										$flag=1;
+									}
                 else
                     $channelstr.='<li class="active">';
                 if($channel->type=='private')
@@ -43,7 +46,7 @@
            }
         }
 	}
-	if(!$_SESSION['loggedIn'] || !isset($_GET["channel"]) || $_GET["channel"]=='')
+	if(!$_SESSION['loggedIn'] || !isset($_GET["channel"]) || $_GET["channel"]=='' || $flag==0)
 	{
 		header("location: ./index.php?status=notloggedin");
 	}

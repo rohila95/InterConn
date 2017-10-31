@@ -19,11 +19,11 @@ Message Threads
     -> Liked ppl names listing
     -> oninvalid="this.setCustomValidity('Enter Phone number preceding with country code, "-" not required')"
 
-    
+
     -> Profile page editing not working when even phone number
     -> After the registration is success, sing in button must lead to sign in page if time permits
 
     -> thread likes...one after other issue
 
-    -> Random channel Id Fix
+    -> Random channel Id Fix- OnGoing Rohila Working
     ->
