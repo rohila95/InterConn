@@ -11,6 +11,8 @@ function start()
                     var file = input.files[0];
                     var _URL = window.URL || window.webkitURL;
                     img = new Image();
+                    var minwidth = 250;
+                    var minheight = 250;
                     var imgwidth = 0;
                     var imgheight = 0;
                     var maxwidth = 1250;
@@ -23,10 +25,10 @@ function start()
                         console.log("width & height:" + imgwidth + "&" + imgheight);
                         $("#width").text(imgwidth);
                         $("#height").text(imgheight);
-                         if(imgwidth <= maxwidth && imgheight <= maxheight){
+                         if(imgwidth <= maxwidth && imgwidth >=minwidth && imgheight >= minheight && imgheight <= maxheight ){
                              $('.profile-pic').css('background-image',"url("+imageBlob+")");
                          }else{
-                             $('#errorModal .modal-body').html("<p>Dimensions of the image are too weird!! Try the one with both width & height are less than 1250px..</p>");
+                             $('#errorModal .modal-body').html("<p>Dimensions of the image are too weird!! Try the one with both width & height are less than 1250px  and greater than 250px aswell..</p>");
                              $('#errorModal').on('hidden.bs.modal', function (e) {
                                  $('#errorModal').off();
                              });
@@ -102,7 +104,7 @@ function start()
 
 								}, 4000);
 							}
-						else if($.trim(data).split("-")[0]=="fail")
+						else if(data.includes("fail"))
 							{
 								$('#errorModal .modal-body').html("<p>"+ $.trim(data).split("-")[1]+"</p>");
 								$('#errorModal').on('hidden.bs.modal', function (e) {
