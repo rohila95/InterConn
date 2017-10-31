@@ -186,13 +186,13 @@
 			          	<div class="row">
 					      	<div class="form-group">
 					      		<div class="uniqueChannel"></div>
-						        <input type="text" class="form-control channelName" name="name" required>
+						        <input type="text" class="form-control channelName" name="name" maxlength="40" required>
 						        <label class="form-control-placeholder" for="name">Name</label>
 					      	</div>
 					    </div>
 					    <div class="row">
 					      	<div class="form-group">
-						        <input type="text" class="form-control channelPurpose" name="purpose" required>
+						        <input type="text" class="form-control channelPurpose" name="purpose" maxlength="40" required>
 						        <label class="form-control-placeholder" for="purpose">Purpose</label>
 						    </div>
 						</div>
