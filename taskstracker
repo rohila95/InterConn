@@ -2,7 +2,8 @@ Message Threads
 
     --------------------------------- After Mile stone 2 ------------------------------------
     -> Auto scroll to recent msg in the thread.
-    -> Fix the reactions order
+    -> Fix the reactions order.
+    -> Make a standard object for response that server pushes.
 
     --------------------------------- Before milestone 2 ------------------------------------
 
