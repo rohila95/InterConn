@@ -229,7 +229,7 @@
 				    <button type="button" class="btn btn-primary threadbutt nonthumbbutts" title="thread"><i class="fa fa-comments-o"></i></button>
 				    <button type="button" class="btn btn-primary replybutt nonthumbbutts " title="reply"><i class="fa fa-reply"></i></button>
 			</div>
-            <div class="col-xs-11 mainContent_HP"><div class="row">
+            <div class="col-xs-11 mainContent_HP">
 
                     <?php
                         if(isset($_GET["channel"])){
@@ -238,9 +238,9 @@
                             {
 
                                 if($currentChannel[0]->type=='private')
-                                    echo '<div class="headerSpace_HP row"><div class="channelTitle currentChannelTitle" id="'.$_GET["channel"].'"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+                                    echo '<div class="headerSpace_HP row"><div class="channelTitle currentChannelTitle row " id="'.$_GET["channel"].'"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
                                 else if($currentChannel[0]->type=='public')
-                                    echo '<div class="headerSpace_HP row"><div class="channelTitle currentChannelTitle" id="'.$_GET["channel"].'"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+                                    echo '<div class="headerSpace_HP row"><div class="channelTitle currentChannelTitle row " id="'.$_GET["channel"].'"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
                                 $user_count=$currentChannel[0]->usercount;
                                 $purpose=$currentChannel[0]->purpose;
                             }
@@ -248,7 +248,7 @@
                                 echo '<div class="headerSpace_HP row">Channel doesn\'t exist </div>';
                         }
                     ?>
-                        <div class='headerAddon_HP'>
+                        <div class='row headerAddon_HP'>
                             <i class="fa fa-star-o"></i> | <a href="#" data-toggle="tooltip" data-placement="bottom" title=<?php echo '"'.htmlspecialchars($groupMembers[0]->names).'"';?>><i class="fa fa-users"></i></a> <?php echo $user_count;?>| Purpose: <i><?php echo htmlspecialchars($purpose);?></i>
                             <?php
                             	if($currentChannel[0]->created_by==$_SESSION['userid'] && $currentChannel[0]->type=='private')
@@ -263,6 +263,7 @@
 
                         </div>
                             </div>
+            <div class="row">
                 <div class="col-xs-12 regularMessagesWrapper">
                     <div class="row rightContent_wrapper_HP">
                         <div class="messagesList">
