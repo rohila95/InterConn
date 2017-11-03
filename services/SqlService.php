@@ -42,7 +42,7 @@ class SqlService{
 		$sql="SELECT user.user_name,user.first_name,user.last_name,user.profile_pic,user.status,user.status_emoji FROM `user`,`user_workspace` where user.user_id=user_workspace.user_id and user_workspace.workspace_id=".$workspaceid;
 		return $sql;
 	}
-
+	
 	public function getSpecificChannelDetails($channelid)
 	{
 		$sql="SELECT channel.channel_id,channel_name,type,purpose,created_by,created_at,count(user_channel.user_id) as usercount FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and channel.channel_id=".$channelid;

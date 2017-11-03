@@ -241,6 +241,13 @@ if(isset($_POST["getWorkspaceUsers"]))
   $workspaceid=$data->workspaceid;
   echo  $webService->getUsersInWorkspaceInvites($workspaceid,$userid);
 }
+if(isset($_POST["getWorkspaceUsersByInput"]))
+{
+  $data=json_decode($_POST["getWorkspaceUsersByInput"]);
+  $inputString=$data->inputString;
+  $workspaceid=$data->workspaceid;
+  echo  $webService->getUsersInWorkspaceByInput($workspaceid,$inputString);
+}
 
 if(isset($_POST["getChannelUsers"]))
 {

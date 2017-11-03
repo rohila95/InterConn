@@ -7,7 +7,24 @@ function start()
     $(document).ready(function() {
 		console.log("Inside ready");
 		// $('[data-toggle="tooltip"]').tooltip();
+		var userid=$('.loggedIn_user').attr('id');
+		var workspaceid=$('.loggedIn_workspace').attr('id');
+		var channelid=$('.currentChannelTitle').attr('id');
+		var getusersdata='{"userid":"'+userid+'","workspaceid":"'+workspaceid+'"}';
+		
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
+		$('input.userProfileSearchInput').keyup(function(){
+			$(".resSuggDiv").remove();
+			var inputStr = $(this).val().trim();
+			var inputData='{"inputString":"'+inputStr+'","workspaceid":"'+workspaceid+'"}';
+			$.post('./Controller.php',{"getWorkspaceUsersByInput":inputData},function (data){
+				console.log(data);
+				
+			});
+
+		});
+
+
 		$('.createNewChannelIcon').click(function()
 		{
 			$('.channelInvites').select2('data', null);
@@ -21,10 +38,7 @@ function start()
 			$('#existingChannelInvites').modal('show');
 
 		});
-		var userid=$('.loggedIn_user').attr('id');
-		var workspaceid=$('.loggedIn_workspace').attr('id');
-		var channelid=$('.currentChannelTitle').attr('id');
-		var getusersdata='{"userid":"'+userid+'","workspaceid":"'+workspaceid+'"}';
+		
 
 		console.log(getusersdata);
 		$.post('./Controller.php',{"getWorkspaceUsers":getusersdata},function (data){
