@@ -39,7 +39,7 @@ class SqlService{
 
 	public function getUsersWorkspace($workspaceid)
 	{
-		$sql="SELECT user.user_name,user.first_name,user.last_name,user.profile_pic,user.status,user.status_emoji FROM `user`,`user_workspace` where user.user_id=user_workspace.user_id and user_workspace.workspace_id=".$workspaceid;
+		$sql="SELECT user.user_name,user.user_id,user.first_name,user.last_name,user.profile_pic,user.status,user.status_emoji FROM `user`,`user_workspace` where user.user_id=user_workspace.user_id and user_workspace.workspace_id=".$workspaceid;
 		return $sql;
 	}
 	

@@ -112,7 +112,7 @@
 				?>
 				
 			</div>
-			
+			<!-- <a href="./help.html"><i class="fa fa-question-circle-o"></i></a> -->
 			<div class="row updateProfile">
 				<form role="form" id="updateForm" enctype='multipart/form-data'>
 					<div class="col-xs-8" style="margin-top: 2%;">

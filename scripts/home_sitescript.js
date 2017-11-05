@@ -13,13 +13,40 @@ function start()
 		var getusersdata='{"userid":"'+userid+'","workspaceid":"'+workspaceid+'"}';
 		
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
+		$('body').click(function(){
+			$(".resSuggDiv").remove();
+		});
 		$('input.userProfileSearchInput').keyup(function(){
 			$(".resSuggDiv").remove();
 			var inputStr = $(this).val().trim();
+			var searchInput=$(this);
 			var inputData='{"inputString":"'+inputStr+'","workspaceid":"'+workspaceid+'"}';
 			$.post('./Controller.php',{"getWorkspaceUsersByInput":inputData},function (data){
-				console.log(data);
-				
+				// console.log(data);
+				if(data!='[]')
+				{
+					var usersData=$.parseJSON(data);
+					var listGroupDiv = $("<div class='resSuggDiv'><ul class='list-group'></ul></div>");
+					var liComp = "";
+					$.each(usersData,function(i,obj){
+						liComp += '<li class="list-group-item userSuggList" id="'+obj['user_id'] +'">'+obj['name']+'</li>';
+						
+					});
+					listGroupDiv.find("ul").append(liComp);
+	                $("body").append(listGroupDiv);
+	                var eleWidth=$('.left-inner-addon').width();
+	                listGroupDiv.css({
+	                 	position:'absolute',
+	                  	top:searchInput.offset().top+31,
+	                    left:searchInput.offset().left,
+	                    width:$('.left-inner-addon').width()
+	                });
+	                $(".userSuggList").click(function(){
+	                	$('.userProfileSearchInput').val($(this).html());
+	                	$(".resSuggDiv").remove();
+	                	window.location.href = "ProfilePage.php?userid="+$(this).attr("id");
+	                });
+           		}
 			});
 
 		});

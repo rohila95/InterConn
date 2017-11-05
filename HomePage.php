@@ -231,7 +231,7 @@
 			</div>
             <div class="col-xs-11 mainContent_HP">
             	<div class="headerSpace_HP row">
-	            	<div class="col-xs-9">
+	            	<div class="col-xs-8">
 		            	<div class="headerMain row">
 		                    <?php
 		                        if(isset($_GET["channel"])){
@@ -269,9 +269,12 @@
 				        <i  class="fa fa-search"></i>
 				        <input type="text" name="userProfileSearchInput" class="form-control userProfileSearchInput" placeholder="Search Name" />
 					</div>
+					<div class="col-xs-1 addOnButtons">
+						<a href="./help.html"><i class="fa fa-question-circle-o"></i></a>
+					</div>
 						    
 	            </div>
-            </div>
+            
             <div class="row">
                 <div class="col-xs-12 regularMessagesWrapper">
                     <div class="row rightContent_wrapper_HP">
@@ -454,7 +457,7 @@
                    </div>
                 </div>
             </div>
-
+		</div>
             </div>
 		</div>
 	</div>

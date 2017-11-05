@@ -307,13 +307,13 @@ class WebService{
     $sql_service = new SqlService();
     $users = $sql_service->getUsersWorkspace($workspaceid);
     $result = $conn->query($users);
-
+    $array=[];
 
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
               $row['name']=$row['first_name'].' '.$row['last_name'];
-              if (substr($row['name'], 0, strlen($inputString)) === $inputString)
+              if (!strcasecmp(substr($row['name'], 0, strlen($inputString)), $inputString))
                 $array[]= $row;
         }
     } else {
