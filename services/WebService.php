@@ -47,13 +47,22 @@ class WebService{
     $conn->close();
   }
 
-  public function getChannelsDetails($userid)
+  public function getChannelsDetails($userid,$workspaceid,$is_admin)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
     $userid=mysqli_real_escape_string($conn,$userid);
+    $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
+    $is_admin=mysqli_real_escape_string($conn,$is_admin);
     $sql_service = new SqlService();
-    $channelsDetailsQuery = $sql_service->getChannels($userid);
+    if($is_admin==1)
+    {
+      $channelsDetailsQuery = $sql_service->getAllChannels($workspaceid);
+    }
+    else
+    {
+      $channelsDetailsQuery = $sql_service->getChannels($userid);
+    }
     $result = $conn->query($channelsDetailsQuery);
 
 
@@ -371,8 +380,36 @@ class WebService{
     } else {
         echo "Error: " . $messageChannelMap . "<br>" . $conn->error;
     }
-
-
+    $conn->close();
+  }
+  public function archieveChannel($channelid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $channelid=mysqli_real_escape_string($conn,$channelid);
+    $sql_service = new SqlService();
+    $query = $sql_service->archieveChannel($channelid);
+    $result = $conn->query($query);
+    if ($result === TRUE) {
+      echo "Success";
+    } else {
+        echo "Error: " . $query . "<br>" . $conn->error;
+    }
+    $conn->close();
+  }
+  public function unArchieveChannel($channelid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $channelid=mysqli_real_escape_string($conn,$channelid);
+    $sql_service = new SqlService();
+    $query = $sql_service->unArchieveChannel($channelid);
+    $result = $conn->query($query);
+    if ($result === TRUE) {
+      echo "Success";
+    } else {
+        echo "Error: " . $query . "<br>" . $conn->error;
+    }
     $conn->close();
   }
   public function createThreadReply($userid,$content,$parent_message_id,$timestamp)

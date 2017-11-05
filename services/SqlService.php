@@ -25,12 +25,27 @@ class SqlService{
 		$sql="SELECT * FROM `workspace`";
 		return $sql;
 	}
-
-	public function getChannels($userid)
+	public function archieveChannel($channelid)
 	{
-		$sql="SELECT channel.channel_id,channel.channel_name,channel.type,channel.purpose,channel.created_by,channel.created_at,user_channel.joined_at FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and user_channel.left_at='0000-00-00 00:00:00' and user_channel.user_id=".$userid;
+		$sql="UPDATE `InterConn`.`channel` SET `is_archive` = '1' WHERE `channel`.`channel_id` = ".$channelid;
 		return $sql;
 	}
+	public function unArchieveChannel($channelid)
+	{
+		$sql="UPDATE `InterConn`.`channel` SET `is_archive` = '0' WHERE `channel`.`channel_id` = ".$channelid;
+		return $sql;
+	}
+	public function getChannels($userid)
+	{
+		$sql="SELECT channel.channel_id,channel.is_archive,channel.channel_name,channel.type,channel.purpose,channel.created_by,channel.created_at,user_channel.joined_at FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and user_channel.left_at='0000-00-00 00:00:00' and user_channel.user_id=".$userid;
+		return $sql;
+	}
+	public function getAllChannels($workspaceid)
+	{
+		$sql="SELECT channel.channel_id,channel.is_archive,channel.channel_name,channel.type,channel.purpose,channel.created_by,channel.created_at FROM `workspace_channel`,`channel` where workspace_channel.channel_id=channel.channel_id and workspace_id=".$workspaceid;
+		return $sql;
+	}
+	
 	public function getChannelGeneral($userid)
 	{
 		$sql="SELECT channel.channel_id,channel.channel_name,channel.type,channel.purpose,channel.created_by,channel.created_at,user_channel.joined_at FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and user_channel.left_at='0000-00-00 00:00:00' and channel.channel_name='general' and user_channel.user_id=".$userid;
@@ -45,7 +60,7 @@ class SqlService{
 	
 	public function getSpecificChannelDetails($channelid)
 	{
-		$sql="SELECT channel.channel_id,channel_name,type,purpose,created_by,created_at,count(user_channel.user_id) as usercount FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and channel.channel_id=".$channelid;
+		$sql="SELECT channel.channel_id,channel.is_archive,channel_name,type,purpose,created_by,created_at,count(user_channel.user_id) as usercount FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and channel.channel_id=".$channelid;
 		return $sql;
 	}
 
@@ -169,7 +184,7 @@ class SqlService{
 	}
 	public function channelWorkspaceMap($channelid,$workspaceid)
 	{
-		$sql="INSERT INTO `InterConn`.`workspace_channel` (`workspace_id`, `channel_id`) VALUES ('".$channelid."', '".$workspaceid."')";
+		$sql="INSERT INTO `InterConn`.`workspace_channel` (`workspace_id`, `channel_id`) VALUES ('".$workspaceid."', '".$channelid."')";
 		return $sql;
 	}
 

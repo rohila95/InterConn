@@ -12,30 +12,57 @@
     $workspaceDetails = json_decode($web_service->getWorkspaceDetails($_SESSION['userid']));
     $workspaceName=$workspaceDetails[0]->workspace_name;
     $workspaceid=$workspaceDetails[0]->workspace_id;
-		$flag=0;
-    $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid']));
+    $workspaceCreatorId=$workspaceDetails[0]->created_by;
+	$flag=0;
+	$is_admin=0;
+	if($workspaceCreatorId==$_SESSION['userid'])
+		$is_admin=1;
+    $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid'],$workspaceid,$is_admin));
     $directMessagesDetails = json_decode($web_service->getDirectMessagesDetails($workspaceDetails[0]->workspace_id));
 // echo $web_service->getChannelsDetails($_SESSION['userid']);
     $_SESSION['channelid']=$_GET["channel"];
     $groupMembers=json_decode($web_service->getSpecificChannelUserDetails($_GET["channel"]));
    	$channelstr='';
+   	$archiveChannelstr='';
    	$directMessagestr='';
+   	$channelCount=0;
+   	$archieveChannelCount=0;
 		if ($channelDetails!='')
 		{
            foreach($channelDetails as $channel)
            {
-                if($channel->channel_id==$_GET["channel"])
-								{
-                    $channelstr.='<li class="active currentChannel">';
-										$flag=1;
-									}
-                else
-                    $channelstr.='<li class="active">';
-                if($channel->type=='private')
-                    $channelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
-                else
-                    $channelstr.='<a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-unlock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
-                $channelstr.='</li>';
+           		if($channel->is_archive==0)
+           		{
+	                if($channel->channel_id==$_GET["channel"])
+					{
+	                    $channelstr.='<li class="active currentChannel">';
+						$flag=1;
+					}
+	                else
+	                    $channelstr.='<li class="active">';
+	                if($channel->type=='private')
+	                    $channelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+	                else
+	                    $channelstr.='<a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-unlock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+	                $channelstr.='</li>';
+	                $channelCount+=1;
+	            }
+	            else if($channel->is_archive==1)
+	            {
+	            	if($channel->channel_id==$_GET["channel"])
+					{
+	                    $archiveChannelstr.='<li class="active currentChannel">';
+						$flag=1;
+					}
+	                else
+	                    $archiveChannelstr.='<li class="active">';
+	                if($channel->type=='private')
+	                    $archiveChannelstr.=' <a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-lock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+	                else
+	                    $archiveChannelstr.='<a href="./HomePage.php?channel='.$channel->channel_id.'"><span class="channelPrivacyLevel"><i class="fa fa-unlock"></i></span><span class="'.$channel->channel_id.'" >'.htmlspecialchars($channel->channel_name).'</span></a>';
+	                $archiveChannelstr.='</li>';
+	                $archieveChannelCount+=1;
+	            }
            }
         }
 		if ($directMessagesDetails!='')
@@ -96,9 +123,17 @@
 						</div>
 						<span class="categoryTitle_HP"><i class="fa fa-comments-o"></i> All Threads</span><br>
 						<div class="row channelsContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo count($channelDetails);?></span><i class="fa fa-plus-square-o pull-right createNewChannelIcon"></i></div>
+							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo $channelCount;?></span><i class="fa fa-plus-square-o pull-right createNewChannelIcon"></i></div>
 							<ul class="nav navbar-nav channels_UL_List">
 								<?php echo $channelstr;?>
+
+						    </ul>
+
+						</div>
+						<div class="row archieveChannelsContainer_menu_HP">
+							<div class="categoryTitle_HP channelTitle"> Archieved Channels <span class="noOfChannels_HP numberCount_badge"><?php echo $archieveChannelCount;?></span></div>
+							<ul class="nav navbar-nav channels_UL_List">
+								<?php echo $archiveChannelstr;?>
 
 						    </ul>
 
@@ -223,12 +258,22 @@
 			      </div>
 			    </div>
 			</div>
-			<div class="btn-group messageHoverButtons">
-				    <button emojiid="1" type="button" class="btn btn-primary thumbsbutt" title="thumbsup"><i class="fa fa-thumbs-o-up"></i></button>
-				    <button emojiid="2" type="button" class="btn btn-primary thumbsbutt" title="thumbsdown"><i class="fa fa-thumbs-o-down"></i></button>
-				    <button type="button" class="btn btn-primary threadbutt nonthumbbutts" title="thread"><i class="fa fa-comments-o"></i></button>
-				    <button type="button" class="btn btn-primary replybutt nonthumbbutts " title="reply"><i class="fa fa-reply"></i></button>
-			</div>
+			<?php
+				if(isset($_GET["channel"])){
+                    $currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
+                    if($currentChannel!='' && $currentChannel[0]->is_archive==0)
+                    {
+                    	echo '<div class="btn-group messageHoverButtons">
+							    <button emojiid="1" type="button" class="btn btn-primary thumbsbutt" title="thumbsup"><i class="fa fa-thumbs-o-up"></i></button>
+							    <button emojiid="2" type="button" class="btn btn-primary thumbsbutt" title="thumbsdown"><i class="fa fa-thumbs-o-down"></i></button>
+							    <button type="button" class="btn btn-primary threadbutt nonthumbbutts" title="thread"><i class="fa fa-comments-o"></i></button>
+							    <button type="button" class="btn btn-primary replybutt nonthumbbutts " title="reply"><i class="fa fa-reply"></i></button>
+							</div>';
+                       
+                    }
+                }
+			?>
+			
             <div class="col-xs-11 mainContent_HP">
             	<div class="headerSpace_HP row">
 	            	<div class="col-xs-8">
@@ -253,14 +298,17 @@
 		                <div class='row headerAddon_HP'>
 		                    <i class="fa fa-star-o"></i> | <a href="#" data-toggle="tooltip" data-placement="bottom" title=<?php echo '"'.htmlspecialchars($groupMembers[0]->names).'"';?>><i class="fa fa-users"></i></a> <?php echo $user_count;?>| Purpose: <i><?php echo htmlspecialchars($purpose);?></i>
 		                    <?php
-		                    	if($currentChannel[0]->created_by==$_SESSION['userid'] && $currentChannel[0]->type=='private')
+		                    	if($currentChannel[0]->is_archive==0)
 		                    	{
-		                    		echo ' |<span class="invitations"> Invite Members</span>';
-		                    	}
-		                    	else if($currentChannel[0]->type=='public' && $currentChannel[0]->channel_name!='general' && $currentChannel[0]->channel_name!='random')
-		                    	{
-		                    		echo ' |<span class="invitations"> Invite Members</span>';
-		                    	}
+			                    	if($currentChannel[0]->created_by==$_SESSION['userid'] && $currentChannel[0]->type=='private')
+			                    	{
+			                    		echo ' |<span class="invitations"> Invite Members</span>';
+			                    	}
+			                    	else if($currentChannel[0]->type=='public' && $currentChannel[0]->channel_name!='general' && $currentChannel[0]->channel_name!='random')
+			                    	{
+			                    		echo ' |<span class="invitations"> Invite Members</span>';
+			                    	}
+			                    }
 		                    ?>
 
 		                </div>
@@ -270,7 +318,16 @@
 				        <input type="text" name="userProfileSearchInput" class="form-control userProfileSearchInput" placeholder="Search Name" />
 					</div>
 					<div class="col-xs-1 addOnButtons">
-						<a href="./help.html"><i class="fa fa-question-circle-o"></i></a>
+						<?php
+							if($workspaceCreatorId==$_SESSION['userid'])
+							{
+								if($currentChannel[0]->is_archive==0)
+									echo '<i class="fa fa-archive archieveButton"></i>';
+								else if($currentChannel[0]->is_archive==1)
+										echo '<i class="fa fa-undo unarchieveButton"></i>';
+							}
+						?>
+						<a href="./help.html"><i class="fa fa-question-circle-o"></i></a>				
 					</div>
 						    
 	            </div>
@@ -414,10 +471,13 @@
                                 <?php
                                 if(isset($_GET["channel"])){
                                     $currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
-                                    if($currentChannel!='')
-                                        echo '<textarea class="form-control inputMessage" rows="2" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn hidden"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
-                                    else
-                                        echo '<textarea class="form-control inputMessage" rows="2" disabled autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
+                                    if($currentChannel[0]->is_archive==0)
+                                    {
+	                                    if($currentChannel!='')
+	                                        echo '<textarea class="form-control inputMessage" rows="2" required autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn hidden"><button class="btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button></span>';
+	                                    else
+	                                        echo '<textarea class="form-control inputMessage" rows="2" disabled autofocus placeholder="Type your message..." name="message"></textarea><span class="input-group-btn"><button class="btn btn-secondary disabled" type="submit"><i class="fa fa-paper-plane"></i></button></span></span>';
+	                                }
                                 }
 
                                 ?>
@@ -444,14 +504,20 @@
                            <div class="row eleToBeCleared threadedreplies_content">
 
                            </div>
-                           <div class="row messageentryspace_threadsection">
-                               <form>
-                                   <textarea placeholder="Reply" required name="threadreply_msgcontent" class="form-control"></textarea>
-                                   <input type="hidden" class="parentmsgidip_threadmsg" name="parent_message_id"/>
-                                   <button id="thread_MsgEntrySubmit" class="hidden" />
-                               </form>
+                           <?php
+                           		if($currentChannel!='' && $currentChannel[0]->is_archive==0)
+                   				{
+                   					echo '<div class="row messageentryspace_threadsection">
+			                               <form>
+			                                   <textarea placeholder="Reply" required name="threadreply_msgcontent" class="form-control"></textarea>
+			                                   <input type="hidden" class="parentmsgidip_threadmsg" name="parent_message_id"/>
+			                                   <button id="thread_MsgEntrySubmit" class="hidden" />
+			                               </form>
 
-                           </div>
+			                           </div>';
+                   				}
+                           ?>
+                           
 
 
                    </div>

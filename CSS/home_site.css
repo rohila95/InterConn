@@ -30,9 +30,8 @@
 {
   font-size: 2em;
 }
-.fa-question-circle-o
+.addOnButtons .fa
 {
-  padding-top: 7%;
   cursor: pointer;
 }
 .userSuggList:hover
@@ -187,8 +186,8 @@ html, body {
     cursor: pointer;
 }
 
-.channelsContainer_menu_HP, .directMessageContainer_menu_HP{
-	max-height: 50%;
+.channelsContainer_menu_HP,.archieveChannelsContainer_menu_HP ,.directMessageContainer_menu_HP{
+	max-height: 30%;
 
 }
 
