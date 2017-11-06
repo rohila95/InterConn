@@ -296,14 +296,14 @@ if(isset($_POST["inviteToChannel"]))
 if(isset($_POST["removeFromChannel"]))
 {
   // echo 'in cont';
-  $data=json_decode($_POST["inviteToChannel"]);
+  $data=json_decode($_POST["removeFromChannel"]);
   $ids=$data->ids;
   $channelid=$data->channelid;
   $timestamp=date('Y-m-d H:i:s', time());
   if(ids!=[])
-    echo  $webService->inviteUser($ids,$channelid,$timestamp);
+    echo  $webService->leaveChannel($ids,$channelid,$timestamp);
   else
-    echo 'fail-Please select atleast one member to invite.';
+    echo 'fail-Please select atleast one member to remove from channel.';
 }
 if(isset($_POST["getProfileDetails"]))
 {
