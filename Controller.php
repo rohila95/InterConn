@@ -104,6 +104,20 @@ if(isset($_POST["unArchieveChannel"]))
   $channelid=$_POST["unArchieveChannel"];
   echo  $webService->unArchieveChannel($channelid);
 }
+
+
+if(isset($_POST["deleteMessage"]))
+{
+  $messageid=$_POST["deleteMessage"];
+  echo  $webService->deleteMessage($messageid);
+}
+if(isset($_POST["deleteThreadedMessage"]))
+{
+  $messageid=$_POST["deleteThreadedMessage"];
+  echo  $webService->deleteThreadedMessage($messageid);
+}
+
+
 if(isset($_POST["createChannel"]))
 {
   $data=json_decode($_POST["createChannel"]);
@@ -268,6 +282,18 @@ if(isset($_POST["getChannelUsers"]))
   echo  $webService->getUsersInWorkspaceChannelInvites($workspaceid,$channelid);
 }
 if(isset($_POST["inviteToChannel"]))
+{
+  // echo 'in cont';
+  $data=json_decode($_POST["inviteToChannel"]);
+  $ids=$data->ids;
+  $channelid=$data->channelid;
+  $timestamp=date('Y-m-d H:i:s', time());
+  if(ids!=[])
+    echo  $webService->inviteUser($ids,$channelid,$timestamp);
+  else
+    echo 'fail-Please select atleast one member to invite.';
+}
+if(isset($_POST["removeFromChannel"]))
 {
   // echo 'in cont';
   $data=json_decode($_POST["inviteToChannel"]);

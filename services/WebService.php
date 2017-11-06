@@ -412,6 +412,56 @@ class WebService{
     }
     $conn->close();
   }
+  public function deleteMessage($messageid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $messageid=mysqli_real_escape_string($conn,$messageid);
+    $sql_service = new SqlService();
+    $query = $sql_service->deleteChannelMessages($messageid);
+    $result = $conn->query($query);
+    if ($result === TRUE) {
+      echo "success";
+    } else {
+        echo "Error: " . $query . "<br>" . $conn->error;
+    }
+    $conn->close();
+  }
+  public function deleteThreadedMessage($messageid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $messageid=mysqli_real_escape_string($conn,$messageid);
+    $sql_service = new SqlService();
+    $query = $sql_service->deletethreadedMessages($messageid);
+    $result = $conn->query($query);
+    if ($result === TRUE) {
+      echo "success";
+    } else {
+        echo "Error: " . $query . "<br>" . $conn->error;
+    }
+    $conn->close();
+  }
+
+  public function leaveChannel($userids,$channelid,$timestamp)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $channelid=mysqli_real_escape_string($conn,$channelid);
+    $timestamp=mysqli_real_escape_string($conn,$timestamp);
+    $sql_service = new SqlService();
+    foreach ($userids as $id) {
+      $query = $sql_service->leaveChannel($id,$channelid,$timestamp);
+      $result = $conn->query($query);
+      if ($result === TRUE) {
+        echo "success";
+      } else {
+          echo "Error: " . $query . "<br>" . $conn->error;
+      }
+    }
+    $conn->close();
+  }
+
   public function createThreadReply($userid,$content,$parent_message_id,$timestamp)
   {
     $database_connection = new DatabaseConnection();
@@ -546,7 +596,14 @@ class WebService{
 
     foreach ($userids as $id) {
       $userid=mysqli_real_escape_string($conn,$id);
-      $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
+
+      $userExists= $sql_service->userExistsinChannel($userid,$channelid);
+      $userExistsResult = $conn->query($userExists);
+      if ($userExistsResult->num_rows > 0) {
+          $userChannelMap = $sql_service->createChannelUserMapUserExists($userid,$channelid,$timestamp);
+      } else {
+          $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
+      }
       $result = $conn->query($userChannelMap);
       if ($result === TRUE) {
           echo "success";

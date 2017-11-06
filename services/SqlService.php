@@ -45,7 +45,7 @@ class SqlService{
 		$sql="SELECT channel.channel_id,channel.is_archive,channel.channel_name,channel.type,channel.purpose,channel.created_by,channel.created_at FROM `workspace_channel`,`channel` where workspace_channel.channel_id=channel.channel_id and workspace_id=".$workspaceid;
 		return $sql;
 	}
-	
+
 	public function getChannelGeneral($userid)
 	{
 		$sql="SELECT channel.channel_id,channel.channel_name,channel.type,channel.purpose,channel.created_by,channel.created_at,user_channel.joined_at FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and user_channel.left_at='0000-00-00 00:00:00' and channel.channel_name='general' and user_channel.user_id=".$userid;
@@ -57,7 +57,7 @@ class SqlService{
 		$sql="SELECT user.user_name,user.user_id,user.first_name,user.last_name,user.profile_pic,user.status,user.status_emoji FROM `user`,`user_workspace` where user.user_id=user_workspace.user_id and user_workspace.workspace_id=".$workspaceid;
 		return $sql;
 	}
-	
+
 	public function getSpecificChannelDetails($channelid)
 	{
 		$sql="SELECT channel.channel_id,channel.is_archive,channel_name,type,purpose,created_by,created_at,count(user_channel.user_id) as usercount FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and channel.channel_id=".$channelid;
@@ -66,7 +66,7 @@ class SqlService{
 
 	public function getSpecificChannelUserDetails($channelid)
 	{
-		$sql="SELECT GROUP_CONCAT(first_name,' ') as names FROM `user`,`user_channel` where user_channel.user_id=user.user_id and user_channel.channel_id=".$channelid;
+		$sql="SELECT GROUP_CONCAT(first_name,' ') as names FROM `user`,`user_channel` where user_channel.user_id=user.user_id and user_channel.left_at='0000-00-00 00:00:00' and user_channel.channel_id=".$channelid;
 		return $sql;
 	}
 	public function getChannelMessages($channelid)
@@ -106,9 +106,20 @@ class SqlService{
 	}
 	public function getUserInWorkspaceNotInChannel($workspaceid,$channelid)
 	{
-		$sql="SELECT user.user_id as id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id NOT IN(select user_channel.user_id from user_channel where user_channel.channel_id=".$channelid.")";
+		$sql="SELECT user.user_id as id,user.first_name,user.last_name,user.profile_pic FROM `user_workspace`,`user` where user.user_id=user_workspace.user_id and workspace_id=".$workspaceid." and user.user_id NOT IN(select user_channel.user_id from user_channel where user_channel.channel_id=".$channelid." and user_channel.left_at='0000-00-00 00:00:00')";
 		return $sql;
 	}
+	public function leaveChannel($userid,$channelid,$timestamp)
+	{
+		$sql="UPDATE `InterConn`.`user_channel` SET `left_at` = '".$timestamp."' WHERE `user_channel`.`user_id` = ".$userid." AND `user_channel`.`channel_id` = ".$channelid;
+		return $sql;
+	}
+	public function userExistsinChannel($userid,$channelid)
+	{
+		$sql="SELECT * FROM `user_channel` where user_id=".$userid." and channel_id=".$channelid;
+		return $sql;
+	}
+
 	public function insertReplyThread($parentmessageid,$content,$created_by,$timestamp)
 	{
 		$sql="INSERT INTO `InterConn`.`threaded_message` (`id`, `parent_message_id`, `content`, `created_by`, `created_at`) VALUES (NULL, '".$parentmessageid."', '".$content."', '".$created_by."', '".$timestamp."')";
@@ -175,7 +186,11 @@ class SqlService{
 		$sql="INSERT INTO `InterConn`.`user_channel` (`user_id`, `channel_id`, `joined_at`, `left_at`, `starred`) VALUES ( '".$userid."',  '".$channelid."',  '".$timestamp."', '0000-00-00 00:00:00', '0')";
 		return $sql;
 	}
-
+	public function createChannelUserMapUserExists($userid,$channelid,$timestamp)
+	{
+		$sql="UPDATE `InterConn`.`user_channel` SET `joined_at` = '".$timestamp."', `left_at` = '0000-00-00 00:00:00' WHERE `user_channel`.`user_id` =".$userid." AND `user_channel`.`channel_id` = ".$channelid;
+		return $sql;
+	}
 	public function registerNewUser($username,$first_name,$last_name,$email_id,$profile_pic,$password,$phone_number,$what_i_do,$status,$status_emoji,$skype)
 	{
 		$sql="INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`) VALUES (NULL, '".$username."', '".$first_name."', '".$last_name."', '".$email_id."', '".$profile_pic."', '".$password."', '".$phone_number."', '".$what_i_do."', '".$status."', ".$status_emoji.", '".$skype."')";
