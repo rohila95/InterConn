@@ -74,6 +74,16 @@ class SqlService{
 		$sql="SELECT message.message_id,user.user_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded,user.profile_pic FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at";
 		return $sql;
 	}
+	public function deletethreadedMessages($messageid)
+	{
+		$sql="UPDATE `InterConn`.`threaded_message` SET `is_active` = '1' WHERE `threaded_message`.`id` =".$messageid;
+		return $sql;
+	}
+	public function deleteChannelMessages($messageid)
+	{
+		$sql="UPDATE `InterConn`.`message` SET `is_active` = '1' WHERE `message`.`message_id` =".$messageid;
+		return $sql;
+	}
 	public function getMessageReactions($messageid)
 	{
 		$sql="SELECT count(*) as count,message_reaction.emoji_id,message_id,emoji.emoji_code,emoji.emoji_pic FROM `message_reaction`,`emoji` where message_reaction.emoji_id=emoji.emoji_id and message_id=".$messageid." group by message_id, message_reaction.emoji_id";
@@ -81,7 +91,7 @@ class SqlService{
 	}
 	public function getThreadMessages($parent_message_id)
 	{
-		$sql="SELECT threaded_message.id,threaded_message.content,threaded_message.created_at,user.user_id,user.first_name,user.last_name,user.profile_pic FROM `threaded_message`,`user` where threaded_message.created_by=user.user_id and parent_message_id=".$parent_message_id." order by threaded_message.created_at";
+		$sql="SELECT threaded_message.id,threaded_message.content,threaded_message.created_at,user.user_id,user.first_name,user.last_name,user.profile_pic FROM `threaded_message`,`user` where threaded_message.created_by=user.user_id and threaded_message.is_active=0 and parent_message_id=".$parent_message_id." order by threaded_message.created_at";
 		return $sql;
 	}
 	public function getThreadMessageReactions($threadmessage_id)
