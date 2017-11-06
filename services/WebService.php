@@ -391,7 +391,7 @@ class WebService{
     $query = $sql_service->archieveChannel($channelid);
     $result = $conn->query($query);
     if ($result === TRUE) {
-      echo "Success";
+      echo "success";
     } else {
         echo "Error: " . $query . "<br>" . $conn->error;
     }
@@ -406,7 +406,7 @@ class WebService{
     $query = $sql_service->unArchieveChannel($channelid);
     $result = $conn->query($query);
     if ($result === TRUE) {
-      echo "Success";
+      echo "success";
     } else {
         echo "Error: " . $query . "<br>" . $conn->error;
     }

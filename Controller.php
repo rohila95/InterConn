@@ -94,6 +94,16 @@ if(isset($_POST["getworkspaces"]))
 {
   echo  $webService->getAllWorkspaceDetails();
 }
+if(isset($_POST["archieveChannel"]))
+{
+  $channelid=$_POST["archieveChannel"];
+  echo  $webService->archieveChannel($channelid);
+}
+if(isset($_POST["unArchieveChannel"]))
+{
+  $channelid=$_POST["unArchieveChannel"];
+  echo  $webService->unArchieveChannel($channelid);
+}
 if(isset($_POST["createChannel"]))
 {
   $data=json_decode($_POST["createChannel"]);

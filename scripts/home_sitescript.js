@@ -16,6 +16,69 @@ function start()
 		$('body').click(function(){
 			$(".resSuggDiv").remove();
 		});
+		
+		$('.archieveButton').click(function(){
+			$.post('./Controller.php',{"archieveChannel":channelid},function (data){
+				if(data.includes('success'))
+				{
+					$('#successModal .modal-body').html("<p> Channel Archieved Successfully. </p>");
+					$('#successModal').on('hidden.bs.modal', function (e) {
+						$('#successModal').off();
+                        window.location.href = "./HomePage.php?channel="+channelid;
+
+					});
+					$("#successModal").modal("show");
+					$("#successModal").css("z-index","1100");
+					setTimeout(function()
+						{
+							$('#successModal').modal('hide');
+							window.location.href = "./HomePage.php?channel="+channelid;
+						}, 4000);		
+				}
+				else
+				{
+					$('#errorModal .modal-body').html("<p> Channel not Archieved. </p>");
+					$('#errorModal').on('hidden.bs.modal', function (e) {
+						$('#errorModal').off();
+					});
+					$("#errorModal").modal("show");
+					$("#errorModal").css("z-index","1100");
+					setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+				}
+				
+			});
+		});
+		$('.unarchieveButton').click(function(){
+			$.post('./Controller.php',{"unArchieveChannel":channelid},function (data){
+				if(data.includes('success'))
+				{
+					$('#successModal .modal-body').html("<p> Channel UnArchieved Successfully. </p>");
+					$('#successModal').on('hidden.bs.modal', function (e) {
+						$('#successModal').off();
+                        window.location.href = "./HomePage.php?channel="+channelid;
+
+					});
+					$("#successModal").modal("show");
+					$("#successModal").css("z-index","1100");
+					setTimeout(function()
+						{
+							$('#successModal').modal('hide');
+							window.location.href = "./HomePage.php?channel="+channelid;
+						}, 4000);		
+				}
+				else
+				{
+					$('#errorModal .modal-body').html("<p> Channel not UnArchieved. </p>");
+					$('#errorModal').on('hidden.bs.modal', function (e) {
+						$('#errorModal').off();
+					});
+					$("#errorModal").modal("show");
+					$("#errorModal").css("z-index","1100");
+					setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+				}
+				
+			});
+		});
 		$('input.userProfileSearchInput').keyup(function(){
 			$(".resSuggDiv").remove();
 			var inputStr = $(this).val().trim();
