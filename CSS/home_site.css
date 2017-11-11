@@ -450,3 +450,15 @@ pre
 {
     background-color: red;
 }
+
+.headerSpan{
+    cursor: pointer;: 
+}
+.existingChannelMemUL li{
+    padding: 4px 15px !important;
+}
+
+
+#channelMembershipEditingPUP .curSelChannel{
+    font-size: 12px;
+}

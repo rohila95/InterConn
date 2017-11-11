@@ -64,11 +64,22 @@ class SqlService{
 		return $sql;
 	}
 
+	// this Query returns the coma seperated listof users first names alone
 	public function getSpecificChannelUserDetails($channelid)
 	{
-		$sql="SELECT GROUP_CONCAT(first_name,' ') as names FROM `user`,`user_channel` where user_channel.user_id=user.user_id and user_channel.left_at='0000-00-00 00:00:00' and user_channel.channel_id=".$channelid;
+		$sql="SELECT GROUP_CONCAT(first_name,' ') as names  FROM `user`,`user_channel` where user_channel.user_id=user.user_id and user_channel.left_at='0000-00-00 00:00:00' and user_channel.channel_id=".$channelid;
 		return $sql;
 	}
+
+    // this Query returns the coma seperated listof users first names alone
+    public function getSpecificChannelUserDetWithIDs($channelid)
+    {
+        $sql="SELECT  user.first_name, user.last_name, user.user_id FROM `user`,`user_channel` where user_channel.user_id=user.user_id and user_channel.left_at='0000-00-00 00:00:00' and user_channel.channel_id=".$channelid;
+        return $sql;
+    }
+
+
+
 	public function getChannelMessages($channelid)
 	{
 		$sql="select * from (SELECT message.message_id,user.user_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded,user.profile_pic FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at desc limit 10) A order by A.created_at";

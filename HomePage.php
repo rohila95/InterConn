@@ -15,14 +15,23 @@
     $workspaceCreatorId=$workspaceDetails[0]->created_by;
 	$flag=0;
 	$is_admin=0;
-	if($workspaceCreatorId==$_SESSION['userid'])
-		$is_admin=1;
+	if($workspaceCreatorId==$_SESSION['userid']){
+        $is_admin=1;
+        echo "<script>isAdmin= true; </script>";
+    }
+
     $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid'],$workspaceid,$is_admin));
     $directMessagesDetails = json_decode($web_service->getDirectMessagesDetails($workspaceDetails[0]->workspace_id));
-// echo $web_service->getChannelsDetails($_SESSION['userid']);
+   // echo $web_service->getChannelsDetails($_SESSION['userid']);
     $_SESSION['channelid']=$_GET["channel"];
+    // changing the below service call to the getSpecificChannelUserDetWithIDs to get the UserIds as well
     $groupMembers=json_decode($web_service->getSpecificChannelUserDetails($_GET["channel"]));
-   	$channelstr='';
+
+    $groupMembersWholeDet=json_decode($web_service->getSpecificChannelUserDetWithIDs($_GET["channel"]));
+    /*print_r($groupMembersWholeDet);
+    return;*/
+
+  	$channelstr='';
    	$archiveChannelstr='';
    	$directMessagestr='';
    	$channelCount=0;
@@ -164,7 +173,7 @@
 
 			        </div>
 			        <div class="modal-footer">
-			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
 			        </div>
 			      </div>
 			    </div>
@@ -180,7 +189,7 @@
 
 			        </div>
 			        <div class="modal-footer">
-			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
 			        </div>
 			      </div>
 			    </div>
@@ -208,7 +217,55 @@
 			      </div>
 			    </div>
 			</div>
-			<div class="modal fade" id="createChannel" role="dialog">
+
+
+            <div class="modal fade" id="channelMembershipEditingPUP" role="dialog">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header regularModal">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Channel Membership <span class="curSelChannel"> </span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-3"> </div>
+                                <div class="existingChannelMembersWrapper col-xs-6">
+                                    <span class='popupSubtitle'><b>Existing members</b></span>
+                                    <ul class="list-group existingChannelMemUL">
+                                        <?php
+                                        if ($groupMembersWholeDet!=null) {
+                                            $listGroupStr="";
+                                            foreach ($groupMembersWholeDet as $grpMem) {
+                                                $listGroupStr.= "<li class='list-group-item' userid='$grpMem->user_id'>". $grpMem->first_name." ".$grpMem->last_name ."</li>";
+                                            }
+                                            echo $listGroupStr;
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-3"> </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group inviteFromChannelPageFG">
+                                    <span class='invites'><b>Invite new members</b></span>
+                                    <div class="existingChannelInvites">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default cancelChanges" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default saveChanges" data-dismiss="modal">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="createChannel" role="dialog">
 			    <div class="modal-dialog modal-lg">
 			      <div class="modal-content">
 			        <div class="modal-header">
@@ -288,9 +345,9 @@
 		                            {
 
 		                                if($currentChannel[0]->type=='private')
-		                                    echo '<div class="channelTitle currentChannelTitle col-xs-6 " id="'.$_GET["channel"].'"><i class="fa fa-lock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+		                                    echo '<div class="channelTitle currentChannelTitle col-xs-6 " id="'.$_GET["channel"].'"><i class="fa fa-lock"></i> <span>'. htmlspecialchars($currentChannel[0]->channel_name).'</span></div>';
 		                                else if($currentChannel[0]->type=='public')
-		                                    echo '<div class="channelTitle currentChannelTitle col-xs-6 " id="'.$_GET["channel"].'"><i class="fa fa-unlock"></i> '. htmlspecialchars($currentChannel[0]->channel_name).'</div>';
+		                                    echo '<div class="channelTitle currentChannelTitle col-xs-6 " id="'.$_GET["channel"].'"><i class="fa fa-unlock"></i> <span>'. htmlspecialchars($currentChannel[0]->channel_name).'</span></div>';
 		                                $user_count=$currentChannel[0]->usercount;
 		                                $purpose=$currentChannel[0]->purpose;
 		                            }
@@ -298,18 +355,33 @@
 		                    ?>
 
 		                </div>
-		                <div class='row headerAddon_HP'>
-		                    <i class="fa fa-star-o"></i> | <a href="#" data-toggle="tooltip" data-placement="bottom" title=<?php echo '"'.htmlspecialchars($groupMembers[0]->names).'"';?>><i class="fa fa-users"></i></a> <?php echo $user_count;?>| Purpose: <i><?php echo htmlspecialchars($purpose);?></i>
+                        <?php
+                            if($currentChannel[0]->is_archive==0)
+                            {
+                                echo "<div class='row headerAddon_HP activeChannel'>";
+                            }else{
+                                echo "<div class='row headerAddon_HP archivedChannel'>";
+                            }
+                        ?>
+		                    <span class="starChannelIcon headerSpan"> <i class="fa fa-star-o"></i> </span> |
+                            <span class="channelMemebersShortDetails headerSpan">
+                                <a href="#" title="Edit Members" class="channelMemebersEditButt" data-toggle="tooltip" data-placement="bottom" >
+                                <i class="fa fa-users"></i></a> <span class="membersCount" title=<?php echo '"'.htmlspecialchars($groupMembers[0]->names).'"';?>> <?php echo $user_count;?>  </span>
+                            </span>|
+                            <span class="channelPurpose headerSpan" title="Channel Purpose">
+                                <i><?php echo htmlspecialchars($purpose);?></i>
+                            </span>
+
 		                    <?php
 		                    	if($currentChannel[0]->is_archive==0)
 		                    	{
 			                    	if($currentChannel[0]->created_by==$_SESSION['userid'] && $currentChannel[0]->type=='private')
 			                    	{
-			                    		echo ' |<span class="invitations"> Invite Members</span>';
+			                    		echo ' |<span class="invitations headerSpan"> Invite Members</span>';
 			                    	}
 			                    	else if($currentChannel[0]->type=='public' && $currentChannel[0]->channel_name!='general' && $currentChannel[0]->channel_name!='random')
 			                    	{
-			                    		echo ' |<span class="invitations"> Invite Members</span>';
+			                    		echo ' |<span class="invitations headerSpan"> Invite Members</span>';
 			                    	}
 			                    }
 		                    ?>

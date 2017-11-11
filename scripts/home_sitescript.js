@@ -128,6 +128,18 @@ function start()
 			$('#existingChannelInvites').modal('show');
 
 		});
+
+
+
+        $(document).on('click','.channelMemebersEditButt',function(){
+        	if($(this).parents(".headerAddon_HP").hasClass("archivedChannel")){
+        		return;
+			}
+            $("#channelMembershipEditingPUP .curSelChannel").html($(".currentChannelTitle span").html());
+            $('.existingChannelInvites').select2('data', null);
+            $('#channelMembershipEditingPUP').modal('show');
+
+        });
 		
 
 		console.log(getusersdata);
@@ -490,34 +502,39 @@ function start()
         });
 
 
+		/* Below click registration for channel members editing */
+        $(document).on("click",".channelMemebersEditButt",function(e) {
+
+        });
 
 	});
 }
 start();
 function escapeHtml(str)
-		{
-		    var map =
-		    {
-		        '&': '&amp;',
-		        '<': '&lt;',
-		        '>': '&gt;',
-		        '"': '&quot;',
-		        "'": '&#039;'
-		    };
-		    return str.replace(/[&<>"']/g, function(m) {return map[m];});
-		}
+{
+	var map =
+	{
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		"'": '&#039;'
+	};
+	return str.replace(/[&<>"']/g, function(m) {return map[m];});
+}
 function decodeHtml(str)
 {
-    var map =
-    {
-        '&amp;': '&',
-        '&lt;': '<',
-        '&gt;': '>',
-        '&quot;': '"',
-        '&#039;': "'"
-    };
-    return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m) {return map[m];});
+	var map =
+	{
+		'&amp;': '&',
+		'&lt;': '<',
+		'&gt;': '>',
+		'&quot;': '"',
+		'&#039;': "'"
+	};
+	return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m) {return map[m];});
 }
+
 // gets all the the thread replies, by just needing the parentmsgID
 function getAllThreadReplies(parentMsgID){
     var convertedJSON ={};
@@ -537,7 +554,7 @@ function getAllThreadReplies(parentMsgID){
                 var jsonArrRes = $.parseJSON(data);
                 // to update the number of replies in case if changed
 								if(jsonArrRes.length > 0 && $(".messagewithid_"+parentMsgID).find(".repliescount").length < 1){
-				                    $(".messagewithid_"+parentMsgID).find(".msg_reactionsec").append('<div class="repliescount" title="view thread"><a href="#"><span>'+jsonArrRes.length +'</span> replies</a></div>');
+				                    $(".messagewithid_"+parentMsgID).find(".msg_reactionsec").append('<div class="repliescount" 										title="view thread"><a href="#"><span>'+jsonArrRes.length +'</span> replies</a></div>');
 								}else {
 									$(".messagewithid_"+parentMsgID).find(".repliescount span").html(jsonArrRes.length);
 								}
