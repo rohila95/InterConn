@@ -266,9 +266,12 @@
                     	echo '<div class="btn-group messageHoverButtons">
 							    <button emojiid="1" type="button" class="btn btn-primary thumbsbutt" title="thumbsup"><i class="fa fa-thumbs-o-up"></i></button>
 							    <button emojiid="2" type="button" class="btn btn-primary thumbsbutt" title="thumbsdown"><i class="fa fa-thumbs-o-down"></i></button>
-							    <button type="button" class="btn btn-primary threadbutt nonthumbbutts" title="thread"><i class="fa fa-comments-o"></i></button>
-							    <button type="button" class="btn btn-primary replybutt nonthumbbutts " title="reply"><i class="fa fa-reply"></i></button>
-							</div>';
+							    <button type="button" class="btn btn-primary threadbutt nonthumbbutts" title="thread"><i class="fa fa-comments-o"></i></button>';
+						if($workspaceCreatorId==$_SESSION['userid'])
+							{
+							   echo '<button type="button" class="btn btn-primary replybutt nonthumbbutts " title="reply"><i class="fa fa-trash-o"></i></button>';
+							}
+						echo '</div>';
                        
                     }
                 }

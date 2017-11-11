@@ -152,11 +152,16 @@ class WebService{
     $sql_service = new SqlService();
     $channelMessages = $sql_service->getChannelMessages($channelid);
     $result = $conn->query($channelMessages);
-
+    $flag=0;
 
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
+          if($flag==0)
+          {
+            $lastmessageid=$row['message_id'];
+            $flag=1;
+          }
           //get emojis
           $messageid=$row['message_id'];
           $emojiArray=[];
@@ -200,9 +205,12 @@ class WebService{
 
           $array[]= $row;
       }
+
+      
     } else {
         return 'fail';
     }
+
     return json_encode($array);
     $conn->close();
   }
