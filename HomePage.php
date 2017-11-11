@@ -411,11 +411,11 @@
                 <div class="col-xs-12 regularMessagesWrapper">
                     <div class="row rightContent_wrapper_HP">
                         <div class="messagesList">
-                        <div>This is the begining of Chat....</div>
+                        
                         <?php
                             if(isset($_GET["channel"])){
                                 // echo $web_service->getChannelMessages($_GET["channel"]);
-                                $currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"]));
+                                $currentChannelMessages = json_decode($web_service->getChannelMessages($_GET["channel"],-1));
                                 // var_dump($currentChannelMessages);
 
                                 $msgStr='';
@@ -424,6 +424,17 @@
                                 $prevTime='';
                                 if ($currentChannelMessages!=null)
                                 {
+                                	$remainingMessages= $currentChannelMessages->messageCount;
+                                	// echo $remainingMessages;
+
+	                                $lastmessageid= $currentChannelMessages->lastmessageid;
+	                                // echo $lastmessageid;
+	                                if($remainingMessages==0)
+	                                	echo '<div>This is the begining of Chat....</div>';
+	                                else if($remainingMessages>0)
+	                                	echo '<div class="oldMessages" id='.$lastmessageid.'>Load Old Messages</div>';
+	                                $currentChannelMessages=$currentChannelMessages->messages;
+
                                     date_default_timezone_set('America/New_York');
                                     $time= time();
                                     $today = date("l, F jS, o", $time);

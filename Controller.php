@@ -32,7 +32,13 @@ if(isset($_POST["setReaction"])){ // to post a react by a
 
 
 }
-
+if(isset($_POST["retrieveOldMessages"]))
+{
+  $data=json_decode($_POST["retrieveOldMessages"]);
+  $channelid=$data->channelid;
+  $lastmessageid=$data->lastmessageid;
+  echo  $webService->getChannelMessages($channelid,$lastmessageid);
+}
 if(isset($_POST["register"])){ // to post a react by a
 	$data=json_decode($_POST["register"]);
 	// var_dump($data);

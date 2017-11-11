@@ -144,16 +144,20 @@ class WebService{
     $conn->close();
   }
 
-  public function getChannelMessages($channelid)
+  public function getChannelMessages($channelid,$lastMessageid)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
     $channelid=mysqli_real_escape_string($conn,$channelid);
+    $lastMessageid=mysqli_real_escape_string($conn,$lastMessageid);
     $sql_service = new SqlService();
-    $channelMessages = $sql_service->getChannelMessages($channelid);
+    if($lastMessageid==-1)
+      $channelMessages = $sql_service->getChannelMessages($channelid);
+    else
+      $channelMessages = $sql_service->getOlderChannelMessages($channelid,$lastMessageid);
     $result = $conn->query($channelMessages);
     $flag=0;
-
+    $messagesExist=0;
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
@@ -205,13 +209,25 @@ class WebService{
 
           $array[]= $row;
       }
-
+      if($lastmessageid!=0){
+        $messagesCount = $sql_service->getOlderChannelMessagesCount($channelid,$lastmessageid);
+        $countresult = $conn->query($messagesCount);
+         // echo 'message count'.$messagesCount;
+        if ($countresult->num_rows > 0) {
+          while($countrow = $countresult->fetch_assoc()) {
+            $messagesExist=$countrow["messagecount"];
+             // echo 'new line'.$messagesExist.'---------'.$countrow["messagecount"];
+          }
+        }
+        else 
+          return 'fail';
+      }
       
     } else {
         return 'fail';
     }
 
-    return json_encode($array);
+    return json_encode(array("messages"=>$array,"messageCount"=>$messagesExist,"lastmessageid"=>$lastmessageid));
     $conn->close();
   }
 

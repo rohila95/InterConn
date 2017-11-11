@@ -16,7 +16,25 @@ function start()
 		$('body').click(function(){
 			$(".resSuggDiv").remove();
 		});
-		
+		$(document).on("click",".oldMessages",function(){
+			var queryStr='{"channelid":"'+channelid+'","lastmessageid":"'+$(this).attr('id')+'"}';
+			// console.log(queryStr);
+			$.post('./Controller.php',{"retrieveOldMessages":queryStr},function (data){
+				console.log(data);
+				var messages=$.parseJSON(data);
+				var messageCount=messages["messageCount"];
+				var lastmessageid=messages["lastmessageid"];
+				$('.oldMessages').remove();
+
+				var divStr='';
+				if (messageCount==0)
+					divStr+='<div>This is the begining of Chat....</div>';
+				else
+					divStr+='<div class="oldMessages" id='+lastmessageid+'>Load Old Messages</div>';
+
+				
+			});
+		});
 		$('.archieveButton').click(function(){
 			$.post('./Controller.php',{"archieveChannel":channelid},function (data){
 				if(data.includes('success'))
