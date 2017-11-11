@@ -21,16 +21,23 @@ function start()
 			// console.log(queryStr);
 			$.post('./Controller.php',{"retrieveOldMessages":queryStr},function (data){
 				console.log(data);
-				var messages=$.parseJSON(data);
-				var messageCount=messages["messageCount"];
-				var lastmessageid=messages["lastmessageid"];
+				// var messageList=$.parseJSON(data);
+				// var messageCount=messageList["messageCount"];
+				// var lastmessageid=messageList["lastmessageid"];
+				// var messages=messageList["messages"];
 				$('.oldMessages').remove();
+				$('.messagesList').prepend(data);
+				// var divStr='';
+				// if (messageCount==0)
+				// 	divStr+='<div>This is the begining of Chat....</div>';
+				// else
+				// 	divStr+='<div class="oldMessages" id='+lastmessageid+'>Load Old Messages</div>';
+				// $.each(messages,function(i,obj){
+				// 		console.log(obj);
 
-				var divStr='';
-				if (messageCount==0)
-					divStr+='<div>This is the begining of Chat....</div>';
-				else
-					divStr+='<div class="oldMessages" id='+lastmessageid+'>Load Old Messages</div>';
+						
+				// });
+
 
 				
 			});
