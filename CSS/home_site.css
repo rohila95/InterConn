@@ -1,8 +1,16 @@
 
 
-@media screen and (min-height: 845px) {
-
+@media screen and (max-width: 745px) {
+    .menu_leftMain_HP{
+        overflow-x: scroll !important;
+    }
+    .leftMenuContentWrapper_HP{
+        overflow-x: scroll !important;
+    }
 }
+
+
+
 .invitations
 {
   cursor: pointer;
@@ -92,8 +100,9 @@
 
   .menu_leftMain_HP{
       background-color: #222222;
-      height:100% !important;
+      height:97.5% !important;
       overflow-y: auto;
+      overflow-x: hidden;
   }
   .leftMenuContentWrapper_HP{
 	  min-height: 100% !important;
@@ -109,8 +118,8 @@ html, body {
 }
 
 
+
 .verticle_navbar_HP{
-	   min-width: 11% !important;
 	   background-color: #222222;
       font-family: Times New Roman !important;
        font-size: 16px;
@@ -186,10 +195,6 @@ html, body {
     cursor: pointer;
 }
 
-.channelsContainer_menu_HP,.archieveChannelsContainer_menu_HP ,.directMessageContainer_menu_HP{
-	max-height: 30%;
-
-}
 
 
 .directMessageContainer_menu_HP{
@@ -235,7 +240,7 @@ html, body {
 .channels_UL_List, .directmessages_UL_List{
 
     margin-top: -9%;
-
+    width:100%;
  }
 
 .signOut
@@ -322,9 +327,9 @@ pre
     white-space: pre-wrap;
 }
 
-.mainContent_HP{
-    max-width: 89%;
-}
+/*.mainContent_HP{
+    max-width: 85%;
+}*/
 
 .regularMessagesWrapper{
     height:100% !important;
@@ -393,8 +398,8 @@ pre
 .messageEntrySpace_regularMsg_HP {
     position: fixed;
     bottom: -0.5%;
-    width: 86.7%;
-    left: 12.5%;
+    width: 78.7%;
+    left: 19.5%;
 }
 .fa-paper-plane
 {

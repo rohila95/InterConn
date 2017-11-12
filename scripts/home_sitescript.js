@@ -172,7 +172,7 @@ function start()
 
 		console.log(getusersdata);
 		$.post('./Controller.php',{"getWorkspaceUsers":getusersdata},function (data){
-			usersData=$.parseJSON(data);
+                usersData=$.parseJSON(data);
 			$('.channelInvites').select2({
 		    width: '100%',
 		    allowClear: true,
@@ -340,7 +340,7 @@ function start()
 			//$(".threadMessageWrapper").html("<h2>Clicked on the thread with messageId: "+curMessageId+"</h2>" );
             $(".messageHoverButtons").hide();
             $(".regularMessagesWrapper").removeClass("col-xs-12").addClass("col-xs-8");
-			$(".messageEntrySpace_regularMsg_HP").css("width","56.7%");
+			$(".messageEntrySpace_regularMsg_HP").css("width","51.7%");
             var curMsgEle = $(".regularMessagesWrapper").find(".messagewithid_"+curMessageId);
             $(".threadMessageWrapper .parentmsgidip_threadmsg").val(curMessageId);
             var parentsUserPicEle = curMsgEle.parents(".messageSet").eq(0).find(".userPic").clone();
@@ -432,7 +432,7 @@ function start()
 		        }
 		    });
 	 	});
-		$( ".inviteExistingChannel" ).on("click",function(e) {
+		$( ".inviteExistingChannel, .saveChangesChannelMemShipEdit" ).on("click",function(e) {
 
 			var ids=[];
 			$.each(usersData,function(i,obj){
@@ -440,7 +440,7 @@ function start()
 				$.each($(".select2-choices li div"),function(i,innerobj){
 
 					if(obj['text']==innerobj['outerText'])
-						ids.push(obj['id']);
+						ids.push(obj['user_id']);
 				});
 			});
 
@@ -519,6 +519,9 @@ function start()
 						userTobeAddedToSuggList['last_name'] = curUserFullnumber.split(" ")[1];
 						userTobeAddedToSuggList['profile_pic'] = "./images/"+ userLIToRemove.attr('userid')+".png";
 						userTobeAddedToSuggList['text'] = curUserFullnumber;
+						if(usersChannelData == ""){
+                            usersChannelData = [];
+						}
 						usersChannelData.push(userTobeAddedToSuggList);
 
                          /* logic to remove the array element

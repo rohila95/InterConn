@@ -113,14 +113,14 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-1 verticle_navbar_HP">
+			<div class="col-xs-2 verticle_navbar_HP">
 
 				<div class="row menu_leftMain_HP">
-					<div class="leftMenuContentWrapper_HP" >
+					<div class="row leftMenuContentWrapper_HP" >
 						<div class="row title_main_HP">
 							<h3> InterConn  </h3>
 						</div>
-						<div class="loginDetails">
+						<div class="row loginDetails">
 							<span class="loggedIn_user" id='<?php  echo $userDetails[0]->user_id ?>' title='<?php
                             if($is_admin){
                                 echo "Welcome Admin";
@@ -139,18 +139,22 @@
 
 
 						</div>
-						<span class="categoryTitle_HP"><i class="fa fa-comments-o"></i> All Threads</span><br>
+                        <div  class="row categoryTitle_HP"><i class="fa fa-comments-o"></i> <span>All Threads</span></div>
 						<div class="row channelsContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo $channelCount;?></span><i class="fa fa-plus-square-o pull-right createNewChannelIcon"></i></div>
-							<ul class="nav navbar-nav channels_UL_List">
+							<div class="row categoryTitle_HP channelTitle"> <div class="col-xs-10"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo $channelCount;?></span>
+
+                                    <i class="fa fa-plus-square-o   pull-right createNewChannelIcon"></i> </div>
+                            </div>
+							<ul class="row nav navbar-nav channels_UL_List">
 								<?php echo $channelstr;?>
 
 						    </ul>
 
 						</div>
 						<div class="row archieveChannelsContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Archieved Channels <span class="noOfChannels_HP numberCount_badge"><?php echo $archieveChannelCount;?></span></div>
-							<ul class="nav navbar-nav channels_UL_List">
+							<div class="row categoryTitle_HP channelTitle"> <div class="col-xs-12"><span> Archieved Channels</span>
+                                    <span class="noOfChannels_HP numberCount_badge"><?php echo $archieveChannelCount;?></span></div> </div>
+							<ul class=" row nav navbar-nav channels_UL_List">
 								<?php echo $archiveChannelstr;?>
 
 						    </ul>
@@ -158,7 +162,7 @@
 						</div>
 
 						<div class="row directMessageContainer_menu_HP">
-							<div class="categoryTitle_HP channelTitle"> Direct Messages <span class="noOfDirectMessages_HP numberCount_badge"> <?php echo count($directMessagesDetails);?></span><i class="fa fa-plus-square-o pull-right"></i></div>
+                            <div class="row categoryTitle_HP channelTitle"> <div class="col-xs-10"> <span>Direct Messages </span> <span class="noOfDirectMessages_HP numberCount_badge"> <?php echo count($directMessagesDetails);?></span><i class="fa fa-plus-square-o pull-right "></i> </div></div>
 							<ul class="nav navbar-nav directmessages_UL_List">
 						        <?php echo $directMessagestr;?>
 						    </ul>
@@ -272,7 +276,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default cancelChanges" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-default saveChanges" data-dismiss="modal">Save Changes</button>
+                            <button type="button" class="btn btn-default  saveChangesChannelMemShipEdit" data-dismiss="modal">Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -349,7 +353,7 @@
                 }
 			?>
 			
-            <div class="col-xs-11 mainContent_HP">
+            <div class="col-xs-10 mainContent_HP">
             	<div class="headerSpace_HP row">
 	            	<div class="col-xs-8">
 		            	<div class="headerMain row">

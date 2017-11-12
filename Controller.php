@@ -271,7 +271,9 @@ if(isset($_POST["getWorkspaceUsers"]))
   $data=json_decode($_POST["getWorkspaceUsers"]);
   $userid=$data->userid;
   $workspaceid=$data->workspaceid;
-  echo  $webService->getUsersInWorkspaceInvites($workspaceid,$userid);
+  // following line commented thinking that even the user being logged in has to be in the suggestion list to add
+  //echo  $webService->getUsersInWorkspaceInvites($workspaceid,$userid);
+    echo  $webService->getAllUsersInWorkspace($workspaceid);
 }
 if(isset($_POST["getWorkspaceUsersByInput"]))
 {
