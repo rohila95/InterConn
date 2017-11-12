@@ -20,25 +20,39 @@ function start()
 			var queryStr='{"channelid":"'+channelid+'","lastmessageid":"'+$(this).attr('id')+'"}';
 			// console.log(queryStr);
 			$.post('./Controller.php',{"retrieveOldMessages":queryStr},function (data){
-				console.log(data);
-				// var messageList=$.parseJSON(data);
-				// var messageCount=messageList["messageCount"];
-				// var lastmessageid=messageList["lastmessageid"];
-				// var messages=messageList["messages"];
 				$('.oldMessages').remove();
 				$('.messagesList').prepend(data);
-				// var divStr='';
-				// if (messageCount==0)
-				// 	divStr+='<div>This is the begining of Chat....</div>';
-				// else
-				// 	divStr+='<div class="oldMessages" id='+lastmessageid+'>Load Old Messages</div>';
-				// $.each(messages,function(i,obj){
-				// 		console.log(obj);
+			
+			});
+		});
+		$(document).on("click",".deletebutt",function(){
+			$.post('./Controller.php',{"deleteMessage":curMessageId},function (data){
+				if(data.includes('success'))
+				{
+					$('#successModal .modal-body').html("<p> Message deleted Successfully. </p>");
+					$('#successModal').on('hidden.bs.modal', function (e) {
+						$('#successModal').off();
+                        window.location.href = "./HomePage.php?channel="+channelid;
 
-						
-				// });
-
-
+					});
+					$("#successModal").modal("show");
+					$("#successModal").css("z-index","1100");
+					setTimeout(function()
+						{
+							$('#successModal').modal('hide');
+							window.location.href = "./HomePage.php?channel="+channelid;
+						}, 4000);		
+				}
+				else
+				{
+					$('#errorModal .modal-body').html("<p> Unable to delete message. </p>");
+					$('#errorModal').on('hidden.bs.modal', function (e) {
+						$('#errorModal').off();
+					});
+					$("#errorModal").modal("show");
+					$("#errorModal").css("z-index","1100");
+					setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+				}
 				
 			});
 		});

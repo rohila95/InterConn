@@ -345,7 +345,7 @@
 							    <button type="button" class="btn btn-primary threadbutt nonthumbbutts" title="thread"><i class="fa fa-comments-o"></i></button>';
 						if($workspaceCreatorId==$_SESSION['userid'])
 							{
-							   echo '<button type="button" class="btn btn-primary replybutt nonthumbbutts " title="delete post"><i class="fa fa-trash-o"></i></button>';
+							   echo '<button type="button" class="btn btn-primary deletebutt" title="delete message"><i class="fa fa-trash-o"></i></button>';
 							}
 						echo '</div>';
                        
