@@ -309,7 +309,29 @@ class WebService{
     $conn->close();
   }
 
+public function getAllUsersInWorkspace($workspaceid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
+    $sql_service = new SqlService();
+    $users = $sql_service->getUsersWorkspace($workspaceid);
+    $result = $conn->query($users);
 
+
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+              $row['text']=$row['first_name'].' '.$row['last_name'];
+              $array[]= $row;
+        }
+    } else {
+        return 'fail';
+    }
+    return json_encode($array);
+    $conn->close();
+  }
     public function getSpecificChannelUserDetWithIDs($channelid)
     {
         $database_connection = new DatabaseConnection();
