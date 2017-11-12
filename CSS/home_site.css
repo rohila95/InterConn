@@ -445,6 +445,7 @@ pre
 #successModal .modal-header
 {
     background-color: green;
+
 }
 #errorModal .modal-header
 {
@@ -454,6 +455,11 @@ pre
 .headerSpan{
     cursor: pointer;: 
 }
+
+.existingChannelMemUL{
+    margin-top: 3%;
+}
+
 .existingChannelMemUL li{
     padding: 4px 15px !important;
 }

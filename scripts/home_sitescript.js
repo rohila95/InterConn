@@ -485,6 +485,83 @@ function start()
 		    });
 	 	});
 
+
+		// handles the removing of user from a channel
+		$(document).on('click','.existingChannelMembersWrapper .removeUserFromChannel' ,function(){
+			var userLIToRemove = $(this).parents("li");
+            var ids=[];
+            ids.push(parseInt(userLIToRemove.attr('userid')));
+            var convertedJSON = {};
+            convertedJSON ['ids']=ids;
+            convertedJSON['channelid']=channelid;
+            var stringData = JSON.stringify(convertedJSON);
+            console.log(convertedJSON);
+            $.ajax({
+                url: './Controller.php',
+                type: 'post',
+                data: {'removeFromChannel':stringData},
+                dataType: 'text',
+                success: function (data) {
+                    console.log(data);
+                    if(data.includes('success'))
+                    {
+                        /* now this removed users li has to be removed and his data set to be added in the select 2 list */
+                        $('.existingChannelInvites').select2('data', null);
+
+
+						var userTobeAddedToSuggList = {};
+						var curUserFullnumber = userLIToRemove.find(".userfullname").html();
+                        userTobeAddedToSuggList['id'] = userLIToRemove.attr('userid');
+						userTobeAddedToSuggList['first_name'] = curUserFullnumber.split(" ")[0];
+						userTobeAddedToSuggList['last_name'] = curUserFullnumber.split(" ")[1];
+						userTobeAddedToSuggList['profile_pic'] = "./images/"+ userLIToRemove.attr('userid')+".png";
+						userTobeAddedToSuggList['text'] = curUserFullnumber;
+						usersChannelData.push(userTobeAddedToSuggList);
+
+                         /* logic to remove the array element
+                         	$.each(usersChannelData, function(i){
+                           if(usersChannelData[i].id === userLIToRemove.attr('userid')) {
+								   usersChannelData.splice(i,1);
+								   return false;
+							   }
+							 });
+                         */
+
+                        $('.existingChannelInvites').select2({
+                            width: '100%',
+                            allowClear: true,
+                            multiple: true,
+                            data: usersChannelData
+                        });
+                        userLIToRemove.remove();
+
+                        $('#successModal .modal-body').html("<p> Member Removed Successfully. </p>");
+                        $("#successModal").modal("show");
+                        $("#successModal").css("z-index","2100");
+                        setTimeout(function()
+                        {
+                            $('#successModal').modal('hide');
+                        }, 1000);
+
+
+                    }
+                    else if($.trim(data).split("-")[0]=="fail")
+                    {
+                        $('#errorModal .modal-body').html("<p>"+$.trim(data).split("-")[1]+"</p>");
+                        $("#errorModal").modal("show");
+                        $("#errorModal").css("z-index","2100");
+                        setTimeout(function() {$('#errorModal').modal('hide');}, 1000);
+                    }
+                }
+            });
+
+
+
+
+
+        });
+
+
         $(document).on("keypress",".messageentryspace_threadsection",function(e) {
                 if(e.which == 13 && !e.shiftKey) {
                     e.preventDefault();

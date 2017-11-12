@@ -293,11 +293,11 @@ if(isset($_POST["inviteToChannel"]))
 {
   // echo 'in cont';
   $data=json_decode($_POST["inviteToChannel"]);
-  $ids=$data->ids;
+    $useridArr=$data->ids;
   $channelid=$data->channelid;
   $timestamp=date('Y-m-d H:i:s', time());
-  if(ids!=[])
-    echo  $webService->inviteUser($ids,$channelid,$timestamp);
+  if($useridArr!=[])
+    echo  $webService->inviteUser($useridArr,$channelid,$timestamp);
   else
     echo 'fail-Please select atleast one member to invite.';
 }
@@ -305,13 +305,13 @@ if(isset($_POST["removeFromChannel"]))
 {
   // echo 'in cont';
   $data=json_decode($_POST["removeFromChannel"]);
-  $ids=$data->ids;
+  $useridArr=$data->ids;
   $channelid=$data->channelid;
   $timestamp=date('Y-m-d H:i:s', time());
-  if(ids!=[])
-    echo  $webService->leaveChannel($ids,$channelid,$timestamp);
+  if($useridArr!=[])
+    echo  $webService->leaveChannel($useridArr,$channelid,$timestamp);
   else
-    echo 'fail-Please select atleast one member to remove from channel.';
+    echo 'fail-Please select a member to remove from channel.';
 }
 if(isset($_POST["getProfileDetails"]))
 {

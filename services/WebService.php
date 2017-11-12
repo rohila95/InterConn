@@ -504,6 +504,8 @@ class WebService{
     $sql_service = new SqlService();
     foreach ($userids as $id) {
       $query = $sql_service->leaveChannel($id,$channelid,$timestamp);
+     /* echo $query;
+      return ;*/
       $result = $conn->query($query);
       if ($result === TRUE) {
         echo "success";

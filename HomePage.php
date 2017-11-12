@@ -237,7 +237,13 @@
                                         if ($groupMembersWholeDet!=null) {
                                             $listGroupStr="";
                                             foreach ($groupMembersWholeDet as $grpMem) {
-                                                $listGroupStr.= "<li class='list-group-item' userid='$grpMem->user_id'>". $grpMem->first_name." ".$grpMem->last_name ."</li>";
+                                                $listGroupStr.= "<li class='list-group-item' userid='$grpMem->user_id'><span class='userfullname'>". $grpMem->first_name." ".$grpMem->last_name ."</span>";
+
+                                                if($is_admin == 1){
+                                                    $listGroupStr.="<span><button type='button' class='close pull-right removeUserFromChannel' title='remove'>×</button></span>";
+                                                }
+                                                $listGroupStr.="</li>";
+
                                             }
                                             echo $listGroupStr;
                                         }
@@ -327,7 +333,7 @@
 							    <button type="button" class="btn btn-primary threadbutt nonthumbbutts" title="thread"><i class="fa fa-comments-o"></i></button>';
 						if($workspaceCreatorId==$_SESSION['userid'])
 							{
-							   echo '<button type="button" class="btn btn-primary replybutt nonthumbbutts " title="reply"><i class="fa fa-trash-o"></i></button>';
+							   echo '<button type="button" class="btn btn-primary replybutt nonthumbbutts " title="delete post"><i class="fa fa-trash-o"></i></button>';
 							}
 						echo '</div>';
                        
