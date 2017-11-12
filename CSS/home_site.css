@@ -336,21 +336,11 @@ pre
 }
 
 .rightContent_wrapper_HP {
-    /*position: absolute;*/
-    /*bottom: 6%;*/
-    /*left: 13%;*/
-   /* width: 87.8%;*/
-
-    /*padding-left: 1%;
-    max-height: 86%;
-    overflow-y: auto;
-    overflow-x: hidden;*/
-
     position: absolute;
-    bottom: 15%;
+    bottom: 23%;
     width: 100%;
     padding-left: 1%;
-    max-height: 85%;
+    max-height: 78%;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -384,11 +374,19 @@ pre
 
 .threadhead_parentmessage{
     border-bottom: 1px solid #bcbcbd;
+    max-height: 25%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
+
+.threadHeaderWrapper{
+    margin-top: -6%;
+}
+
 
 .threadedreplies_content{
     padding: 3%;
-    max-height: 62%;
+    max-height: 48%;
     overflow-x: hidden;
     overflow-y: auto;
 }
