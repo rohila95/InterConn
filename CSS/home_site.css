@@ -471,3 +471,15 @@ pre
 #channelMembershipEditingPUP .curSelChannel{
     font-size: 12px;
 }
+
+.busy-loader {
+    background: url(ajax-loader.gif) no-repeat scroll center center #FFF;
+    position: absolute;
+    width: 100%;
+    opacity: 0.6;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    min-width:90%;
+    height: 88%;
+}

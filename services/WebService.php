@@ -309,28 +309,28 @@ class WebService{
     $conn->close();
   }
 
-public function getAllUsersInWorkspace($workspaceid)
-  {
-    $database_connection = new DatabaseConnection();
-    $conn = $database_connection->getConnection();
-    $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
-    $sql_service = new SqlService();
-    $users = $sql_service->getUsersWorkspace($workspaceid);
-    $result = $conn->query($users);
+  public function getAllUsersInWorkspace($workspaceid)
+    {
+      $database_connection = new DatabaseConnection();
+      $conn = $database_connection->getConnection();
+      $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
+      $sql_service = new SqlService();
+      $users = $sql_service->getUsersWorkspace($workspaceid);
+      $result = $conn->query($users);
 
 
-    if ($result->num_rows > 0) {
+      if ($result->num_rows > 0) {
 
-        while($row = $result->fetch_assoc()) {
-              $row['text']=$row['first_name'].' '.$row['last_name'];
-              $array[]= $row;
-        }
-    } else {
-        return 'fail';
+          while($row = $result->fetch_assoc()) {
+                $row['text']=$row['first_name'].' '.$row['last_name'];
+                $array[]= $row;
+          }
+      } else {
+          return 'fail';
+      }
+      return json_encode($array);
+      $conn->close();
     }
-    return json_encode($array);
-    $conn->close();
-  }
     public function getSpecificChannelUserDetWithIDs($channelid)
     {
         $database_connection = new DatabaseConnection();
@@ -351,11 +351,6 @@ public function getAllUsersInWorkspace($workspaceid)
         return json_encode($array);
         $conn->close();
     }
-
-
-
-
-
 
   public function getUsersInWorkspaceInvites($workspaceid,$userid)
   {
@@ -500,18 +495,44 @@ public function getAllUsersInWorkspace($workspaceid)
     }
     $conn->close();
   }
-  public function deleteThreadedMessage($messageid)
+
+  public function deleteThreadedMessage($messageid,$parentmsgid)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
     $messageid=mysqli_real_escape_string($conn,$messageid);
+    $parentmsgid = mysqli_real_escape_string($conn,$parentmsgid);
     $sql_service = new SqlService();
-    $query = $sql_service->deletethreadedMessages($messageid);
-    $result = $conn->query($query);
+    $deleteThreadMsgQuery = $sql_service->deletethreadedMessages($messageid);
+    $result = $conn->query($deleteThreadMsgQuery);
     if ($result === TRUE) {
-      echo "success";
+      // now to check the count of active thread replies present
+        $countThreadRepliesQuery = $sql_service->getThreadReplyCount($parentmsgid);
+        $countQueryResult = $conn->query($countThreadRepliesQuery);
+        $threadCount = 0;
+        if ($countQueryResult->num_rows > 0) {
+            while($row = $countQueryResult->fetch_assoc()) {
+                $threadCount = $row['threadCount'];
+                if($threadCount >0){
+
+                    // do nothing
+                }else{
+                  $updateParentMsgToNoParentQuery= $sql_service->updateParentToNoParent($parentmsgid);
+                    $result = $conn->query($updateParentMsgToNoParentQuery);
+                    if($result == TRUE){
+                      echo "success";
+                      return;
+                    }else{
+                      echo "Error: ".$updateParentMsgToNoParentQuery . "<br>" . $conn->error;;
+                      return;
+                    }
+                }
+            }
+        }
+        echo "success";
+
     } else {
-        echo "Error: " . $query . "<br>" . $conn->error;
+        echo "Error: " . $deleteThreadMsgQuery . "<br>" . $conn->error;
     }
     $conn->close();
   }

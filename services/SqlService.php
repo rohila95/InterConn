@@ -169,6 +169,15 @@ class SqlService{
 		$sql="SELECT count(*) as threadCount FROM `threaded_message` where parent_message_id=".$messageid." and is_active=0";
 		return $sql;
 	}
+
+    public function updateParentToNoParent($parentmsgid)
+    {
+        $sql="UPDATE `InterConn`.`message` SET `is_threaded` = '0' WHERE `message`.`message_id` = ".$parentmsgid;
+        return $sql;
+    }
+
+
+
 	public function getLastThreadReply($messageid)
 	{
 		$sql="SELECT content,created_at,first_name,last_name,profile_pic FROM `threaded_message`,user where threaded_message.created_by=user.user_id and parent_message_id=".$messageid." order by created_at desc limit 1";
@@ -282,6 +291,12 @@ class SqlService{
 	public function getSpecificMessageReactionEmojiCount( $messageid,$emojid){
         $sql= "SELECT COUNT (*) FROM `InterConn`.`message_reaction` WHERE `message_reaction`.`message_id` = ".$messageid." and `message_reaction`.`emoji_id`=".$emojid;
         return $sql;
+	}
+
+	// to get the count of number of replies on a message
+	public function getRepliesCountOnMessage( $parentmessageid){
+		$sql = "SELECT COUNT(*) FROM `InterConn`.`threaded_message` WHERE `parent_message_id`=".$parentmessageid ." and `is_active` = 0";
+		return $sql;
 	}
 
 

@@ -28,7 +28,7 @@ function start()
 		$(document).on("click",".deletebutt",function(){
 			var postDataObj={};
 			if(curMessageId == ""){
-                postDataObj={"deleteThreadedMessage":curThreadReplyId};
+                postDataObj={"deleteThreadedMessage":curThreadReplyId,"parentMessageID":$(".threadReplyWithId_"+curThreadReplyId).parents(".threadedContent").find(".threadheadmsg .message_body").attr("id")};
 			}else{
                 postDataObj={"deleteMessage":curMessageId};
 			}
@@ -36,7 +36,11 @@ function start()
 			$.post('./Controller.php',postDataObj,function (data){
 				if(data.includes('success'))
 				{
-					$('#successModal .modal-body').html("<p> Message deleted Successfully. </p>");
+                    var successStr = "<p> Thread Reply deleted Successfully. </p>";
+					if(postDataObj["deleteThreadedMessage"] == undefined){
+                   		 successStr = "<p> Message deleted Successfully. </p>";
+					}
+					$('#successModal .modal-body').html(successStr);
 					$('#successModal').on('hidden.bs.modal', function (e) {
 						$('#successModal').off();
                         window.location.href = "./HomePage.php?channel="+channelid;
@@ -416,6 +420,7 @@ function start()
 		    convertedJSON['workspaceid']=$('.loggedIn_workspace').attr('id');
 		    var stringData = JSON.stringify(convertedJSON);
 	     	console.log(convertedJSON);
+	     	$("#wholebody_loader").show();
 		    $.ajax({
 		        url: './Controller.php',
 		        type: 'post',
@@ -431,6 +436,7 @@ function start()
                             window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
 
 						});
+                        $("#wholebody_loader").hide();
 						$("#successModal").modal("show");
 						$("#successModal").css("z-index","1100");
 						setTimeout(function()
@@ -470,13 +476,16 @@ function start()
 		    convertedJSON['channelid']=channelid;
 		    var stringData = JSON.stringify(convertedJSON);
 	     	console.log(convertedJSON);
-		    $.ajax({
+            $("#wholebody_loader").show();
+
+            $.ajax({
 		        url: './Controller.php',
 		        type: 'post',
 		        data: {'inviteToChannel':stringData},
 		        dataType: 'text',
 		        success: function (data) {
 		        	console.log(data);
+                    $("#wholebody_loader").hide();
 		        	if(data.includes('success'))
 		        	{
 		        		$('#successModal .modal-body').html("<p> Members invited Successfully. </p>");
@@ -520,6 +529,7 @@ function start()
             convertedJSON['channelid']=channelid;
             var stringData = JSON.stringify(convertedJSON);
             console.log(convertedJSON);
+            $("#wholebody_loader").show();
             $.ajax({
                 url: './Controller.php',
                 type: 'post',
@@ -527,6 +537,7 @@ function start()
                 dataType: 'text',
                 success: function (data) {
                     console.log(data);
+                    $("#wholebody_loader").hide();
                     if(data.includes('success'))
                     {
                         /* now this removed users li has to be removed and his data set to be added in the select 2 list */
@@ -612,12 +623,14 @@ function start()
 
                             var stringData = JSON.stringify(convertedJSON);
                             console.log(convertedJSON);
+                        	$("#threadmsg_loader").show();
                             $.ajax({
                                 url: './Controller.php',
                                 type: 'post',
                                 data: {'createThreadReply':stringData},
                                 dataType: 'text',
                                 success: function (data) {
+                                    $("#threadmsg_loader").hide();
 									if(data.split("-")[0]=="success"){
 									    $(".messageentryspace_threadsection textarea").val("");
                                         getAllThreadReplies($(".parentmsgidip_threadmsg").val());
@@ -674,6 +687,8 @@ function getAllThreadReplies(parentMsgID){
 
     var stringData = JSON.stringify(convertedJSON);
     console.log(convertedJSON);
+    //loader show
+    $("#threadmsg_loader").show();
     $.ajax({
         url: './Controller.php',
         type: 'post',
@@ -722,6 +737,8 @@ function getAllThreadReplies(parentMsgID){
                     $(".threadedreplies_content").find(".threadReplyWithId_"+obj['id']).append(curThRepMsgCont);
                 });
 
+				//loader hide
+                $("#threadmsg_loader").hide();
 
 
 

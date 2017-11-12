@@ -508,7 +508,11 @@
 
 
                    </div>
-                </div>
+
+                   <div id="threadmsg_loader" class="busy-loader" style="display: none;">
+                   </div>
+
+               </div>
             </div>
 		</div>
             </div>
@@ -517,5 +521,7 @@
 	<div class="footer row">
 		<small >&copy; Mahesh Kukunooru, Rohila Gudipati, Maheedhar Gunnam</small>
 	</div>
+    <div id="wholebody_loader" class="busy-loader" style="display: none;">
+    </div>
 	</body>
 </html>

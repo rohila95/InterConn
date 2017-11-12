@@ -122,7 +122,9 @@ if(isset($_POST["deleteMessage"]))
 if(isset($_POST["deleteThreadedMessage"]))
 {
   $messageid=$_POST["deleteThreadedMessage"];
-  echo  $webService->deleteThreadedMessage($messageid);
+  $parentmsgid= $_POST["parentMessageID"];
+  //echo $messageid." ".$parentmsgid;
+  echo  $webService->deleteThreadedMessage($messageid, $parentmsgid);
 }
 
 
