@@ -313,7 +313,6 @@ public function getAllUsersInWorkspace($workspaceid)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
-    $userid=mysqli_real_escape_string($conn,$userid);
     $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
     $sql_service = new SqlService();
     $users = $sql_service->getUsersWorkspace($workspaceid);
