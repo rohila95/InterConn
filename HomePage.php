@@ -355,7 +355,7 @@
 			
             <div class="col-xs-10 mainContent_HP">
             	<div class="headerSpace_HP row">
-	            	<div class="col-xs-8">
+	            	<div class="col-xs-7">
 		            	<div class="headerMain row">
 		                    <?php
 		                        if(isset($_GET["channel"])){
@@ -416,7 +416,7 @@
 				        <i  class="fa fa-search"></i>
 				        <input type="text" name="userProfileSearchInput" class="form-control userProfileSearchInput" placeholder="Search Name" />
 					</div>
-					<div class="col-xs-1 addOnButtons">
+					<div class="col-xs-2 addOnButtons">
 						<?php
 							if($workspaceCreatorId==$_SESSION['userid'])
 							{

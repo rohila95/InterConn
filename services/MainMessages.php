@@ -19,7 +19,7 @@ function constructMessagesDiv($messageStr)
     if($remainingMessages==0)
       echo '<div>This is the begining of Chat....</div>';
     else if($remainingMessages>0)
-      echo '<div class="oldMessages" id='.$lastmessageid.'>Load Old Messages</div>';
+      echo '<div class="oldMessages" id='.$lastmessageid.'><a>Loading more Messages...</a></div>';
     $currentChannelMessages=$currentChannelMessages->messages;
 
       date_default_timezone_set('America/New_York');

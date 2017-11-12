@@ -337,7 +337,7 @@ pre
 
 .rightContent_wrapper_HP {
     position: absolute;
-    bottom: 23%;
+    bottom: 22%;
     width: 100%;
     padding-left: 1%;
     max-height: 78%;
@@ -356,6 +356,9 @@ pre
     border-left: 1px solid #bcbcbd;
 }
 
+.oldMessages{
+    cursor: pointer;
+}
 
 .messageentryspace_threadsection{
     margin-top: 4%;
@@ -482,4 +485,7 @@ pre
     top: 0;
     min-width:90%;
     height: 88%;
+}
+#wholebody_loader{
+    height: 100%;
 }

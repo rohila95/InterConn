@@ -5,12 +5,28 @@ function start()
 	var usersData='';
 	var usersChannelData='';
     $(document).ready(function() {
-		console.log("Inside ready");
+        $("#wholebody_loader").hide();
+        console.log("Inside ready");
 		// $('[data-toggle="tooltip"]').tooltip();
 		var userid=$('.loggedIn_user').attr('id');
 		var workspaceid=$('.loggedIn_workspace').attr('id');
 		var channelid=$('.currentChannelTitle').attr('id');
 		var getusersdata='{"userid":"'+userid+'","workspaceid":"'+workspaceid+'"}';
+
+		// to make an ajax call on scroll top
+        $(".rightContent_wrapper_HP").scroll(function(){
+            if($(".rightContent_wrapper_HP").scrollTop()== 0){
+               if($(".oldMessages").length > 0 ){
+                   $(".oldMessages").trigger("click");
+               }
+            }
+
+        });
+
+		$(document).on("click",".channelsContainer_menu_HP a, .archieveChannelsContainer_menu_HP a",function(){
+            $("#wholebody_loader").show();
+		});
+
 		
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
 		$('body').click(function(){
@@ -19,7 +35,9 @@ function start()
 		$(document).on("click",".oldMessages",function(){
 			var queryStr='{"channelid":"'+channelid+'","lastmessageid":"'+$(this).attr('id')+'"}';
 			// console.log(queryStr);
+            $("#wholebody_loader").show();
 			$.post('./Controller.php',{"retrieveOldMessages":queryStr},function (data){
+                $("#wholebody_loader").hide();
 				$('.oldMessages').remove();
 				$('.messagesList').prepend(data);
 			
@@ -33,8 +51,11 @@ function start()
                 postDataObj={"deleteMessage":curMessageId};
 			}
 
-			$.post('./Controller.php',postDataObj,function (data){
-				if(data.includes('success'))
+            $("#wholebody_loader").show();
+            $.post('./Controller.php',postDataObj,function (data){
+                $("#wholebody_loader").hide();
+
+                if(data.includes('success'))
 				{
                     var successStr = "<p> Thread Reply deleted Successfully. </p>";
 					if(postDataObj["deleteThreadedMessage"] == undefined){
@@ -43,6 +64,7 @@ function start()
 					$('#successModal .modal-body').html(successStr);
 					$('#successModal').on('hidden.bs.modal', function (e) {
 						$('#successModal').off();
+						$("#wholebody_loader").show();
                         window.location.href = "./HomePage.php?channel="+channelid;
 
 					});
@@ -51,7 +73,8 @@ function start()
 					setTimeout(function()
 						{
 							$('#successModal').modal('hide');
-							window.location.href = "./HomePage.php?channel="+channelid;
+                            $("#wholebody_loader").show();
+                            window.location.href = "./HomePage.php?channel="+channelid;
 						}, 2000);
 				}
 				else
@@ -68,12 +91,16 @@ function start()
 			});
 		});
 		$('.archieveButton').click(function(){
-			$.post('./Controller.php',{"archieveChannel":channelid},function (data){
-				if(data.includes('success'))
+            $("#wholebody_loader").show();
+            $.post('./Controller.php',{"archieveChannel":channelid},function (data){
+                $("#wholebody_loader").hide();
+
+                if(data.includes('success'))
 				{
 					$('#successModal .modal-body').html("<p> Channel Archieved Successfully. </p>");
 					$('#successModal').on('hidden.bs.modal', function (e) {
 						$('#successModal').off();
+                        $("#wholebody_loader").show();
                         window.location.href = "./HomePage.php?channel="+channelid;
 
 					});
@@ -82,7 +109,8 @@ function start()
 					setTimeout(function()
 						{
 							$('#successModal').modal('hide');
-							window.location.href = "./HomePage.php?channel="+channelid;
+                            $("#wholebody_loader").show();
+                            window.location.href = "./HomePage.php?channel="+channelid;
 						}, 2000);
 				}
 				else
@@ -99,12 +127,16 @@ function start()
 			});
 		});
 		$('.unarchieveButton').click(function(){
-			$.post('./Controller.php',{"unArchieveChannel":channelid},function (data){
-				if(data.includes('success'))
+            $("#wholebody_loader").show();
+            $.post('./Controller.php',{"unArchieveChannel":channelid},function (data){
+                $("#wholebody_loader").hide();
+
+                if(data.includes('success'))
 				{
 					$('#successModal .modal-body').html("<p> Channel UnArchieved Successfully. </p>");
 					$('#successModal').on('hidden.bs.modal', function (e) {
 						$('#successModal').off();
+                        $("#wholebody_loader").show();
                         window.location.href = "./HomePage.php?channel="+channelid;
 
 					});
@@ -113,7 +145,8 @@ function start()
 					setTimeout(function()
 						{
 							$('#successModal').modal('hide');
-							window.location.href = "./HomePage.php?channel="+channelid;
+                            $("#wholebody_loader").show();
+                            window.location.href = "./HomePage.php?channel="+channelid;
 						}, 2000);
 				}
 				else
@@ -134,8 +167,11 @@ function start()
 			var inputStr = $(this).val().trim();
 			var searchInput=$(this);
 			var inputData='{"inputString":"'+inputStr+'","workspaceid":"'+workspaceid+'"}';
-			$.post('./Controller.php',{"getWorkspaceUsersByInput":inputData},function (data){
-				// console.log(data);
+            $("#wholebody_loader").show();
+            $.post('./Controller.php',{"getWorkspaceUsersByInput":inputData},function (data){
+                $("#wholebody_loader").hide();
+
+                // console.log(data);
 				if(data!='[]')
 				{
 					var usersData=$.parseJSON(data);
@@ -157,7 +193,8 @@ function start()
 	                $(".userSuggList").click(function(){
 	                	$('.userProfileSearchInput').val($(this).html());
 	                	$(".resSuggDiv").remove();
-	                	window.location.href = "ProfilePage.php?userid="+$(this).attr("id");
+                        $("#wholebody_loader").show();
+                        window.location.href = "ProfilePage.php?userid="+$(this).attr("id");
 	                });
            		}
 			});
@@ -196,8 +233,12 @@ function start()
 		
 
 		console.log(getusersdata);
-		$.post('./Controller.php',{"getWorkspaceUsers":getusersdata},function (data){
-                usersData=$.parseJSON(data);
+        $("#wholebody_loader").show();
+
+        $.post('./Controller.php',{"getWorkspaceUsers":getusersdata},function (data){
+            $("#wholebody_loader").hide();
+
+            usersData=$.parseJSON(data);
 			$('.channelInvites').select2({
 		    width: '100%',
 		    allowClear: true,
@@ -207,8 +248,11 @@ function start()
 		});
 
 		var getUsersDataNotInChannel='{"channelid":"'+channelid+'","workspaceid":"'+workspaceid+'"}';
-		$.post('./Controller.php',{"getChannelUsers":getUsersDataNotInChannel},function (data){
-			// console.log(data);
+        $("#wholebody_loader").show();
+        $.post('./Controller.php',{"getChannelUsers":getUsersDataNotInChannel},function (data){
+            $("#wholebody_loader").hide();
+
+            // console.log(data);
 				// usersChannelData=$.parseJSON(data);
 			if(!data.includes('fail'))
 			{
@@ -274,12 +318,14 @@ function start()
 
 		$(".loggedIn_user").click(function(){
 			var id= $('.loggedIn_user').attr('id');
-			window.location.href = "ProfilePage.php?userid="+id;
+            $("#wholebody_loader").show();
+            window.location.href = "ProfilePage.php?userid="+id;
 		});
 
         $(document).on("click",".message_header",function() {
                 var id= $(this).attr('userid');
-                window.location.href = "ProfilePage.php?userid="+id;
+            $("#wholebody_loader").show();
+            window.location.href = "ProfilePage.php?userid="+id;
         });
 
 
@@ -301,8 +347,9 @@ function start()
             }
 
             data["emoji_id"] = emoji_idCLicked;
-
+            $("#wholebody_loader").show();
             $.post('./Controller.php',data,function (data){
+                $("#wholebody_loader").hide();
 
                 if($.trim(data).split("-")[0] == "success"){
 
@@ -433,6 +480,7 @@ function start()
 		        		$('#successModal .modal-body').html("<p> Channel created Successfully. </p>");
 						$('#successModal').on('hidden.bs.modal', function (e) {
 							$('#successModal').off();
+                            $("#wholebody_loader").show();
                             window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
 
 						});
@@ -442,7 +490,8 @@ function start()
 						setTimeout(function()
 							{
 								$('#successModal').modal('hide');
-								window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
+                                $("#wholebody_loader").show();
+                                window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
 							}, 2000);
 		        	}
 		        	else if($.trim(data).split("-")[0]=="fail")
