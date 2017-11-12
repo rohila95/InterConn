@@ -169,8 +169,11 @@ function start()
 		});
 
 
-
+        /* Below click registration for channel members editing */
         $(document).on('click','.channelMemebersEditButt',function(){
+        	if(!isAdmin){
+				return;
+			}
         	if($(this).parents(".headerAddon_HP").hasClass("archivedChannel")){
         		return;
 			}
@@ -547,7 +550,15 @@ function start()
                             multiple: true,
                             data: usersChannelData
                         });
+                        // the fll0wing lines to changes few html element details like member count, memberslist in tile etc
                         userLIToRemove.remove();
+                        $(".headerAddon_HP .membersCount").html(parseInt($(".headerAddon_HP .membersCount").html())-1);
+                        var titleMemList = "";
+                        $(".existingChannelMemUL li").find(".userfullname").each(function(){
+                            titleMemList += $(this).html().split(" ")[0]+",";
+                        });
+
+                        $(".headerAddon_HP .membersCount").attr("title",titleMemList);
 
                         $('#successModal .modal-body').html("<p> Member Removed Successfully. </p>");
                         $("#successModal").modal("show");
@@ -617,11 +628,6 @@ function start()
             $(".eleToBeCleared").empty();
         });
 
-
-		/* Below click registration for channel members editing */
-        $(document).on("click",".channelMemebersEditButt",function(e) {
-
-        });
 
 	});
 }

@@ -121,7 +121,15 @@
 							<h3> InterConn  </h3>
 						</div>
 						<div class="loginDetails">
-							<span class="loggedIn_user" id=<?php  echo '"'.$userDetails[0]->user_id.'"'?>><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo htmlspecialchars($userDetails[0]->first_name).' '.htmlspecialchars($userDetails[0]->last_name); ?>
+							<span class="loggedIn_user" id='<?php  echo $userDetails[0]->user_id ?>' title='<?php
+                            if($is_admin){
+                                echo "Welcome Admin";
+                            }else{
+                                echo "Welcome ".htmlspecialchars($userDetails[0]->first_name).' '.htmlspecialchars($userDetails[0]->last_name);
+
+                            }
+
+                            ?>'><i class="fa fa-user"></i>&nbsp;&nbsp;<?php  echo htmlspecialchars($userDetails[0]->first_name).' '.htmlspecialchars($userDetails[0]->last_name); ?>
                                 <a class="signOut" href="./index.php?status=signout" title="Sign Out">
                                     <span class="channelPrivacyLevel" title="Sign Out"><i class="fa fa-sign-out"></i></span>
                                 </a></span>
@@ -372,7 +380,12 @@
                         ?>
 		                    <span class="starChannelIcon headerSpan"> <i class="fa fa-star-o"></i> </span> |
                             <span class="channelMemebersShortDetails headerSpan">
-                                <a href="#" title="Edit Members" class="channelMemebersEditButt" data-toggle="tooltip" data-placement="bottom" >
+                                <a href="#" class="channelMemebersEditButt" data-toggle="tooltip" data-placement="bottom"  title='<?php
+                                    if($is_admin){
+                                        echo "Edit members";
+                                    }
+
+                                ?>'>
                                 <i class="fa fa-users"></i></a> <span class="membersCount" title=<?php echo '"'.htmlspecialchars($groupMembers[0]->names).'"';?>> <?php echo $user_count;?>  </span>
                             </span>|
                             <span class="channelPurpose headerSpan" title="Channel Purpose">
