@@ -1,0 +1,10 @@
+
+--------------- To Delete unneccessary channels --------------
+DELETE FROM `message_channel` WHERE `channel_id` = 35;
+DELETE FROM `user_channel` WHERE `channel_id` = 35;
+DELETE FROM `channel_invitation` WHERE `channel_id` = 35;
+DELETE FROM `workspace_channel` WHERE `channel_id` = 35;
+DELETE FROM `channel` WHERE `channel_id` = 35;
+
+
+

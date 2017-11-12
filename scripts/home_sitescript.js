@@ -155,8 +155,11 @@ function start()
 		});
 
 
-
+        /* Below click registration for channel members editing */
         $(document).on('click','.channelMemebersEditButt',function(){
+        	if(!isAdmin){
+				return;
+			}
         	if($(this).parents(".headerAddon_HP").hasClass("archivedChannel")){
         		return;
 			}
@@ -611,11 +614,6 @@ function start()
             $(".eleToBeCleared").empty();
         });
 
-
-		/* Below click registration for channel members editing */
-        $(document).on("click",".channelMemebersEditButt",function(e) {
-
-        });
 
 	});
 }
