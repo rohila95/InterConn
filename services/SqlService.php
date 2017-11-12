@@ -166,7 +166,7 @@ class SqlService{
 
 	public function getThreadReplyCount($messageid)
 	{
-		$sql="SELECT count(*) as threadCount FROM `threaded_message` where parent_message_id=".$messageid;
+		$sql="SELECT count(*) as threadCount FROM `threaded_message` where parent_message_id=".$messageid." and is_active=0";
 		return $sql;
 	}
 	public function getLastThreadReply($messageid)

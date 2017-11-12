@@ -35,7 +35,7 @@ function start()
 
                              $("#errorModal").modal("show");
                              $("#errorModal").css("z-index","1100");
-                             setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+                             setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 						 }
 
                     }
@@ -102,7 +102,7 @@ function start()
 								{
 									$('#successModal').modal('hide');
 
-								}, 4000);
+								}, 2000);
 							}
 						else if(data.includes("fail"))
 							{
@@ -113,7 +113,7 @@ function start()
 
 								$("#errorModal").modal("show");
 								$("#errorModal").css("z-index","1100");
-								setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+								setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 							}
 						},
 						error: function(xhr,error){

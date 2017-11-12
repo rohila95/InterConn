@@ -26,7 +26,14 @@ function start()
 			});
 		});
 		$(document).on("click",".deletebutt",function(){
-			$.post('./Controller.php',{"deleteMessage":curMessageId},function (data){
+			var postDataObj={};
+			if(curMessageId == ""){
+                postDataObj={"deleteThreadedMessage":curThreadReplyId};
+			}else{
+                postDataObj={"deleteMessage":curMessageId};
+			}
+
+			$.post('./Controller.php',postDataObj,function (data){
 				if(data.includes('success'))
 				{
 					$('#successModal .modal-body').html("<p> Message deleted Successfully. </p>");
@@ -41,7 +48,7 @@ function start()
 						{
 							$('#successModal').modal('hide');
 							window.location.href = "./HomePage.php?channel="+channelid;
-						}, 4000);		
+						}, 2000);
 				}
 				else
 				{
@@ -51,9 +58,9 @@ function start()
 					});
 					$("#errorModal").modal("show");
 					$("#errorModal").css("z-index","1100");
-					setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+					setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 				}
-				
+
 			});
 		});
 		$('.archieveButton').click(function(){
@@ -72,7 +79,7 @@ function start()
 						{
 							$('#successModal').modal('hide');
 							window.location.href = "./HomePage.php?channel="+channelid;
-						}, 4000);		
+						}, 2000);
 				}
 				else
 				{
@@ -82,7 +89,7 @@ function start()
 					});
 					$("#errorModal").modal("show");
 					$("#errorModal").css("z-index","1100");
-					setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+					setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 				}
 				
 			});
@@ -103,7 +110,7 @@ function start()
 						{
 							$('#successModal').modal('hide');
 							window.location.href = "./HomePage.php?channel="+channelid;
-						}, 4000);		
+						}, 2000);
 				}
 				else
 				{
@@ -113,7 +120,7 @@ function start()
 					});
 					$("#errorModal").modal("show");
 					$("#errorModal").css("z-index","1100");
-					setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+					setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 				}
 				
 			});
@@ -232,7 +239,7 @@ function start()
 			offset=$(this).offset();
             $(".messageHoverButtons").find(".nonthumbbutts").show();
 			//$(".messageHoverButtons").css({'top': offset.top, 'left' : parseInt($(this).css("width"))})
-            $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*30/100)})
+            $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*50/100)})
 			$(".messageHoverButtons").show();
 			//console.log(curMessageId);
 		});
@@ -247,7 +254,7 @@ function start()
 
             offset=$(this).offset();
             $(".messageHoverButtons").find(".nonthumbbutts").hide();
-            $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*30/100)})
+            $(".messageHoverButtons").css({'top': offset.top, 'left' : (offset.left)+$(this).width()-($(this).width()*50/100)})
             $(".messageHoverButtons").show();
         });
 
@@ -430,7 +437,7 @@ function start()
 							{
 								$('#successModal').modal('hide');
 								window.location.href = "./HomePage.php?channel="+$.trim(data).split(".")[0].split("-")[1];
-							}, 4000);
+							}, 2000);
 		        	}
 		        	else if($.trim(data).split("-")[0]=="fail")
 		        	{
@@ -440,7 +447,7 @@ function start()
 						});
 						$("#errorModal").modal("show");
 						$("#errorModal").css("z-index","1100");
-						setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+						setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 		        		// $('.uniqueChannel').html('Channel name already exists. Try with different name.');
 		        	}
 		        }
@@ -485,7 +492,7 @@ function start()
 								$('#successModal').modal('hide');
                                 location.reload();
 
-							}, 4000);
+							}, 2000);
 		        	}
 		        	else if($.trim(data).split("-")[0]=="fail")
 		        	{
@@ -495,7 +502,7 @@ function start()
 						});
 						$("#errorModal").modal("show");
 						$("#errorModal").css("z-index","1100");
-						setTimeout(function() {$('#errorModal').modal('hide');}, 4000);
+						setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 		        		// $('.uniqueChannel').html('Channel name already exists. Try with different name.');
 		        	}
 		        }
