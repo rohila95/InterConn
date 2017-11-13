@@ -489,3 +489,10 @@ pre
 #wholebody_loader{
     height: 100%;
 }
+
+textarea {resize: none;}
+
+.msg_content_picture img{
+    width: 75% !important;
+    height: 75% !important;
+}
