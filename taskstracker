@@ -26,6 +26,8 @@ Message Threads
     ---------- Sub Tasks ---------------------------
     Allow admin to add memebers in to private channels as well ✔
     Make sure to do the server side validations for the Admin actions
+    Make sure nothing breaks at the serverside for Archived channel with the brunele tortureous script - meaning   server side validation to be done ****
+    Same with the even the Admin tasks, server side validation to be done ******
 
 
 
