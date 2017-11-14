@@ -252,7 +252,7 @@
                                                 $listGroupStr.= "<li class='list-group-item' userid='$grpMem->user_id'><span class='userfullname'>". $grpMem->first_name." ".$grpMem->last_name ."</span>";
 
                                                 if($is_admin == 1){
-                                                    $listGroupStr.="<span><button type='button' class='close pull-right removeUserFromChannel' title='remove'>×</button></span>";
+                                                    $listGroupStr.="<span><button type='button' class='close pull-right removeUserFromChannel' title='remove'>x</button></span>";
                                                 }
                                                 $listGroupStr.="</li>";
 
