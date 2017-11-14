@@ -2,42 +2,44 @@ Message Threads
 
     ---------------------- Tasks MileStone 3 ------------------------
     New Features & Pagination
-    Implement pagination for the most recent posts. Make a reasonable choice of "page" length (e.g., 10 questions per page) - OnGoing
-    Use Ajax to fetch and populate prior messages and pre-pend posts to the display area - OnGoing
-    Allow users to embed pretty-formatted code, images from a local file, and images from the web in posts. - OnGoing
-    Provide a help page for your site with information about usage, edge cases, implementation, or other useful hints for how to interact with your site.
+     ->Implement pagination for the most recent posts. Make a reasonable choice of "page" length (e.g., 10 questions per page) ✔
+     ->Use Ajax to fetch and populate prior messages and pre-pend posts to the display area ✔
+     ->Allow users to embed pretty-formatted code, images from a local file, and images from the web in posts. - OnGoing
+     ->Provide a help page for your site with information about usage, edge cases, implementation, or other useful hints for how to interact with your site.
 
     Administration
-    Provide a special user account (ADMINISTRATOR)
-    Allow administrators to edit channel membership
-    Allow administrators to delete posts
-    Allow administrators to invite new users
-    Allow an administrator to "archive" a channel, which should result in no further posts, reactions, modifications to channel membership. ✔
-    An administrator should also be able to "unarchive" a channel. ✔
+     ->Provide a special user account (ADMINISTRATOR) ✔ ( Workspace creator becomes the admin by default)
+     ->Allow administrators to edit channel membership ✔
+     ->Allow administrators to delete posts ✔
+     ->Allow administrators to invite new users ✔
+     ->Allow an administrator to "archive" a channel, which should result in no further posts, reactions, modifications to channel membership. ✔
+     ->An administrator should also be able to "unarchive" a channel. ✔
 
     User
-    Create a user reputation metric based on number of channels, number of posts, and reactions
-    Display reputation and associated metrics in the user's profile
-    Provide a textbox in your interface to allow any registered user to query your database to look up any other user. The result of the lookup must display the user's profile page from milestone 2.
-    Each time a user types a letter in the textbox, perform an Ajax request to query your database, return, and display preliminary results.
+     ->Create a user reputation metric based on number of channels, number of posts, and reactions
+     ->Display reputation and associated metrics in the user's profile
+     ->Provide a textbox in your interface to allow any registered user to query your database to look up any other user. The result of the lookup must display the user's profile page from milestone 2. ✔
+     ->Each time a user types a letter in the textbox, perform an Ajax request to query your database, return, and display preliminary results. ✔
     For example, if two users in your database have usernames "pallen" and "paulo", typing "pa" in the textbox would preliminarily display both user's names with a means to directly access the users' respective profiles.
 
 
     ---------- Sub Tasks ---------------------------
-    Allow admin to add memeber in to private channels as well
+    Allow admin to add memebers in to private channels as well ✔
+    Make sure to do the server side validations for the Admin actions
 
 
 
      --------------------------------- After Mile stone 2 ------------------------------------
-    -> Auto scroll to recent msg in the thread.
+    -> Auto scroll to recent msg in the thread, and also to a corresponding msg in the regaular message section on thread head click ✔
+    -> Get loaders where ever necessary. ✔
     -> Fix the reactions order.
     -> Make a standard object for response that server pushes.
-    -> Bootstrap priniciples are violated at places, fix it to be totally responsive
+    -> Bootstrap principles are violated at places, fix it to be totally responsive
     -> To have a FavIcon for our site aswell
 
     --------------------------------- Before milestone 2 ------------------------------------
 
-    -> every message must have a inicator saying whether its a parent of any thread ✔
+    -> every message must have a indicator saying whether its a parent of any thread ✔
     -> Working on getting the side column for threads. ✔
     -> Have to have another table to capture the reactions for the Thread Messages ✔
 

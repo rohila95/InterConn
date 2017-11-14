@@ -313,6 +313,12 @@ function start()
 					$(".regularMessagesWrapper").find(".messagewithid_"+curMessageId).css("background-color","#dedddd").animate({"background-color": ""},2000,function () {
 							$(this).removeAttr("style");
 		          });
+
+				// code segment to make it scroll to the corresponding main message
+            $(".rightContent_wrapper_HP").animate({scrollTop: $(".rightContent_wrapper_HP").scrollTop() + ($('.regularMessagesWrapper .messagewithid_'+curMessageId).parents(".messageSet").offset().top - $(".rightContent_wrapper_HP").offset().top)});
+
+
+
         });
 
 
@@ -785,7 +791,7 @@ function getAllThreadReplies(parentMsgID){
                     curThRepMsgCont.find(".msg_reactionsec").append(emojiElementsStr);
                     $(".threadedreplies_content").find(".threadReplyWithId_"+obj['id']).append(curThRepMsgCont);
                 });
-
+                $(".threadedreplies_content").animate({scrollTop: $(".threadedreplies_content").scrollTop() + ($(".threadedreplies_content .messageSet:last-child").offset().top - $(".threadedreplies_content").offset().top)});
 				//loader hide
                 $("#threadmsg_loader").hide();
 
