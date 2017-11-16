@@ -348,11 +348,11 @@
 							   echo '<button type="button" class="btn btn-primary deletebutt" title="delete message"><i class="fa fa-trash-o"></i></button>';
 							}
 						echo '</div>';
-                       
+
                     }
                 }
 			?>
-			
+
             <div class="col-xs-10 mainContent_HP">
             	<div class="headerSpace_HP row">
 	            	<div class="col-xs-7">
@@ -421,26 +421,26 @@
 							if($workspaceCreatorId==$_SESSION['userid'])
 							{
 								if($currentChannel[0]->is_archive==0)
-									echo '<i class="fa fa-archive archieveButton"></i>';
+									echo '<i class="fa fa-archive archieveButton" title="Archieve Channel"></i>';
 								else if($currentChannel[0]->is_archive==1)
-										echo '<i class="fa fa-undo unarchieveButton"></i>';
+										echo '<i class="fa fa-undo unarchieveButton" title="Unarchieve Channel"></i>';
 							}
 						?>
-						<a href="./help.html"><i class="fa fa-question-circle-o"></i></a>				
+						<a href="./help.html" title="Help"><i class="fa fa-question-circle-o"></i></a>
 					</div>
-						    
+
 	            </div>
-            
+
             <div class="row">
                 <div class="col-xs-12 regularMessagesWrapper">
                     <div class="row rightContent_wrapper_HP">
                         <div class="messagesList">
-                        
+
                         <?php
                             if(isset($_GET["channel"])){
                                 // echo $web_service->getChannelMessages($_GET["channel"]);
                                 $currentChannelMessages = $web_service->getChannelMessages($_GET["channel"],-1);
-                                
+
                                 echo constructMessagesDiv($currentChannelMessages);
                             }
                         ?>
@@ -504,7 +504,7 @@
 			                           </div>';
                    				}
                            ?>
-                           
+
 
 
                    </div>
