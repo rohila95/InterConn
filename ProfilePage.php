@@ -37,20 +37,20 @@
     	header("location: ./index.php?status=notloggedin");
     }
 
-	
+
 ?>
 
 <html>
 	<head>
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="./Assets/jquery.min.js"></script>
+		<script src="./Assets/bootstrap.min.js"></script>
 		<script src="./scripts/profile_pagescript.js"></script>
 
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="./Assets/bootstrap.min.css">
+		<link rel="stylesheet" href="./Assets/w3.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="./CSS/profilepage_site.css">
         <style>
@@ -69,7 +69,7 @@
 			          <h4 class="modal-title">Success</h4>
 			        </div>
 			        <div class="modal-body">
-			          
+
 			        </div>
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -85,7 +85,7 @@
 			          <h4 class="modal-title">Error</h4>
 			        </div>
 			        <div class="modal-body">
-			          
+
 			        </div>
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -101,7 +101,7 @@
 				<div class="col-sm-10 logo">
 					<span>Profile</span>
 				</div>
-				
+
 				<?php
 					if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
 					{
@@ -110,7 +110,7 @@
 
 					}
 				?>
-				
+
 			</div>
 			<!-- <a href="./help.html"><i class="fa fa-question-circle-o"></i></a> -->
 			<div class="row updateProfile">
@@ -179,7 +179,7 @@
                             <input class="file-upload" name="imgToUpload" type="file" accept="image/*" />
 
                         </div>
-                        
+
                     </div>
 
 					<div class="row">
@@ -201,8 +201,8 @@
 			<div class="row displayProfile">
 				<div class="col-md-3 col-lg-3 " align="center">
 						<img alt="User Pic" src="<?php echo $userDetails[0]->profile_pic ?>" class="profilePicDisplay">
-				</div>	
-				<div class=" col-md-9 col-lg-9 "> 
+				</div>
+				<div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
@@ -217,7 +217,7 @@
                         <td>Last Name:</td>
                         <td><?php echo $userDetails[0]->last_name ?></td>
                       </tr>
-                   
+
                       <tr>
                         <td>What I Do:</td>
                         <td><?php echo $userDetails[0]->what_i_do ?></td>
@@ -228,21 +228,21 @@
                       </tr>
                       <tr>
                         <td>Channels: </td>
-                        <td><?php 
+                        <td><?php
                         if($_SESSION['loggedIn'] && $_SESSION['userid']==$_GET['userid'])
 							{
-								
+
                         		echo $channelstr;
                         	}
                         else
                         	echo $displayChannelList;
                         ?></td>
                       </tr>
-                        
-                     
+
+
                     </tbody>
                   </table>
-				 </div>	
+				 </div>
 			</div>
 		</div>
 		<div class="footer row">
