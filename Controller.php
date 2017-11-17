@@ -29,6 +29,7 @@ if(isset($_POST["setReaction"])){ // to post a react by a
         echo  $reactionService -> postReactionIfNotExist($postInputObj, $_SESSION['userid']);
 
     }
+
    //echo "inside controller";
   //print_r(json_encode($postInputObj));
 

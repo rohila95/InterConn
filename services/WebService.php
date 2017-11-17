@@ -601,8 +601,22 @@ class WebService{
       }else{
           $content = trim($content );
       }*/
+      $splmsg=0;
+      $codetype=0;
+      //splmsg=0--normal,  1--image,2--code
+      //codetype---int  ,0-html,1-js....
 
-    $message = $sql_service->insertReplyThread($parent_message_id,$content,$userid,$timestamp);
+    if($splmsg==0)
+      $message = $sql_service->insertReplyThread($parent_message_id,$content,$userid,$timestamp);
+    else if($splmsg==1)
+            $message = $sql_service->insertSplReplyThread($parent_message_id,$content,$userid,$timestamp,$splmsg,0);
+    else if($splmsg==2)
+              {
+                $codetype=mysqli_real_escape_string($conn,$codetype);
+                $message = $sql_service->insertSplReplyThread($parent_message_id,$content,$userid,$timestamp,$splmsg,$codetype);
+              }
+
+
     $result = $conn->query($message);
     if ($result === TRUE) {
         $messageid = $conn->insert_id;

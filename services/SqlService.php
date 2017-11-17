@@ -146,6 +146,11 @@ class SqlService{
 		$sql="INSERT INTO `InterConn`.`threaded_message` (`id`, `parent_message_id`, `content`, `created_by`, `created_at`) VALUES (NULL, '".$parentmessageid."', '".$content."', '".$created_by."', '".$timestamp."')";
 		return $sql;
 	}
+	public function insertSplReplyThread($parentmessageid,$content,$created_by,$timestamp,$splmsg,$codetype)
+	{
+		$sql="INSERT INTO `InterConn`.`threaded_message` (`id`, `parent_message_id`, `content`, `created_by`, `created_at`, `is_active`, `is_specialmessage`, `code_type`) VALUES (NULL, '".$parentmessageid."', '".$content."', '".$created_by."', '".$timestamp."', '0', '".$splmsg."', '".$codetype."')";
+		return $sql;
+	}
 	public function updateUserProfile($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype)
 	{
 		$sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `email_id` = '$emailid', `profile_pic` = '$profile_pic', `password` = '$password', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype' WHERE `user`.`user_id` = ".$userid;
@@ -196,7 +201,7 @@ class SqlService{
 	}
 	public function createSplMessage($userid,$content,$timestamp,$splmessage,$codetype)
 	{
-		$sql="INSERT INTO `InterConn`.`message` (`message_id`, `created_by`, `created_at`, `message_place`, `content`, `is_threaded`, `is_active`, `edited_at`, `has_shared_content`, `is_specialmessage`, `code_type`) VALUES (NULL, '".$userid."', '".$timestamp."', '', '".$content."', '0', '0', '0000-00-00 00:00:00.000000', '0', '.$splmessage.', '.$codetype.')";
+		$sql="INSERT INTO `InterConn`.`message` (`message_id`, `created_by`, `created_at`, `message_place`, `content`, `is_threaded`, `is_active`, `edited_at`, `has_shared_content`, `is_specialmessage`, `code_type`) VALUES (NULL, '".$userid."', '".$timestamp."', '', '".$content."', '0', '0', '0000-00-00 00:00:00.000000', '0', '".$splmessage."', '".$codetype."')";
 		return $sql;
 	}
 	public function createChannelMessageMap($channelid,$messageid)
