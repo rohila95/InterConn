@@ -219,10 +219,10 @@ class WebService{
              // echo 'new line'.$messagesExist.'---------'.$countrow["messagecount"];
           }
         }
-        else 
+        else
           return 'fail';
       }
-      
+
     } else {
         return 'fail';
     }
@@ -424,7 +424,7 @@ class WebService{
     $conn->close();
   }
 
-  public function createChannelMessage($userid,$content,$channelid,$timestamp)
+  public function createChannelMessage($userid,$content,$channelid,$timestamp,$splmessage,$codetype)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
@@ -432,8 +432,17 @@ class WebService{
     $content=mysqli_real_escape_string($conn,$content);
     $channelid=mysqli_real_escape_string($conn,$channelid);
     $timestamp=mysqli_real_escape_string($conn,$timestamp);
+    $splmessage=mysqli_real_escape_string($conn,$splmessage);
     $sql_service = new SqlService();
-    $message = $sql_service->createMessage($userid,$content,$timestamp);
+    if($splmessage==0)
+      $message = $sql_service->createMessage($userid,$content,$timestamp);
+    else if($splmessage==1)
+            $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,0);
+    else if($splmessage==2)
+              {
+                $codetype=mysqli_real_escape_string($conn,$codetype);
+                $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
+              }
     $result = $conn->query($message);
     if ($result === TRUE) {
         $messageid = $conn->insert_id;

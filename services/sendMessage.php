@@ -7,17 +7,20 @@
     $userid=$_POST['userid'];
     $channelid=$_POST['channelid'];
     $content=$_POST['message'];
+    $splmessage=0;
+    $codetype=0;
     $timestamp = date('Y-m-d H:i:s', time());
     if(trim($content)!='')
-    {  
+    {
       $web_service = new WebService();
       if(checkIfWebImg( trim($content ))){
           $content = trim($content)."<br /><img src='". trim($content)."' />";
       }else{
           $content = trim($content );
       }
-
-      $insertStr = $web_service->createChannelMessage($userid,$content,$channelid,$timestamp);
+//splmessage=0--normal,  1--image,2--code
+//codetype---int  ,0-html,1-js....
+      $insertStr = $web_service->createChannelMessage($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
     }
     header("location: ../HomePage.php?channel=".$channelid);
 

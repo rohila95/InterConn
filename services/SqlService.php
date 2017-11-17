@@ -194,6 +194,11 @@ class SqlService{
 		$sql="INSERT INTO `InterConn`.`message` (`message_id`, `created_by`, `created_at`, `message_place`, `content`, `is_threaded`, `is_active`, `edited_at`, `has_shared_content`) VALUES (NULL, '".$userid."', '".$timestamp."', '', '".$content."', '0', '0', '0000-00-00 00:00:00.000000', '0')";
 		return $sql;
 	}
+	public function createSplMessage($userid,$content,$timestamp,$splmessage,$codetype)
+	{
+		$sql="INSERT INTO `InterConn`.`message` (`message_id`, `created_by`, `created_at`, `message_place`, `content`, `is_threaded`, `is_active`, `edited_at`, `has_shared_content`, `is_specialmessage`, `code_type`) VALUES (NULL, '".$userid."', '".$timestamp."', '', '".$content."', '0', '0', '0000-00-00 00:00:00.000000', '0', '.$splmessage.', '.$codetype.')";
+		return $sql;
+	}
 	public function createChannelMessageMap($channelid,$messageid)
 	{
 		$sql="INSERT INTO `InterConn`.`message_channel` (`message_id`, `channel_id`) VALUES ('".$messageid."', '".$channelid."')";
