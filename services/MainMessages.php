@@ -61,7 +61,18 @@ function constructMessagesDiv($messageStr)
               $msgStr.=$currentTime;
               $msgStr.='</span></div>';
               $dynamicClassNameWithId = "messagewithid_".$message->message_id;
-              $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
+              $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'">';
+              //place to check for web image or not, this can even be done at entry of msg itself level self
+              /*if(checkIfWebImg( htmlspecialchars($message->content ))){
+                  $msgStr.='<div class="msg_content">.htmlspecialchars($message->content)."<br/>".<img src="'.htmlspecialchars($message->content).'" /></div>';
+
+              }else{
+                  $msgStr.='<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
+              }*/
+
+              $msgStr.='<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
+
+              $msgStr.='<div class="msg_reactionsec">';
               // print_r($message->emojis);
               if($message->emojis!='0')
                   foreach ($message->emojis as $emoji)
@@ -130,6 +141,25 @@ function constructMessagesDiv($messageStr)
       $msgStr="<div>No messages in this channel..</div>";
   }
   echo $msgStr;
+}
+
+function checkIfWebImg( $msgcontent ){
+    $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
+    $portExtensions= ['https://www','https://www','www'];
+    $msgcontent = "https://www.cs.odu.edu/~mgunnam/underconstruction.jpg";
+    $urlArr = explode(".",$msgcontent);
+    //print_r($urlArr[count($urlArr)-1]);
+    $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
+    $isValidPort= in_array($urlArr[0],$portExtensions);
+    if($isImage){
+        if($isValidPort){
+            //echo '<img src="'.$url.'" />';
+            echo "true";
+            return true;
+        }
+    }
+    echo "false";
+    return false;
 }
 
 

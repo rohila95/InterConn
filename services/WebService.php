@@ -567,6 +567,32 @@ class WebService{
     $parent_message_id=mysqli_real_escape_string($conn,$parent_message_id);
     $timestamp=mysqli_real_escape_string($conn,$timestamp);
     $sql_service = new SqlService();
+
+      $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
+      $portExtensions= ['https://www','http://www','www',];
+      // $msgcontent = "https://www.cs.odu.edu/~mgunnam/underconstruction.jpg";
+      $urlArr = explode(".",trim($content));
+      $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
+      $isValidPort= in_array($urlArr[0],$portExtensions);
+      if($isImage){
+          if($isValidPort){
+              $content = trim($content).'<br /><img src="'. trim($content).'" />';
+          }
+          else{
+              $content = trim($content );
+          }
+      } else{
+          $content = trim($content );
+      }
+
+      // $isWebImg = checkIfWebImg( trim($content ));
+
+    /*  if($isWebImg == 1){
+          $content = trim($content).'<br /><img src="'. trim($content).'" />';
+      }else{
+          $content = trim($content );
+      }*/
+
     $message = $sql_service->insertReplyThread($parent_message_id,$content,$userid,$timestamp);
     $result = $conn->query($message);
     if ($result === TRUE) {
@@ -576,7 +602,7 @@ class WebService{
         if ($innerresult === TRUE) {
             echo "success-inserted-".$messageid;
 
-           // echo "Updated parent message " ;
+           // echo "Updated parent message ";
         } else {
             echo "fail- " . $updateParentMessage . "<br>" . $conn->error;
         }
@@ -585,6 +611,21 @@ class WebService{
     }
     $conn->close();
   }
+
+  function checkIfWebImg( $msgcontent ){
+        $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
+        $portExtensions= ['https://www','https://www','www'];
+       // $msgcontent = "https://www.cs.odu.edu/~mgunnam/underconstruction.jpg";
+        $urlArr = explode(".",$msgcontent);
+        $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
+        $isValidPort= in_array($urlArr[0],$portExtensions);
+        if($isImage){
+            if($isValidPort){
+                return 1;
+            }
+        }
+        return 0;
+    }
 
   public function createDirectMessage($userid,$content,$receiverid)
   {

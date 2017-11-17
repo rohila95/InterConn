@@ -4,7 +4,7 @@ Message Threads
     New Features & Pagination
      ->Implement pagination for the most recent posts. Make a reasonable choice of "page" length (e.g., 10 questions per page) ✔
      ->Use Ajax to fetch and populate prior messages and pre-pend posts to the display area ✔
-     ->Allow users to embed pretty-formatted code, images from a local file, and images from the web in posts. - OnGoing
+     ->Allow users to embed pretty-formatted code, images from a local file, and images from the web in posts. - OnGoing - OnGoing
      ->Provide a help page for your site with information about usage, edge cases, implementation, or other useful hints for how to interact with your site.
 
     Administration
@@ -16,8 +16,7 @@ Message Threads
      ->An administrator should also be able to "unarchive" a channel. ✔
 
     User
-     ->Create a user reputation metric based on number of channels, number of posts, and reactions
-     ->Display reputation and associated metrics in the user's profile
+     ->Create a user reputation metric based on number of channels, number of posts, and reactions. Display reputation and associated metrics in the user's profile
      ->Provide a textbox in your interface to allow any registered user to query your database to look up any other user. The result of the lookup must display the user's profile page from milestone 2. ✔
      ->Each time a user types a letter in the textbox, perform an Ajax request to query your database, return, and display preliminary results. ✔
     For example, if two users in your database have usernames "pallen" and "paulo", typing "pa" in the textbox would preliminarily display both user's names with a means to directly access the users' respective profiles.
