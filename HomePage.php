@@ -14,6 +14,7 @@
     $workspaceName=$workspaceDetails[0]->workspace_name;
     $workspaceid=$workspaceDetails[0]->workspace_id;
     $workspaceCreatorId=$workspaceDetails[0]->created_by;
+    $_SESSION['workspace_creator']=$workspaceCreatorId;
 	$flag=0;
 	$is_admin=0;
 	if($workspaceCreatorId==$_SESSION['userid']){

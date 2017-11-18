@@ -106,26 +106,38 @@ if(isset($_POST["getworkspaces"]))
 if(isset($_POST["archieveChannel"]))
 {
   $channelid=$_POST["archieveChannel"];
-  echo  $webService->archieveChannel($channelid);
+  if($_SESSION['workspace_creator']==$_SESSION['userid'])
+    echo  $webService->archieveChannel($channelid);
+  else 
+    echo 'fail';
 }
 if(isset($_POST["unArchieveChannel"]))
 {
   $channelid=$_POST["unArchieveChannel"];
-  echo  $webService->unArchieveChannel($channelid);
+  if($_SESSION['workspace_creator']==$_SESSION['userid'])
+    echo  $webService->unArchieveChannel($channelid);
+  else 
+    echo 'fail';
 }
 
 
 if(isset($_POST["deleteMessage"]))
 {
   $messageid=$_POST["deleteMessage"];
-  echo  $webService->deleteMessage($messageid);
+  if($_SESSION['workspace_creator']==$_SESSION['userid'])
+    echo  $webService->deleteMessage($messageid);
+  else 
+    echo 'fail';
 }
 if(isset($_POST["deleteThreadedMessage"]))
 {
   $messageid=$_POST["deleteThreadedMessage"];
   $parentmsgid= $_POST["parentMessageID"];
   //echo $messageid." ".$parentmsgid;
-  echo  $webService->deleteThreadedMessage($messageid, $parentmsgid);
+  if($_SESSION['workspace_creator']==$_SESSION['userid'])
+    echo  $webService->deleteThreadedMessage($messageid, $parentmsgid);
+  else 
+    echo 'fail';
 }
 
 
@@ -315,10 +327,15 @@ if(isset($_POST["removeFromChannel"]))
   $useridArr=$data->ids;
   $channelid=$data->channelid;
   $timestamp=date('Y-m-d H:i:s', time());
-  if($useridArr!=[])
-    echo  $webService->leaveChannel($useridArr,$channelid,$timestamp);
+  if($_SESSION['workspace_creator']==$_SESSION['userid'])
+  {
+    if($useridArr!=[])
+      echo  $webService->leaveChannel($useridArr,$channelid,$timestamp);
+    else
+      echo 'fail-Please select a member to remove from channel.';
+  }
   else
-    echo 'fail-Please select a member to remove from channel.';
+    echo 'fail-Only admin can remove members from channel';
 }
 if(isset($_POST["getProfileDetails"]))
 {
