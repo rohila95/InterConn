@@ -433,17 +433,19 @@ class WebService{
     $channelid=mysqli_real_escape_string($conn,$channelid);
     $timestamp=mysqli_real_escape_string($conn,$timestamp);
     $splmessage=mysqli_real_escape_string($conn,$splmessage);
-      $codetype=mysqli_real_escape_string($conn,$codetype);
+    $codetype=mysqli_real_escape_string($conn,$codetype);
+   
     $sql_service = new SqlService();
     if($splmessage==0)
       $message = $sql_service->createMessage($userid,$content,$timestamp);
     else if($splmessage==1)
-            $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,0);
+            $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
     else if($splmessage==2)
               {
                 $codetype=mysqli_real_escape_string($conn,$codetype);
                 $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
               }
+
     $result = $conn->query($message);
     if ($result === TRUE) {
         $messageid = $conn->insert_id;
@@ -610,7 +612,7 @@ class WebService{
     if($splmsg==0)
       $message = $sql_service->insertReplyThread($parent_message_id,$content,$userid,$timestamp);
     else if($splmsg==1)
-            $message = $sql_service->insertSplReplyThread($parent_message_id,$content,$userid,$timestamp,$splmsg,0);
+            $message = $sql_service->insertSplReplyThread($parent_message_id,$content,$userid,$timestamp,$splmsg,$codetype);
     else if($splmsg==2)
               {
                 $codetype=mysqli_real_escape_string($conn,$codetype);
