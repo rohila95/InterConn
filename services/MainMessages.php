@@ -151,9 +151,9 @@ function messageContentHelper($message){
 
     }else if( $message->is_specialmessage == 1){
         if($message->code_type == 1){ // in case of web image
-            $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content)."<br /><img src='". $message->content."' />";'</div>';
+            $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'<br /><img src="'. $message->content.'" /></div>';
         }else{
-              // this is the place to handle images in the regular msg stream, got to load the images from the image folder reserved for regular msgs
+              // this is the place to handle images in the regular msg stream, got to load the images from the image folder reserved for regular msgs, for not sending the normal path
             $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
         }
 
