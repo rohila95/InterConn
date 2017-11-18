@@ -64,22 +64,7 @@ function constructMessagesDiv($messageStr)
               $msgStr.='</span></div>';
               $dynamicClassNameWithId = "messagewithid_".$message->message_id;
               $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'">';
-              //place to check for web image or not, this can even be done at entry of msg itself level self
-              /*if(checkIfWebImg( htmlspecialchars($message->content ))){
-                  $msgStr.='<div class="msg_content">.htmlspecialchars($message->content)."<br/>".<img src="'.htmlspecialchars($message->content).'" /></div>';
-
-              }else{
-                  $msgStr.='<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
-              }*/
-
-              if($message->is_specialmessage == 2){
-
-                  $msgStr.= '<div class="msg_content"><pre><code class="'.$codeSnippLanguagesArr[ $message->code_type].'">'.htmlspecialchars($message->content).'</code></pre></div>';
-
-              }else{
-                  $msgStr.= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
-
-              }
+              $msgStr.= messageContentHelper ($message); // this method construct the message content in the format need
               $msgStr.='<div class="msg_reactionsec">';
               // print_r($message->emojis);
               if($message->emojis!='0')
@@ -103,15 +88,7 @@ function constructMessagesDiv($messageStr)
               $dynamicClassNameWithId = "messagewithid_".$message->message_id;
 
               $msgStr.='<div class="message_body addOnMessages '.$dynamicClassNameWithId.'" id="'.$message->message_id.'">';
-                 /*this is the block that decides how to  show the message content */
-                 if($message->is_specialmessage == 2){
-
-                     $msgStr.= '<div class="msg_content"><pre><code class="'.$codeSnippLanguagesArr[ $message->code_type].'">'.htmlspecialchars($message->content).'</code></pre></div>';
-
-                 }else{
-                     $msgStr.= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
-
-                 }
+              $msgStr.= messageContentHelper ($message); // this method construct the message content in the format need
 
               $msgStr.='<div class="msg_reactionsec"> </div></div>';
 
@@ -135,16 +112,7 @@ function constructMessagesDiv($messageStr)
               $msgStr.='</span></div>';
               $dynamicClassNameWithId = "messagewithid_".$message->message_id;
               $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'">';
-
-              if($message->is_specialmessage == 2){
-
-                  $msgStr.= '<div class="msg_content"><pre><code class="'.$codeSnippLanguagesArr[ $message->code_type].'">'.htmlspecialchars($message->content).'</code></pre></div>';
-
-              }else{
-                  $msgStr.= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
-
-              }
-
+              $msgStr.= messageContentHelper ($message); // this method construct the message content in the format need
               $msgStr.='<div class="msg_reactionsec">';
               // print_r($message->emojis);
               if($message->emojis!='0')
@@ -173,23 +141,25 @@ function constructMessagesDiv($messageStr)
   echo $msgStr;
 }
 
-function checkIfWebImg( $msgcontent ){
-    $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
-    $portExtensions= ['https://www','https://www','www'];
-    //$msgcontent = "https://www.cs.odu.edu/~mgunnam/underconstruction.jpg";
-    $urlArr = explode(".",$msgcontent);
-    //print_r($urlArr[count($urlArr)-1]);
-    $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
-    $isValidPort= in_array($urlArr[0],$portExtensions);
-    if($isImage){
-        if($isValidPort){
-            //echo '<img src="'.$url.'" />';
-            echo "true";
-            return true;
+
+function messageContentHelper($message){
+    $codeSnippLanguagesArr=["html","javascript","python","php"];
+    $msgContent ="";
+    if($message->is_specialmessage == 2){
+
+        $msgContent= '<div class="msg_content"><pre><code class="'.$codeSnippLanguagesArr[ $message->code_type].'">'.htmlspecialchars($message->content).'</code></pre></div>';
+
+    }else if( $message->is_specialmessage == 1){
+        if($message->code_type == 1){ // in case of web image
+            $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content)."<br /><img src='". $message->content."' />";'</div>';
+        }else{
+              // this is the place to handle images in the regular msg stream, got to load the images from the image folder reserved for regular msgs
+            $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
         }
+
     }
-    echo "false";
-    return false;
+
+    return $msgContent;
 }
 
 
