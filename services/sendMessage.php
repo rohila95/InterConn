@@ -13,7 +13,6 @@
         $codetype=$_POST['codesnipptype'];
     }
 
-
     $timestamp = date('Y-m-d H:i:s', time());
     if(trim($content)!='')
     {
