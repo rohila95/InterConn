@@ -32,6 +32,7 @@
     /*print_r($groupMembersWholeDet);
     return;*/
 
+    $codeSnippLanguagesArr=["html","javascript","python","php"];
   	$channelstr='';
    	$archiveChannelstr='';
    	$directMessagestr='';
@@ -105,6 +106,7 @@
 		<link rel="stylesheet" href="./CSS/home_site.css">
 		<link rel="stylesheet" href="./Assets/w3.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	</head>
 
 	<body>
@@ -173,6 +175,63 @@
 				</div>
 
 			</div>
+
+           <!-- modal for code snippet -->
+            <div class="modal fade" id="sendSnippetModal" role="dialog">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Send Code Snippet </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="form-group">
+                                        <select class="form-control" id="codeSnipSelBox">
+                                            <option value="0">HTML</option>
+                                            <option value="1">JavaScript</option>
+                                            <option value="2">Python</option>
+                                            <option value="3">PHP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    <textarea class="form-control textAreaInCodeSnipp" rows="7" required="" autofocus="" placeholder="Copy your code snipped here"></textarea>
+                                </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary sendSnippetButt" data-dismiss="modal">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal for local image -->
+
+            <div class="modal fade" id="sendLocalImgModal" role="dialog">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Upload Local Image</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                            <button type="button" class="btn btn-primary sendLocalImgButt" data-dismiss="modal">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 			<div class="modal fade" id="successModal" role="dialog">
 			    <div class="modal-dialog modal-sm">
 			      <div class="modal-content">
@@ -189,6 +248,8 @@
 			      </div>
 			    </div>
 			</div>
+
+
 			<div class="modal fade" id="errorModal" role="dialog">
 			    <div class="modal-dialog modal-sm">
 			      <div class="modal-content">
@@ -446,9 +507,20 @@
                         </div>
                     </div>
                     <div class="messageEntrySpace_regularMsg_HP row">
+
+                        <div class="dropup dropupMenuRegularMsgs">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropup Example
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li intent="localimage" ><a href="#" class="localimagesel_regularmsg">Local Image</a></li>
+                                <li intent="codesnipp" ><a href="#" class="codesnippetsel__regularmsg">Code Snippet</a></li>
+                            </ul>
+                        </div>
                         <form method="POST" action="./services/sendMessage.php">
                             <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
                             <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
+                            <input type="hidden" class="isSplMsgHiddenIP" class="form-control" value="0" name="isspecialmsg">
+                            <input type="hidden" class="codeSnippTypeHiddenIP" class="form-control" value="0" name="codesnipptype">
                             <div class="form-group">
 
                                 <?php
@@ -521,5 +593,14 @@
 	</div>
     <div id="wholebody_loader" class="busy-loader" style="display: none;">
     </div>
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/color-brewer.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.1.0/highlightjs-line-numbers.min.js"></script>
+
+    <script>
+        hljs.initHighlightingOnLoad();
+        hljs.initLineNumbersOnLoad();
+    </script>
 	</body>
 </html>

@@ -7,8 +7,13 @@
     $userid=$_POST['userid'];
     $channelid=$_POST['channelid'];
     $content=$_POST['message'];
-    $splmessage=0;
     $codetype=0;
+    $splmessage=$_POST['isspecialmsg'];
+    if($splmessage == 2){
+        $codetype=$_POST['codesnipptype'];
+    }
+
+
     $timestamp = date('Y-m-d H:i:s', time());
     if(trim($content)!='')
     {
@@ -19,7 +24,7 @@
           $content = trim($content );
       }
 //splmessage=0--normal,  1--image,2--code
-//codetype---int  ,0-html,1-js....
+//codetype---int  ,0-html,1-js,2-python,3-php....
       $insertStr = $web_service->createChannelMessage($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
     }
     header("location: ../HomePage.php?channel=".$channelid);

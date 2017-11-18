@@ -13,6 +13,33 @@ function start()
 		var channelid=$('.currentChannelTitle').attr('id');
 		var getusersdata='{"userid":"'+userid+'","workspaceid":"'+workspaceid+'"}';
 
+
+		/* logic that takes care of code snippet and imge upload is taken care here */
+
+        $(document).on("click",".dropupMenuRegularMsgs li",function(event){
+        	event.preventDefault();
+        	if($(this).attr("intent") == "codesnipp"){
+
+                $("#sendSnippetModal").modal("show");
+
+            }else if($(this).attr("intent") == "localimage"){
+                $("#sendLocalImgModal").modal("show");
+
+            }
+		});
+
+		// handler for sendSnippet butt click
+        $(document).on("click",".sendSnippetButt",function(event) {
+				// this following  hidden ip value will be set to  0--normal,  1--image,2--code
+			$(".messageEntrySpace_regularMsg_HP").find(".isSplMsgHiddenIP").val("2");
+            $(".messageEntrySpace_regularMsg_HP .inputMessage").val($(".textAreaInCodeSnipp").val());
+            $(".messageEntrySpace_regularMsg_HP button").trigger("click");
+        });
+
+
+
+
+
 		// to make an ajax call on scroll top
         $(".rightContent_wrapper_HP").scroll(function(){
             if($(".rightContent_wrapper_HP").scrollTop()== 0){

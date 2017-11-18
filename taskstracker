@@ -1,5 +1,9 @@
 Message Threads
 
+-> Make sure to get a registration link with in admin logged in page somewehere
+-> Got to change the folder permission for the uploded images
+
+
     ---------------------- Tasks MileStone 3 ------------------------
     New Features & Pagination
      ->Implement pagination for the most recent posts. Make a reasonable choice of "page" length (e.g., 10 questions per page) ✔
