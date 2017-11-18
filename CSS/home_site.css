@@ -497,6 +497,20 @@ textarea {resize: none;}
     height: 75% !important;
 }
 
+.imageBeingPutinMsg {
+    border-radius: 5%;
+    height: 30%;
+    width: 40%;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all .3s ease;
+    text-decoration: none;
+}
+
 /* following css block is for numering in code snipped stuff */
 /* for block of numbers */
 td.hljs-ln-numbers {
@@ -520,3 +534,4 @@ td.hljs-ln-numbers {
 td.hljs-ln-code {
     padding-left: 10px;
 }
+
