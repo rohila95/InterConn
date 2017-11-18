@@ -72,8 +72,14 @@ function constructMessagesDiv($messageStr)
                   $msgStr.='<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
               }*/
 
-              $msgStr.='<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
+              if($message->is_specialmessage == 2){
 
+                  $msgStr.= '<div class="msg_content"><pre><code class="'.$codeSnippLanguagesArr[ $message->code_type].'">'.htmlspecialchars($message->content).'</code></pre></div>';
+
+              }else{
+                  $msgStr.= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
+
+              }
               $msgStr.='<div class="msg_reactionsec">';
               // print_r($message->emojis);
               if($message->emojis!='0')
@@ -130,7 +136,14 @@ function constructMessagesDiv($messageStr)
               $dynamicClassNameWithId = "messagewithid_".$message->message_id;
               $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'">';
 
-              $msgStr.='<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
+              if($message->is_specialmessage == 2){
+
+                  $msgStr.= '<div class="msg_content"><pre><code class="'.$codeSnippLanguagesArr[ $message->code_type].'">'.htmlspecialchars($message->content).'</code></pre></div>';
+
+              }else{
+                  $msgStr.= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
+
+              }
 
               $msgStr.='<div class="msg_reactionsec">';
               // print_r($message->emojis);
