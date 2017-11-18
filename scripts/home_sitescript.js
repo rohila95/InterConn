@@ -33,6 +33,7 @@ function start()
 				// this following  hidden ip value will be set to  0--normal,  1--image,2--code
 			$(".messageEntrySpace_regularMsg_HP").find(".isSplMsgHiddenIP").val("2");
             $(".messageEntrySpace_regularMsg_HP .inputMessage").val($(".textAreaInCodeSnipp").val());
+            $(".messageEntrySpace_regularMsg_HP .codeSnippTypeHiddenIP").val( $("#codeSnipSelBox").val());
             $(".messageEntrySpace_regularMsg_HP button").trigger("click");
         });
 
