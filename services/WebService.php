@@ -433,6 +433,7 @@ class WebService{
     $channelid=mysqli_real_escape_string($conn,$channelid);
     $timestamp=mysqli_real_escape_string($conn,$timestamp);
     $splmessage=mysqli_real_escape_string($conn,$splmessage);
+      $codetype=mysqli_real_escape_string($conn,$codetype);
     $sql_service = new SqlService();
     if($splmessage==0)
       $message = $sql_service->createMessage($userid,$content,$timestamp);

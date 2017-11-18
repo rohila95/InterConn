@@ -1,7 +1,9 @@
 <?php
 function constructMessagesDiv($messageStr)
 {
-  $web_service = new WebService();
+    $codeSnippLanguagesArr=["html","javascript","python","php"];
+
+    $web_service = new WebService();
   $currentChannelMessages = json_decode($messageStr);
   // var_dump($currentChannelMessages);
 
@@ -94,7 +96,18 @@ function constructMessagesDiv($messageStr)
           {
               $dynamicClassNameWithId = "messagewithid_".$message->message_id;
 
-              $msgStr.='<div class="message_body addOnMessages '.$dynamicClassNameWithId.'" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec"> </div></div>';
+              $msgStr.='<div class="message_body addOnMessages '.$dynamicClassNameWithId.'" id="'.$message->message_id.'">';
+                 /*this is the block that decides how to  show the message content */
+                 if($message->is_specialmessage == 2){
+
+                     $msgStr.= '<div class="msg_content"><pre><code class="'.$codeSnippLanguagesArr[ $message->code_type].'">'.htmlspecialchars($message->content).'</code></pre></div>';
+
+                 }else{
+                     $msgStr.= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
+
+                 }
+
+              $msgStr.='<div class="msg_reactionsec"> </div></div>';
 
           }
           else if($prevUser!=$message->first_name || $prevTime!=$currentTime)
@@ -115,7 +128,11 @@ function constructMessagesDiv($messageStr)
               $msgStr.=$currentTime;
               $msgStr.='</span></div>';
               $dynamicClassNameWithId = "messagewithid_".$message->message_id;
-              $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'"><div class="msg_content">'.htmlspecialchars($message->content).'</div><div class="msg_reactionsec">';
+              $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'">';
+
+              $msgStr.='<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
+
+              $msgStr.='<div class="msg_reactionsec">';
               // print_r($message->emojis);
               if($message->emojis!='0')
                   foreach ($message->emojis as $emoji)

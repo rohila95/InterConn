@@ -32,7 +32,6 @@
     /*print_r($groupMembersWholeDet);
     return;*/
 
-    $codeSnippLanguagesArr=["html","javascript","python","php"];
   	$channelstr='';
    	$archiveChannelstr='';
    	$directMessagestr='';
