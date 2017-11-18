@@ -157,6 +157,8 @@ function messageContentHelper($message){
             $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
         }
 
+    }else{
+        $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
     }
 
     return $msgContent;
