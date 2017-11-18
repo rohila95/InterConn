@@ -221,6 +221,19 @@
                             <h4 class="modal-title">Upload Local Image</h4>
                         </div>
                         <div class="modal-body">
+                            <form role="form" id="sendImagInMsgs" enctype="multipart/form-data">
+                                <div class="form-group" style="margin-left: 10%;">
+
+                                        <div class="imageBeingPutinMsg">
+                                            <span class="glyphicon glyphicon-camera"></span>
+                                            <span>Change Image</span>
+                                        </div>
+
+                                        <input class="fileUploadIP hidden" name="imgToUpload" type="file" accept="image/*">
+
+                                </div>
+                            </form>
+
 
                         </div>
                         <div class="modal-footer">

@@ -184,6 +184,51 @@ if(isset($_POST["getThreadMessages"]))
   echo  $webService->getThreadMessages($parent_message_id);
 }
 
+// to upload an image as a message
+if(isset($_POST["imageAsMsg"])){
+    chmod("./Assets/msgimages", 777);
+    $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG");
+    $file_name=$_POST["file_name"];
+    $fname=$_FILES['filetoUpload']['tmp_name'];
+    $file_name=explode('\\', $file_name);
+    $file_ext=explode('.', $file_name[2]);
+    $userid = $_SESSION['userid'];
+    $channelid=$_POST['channelid'];
+    $content="The ID of the row is used to get the actual image to be shown";
+    $codetype=0;
+    $splmessage= 1;
+    $timestamp = date('Y-m-d H:i:s', time());
+
+    $insertedMsgID = $webService->getUniqueMsgIDAfterInsertion($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
+
+    /*  there was a problem with .PNG thing
+        if($file_ext[1] == "png"){
+            $file_ext[1] == "PNG";
+        }*/
+
+    if($insertedMsgID == -1){
+        echo "fail- Failed to send the image";
+        return;
+    }
+    $uploadfile_newname='./Assets/msgimages/'.$insertedMsgID.'.'.$file_ext[1];
+
+    // echo $file_ext[1];
+    if (!in_array($file_ext[1], $valid_file_extensions)) {
+        echo 'fail-Invalid Image. Try another image.';
+    }else{
+
+        $uploadSucess = move_uploaded_file($fname, $uploadfile_newname);
+        if(!$uploadSucess)
+        {
+            $webService->deleteMessage($insertedMsgID);
+            echo 'fail-Image too large. Try small image.';
+        }else{
+            echo "success";
+        }
+    }
+}
+
+
 if(isset($_POST["updateProfile"]))
 {
    // print_r(json_encode($postInputObj));

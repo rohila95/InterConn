@@ -28,7 +28,7 @@
       }else{
           $content = trim($content );
       }
-//splmessage= 0--normal,  1--image,2--code
+//splmessage= 0--normal,  1--image,2--code6
 //codetype---int  ,0-html,1-js,2-python,3-php....
       
       $insertStr = $web_service->createChannelMessage($userid,$content,$channelid,$timestamp,$splmessage,$codetype);

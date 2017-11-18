@@ -462,6 +462,54 @@ class WebService{
     }
     $conn->close();
   }
+
+    /* method to enter the dummy msg to get the unique same for msgimage */
+    public function getUniqueMsgIDAfterInsertion($userid,$content,$channelid,$timestamp,$splmessage,$codetype)
+    {
+        $database_connection = new DatabaseConnection();
+        $conn = $database_connection->getConnection();
+        $userid=mysqli_real_escape_string($conn,$userid);
+        $content=mysqli_real_escape_string($conn,$content);
+        $channelid=mysqli_real_escape_string($conn,$channelid);
+        $timestamp=mysqli_real_escape_string($conn,$timestamp);
+        $splmessage=mysqli_real_escape_string($conn,$splmessage);
+        $codetype=mysqli_real_escape_string($conn,$codetype);
+        $messageidtobereturn = -1;
+        $sql_service = new SqlService();
+        if($splmessage==0)
+            $message = $sql_service->createMessage($userid,$content,$timestamp);
+        else if($splmessage==1)
+            $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
+        else if($splmessage==2)
+        {
+            $codetype=mysqli_real_escape_string($conn,$codetype);
+            $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
+        }
+
+        echo $message;
+        return;
+
+        $result = $conn->query($message);
+        if ($result === TRUE) {
+            $messageidtobereturn = $conn->insert_id;
+            // echo "New record created successfully. Last inserted ID is: " . $last_id;
+        } else {
+            return  -1;
+        }
+        $messageChannelMap = $sql_service->createChannelMessageMap($channelid,$messageidtobereturn);
+        
+        $result = $conn->query($messageChannelMap);
+        if ($result === TRUE) {
+           return $messageidtobereturn;
+        } else {
+            return  -1;
+        }
+        $conn->close();
+    }
+
+
+
+
   public function archieveChannel($channelid)
   {
     $database_connection = new DatabaseConnection();
@@ -637,6 +685,18 @@ class WebService{
     }
     $conn->close();
   }
+
+  /* method to insert dummy image name */
+  function insertDummyNameForMsgImage($userid,$channelid ){
+      $database_connection = new DatabaseConnection();
+      $conn = $database_connection->getConnection();
+      $userid=mysqli_real_escape_string($conn,$userid);
+      $content=mysqli_real_escape_string($conn,$content);
+      $parent_message_id=mysqli_real_escape_string($conn,$parent_message_id);
+      $timestamp=mysqli_real_escape_string($conn,$timestamp);
+      $sql_service = new SqlService();
+  }
+
 
   function checkIfWebImg( $msgcontent ){
         $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
