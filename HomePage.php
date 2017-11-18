@@ -316,6 +316,7 @@
                                 <div class="col-xs-3"> </div>
                                 <div class="existingChannelMembersWrapper col-xs-6">
                                     <span class='popupSubtitle'><b>Existing members</b></span>
+
                                     <ul class="list-group existingChannelMemUL">
                                         <?php
                                         if ($groupMembersWholeDet!=null) {
@@ -341,6 +342,7 @@
                             <div class="row">
                                 <div class="form-group inviteFromChannelPageFG">
                                     <span class='invites'><b>Invite new members</b></span>
+                                    <span><a href='./register.html'>New user?</a></span>
                                     <div class="existingChannelInvites">
                                     </div>
                                 </div>
