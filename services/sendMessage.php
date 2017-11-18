@@ -18,6 +18,7 @@
     if(trim($content)!='')
     {
       $web_service = new WebService();
+      
       if(checkIfWebImg( trim($content ))){
           $content = trim($content);
           $splmessage = 1;
@@ -30,13 +31,14 @@
       }
 //splmessage= 0--normal,  1--image,2--code
 //codetype---int  ,0-html,1-js,2-python,3-php....
+      
       $insertStr = $web_service->createChannelMessage($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
     }
     header("location: ../HomePage.php?channel=".$channelid);
 
     function checkIfWebImg( $msgcontent ){
         $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
-        $portExtensions= ['https://www','https://www','www'];
+        $portExtensions= ['https://www','http://www','www'];
         //$msgcontent = "https://www.cs.odu.edu/~mgunnam/underconstruction.jpg";
         $urlArr = explode(".",$msgcontent);
         //print_r($urlArr[count($urlArr)-1]);

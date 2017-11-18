@@ -242,12 +242,14 @@ if(isset($_POST["updateProfile"]))
 
           echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
       }else{
+        chmod("./images", 777); 
           $fname=$_FILES['filetoUpload']['tmp_name'];
           $file_name=explode('\\', $file_name);
           $file_ext=explode('.', $file_name[2]);
           if($file_ext[1] == "png"){
               $file_ext[1] == "PNG";
           }
+
           $uploadfile_newname='./images/'.$_SESSION['userid'].'.'.$file_ext[1];
           // echo $file_ext[1];
           if (!in_array($file_ext[1], $valid_file_extensions)) {
