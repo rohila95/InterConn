@@ -476,18 +476,12 @@ class WebService{
         $codetype=mysqli_real_escape_string($conn,$codetype);
         $messageidtobereturn = -1;
         $sql_service = new SqlService();
-        if($splmessage==0)
-            $message = $sql_service->createMessage($userid,$content,$timestamp);
-        else if($splmessage==1)
+        
             $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
-        else if($splmessage==2)
-        {
-            $codetype=mysqli_real_escape_string($conn,$codetype);
-            $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
-        }
+        
 
         echo $message;
-        return;
+        // return;
 
         $result = $conn->query($message);
         if ($result === TRUE) {
