@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93e66bcb-f980-4c53-a607-cd86fbac036d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/sendMessage.php" afterPath="$PROJECT_DIR$/services/sendMessage.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,11 +16,21 @@
     <splitter split-orientation="horizontal" split-proportion="0.7177637">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="sendMessage.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="sendMessage.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/services/sendMessage.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="236">
                   <caret line="41" column="45" lean-forward="true" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="18" lean-forward="true" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
@@ -201,6 +212,7 @@
         <option value="$PROJECT_DIR$/register.html" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/services/sendMessage.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -241,7 +253,7 @@
             <path>
               <item name="WebProgramming-CS518" type="b2602c69:ProjectViewProjectNode" />
               <item name="WebProgramming-CS518" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="services" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Assets" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -307,7 +319,7 @@
       <workItem from="1510090116985" duration="74561000" />
       <workItem from="1510889519109" duration="22901000" />
       <workItem from="1511052946845" duration="46000" />
-      <workItem from="1511109866185" duration="4678000" />
+      <workItem from="1511109866185" duration="5091000" />
     </task>
     <servers />
   </component>
@@ -344,7 +356,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186469000" />
+    <option name="totallyTimeSpent" value="186882000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -432,14 +444,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="77" lean-forward="true" selection-start-line="18" selection-start-column="77" selection-end-line="18" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/profile_pagescript.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -956,6 +960,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="41" column="45" lean-forward="true" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="18" lean-forward="true" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
           <folding />
         </state>
       </provider>
