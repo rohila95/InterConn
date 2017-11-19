@@ -186,7 +186,7 @@ if(isset($_POST["getThreadMessages"]))
 
 // to upload an image as a message
 if(isset($_POST["imageAsMsg"])){
-    chmod("./Assets/msgimages", 777);
+    // chmod("./Assets/msgimages", 777);
     $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG");
     $file_name=$_POST["file_name"];
     $fname=$_FILES['filetoUpload']['tmp_name'];
@@ -299,7 +299,7 @@ if(isset($_POST["updateProfile"]))
 
           echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
       }else{
-        chmod("./images", 777); 
+        // chmod("./images", 777); 
           $fname=$_FILES['filetoUpload']['tmp_name'];
           $file_name=explode('\\', $file_name);
           $file_ext=explode('.', $file_name[2]);
