@@ -38,7 +38,6 @@
     function checkIfWebImg( $msgcontent ){
         $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
         $portExtensions= ['https://www','http://www','www'];
-        //$msgcontent = "https://www.cs.odu.edu/~mgunnam/underconstruction.jpg";
         $urlArr = explode(".",$msgcontent);
         //print_r($urlArr[count($urlArr)-1]);
         $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
@@ -46,7 +45,12 @@
         if($isImage){
             if($isValidPort){
                 //echo '<img src="'.$url.'" />';
-                return true;
+                file_get_contents($msgcontent);
+                $statusContent = $http_response_header[0];
+                $isNotValidURL = strpos($statusContent,"404");
+                if($isNotValidURL == false){
+                    return true;
+                }
             }
         }
         return false;

@@ -15,6 +15,16 @@
     $val1= in_array($urlArr[0],$protExtensions);
     $extension = $urlArr[count($urlArr)-1];
 
+    file_get_contents("http://www.cs.odu.edu/~mgunnam/underconstruction.jpg");
+    var_dump($http_response_header);
+    echo "<br />";
+    echo $http_response_header[0];
+
+    echo "<br />";
+    echo "stringpos->".strpos($http_response_header[0],"301");
+
+echo "<br />";
+
     if($val){
         $prot = $urlArr[0];
         if($val1){
@@ -25,6 +35,7 @@
     }else{
         echo $url."Hello";
     }
+
 
 
    echo '<div class="container">
@@ -48,5 +59,6 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
     <script> $(document).ready(function() { hljs.initHighlightingOnLoad(); }); </script>';
+
 
 ?>

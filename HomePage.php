@@ -524,7 +524,7 @@
                     <div class="messageEntrySpace_regularMsg_HP row">
 
                         <div class="dropup dropupMenuRegularMsgs">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropup Example
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">More Options
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li intent="localimage" ><a href="#" class="localimagesel_regularmsg">Local Image</a></li>
