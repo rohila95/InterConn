@@ -511,6 +511,11 @@ textarea {resize: none;}
     text-decoration: none;
 }
 
+.msg_content img{
+  max-width: 40%;
+  max-height: 40%;
+}
+
 /* following css block is for numering in code snipped stuff */
 /* for block of numbers */
 td.hljs-ln-numbers {

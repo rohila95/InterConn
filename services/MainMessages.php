@@ -147,14 +147,14 @@ function messageContentHelper($message){
     $msgContent ="";
     if($message->is_specialmessage == 2){
 
-        $msgContent= '<div class="msg_content"><pre><code class="'.$codeSnippLanguagesArr[ $message->code_type].'">'.htmlspecialchars($message->content).'</code></pre></div>';
+        $msgContent= '<div class="msg_content"><div class="well"><pre><code class="'.$codeSnippLanguagesArr[ $message->code_type].'">'.htmlspecialchars($message->content).'</code></pre></div></div>';
 
     }else if( $message->is_specialmessage == 1){
         if($message->code_type == 1){ // in case of web image
-            $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'<br /><img src="'. $message->content.'" /></div>';
+            $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'<br /> <div class="well"> <img src="'. $message->content.'" /></div></div>';
         }else{
               // this is the place to handle images in the regular msg stream, got to load the images from the image folder reserved for regular msgs, for not sending the normal path
-            $msgContent= '<div class="msg_content"><img src="./Assets/msgimages/'.trim($message->message_id).'.'.htmlspecialchars($message->content) .'" /></div>';
+            $msgContent= '<div class="msg_content"><div class="well"> <img src="./Assets/msgimages/'.trim($message->message_id).'.'.htmlspecialchars($message->content) .'" /></div></div>';
         }
 
     }else{

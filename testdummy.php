@@ -5,37 +5,26 @@
  * Date: 11/12/2017
  * Time: 9:06 PM
  */
-
+$msgcontent = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Icons8_flat_businessman.svg/1024px-Icons8_flat_businessman.svg.png";
     $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
-    $protExtensions= ['https://www','https://www','www'];
-    $url = "https://www.cs.odu.edu/~mgunnam/underconstruction.jpg";
-    $urlArr = explode(".",$url);
-    //print_r($urlArr[count($urlArr)-1]);
-    $val= in_array($urlArr[count($urlArr)-1],$imageExtension);
-    $val1= in_array($urlArr[0],$protExtensions);
-    $extension = $urlArr[count($urlArr)-1];
-
-    file_get_contents("http://www.cs.odu.edu/~mgunnam/underconstruction.jpg");
-    var_dump($http_response_header);
-    echo "<br />";
-    echo $http_response_header[0];
-
-    echo "<br />";
-    echo "stringpos->".strpos($http_response_header[0],"301");
-
-echo "<br />";
-
-    if($val){
-        $prot = $urlArr[0];
-        if($val1){
-            echo $url;
-            echo '<img src="'.$url.'" />';
-
+        $portExtensions= ['https://www','http://','https://','http://www','www'];
+        $urlArr = explode(".",$msgcontent);
+        //print_r($urlArr[count($urlArr)-1]);
+        $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
+        $isValidPort= in_array($urlArr[0],$portExtensions);
+        if($isImage != false){
+            if($isValidPort != false){
+              
+                //echo '<img src="'.$url.'" />';
+                file_get_contents($msgcontent);
+                $statusContent = $http_response_header[0];
+                $isNotValidURL = strpos($statusContent,"404");
+                if($isNotValidURL == false){
+                    echo "true";
+                }
+            }
         }
-    }else{
-        echo $url."Hello";
-    }
-
+        echo "false";
 
 
    echo '<div class="container">

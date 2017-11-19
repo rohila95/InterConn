@@ -37,13 +37,11 @@
 
     function checkIfWebImg( $msgcontent ){
         $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
-        $portExtensions= ['https://www','http://','https://','http://www','www'];
         $urlArr = explode(".",$msgcontent);
         //print_r($urlArr[count($urlArr)-1]);
         $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
-        $isValidPort= in_array($urlArr[0],$portExtensions);
         if($isImage){
-            if($isValidPort){
+
                 //echo '<img src="'.$url.'" />';
                 file_get_contents($msgcontent);
                 $statusContent = $http_response_header[0];
@@ -51,7 +49,6 @@
                 if($isNotValidURL == false){
                     return true;
                 }
-            }
         }
         return false;
     }
