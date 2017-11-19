@@ -37,7 +37,7 @@
 
     function checkIfWebImg( $msgcontent ){
         $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
-        $portExtensions= ['https://www','http://www','www'];
+        $portExtensions= ['https://www','http://','https://','http://www','www'];
         $urlArr = explode(".",$msgcontent);
         //print_r($urlArr[count($urlArr)-1]);
         $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
