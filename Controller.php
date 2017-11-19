@@ -194,7 +194,7 @@ if(isset($_POST["imageAsMsg"])){
     $file_ext=explode('.', $file_name[2]);
     $userid = $_SESSION['userid'];
     $channelid=$_POST['channelid'];
-    $content="The ID of the row is used to get the actual image to be shown";
+    $content=$file_ext;
     $codetype=0;
     $splmessage= 1;
     $timestamp = date('Y-m-d H:i:s', time());
