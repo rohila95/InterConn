@@ -49,7 +49,7 @@
 		<script src="./scripts/profile_pagescript.js"></script>
 
 
-		<link rel="stylesheet" href="./Assets/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./Assets/w3.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="./CSS/profilepage_site.css">
