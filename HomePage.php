@@ -95,7 +95,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="./Assets/jquery.min.js"></script>
 		<script src="./Assets/bootstrap.min.js"></script>
-        <script src="./Assets/jquery-ui.min.js"
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
                 integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
                 crossorigin="anonymous"></script>
 		<script src="./scripts/home_sitescript.js"></script>
