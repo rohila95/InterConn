@@ -194,7 +194,7 @@ if(isset($_POST["imageAsMsg"])){
     $file_ext=explode('.', $file_name[2]);
     $userid = $_SESSION['userid'];
     $channelid=$_POST['channelid'];
-    $content=$file_ext;
+    $content=$file_ext[1];
     $codetype=0;
     $splmessage= 1;
     $timestamp = date('Y-m-d H:i:s', time());
@@ -210,7 +210,7 @@ if(isset($_POST["imageAsMsg"])){
         echo "fail- Failed to send the image";
         return;
     }
-    $uploadfile_newname='./Assets/msgimages/'.$insertedMsgID.'.'.$file_ext[1];
+    $uploadfile_newname='./Assets/msgimages/'.trim($insertedMsgID).'.'.$file_ext[1];
 
     // echo $file_ext[1];
     if (!in_array($file_ext[1], $valid_file_extensions)) {

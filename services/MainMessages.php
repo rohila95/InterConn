@@ -154,7 +154,7 @@ function messageContentHelper($message){
             $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'<br /><img src="'. $message->content.'" /></div>';
         }else{
               // this is the place to handle images in the regular msg stream, got to load the images from the image folder reserved for regular msgs, for not sending the normal path
-            $msgContent= '<div class="msg_content"><img src="./Assests/msgimages/ '.  htmlspecialchars($message->message_id).htmlspecialchars($message->message_content) .'" /></div>';
+            $msgContent= '<div class="msg_content"><img src="./Assets/msgimages/'.trim($message->message_id).'.'.htmlspecialchars($message->content) .'" /></div>';
         }
 
     }else{
