@@ -89,7 +89,7 @@
 		header("location: ./index.php?status=notloggedin");
 	}
 ?>
-<html>
+<html lang="en">
 	<head>
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -112,7 +112,6 @@
 	</head>
 
 	<body>
-
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-2 verticle_navbar_HP">
@@ -141,7 +140,7 @@
 
 
 						</div>
-                        <div  class="row categoryTitle_HP"><i class="fa fa-comments-o"></i> <span>All Threads</span></div>
+                        <div  class="row categoryTitle_HP hidden" ><i class="fa fa-comments-o"></i> <span>All Threads</span></div>
 						<div class="row channelsContainer_menu_HP">
 							<div class="row categoryTitle_HP channelTitle"> <div class="col-xs-10"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo $channelCount;?></span>
 
@@ -614,10 +613,35 @@
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/color-brewer.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.1.0/highlightjs-line-numbers.min.js"></script>
+    <style>
+
+        /* for block of numbers */
+        td.hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            text-align: center;
+            color: #ccc;
+            border-right: 1px solid #CCC;
+            vertical-align: top;
+            padding-right: 5px;
+
+            /* your custom style here */
+        }
+
+        /* for block of code */
+        td.hljs-ln-code {
+            padding-left: 10px;
+        }
+    </style>
 
     <script>
         hljs.initHighlightingOnLoad();
-      //  hljs.initLineNumbersOnLoad();
+        //hljs.initLineNumbersOnLoad();
     </script>
 	</body>
 </html>

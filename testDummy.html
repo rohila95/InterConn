@@ -1,12 +1,28 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+	<script src="./Assets/jquery.min.js"></script>
+	<script src="./Assets/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+			integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			crossorigin="anonymous"></script>
+	<script src="./scripts/home_sitescript.js"></script>
+
+	<script src="./scripts/select2/select2.js"></script>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+	<link rel="stylesheet" href="./scripts/select2/select2.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./CSS/home_site.css">
+	<link rel="stylesheet" href="./Assets/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-<div class="container">
+<div class="container-fluid">
 			<pre><code class="javascript">
 			$(document).ready(function() {
 			  $('pre code').each(function(i, block) {
@@ -15,43 +31,14 @@
 			});
 			</code></pre>
 
-    <pre><code class="python">
-					  if val==1:
-							print "val2"
-					  else:
-							print "notval1"
-
-			</code></pre>
-
-    <pre><code class="css">
-        @import "somestyle.css"
-			body {
-			    background: white;
-			}
-
-			.wrapper {
-                background: #F88;
-                color: #454545;
-			}
-
-			.box::after {
-			    content: "...";
-			}
-			</code></pre>
 </div>
 
 
-
-<!--<link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/color-brewer.min.css">-->
 <link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/color-brewer.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.1.0/highlightjs-line-numbers.min.js"></script>
 
-<script>hljs.initHighlightingOnLoad();
-hljs.initLineNumbersOnLoad();
-</script>
 <style>
 
     /* for block of numbers */
@@ -77,6 +64,9 @@ hljs.initLineNumbersOnLoad();
         padding-left: 10px;
     }
 </style>
+<script>hljs.initHighlightingOnLoad();
+hljs.initLineNumbersOnLoad();
+</script>
 
 </body>
 </html>
