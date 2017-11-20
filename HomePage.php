@@ -206,7 +206,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary sendSnippetButt" data-dismiss="modal">Send</button>
+                            <button type="button" class="btn btn-primary sendSnippetButt">Send</button>
                         </div>
                     </div>
                 </div>

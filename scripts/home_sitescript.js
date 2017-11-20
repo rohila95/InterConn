@@ -131,24 +131,28 @@ function start()
             });
         });
 
-
-
-
-
-
-
-
-
-
-
-
 		// handler for sendSnippet butt click
         $(document).on("click",".sendSnippetButt",function(event) {
 				// this following  hidden ip value will be set to  0--normal,  1--image,2--code
-			$(".messageEntrySpace_regularMsg_HP").find(".isSplMsgHiddenIP").val("2");
-            $(".messageEntrySpace_regularMsg_HP .inputMessage").val($(".textAreaInCodeSnipp").val());
-            $(".messageEntrySpace_regularMsg_HP .codeSnippTypeHiddenIP").val( $("#codeSnipSelBox").val());
-            $(".messageEntrySpace_regularMsg_HP button").trigger("click");
+			if($(".textAreaInCodeSnipp").val()=='')
+			{
+				$('#errorModal .modal-body').html("<p>Enter Code snippet</p>");
+                $('#errorModal').on('hidden.bs.modal', function (e) {
+                    $('#errorModal').off();
+                });
+
+                $("#errorModal").modal("show");
+                $("#errorModal").css("z-index","1100");
+                setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
+			}
+			else
+			{
+				$('#sendSnippetModal').modal('hide');
+				$(".messageEntrySpace_regularMsg_HP").find(".isSplMsgHiddenIP").val("2");
+	            $(".messageEntrySpace_regularMsg_HP .inputMessage").val($(".textAreaInCodeSnipp").val());
+	            $(".messageEntrySpace_regularMsg_HP .codeSnippTypeHiddenIP").val( $("#codeSnipSelBox").val());
+	            $(".messageEntrySpace_regularMsg_HP button").trigger("click");
+	        }
         });
 
 
