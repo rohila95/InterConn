@@ -320,7 +320,16 @@ class SqlService{
 		$sql="SELECT * FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and user_channel.user_id=".$user_id." and channel.type='public'";
 		return $sql;
 	}
+	
+	public function getNoThreadMessageEmoticons($user_id){
+		$sql = "SELECT 'threadreaction',count(*) as count FROM `threadmessage_reaction` where created_by=".$user_id." UNION SELECT 'messagereaction',count(*) as count FROM `message_reaction` where created_by=".$user_id." UNION SELECT 'threadmessages',count(*) as count FROM `threaded_message` where created_by=".$user_id." UNION SELECT 'messages',count(*) as count FROM `message` where created_by=".$user_id." UNION SELECT 'createdchannel',count(*) as count FROM `channel` where created_by=".$user_id." UNION SELECT 'channel',count(*) as count FROM `user_channel` where user_id=".$user_id; 
+		return $sql;
+ 	}
 
 
 }
 ?>
+
+
+
+
