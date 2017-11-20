@@ -43,7 +43,7 @@ $(function() {
     console.log(parseInt($(this).data('value')));
   })
 
-  $('.half').hover(function() {
+/*  $('.half').hover(function() {
     if (starClicked == false) {
       setHalfStarState(this)
     }
@@ -54,7 +54,11 @@ $(function() {
     if (starClicked == false) {
       setFullStarState(this)
     }
-  })
+  })*/
+
+    $(".star").eq(4).find(".half").trigger("click");
+    $(".star").eq(4).find(".half").trigger("click");
+
 
 })
 
