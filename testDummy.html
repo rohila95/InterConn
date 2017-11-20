@@ -10,6 +10,8 @@
 			integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 			crossorigin="anonymous"></script>
 	<script src="./scripts/home_sitescript.js"></script>
+  <script src="./scripts/ratingscript.js"></script>
+  <link rel="stylesheet" href="./CSS/rating.css">
 
 	<script src="./scripts/select2/select2.js"></script>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -111,6 +113,7 @@
 </style>
 <script>hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad();
+    $(".star").eq(4).find(".half").trigger("click");
 </script>
 
 </body>
