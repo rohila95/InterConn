@@ -434,7 +434,7 @@ class WebService{
     $timestamp=mysqli_real_escape_string($conn,$timestamp);
     $splmessage=mysqli_real_escape_string($conn,$splmessage);
     $codetype=mysqli_real_escape_string($conn,$codetype);
-   
+
     $sql_service = new SqlService();
     if($splmessage==0)
       $message = $sql_service->createMessage($userid,$content,$timestamp);
@@ -476,9 +476,9 @@ class WebService{
         $codetype=mysqli_real_escape_string($conn,$codetype);
         $messageidtobereturn = -1;
         $sql_service = new SqlService();
-        
+
             $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
-        
+
 
         echo $message;
         // return;
@@ -491,7 +491,7 @@ class WebService{
             return  -1;
         }
         $messageChannelMap = $sql_service->createChannelMessageMap($channelid,$messageidtobereturn);
-        
+
         $result = $conn->query($messageChannelMap);
         if ($result === TRUE) {
            return $messageidtobereturn;
