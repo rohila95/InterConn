@@ -10,6 +10,8 @@
 			integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 			crossorigin="anonymous"></script>
 	<script src="./scripts/home_sitescript.js"></script>
+  <script src="./scripts/ratingscript.js"></script>
+  <link rel="stylesheet" href="./CSS/rating.css">
 
 	<script src="./scripts/select2/select2.js"></script>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -30,6 +32,51 @@
 			  });
 			});
 			</code></pre>
+
+      <div class="userratingwrapper">
+          <div class="rating" data-vote="0">
+            <div class="star hidden">
+              <span class="full" data-value="0"></span>
+              <span class="half" data-value="0"></span>
+            </div>
+
+            <div class="star">
+              <span class="full" data-value="1"></span>
+              <span class="half" data-value="0.5"></span>
+              <span class="selected"></span>
+            </div>
+
+            <div class="star">
+                <span class="full" data-value="2"></span>
+                <span class="half" data-value="1.5"></span>
+                <span class="selected"></span>
+            </div>
+
+            <div class="star">
+              <span class="full" data-value="3"></span>
+              <span class="half" data-value="2.5"></span>
+              <span class="selected"></span>
+            </div>
+
+            <div class="star">
+              <span class="full" data-value="4"></span>
+              <span class="half" data-value="3.5"></span>
+              <span class="selected"></span>
+            </div>
+
+            <div class="star">
+              <span class="full" data-value="5"></span>
+              <span class="half" data-value="4.5"></span>
+              <span class="selected"></span>
+            </div>
+
+            <div class="score">
+              <span class="score-rating js-score">0</span>
+              <span>/</span>
+              <span class="total">5</span>
+            </div>
+          </div>
+      </div>
 
 </div>
 
@@ -66,6 +113,7 @@
 </style>
 <script>hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad();
+    $(".star").eq(4).find(".half").trigger("click");
 </script>
 
 </body>
