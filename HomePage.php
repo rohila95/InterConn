@@ -153,7 +153,7 @@
 
 						</div>
 						<div class="row archieveChannelsContainer_menu_HP">
-							<div class="row categoryTitle_HP channelTitle"> <div class="col-xs-12"><span> Archieved Channels</span>
+							<div class="row categoryTitle_HP channelTitle"> <div class="col-xs-12"><span> Archived Channels</span>
                                     <span class="noOfChannels_HP numberCount_badge"><?php echo $archieveChannelCount;?></span></div> </div>
 							<ul class=" row nav navbar-nav channels_UL_List">
 								<?php echo $archiveChannelstr;?>
@@ -496,9 +496,9 @@
 							if($workspaceCreatorId==$_SESSION['userid'])
 							{
 								if($currentChannel[0]->is_archive==0)
-									echo '<i class="fa fa-archive archieveButton" title="Archieve Channel"></i>';
+									echo '<i class="fa fa-archive archieveButton" title="Archive Channel"></i>';
 								else if($currentChannel[0]->is_archive==1)
-										echo '<i class="fa fa-undo unarchieveButton" title="Unarchieve Channel"></i>';
+										echo '<i class="fa fa-undo unarchieveButton" title="Unarchive Channel"></i>';
 							}
 						?>
 						<a href="./help.html" title="Help"><i class="fa fa-question-circle-o"></i></a>
