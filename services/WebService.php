@@ -121,6 +121,43 @@ class WebService{
     $conn->close();
   }
 
+  public function getUserScore($userid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $sql_service = new SqlService();
+    $scoreQuery = $sql_service->getUserScore($userid);
+    $result = $conn->query($scoreQuery);
+    $score=0;
+    $reactions=0;
+    $messages=0;
+    $messages=0;
+    $messages=0;
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+          if($row['title']=='createdchannel')
+            $channelscreated=$row['count'];
+          else if($row['title']=='channel')
+            $channels=$row['count'];
+          else if($row['title']=='threadreaction')
+            $reactions+=$row['count'];
+          else if($row['title']=='messagereaction')
+            $reactions+=$row['count'];
+          else if($row['title']=='threadmessages')
+            $messages+=$row['count'];
+          else if($row['title']=='messages')
+            $messages+=$row['count'];
+        }
+    } else {
+        return 'fail';
+    }
+    $score=$reactions+$messages+$messages+$messages;
+    return json_encode($score);
+    $conn->close();
+  }
+
   public function getUserDetails($emailid)
   {
     $database_connection = new DatabaseConnection();

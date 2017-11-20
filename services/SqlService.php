@@ -321,8 +321,8 @@ class SqlService{
 		return $sql;
 	}
 	
-	public function getNoThreadMessageEmoticons($user_id){
-		$sql = "SELECT 'threadreaction',count(*) as count FROM `threadmessage_reaction` where created_by=".$user_id." UNION SELECT 'messagereaction',count(*) as count FROM `message_reaction` where created_by=".$user_id." UNION SELECT 'threadmessages',count(*) as count FROM `threaded_message` where created_by=".$user_id." UNION SELECT 'messages',count(*) as count FROM `message` where created_by=".$user_id." UNION SELECT 'createdchannel',count(*) as count FROM `channel` where created_by=".$user_id." UNION SELECT 'channel',count(*) as count FROM `user_channel` where user_id=".$user_id; 
+	public function getUserScore($user_id){
+		$sql = "SELECT 'threadreaction' as title,count(*) as count FROM `threadmessage_reaction` where created_by=".$user_id." UNION SELECT 'messagereaction' as title,count(*) as count FROM `message_reaction` where created_by=".$user_id." UNION SELECT 'threadmessages' as title,count(*) as count FROM `threaded_message` where created_by=".$user_id." UNION SELECT 'messages' as title,count(*) as count FROM `message` where created_by=".$user_id." UNION SELECT 'createdchannel' as title,count(*) as count FROM `channel` where created_by=".$user_id." UNION SELECT 'channel' as title,count(*) as count FROM `user_channel` where user_id=".$user_id; 
 		return $sql;
  	}
 
