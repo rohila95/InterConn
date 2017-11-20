@@ -622,7 +622,7 @@ class WebService{
     $timestamp=mysqli_real_escape_string($conn,$timestamp);
     $sql_service = new SqlService();
 
-      $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
+      $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG','gif','GIF'];
       $portExtensions= ['https://www','http://www','www',];
       // $msgcontent = "https://www.cs.odu.edu/~mgunnam/underconstruction.jpg";
       $urlArr = explode(".",trim($content));
@@ -693,7 +693,7 @@ class WebService{
 
 
   function checkIfWebImg( $msgcontent ){
-        $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
+        $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG','gif','GIF'];
         $portExtensions= ['https://www','https://www','www'];
        // $msgcontent = "https://www.cs.odu.edu/~mgunnam/underconstruction.jpg";
         $urlArr = explode(".",$msgcontent);
