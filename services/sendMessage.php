@@ -36,7 +36,7 @@
     header("location: ../HomePage.php?channel=".$channelid);
 
     function checkIfWebImg( $msgcontent ){
-        $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
+        $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG','gif','GIF'];
         $urlArr = explode(".",$msgcontent);
         //print_r($urlArr[count($urlArr)-1]);
         $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
