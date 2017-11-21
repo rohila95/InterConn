@@ -32,6 +32,9 @@
         .highlight {
             background-color: yellow !important;
         }
+        .container {
+            width: 879px;
+        }
     </style>
 
 
@@ -94,56 +97,111 @@
         <br />
 
         <div class="panel-group" id="accordion">
-            <div class="faqHeader">Channels</div>
+            <div class="faqHeader">General</div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">How to edit my profile?</a>
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">How to edit my profile?</a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
-                        You can find a link with your name in the top left corner which takes you to your profile page, where you can edit your profile pic as well as any other information provided during registration.
-                        <br /><img src="./Assets/helpPage/workspace_profile.PNG">
+                      <div class="row">
+                        <div class="col-md-7">
+                          You can find a link with your name in the top left corner which takes you to your profile page once you are logged in, where you can edit your profile pic as well
+                          as any other information provided during registration. Also you can find the workspace you are in under that link.
+                        </div>
+                        <div class="col-md-5">
+                          <img src="./Assets/helpPage/workspace_profile.PNG" />
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Can I submit my own Bootstrap templates or themes?</a>
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Can I view others profiles?</a>
                     </h4>
                 </div>
                 <div id="collapseTen" class="panel-collapse collapse">
                     <div class="panel-body">
-                        A lot of the content of the site has been submitted by the community. Whether it is a commercial element/template/theme
-                        or a free one, you are encouraged to contribute. All credits are published along with the resources.
+                        You can click on a person's name present either in the messages to directly view their profile. Also you can directly go to the same view by replacing your
+                          userid in the profile page with their userid (If you remember it).
+                        </thead>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">What is the currency used for all transactions?</a>
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">Are there any limitations on uploading an image as profile page</a>
                     </h4>
                 </div>
                 <div id="collapseEleven" class="panel-collapse collapse">
                     <div class="panel-body">
-                        All prices for themes, templates and other items, including each seller's or buyer's account balance are in <strong>USD</strong>
+                        Yes, you can only upload an image with minimum dimensions 250x250 and maximum dimensions being 1250x1250. And the image can be any one of
+                        the following formats.
+                        <ul>
+                          <li> .png, .PNG </li>
+                          <li> .jpg, .jpeg, .JPG, .JPEG</li>
+                          <li> .gif, .GIF </li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="faqHeader">Sellers</div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Who cen sell items?</a>
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">Is there an option to logoff?</a>
+                    </h4>
+                </div>
+                <div id="collapseTwelve" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-7">
+                          You can find a button beside your name in the top left corner which helps you signout of the application once you are logged in.
+                        </div>
+                        <div class="col-md-5">
+                          <img src="./Assets/helpPage/workspace_profile.PNG" />
+                        </div>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="faqHeader">Channels</div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Where to create a channel?</a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse">
                     <div class="panel-body">
-                        Any registed user, who presents a work, which is genuine and appealing, can post it on <strong>PrepBootstrap</strong>.
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="row" style="margin-left:4px; !important">
+                            You can find the list of all channels in the current workspace in the side navbar present to the left of the window under Channels section. There
+                            is a <strong>'+'</strong> button beside it where you can create a new channel. All the public channels have an open lock icon beside the channel whereas
+                            private channels have closed lock icon.
+                          </div>
+
+                          <div class="row" style="margin-top: 4%;margin-left: 25%;">
+                            <div style="margin:auto;">
+                              <img src="./Assets/helpPage/createChannel.PNG">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <img src="./Assets/helpPage/listChannels.PNG">
+                        </div>
+                       </div>
                     </div>
                 </div>
             </div>
