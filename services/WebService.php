@@ -150,7 +150,8 @@ class WebService{
     if ($usersresult->num_rows > 0) {
 
         while($outerrow = $usersresult->fetch_assoc()) {
-          $scoreQuery = $sql_service->getUserScore($outerrow['user_id']);
+          // print_r($outerrow);
+          $scoreQuery = $sql_service->getUserScore($outerrow['id']);
           $result = $conn->query($scoreQuery);
           $score=0;
           $reactions=0;
@@ -173,9 +174,9 @@ class WebService{
                 else if($row['title']=='messages')
                   $messages+=$row['count'];
               }
-          } 
+          }
           $score=floatval($reactions)+floatval($messages)+(floatval($channels)*0.5)+(floatval($channelscreated)*0.5);
-          if($currentuserid==$outerrow['user_id'])
+          if($currentuserid==$outerrow['id'])
           {
             $currentScore=$score;
           }
