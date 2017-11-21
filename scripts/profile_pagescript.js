@@ -87,6 +87,7 @@ function start()
 					processData: false,
 					contentType: false,
 					success: function(data) {
+						data = $.trim(data);
 						console.log(data);
                         if(data.includes("success")){
 							$('#successModal .modal-body').html("<p> Profile updated Successfully. </p>");

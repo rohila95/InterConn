@@ -107,6 +107,7 @@ function start()
                 processData: false,
                 contentType: false,
                 success: function(data) {
+									data = $.trim(data);
                     console.log(data);
                     $("#wholebody_loader").hide();
 
@@ -174,7 +175,7 @@ function start()
             $("#wholebody_loader").show();
 		});
 
-		
+
 		$('.rightContent_wrapper_HP').scrollTop($('.rightContent_wrapper_HP')[0].scrollHeight);
 		$('body').click(function(){
 			$(".resSuggDiv").remove();
@@ -187,7 +188,7 @@ function start()
                 $("#wholebody_loader").hide();
 				$('.oldMessages').remove();
 				$('.messagesList').prepend(data);
-			
+
 			});
 		});
 		$(document).on("click",".deletebutt",function(){
@@ -270,7 +271,7 @@ function start()
 					$("#errorModal").css("z-index","1100");
 					setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 				}
-				
+
 			});
 		});
 		$('.unarchieveButton').click(function(){
@@ -306,7 +307,7 @@ function start()
 					$("#errorModal").css("z-index","1100");
 					setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 				}
-				
+
 			});
 		});
 		$('input.userProfileSearchInput').keyup(function(){
@@ -326,7 +327,7 @@ function start()
 					var liComp = "";
 					$.each(usersData,function(i,obj){
 						liComp += '<li class="list-group-item userSuggList" id="'+obj['id'] +'">'+obj['name']+'</li>';
-						
+
 					});
 					listGroupDiv.find("ul").append(liComp);
 	                $("body").append(listGroupDiv);
@@ -352,7 +353,7 @@ function start()
 		$('.createNewChannelIcon').click(function()
 		{
 			$('.channelInvites').select2('data', null);
-			
+
 			// $('.newChannelInvites').select2('data', null);
 			$('#createChannel').modal('show');
 
@@ -379,7 +380,7 @@ function start()
             $('#channelMembershipEditingPUP').modal('show');
 
         });
-		
+
 
 		console.log(getusersdata);
         $("#wholebody_loader").show();
@@ -637,6 +638,7 @@ function start()
 		        data: {'createChannel':stringData},
 		        dataType: 'text',
 		        success: function (data) {
+							data = $.trim(data);
                     $("#wholebody_loader").hide();
 		        	console.log(data);
 		        	if($.trim(data).split(".")[0].split("-")[0]=="id")
@@ -697,6 +699,7 @@ function start()
 		        data: {'inviteToChannel':stringData},
 		        dataType: 'text',
 		        success: function (data) {
+							data = $.trim(data);
 		        	console.log(data);
                     $("#wholebody_loader").hide();
 		        	if(data.includes('success'))
@@ -749,6 +752,7 @@ function start()
                 data: {'removeFromChannel':stringData},
                 dataType: 'text',
                 success: function (data) {
+									data = $.trim(data);
                     console.log(data);
                     $("#wholebody_loader").hide();
                     if(data.includes('success'))
@@ -844,6 +848,7 @@ function start()
                                 dataType: 'text',
                                 success: function (data) {
                                     $("#threadmsg_loader").hide();
+																		data = $.trim(data);
 									if(data.split("-")[0]=="success"){
 									    $(".messageentryspace_threadsection textarea").val("");
                                         getAllThreadReplies($(".parentmsgidip_threadmsg").val());
@@ -908,6 +913,7 @@ function getAllThreadReplies(parentMsgID){
         data: {'getThreadMessages':stringData},
         dataType: 'text',
         success: function (data) {
+					data = $.trim(data);
             console.log(data);
             if(data!=("fail")){
 
