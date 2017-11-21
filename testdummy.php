@@ -7,7 +7,6 @@
  */
 $msgcontent = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Icons8_flat_businessman.svg/1024px-Icons8_flat_businessman.svg.png";
     $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG'];
-        $portExtensions= ['https://www','http://','https://','http://www','www'];
         $urlArr = explode(".",$msgcontent);
         //print_r($urlArr[count($urlArr)-1]);
         $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);

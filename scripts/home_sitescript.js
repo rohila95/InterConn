@@ -324,7 +324,7 @@ function start()
 					var listGroupDiv = $("<div class='resSuggDiv'><ul class='list-group'></ul></div>");
 					var liComp = "";
 					$.each(usersData,function(i,obj){
-						liComp += '<li class="list-group-item userSuggList" id="'+obj['user_id'] +'">'+obj['name']+'</li>';
+						liComp += '<li class="list-group-item userSuggList" id="'+obj['id'] +'">'+obj['name']+'</li>';
 						
 					});
 					listGroupDiv.find("ul").append(liComp);
@@ -351,6 +351,8 @@ function start()
 		$('.createNewChannelIcon').click(function()
 		{
 			$('.channelInvites').select2('data', null);
+			
+			// $('.newChannelInvites').select2('data', null);
 			$('#createChannel').modal('show');
 
 		});
@@ -385,6 +387,7 @@ function start()
             $("#wholebody_loader").hide();
 
             usersData=$.parseJSON(data);
+            console.log(usersData);
 			// $('.channelInvites').select2({
 		 //    width: '100%',
 		 //    allowClear: true,
@@ -415,6 +418,7 @@ function start()
 			    multiple: true,
 			    data: usersChannelData
 				});
+
 			}
 		});
 
