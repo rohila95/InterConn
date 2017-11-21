@@ -398,7 +398,7 @@
 					      		<span class='invites'>Invite to Channel</span>
 						        <div class="channelInvites">
 						        </div>
-						        
+
 					      	</div>
 					    </div>
 			          </form>
@@ -524,15 +524,30 @@
                         </div>
                     </div>
                     <div class="messageEntrySpace_regularMsg_HP row">
-
-                        <div class="dropup dropupMenuRegularMsgs">
+<?php
+if(isset($_GET["channel"])){
+		$currentChannel = json_decode($web_service->getSpecificChannelDetails($_GET["channel"]));
+		if($currentChannel[0]->is_archive==0)
+		{
+			echo '<div class="dropup dropupMenuRegularMsgs">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">More Options
+							<span class="caret"></span></button>
+					<ul class="dropdown-menu">
+							<li intent="localimage" ><a href="#" class="localimagesel_regularmsg"><i class="fa fa-picture-o" aria-hidden="true">&nbsp;Local Image</i></a></li>
+							<li intent="codesnipp" ><a href="#" class="codesnippetsel__regularmsg"><i class="fa fa-code" aria-hidden="true">&nbsp;Code Snippet</i></a></li>
+					</ul>
+			</div>';
+		}
+}
+ ?>
+                        <!-- <div class="dropup dropupMenuRegularMsgs">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">More Options
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li intent="localimage" ><a href="#" class="localimagesel_regularmsg"><i class="fa fa-picture-o" aria-hidden="true">&nbsp;Local Image</i></a></li>
                                 <li intent="codesnipp" ><a href="#" class="codesnippetsel__regularmsg"><i class="fa fa-code" aria-hidden="true">&nbsp;Code Snippet</i></a></li>
                             </ul>
-                        </div>
+                        </div> -->
                         <form method="POST" action="./services/sendMessage.php">
                             <input type="hidden" class="form-control" value=<?php echo '"'.$_SESSION['userid'].'"';?> name="userid">
                             <input type="hidden" class="form-control" value=<?php echo '"'.$_GET["channel"].'"';?> name="channelid">
