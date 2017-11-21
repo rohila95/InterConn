@@ -126,6 +126,7 @@ function start()
                     }
                 },
                 error: function(xhr,error){
+                    $("#wholebody_loader").hide();
                     console.log(error);
                 }
             });
@@ -626,6 +627,7 @@ function start()
 		        data: {'createChannel':stringData},
 		        dataType: 'text',
 		        success: function (data) {
+                    $("#wholebody_loader").hide();
 		        	console.log(data);
 		        	if($.trim(data).split(".")[0].split("-")[0]=="id")
 		        	{
