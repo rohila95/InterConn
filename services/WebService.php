@@ -154,7 +154,7 @@ class WebService{
         return 'fail';
     }
     $score=$reactions+$messages+$messages+$messages;
-    return json_encode($score);
+    return $score;
     $conn->close();
   }
 

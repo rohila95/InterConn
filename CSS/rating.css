@@ -1,12 +1,12 @@
 
 .rating {
     text-align: center;
-    margin-top: 120px;
+    /* margin-top: 120px; */
     position: relative;
-    width: 50%;
+    width: 100%;
     float: left;
-    background:#ADD8E6;
 }
+
 .hidden {
     opacity: 0;
 }
@@ -80,7 +80,7 @@
     font-family: arial;
     font-size: 20px;
     color: green;
-    margin-top: 20px;
+    margin-top: -2%;
     margin-left: 50px;
 }
 .score-rating {

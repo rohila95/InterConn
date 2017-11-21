@@ -1,6 +1,8 @@
 var starClicked = false;
-var cal_rating = 4;
-var tempval = 1;
+
+var cal_rating = 0;
+var tempval = -1;
+var myVar = null;
 $(function() {
 
   $('.star').click(function() {
@@ -56,8 +58,6 @@ $(function() {
       setFullStarState(this)
     }
   })*/
-  var cal_rating = 4;
-  var tempval = 1;
 /*
     $(".star").eq(0).find(".half").trigger("click");
     $(".star").eq(1).find(".half").trigger("click");
@@ -65,15 +65,18 @@ $(function() {
     $(".star").eq(3).find(".half").trigger("click");
     $(".star").eq(4).find(".half").trigger("click");
 */
-
-    $(".star").eq(0).find(".half").trigger("click");
-    var myVar = setInterval(function(){ myTimer() }, 500);
+     cal_rating = Math.round((parseInt(userScore)/100)*2)/2;
+     if(cal_rating > 5){
+         cal_rating = 5;
+     }
+   $("span[data-value='0']").eq(0).trigger("click");
+    myVar = setInterval(function(){ myTimer() }, 500);
 
 
 })
 
 function myTimer() {
-    $(".star").eq(tempval++).find(".half").trigger("click");
+    $("span[data-value='" + (++tempval) +"']").eq(0).trigger("click");
     console.log("tempval:"+tempval);
     if(tempval == cal_rating){
         clearInterval(myVar);

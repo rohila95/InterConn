@@ -30,6 +30,9 @@
 	            	$displayChannelList.=$channel->channel_name.'<br>';
 	           }
 	        }
+
+            $userScore=$web_service->getUserScore($_GET['userid']);
+
         }
     }
     else
@@ -47,18 +50,21 @@
 		<script src="./Assets/jquery.min.js"></script>
 		<script src="./Assets/bootstrap.min.js"></script>
 		<script src="./scripts/profile_pagescript.js"></script>
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./Assets/w3.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="./CSS/profilepage_site.css">
+        <script src="./Assets/ratingscript.js"></script>
+        <link rel="stylesheet" href="./CSS/rating.css">
         <style>
             html{
                 overflow: hidden !important;
             }
         </style>
+        <script> var userScore=<?php echo $userScore;?>;</script>
 	</head>
 	<body>
 		<div class="container mainLoginWrapper well w3-panel w3-card-4">
@@ -245,6 +251,61 @@
                   </table>
 				 </div>
 			</div>
+            <div class="row userratingwrapper">
+                <div class="rating " data-vote="0" >
+
+                    <div class="star hidden">
+                        <span class="full" data-value="0"></span>
+                        <span class="half" data-value="0"></span>
+                    </div>
+
+                    <div class="star">
+
+                        <span class="full" data-value="1"></span>
+                        <span class="half" data-value="0.5"></span>
+                        <span class="selected"></span>
+
+                    </div>
+
+                    <div class="star">
+
+                        <span class="full" data-value="2"></span>
+                        <span class="half" data-value="1.5"></span>
+                        <span class="selected"></span>
+
+                    </div>
+
+                    <div class="star">
+
+                        <span class="full" data-value="3"></span>
+                        <span class="half" data-value="2.5"></span>
+                        <span class="selected"></span>
+
+                    </div>
+
+                    <div class="star">
+
+                        <span class="full" data-value="4"></span>
+                        <span class="half" data-value="3.5"></span>
+                        <span class="selected"></span>
+
+                    </div>
+
+                    <div class="star">
+
+                        <span class="full" data-value="5"></span>
+                        <span class="half" data-value="4.5"></span>
+                        <span class="selected"></span>
+
+                    </div>
+
+                    <div class="score">
+                        <span class="score-rating js-score">0</span>
+                        <span>/</span>
+                        <span class="total">5</span>
+                    </div>
+                </div>
+            </div>
 		</div>
 		<div class="footer row">
 			<small >&copy; Mahesh Kukunooru, Rohila Gudipati, Maheedhar Gunnam</small>

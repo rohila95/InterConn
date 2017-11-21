@@ -101,7 +101,7 @@
 		<script src="./scripts/home_sitescript.js"></script>
 
 		<script src="./scripts/select2/select2.js"></script>
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 
         <link rel="stylesheet" href="./scripts/select2/select2.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
