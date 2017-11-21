@@ -172,7 +172,6 @@
                           <img src="./Assets/helpPage/1.PNG" />
                         </div>
                       </div>
-
                     </div>
                 </div>
             </div>
@@ -185,12 +184,10 @@
                 </div>
                 <div id="collapseSix" class="panel-collapse collapse">
                     <div class="panel-body">
-                        There are a number of reasons why you should join us:
-                        <ul>
-                            <li>A great 70% flat rate for your items.</li>
-                            <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours for a template/theme to get reviewed.</li>
-                            <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
-                        </ul>
+                      Each user is given a rating based on the number of channels created and the number of channels the user is a part of. Also the number of posts of a user and the reactions are also considered in the evaluation of rating of a person. For now we considered the count of reactions and the number of posts is of higher importance than the number of channels he is a member of as he may be inactive in all of them.
+<br/><br/><strong>User metric value = Reaction count + Posts count + Channels created + channelsPartof</strong><br/><br/>
+As every person’s metric is represented on a scale of 0-5, we calculated the raw metric value for all users and the one with the maximum value is given 5 star rating and every other person’s metric is evaluated relative to the highest rated guy.
+
                     </div>
                 </div>
             </div>
@@ -251,7 +248,7 @@
                     <div class="panel-body">
                       <div class="row">
                         <div class="col-md-7">
-                            Don't worry if you didn't invite a user at the time of creating a channel. You can find something like <strong>Invite Members</strong> at the top of a channel
+                            Don't worry if you didn't invite a user at the time of creating a channel. If you created a private channel, you can find something like <strong>Invite Members</strong> at the top of a channel
                             when you open it. It shows the number of people currently present in the channel.
                         </div>
                         <div class="col-md-5">
@@ -261,23 +258,34 @@
                       <div class="row" style="margin-top: 3%;width: 474px;margin-left: 8%;">
                         <img src="./Assets/helpPage/6.PNG" style="width:700px">
                       </div>
+                      <div class="row" style="margin-top:2%;margin-left:3%;">
+                        Also if you are admin, you can invite users to any channel in the workspace whether it is public or private. This can
+                        be done by clicking on the users icon under the channel name(only for <strong>admin</strong>).
+                      </div>
                     </div>
                 </div>
             </div>
 
-            <!-- <div class="panel panel-default">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">What are the payment options?</a>
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">How to know if I am an admin? And what are the extra powers?</a>
                     </h4>
                 </div>
                 <div id="collapseEight" class="panel-collapse collapse">
                     <div class="panel-body">
-                        The best way to transfer funds is via Paypal. This secure platform ensures timely payments and a secure environment.
+                        The easiest way to find whether you are an admin is to just hover over your name in the left corner which welcomes you with a message <strong>"Welcome Admin"</strong>
+                        . If you are in an Administrator position, you can archive/unrachive a channel <strong>(button present beside the search bar at the top)</strong>, similarly users can
+                         be invited or deleted from channel <strong>(by clicking on the users icon under the channel name at the top)</strong>.<br/>
+
+                        <img src="./Assets/helpPage/8.PNG" style="width:420px;margin-top:2%;margin-left:4%;margin-bottom:2%">
+                        <img src="./Assets/helpPage/9.PNG" style="width: 305px;margin-left: 5%;">
+                        <img src="./Assets/helpPage/10.PNG" style="margin-left: 70%;margin-bottom: 2%;">
+                        <br/>Admin has an option of deleting messages and threads by hovering on message.<strong>(last icon from the left)</strong>.
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
+            <!-- <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">When do I get paid?</a>
