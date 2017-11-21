@@ -529,8 +529,8 @@
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">More Options
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li intent="localimage" ><a href="#" class="localimagesel_regularmsg">Local Image</a></li>
-                                <li intent="codesnipp" ><a href="#" class="codesnippetsel__regularmsg">Code Snippet</a></li>
+                                <li intent="localimage" ><a href="#" class="localimagesel_regularmsg"><i class="fa fa-picture-o" aria-hidden="true">&nbsp;Local Image</i></a></li>
+                                <li intent="codesnipp" ><a href="#" class="codesnippetsel__regularmsg"><i class="fa fa-code" aria-hidden="true">&nbsp;Code Snippet</i></a></li>
                             </ul>
                         </div>
                         <form method="POST" action="./services/sendMessage.php">

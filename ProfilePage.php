@@ -32,6 +32,7 @@
 	        }
 
             $userScore=$web_service->getUserScore($_GET['userid']);
+            // echo $userScore;
 
         }
     }

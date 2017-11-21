@@ -121,40 +121,72 @@ class WebService{
     $conn->close();
   }
 
-  public function getUserScore($userid)
+  public function getUserScore($currentuserid)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
-    $userid=mysqli_real_escape_string($conn,$userid);
+    $currentuserid=mysqli_real_escape_string($conn,$currentuserid);
+    $workspaceid=0;
     $sql_service = new SqlService();
-    $scoreQuery = $sql_service->getUserScore($userid);
-    $result = $conn->query($scoreQuery);
-    $score=0;
-    $reactions=0;
-    $messages=0;
-    $messages=0;
-    $messages=0;
-    if ($result->num_rows > 0) {
+    $max=0;
+    $currentScore=0;
+    $workspaceidQuery = $sql_service->getWorkspace($currentuserid);
+    $workspaceidResult = $conn->query($workspaceidQuery);
 
-        while($row = $result->fetch_assoc()) {
-          if($row['title']=='createdchannel')
-            $channelscreated=$row['count'];
-          else if($row['title']=='channel')
-            $channels=$row['count'];
-          else if($row['title']=='threadreaction')
-            $reactions+=$row['count'];
-          else if($row['title']=='messagereaction')
-            $reactions+=$row['count'];
-          else if($row['title']=='threadmessages')
-            $messages+=$row['count'];
-          else if($row['title']=='messages')
-            $messages+=$row['count'];
+
+    if ($workspaceidResult->num_rows > 0) {
+
+        while($row = $workspaceidResult->fetch_assoc()) {
+            $workspaceid= $row['workspace_id'];
         }
     } else {
         return 'fail';
     }
-    $score=$reactions+$messages+$messages+$messages;
-    return $score;
+
+    $users = $sql_service->getUsersWorkspace($workspaceid);
+    $usersresult = $conn->query($users);
+
+
+    if ($usersresult->num_rows > 0) {
+
+        while($outerrow = $usersresult->fetch_assoc()) {
+          $scoreQuery = $sql_service->getUserScore($outerrow['user_id']);
+          $result = $conn->query($scoreQuery);
+          $score=0;
+          $reactions=0;
+          $messages=0;
+          $messages=0;
+          $messages=0;
+          if ($result->num_rows > 0) {
+
+              while($row = $result->fetch_assoc()) {
+                if($row['title']=='createdchannel')
+                  $channelscreated=$row['count'];
+                else if($row['title']=='channel')
+                  $channels=$row['count'];
+                else if($row['title']=='threadreaction')
+                  $reactions+=$row['count'];
+                else if($row['title']=='messagereaction')
+                  $reactions+=$row['count'];
+                else if($row['title']=='threadmessages')
+                  $messages+=$row['count'];
+                else if($row['title']=='messages')
+                  $messages+=$row['count'];
+              }
+          } 
+          $score=floatval($reactions)+floatval($messages)+(floatval($channels)*0.5)+(floatval($channelscreated)*0.5);
+          if($currentuserid==$outerrow['user_id'])
+          {
+            $currentScore=$score;
+          }
+
+          if($max<$score)
+            $max=$score;
+        }
+    } else {
+        return 'fail';
+    }
+    return ($currentScore/$max)*5;
     $conn->close();
   }
 

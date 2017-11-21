@@ -65,12 +65,12 @@ $(function() {
     $(".star").eq(3).find(".half").trigger("click");
     $(".star").eq(4).find(".half").trigger("click");
 */
-     cal_rating = Math.round((parseInt(userScore)/100)*2)/2;
+     cal_rating = Math.ceil((parseInt(userScore))*2)/2;
      if(cal_rating > 5){
          cal_rating = 5;
      }
    $("span[data-value='0']").eq(0).trigger("click");
-    myVar = setInterval(function(){ myTimer() }, 500);
+    myVar = setInterval(function(){ myTimer() }, 200);
 
 
 })
@@ -79,6 +79,8 @@ function myTimer() {
     $("span[data-value='" + (++tempval) +"']").eq(0).trigger("click");
     console.log("tempval:"+tempval);
     if(tempval == cal_rating){
+      $("span").off("click");
+      $(".star").off("click");
         clearInterval(myVar);
     }
 }
