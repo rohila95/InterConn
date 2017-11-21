@@ -385,12 +385,18 @@ function start()
             $("#wholebody_loader").hide();
 
             usersData=$.parseJSON(data);
-			$('.channelInvites').select2({
-		    width: '100%',
-		    allowClear: true,
-		    multiple: true,
-		    data: usersData
-			});
+			// $('.channelInvites').select2({
+		 //    width: '100%',
+		 //    allowClear: true,
+		 //    multiple: true,
+		 //    data: usersData
+			// });
+        $('.channelInvites').select2({
+			    width: '100%',
+			    allowClear: true,
+			    multiple: true,
+			    data: usersData
+				});
 		});
 
 		var getUsersDataNotInChannel='{"channelid":"'+channelid+'","workspaceid":"'+workspaceid+'"}';
