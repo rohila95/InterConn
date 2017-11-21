@@ -144,7 +144,7 @@
 						<div class="row channelsContainer_menu_HP">
 							<div class="row categoryTitle_HP channelTitle"> <div class="col-xs-10"> Channels <span class="noOfChannels_HP numberCount_badge"><?php echo $channelCount;?></span>
 
-                                    <i class="fa fa-plus-square-o   pull-right createNewChannelIcon"></i> </div>
+                                    <i class="fa fa-plus-square-o   pull-right createNewChannelIcon" title="Add new channel"></i> </div>
                             </div>
 							<ul class="row nav navbar-nav channels_UL_List">
 								<?php echo $channelstr;?>
@@ -398,6 +398,7 @@
 					      		<span class='invites'>Invite to Channel</span>
 						        <div class="channelInvites">
 						        </div>
+						        
 					      	</div>
 					    </div>
 			          </form>

@@ -126,6 +126,7 @@ function start()
                     }
                 },
                 error: function(xhr,error){
+                    $("#wholebody_loader").hide();
                     console.log(error);
                 }
             });
@@ -324,7 +325,7 @@ function start()
 					var listGroupDiv = $("<div class='resSuggDiv'><ul class='list-group'></ul></div>");
 					var liComp = "";
 					$.each(usersData,function(i,obj){
-						liComp += '<li class="list-group-item userSuggList" id="'+obj['user_id'] +'">'+obj['name']+'</li>';
+						liComp += '<li class="list-group-item userSuggList" id="'+obj['id'] +'">'+obj['name']+'</li>';
 						
 					});
 					listGroupDiv.find("ul").append(liComp);
@@ -351,6 +352,8 @@ function start()
 		$('.createNewChannelIcon').click(function()
 		{
 			$('.channelInvites').select2('data', null);
+			
+			// $('.newChannelInvites').select2('data', null);
 			$('#createChannel').modal('show');
 
 		});
@@ -385,12 +388,19 @@ function start()
             $("#wholebody_loader").hide();
 
             usersData=$.parseJSON(data);
-			$('.channelInvites').select2({
-		    width: '100%',
-		    allowClear: true,
-		    multiple: true,
-		    data: usersData
-			});
+            console.log(usersData);
+			// $('.channelInvites').select2({
+		 //    width: '100%',
+		 //    allowClear: true,
+		 //    multiple: true,
+		 //    data: usersData
+			// });
+        $('.channelInvites').select2({
+			    width: '100%',
+			    allowClear: true,
+			    multiple: true,
+			    data: usersData
+				});
 		});
 
 		var getUsersDataNotInChannel='{"channelid":"'+channelid+'","workspaceid":"'+workspaceid+'"}';
@@ -409,6 +419,7 @@ function start()
 			    multiple: true,
 			    data: usersChannelData
 				});
+
 			}
 		});
 
@@ -626,6 +637,7 @@ function start()
 		        data: {'createChannel':stringData},
 		        dataType: 'text',
 		        success: function (data) {
+                    $("#wholebody_loader").hide();
 		        	console.log(data);
 		        	if($.trim(data).split(".")[0].split("-")[0]=="id")
 		        	{
