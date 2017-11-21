@@ -398,6 +398,7 @@
 					      		<span class='invites'>Invite to Channel</span>
 						        <div class="channelInvites">
 						        </div>
+						        
 					      	</div>
 					    </div>
 			          </form>
