@@ -682,7 +682,7 @@ function start()
 				$.each($(".select2-choices li div"),function(i,innerobj){
 
 					if(obj['text']==innerobj['outerText'])
-						ids.push(obj['user_id']);
+						ids.push(obj['id']);
 				});
 			});
 
