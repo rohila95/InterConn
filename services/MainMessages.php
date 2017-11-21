@@ -51,7 +51,7 @@ function constructMessagesDiv($messageStr)
                   $msgStr.='<div class="row dayDividerWrapper"><div class="daySeperatorLine col-xs-5 pull-left"> </div><div class="dayDividerText col-xs-2">'.$currentDate.'</div><div class="daySeperatorLine col-xs-5 pull-right"> </div></div>';
                   $prevdate=$currentDate;
               }
-
+// echo'in 1 if';
 
               if($message->profile_pic=='./images/0.jpeg')
                  $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header" userid="'.$message->user_id .'"  ><b>';
@@ -85,16 +85,30 @@ function constructMessagesDiv($messageStr)
           }
           else if($prevUser==$message->first_name && $prevTime==$currentTime )
           {
+            // echo'in 2 if';
               $dynamicClassNameWithId = "messagewithid_".$message->message_id;
 
               $msgStr.='<div class="message_body addOnMessages '.$dynamicClassNameWithId.'" id="'.$message->message_id.'">';
               $msgStr.= messageContentHelper ($message); // this method construct the message content in the format need
+                $msgStr.='<div class="msg_reactionsec">';
+              if($message->emojis!='0')
+                  foreach ($message->emojis as $emoji)
+                  {
+                      $msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
+                  }
+                  if($message->is_threaded==1)
+                  {
+                      $thread=$message->threads->threadCount;
+                      $msgStr.="<div class='repliescount' title='view thread'><a href='#'><span>".$thread.'</span> replies'."</a></div>";
 
-              $msgStr.='<div class="msg_reactionsec"> </div></div>';
-
+                  }
+                  $msgStr.=' </div></div>';
+                  $prevUser=$message->first_name;
+                  $prevTime=$currentTime;
           }
           else if($prevUser!=$message->first_name || $prevTime!=$currentTime)
           {
+            // echo'in 3 if';
               $msgStr.='</div></div>';
               if($prevdate!=$currentDate)
               {
@@ -114,19 +128,18 @@ function constructMessagesDiv($messageStr)
               $msgStr.='<div class="message_body '.$dynamicClassNameWithId.'" id="'.$message->message_id.'">';
               $msgStr.= messageContentHelper ($message); // this method construct the message content in the format need
               $msgStr.='<div class="msg_reactionsec">';
-              // print_r($message->emojis);
-              if($message->emojis!='0')
-                  foreach ($message->emojis as $emoji)
-                  {
-                      $msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
-                  }
-                  if($message->is_threaded==1)
-                  {
-                      $thread=$message->threads->threadCount;
-                      $msgStr.="<div class='repliescount' title='view thread'><a href='#'><span>".$thread.'</span> replies'."</a></div>";
+            if($message->emojis!='0')
+                foreach ($message->emojis as $emoji)
+                {
+                    $msgStr.='<div class="emojireaction" emojiid="'.$emoji->emoji_id.'"><i class="'.$emoji->emoji_pic.'"></i><span class="reactionCount">'.$emoji->count.'</span></div>';
+                }
+                if($message->is_threaded==1)
+                {
+                    $thread=$message->threads->threadCount;
+                    $msgStr.="<div class='repliescount' title='view thread'><a href='#'><span>".$thread.'</span> replies'."</a></div>";
 
-                  }
-              $msgStr.=' </div></div>';
+                }
+                $msgStr.=' </div></div>';
               $prevUser=$message->first_name;
               $prevTime=$currentTime;
           }
