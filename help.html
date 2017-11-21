@@ -3,7 +3,7 @@
 
   <head>
     <script src="./Assets/jquery.min.js"></script>
-    <script src="./Assets/jquery.min.js"></script>
+
     <script src="./Assets/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -24,6 +24,14 @@
             /* symbol for "collapsed" panels */
             content: "\e080";    /* adjust as needed, taken from bootstrap.css */
         }
+
+        .marker {
+          background-color: yellow;
+          font-weight: bold;
+        }
+        .highlight {
+            background-color: yellow !important;
+        }
     </style>
 
 
@@ -33,24 +41,39 @@
   <body>
     <script>
 
-      $(document).ready({
+      $(document).ready(function(){
 
-          $(document).on('keyup','#query',function(){
+        var highlightRe = /<span class="highlight">(.*?)<\/span>/g,
+        highlightHtml = '<span class="highlight">$1</span>';
+
+          function highlight(word){
+             var term = word;
+             var txt = $('.mainDiv').html().replace(highlightRe,'$1');
+             if(term !== '') {
+                 txt = txt.replace(new RegExp('(' + term + ')', 'gi'), highlightHtml);
+             }
+             $('.mainDiv').html(txt);
+          }
+
+
+          $(document).on('click','.submit',function(){
+              $('.mainDiv').find('.highlight').removeClass('highlight');
+              var commonWords = ["an","the","these","those","that","and","at","or","is","for"];
               var searchQuery = $('#query').val();
-              
+              console.log(searchQuery);
+              var words = searchQuery.split(" ");
+              // console.log(words);
+              words.forEach(function(ele){
+                if(commonWords.includes(ele)){
+                    var a = 1;
+                }else{
+                  highlight(ele);
+                }
+              });
 
-
-
+              $('.collapse').find('.highlight').closest('.panel').find('.panel-heading').addClass('highlight');
           });
-
-
-
-
-
       });
-
-
-
     </script>
 
 
@@ -59,29 +82,29 @@
         <br />
         <br />
         <br />
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" id="query">
+        <div class="form-group row">
+          <div class="col-md-10">
+            <input type="text" class="form-control" placeholder="Search" id="query">
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-info submit">Submit</button>
+          </div>
         </div>
-        <!-- <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            This section contains a wealth of information, related to <strong>PrepBootstrap</strong> and its store. If you cannot find an answer to your question,
-            make sure to contact us.
-        </div> -->
 
         <br />
 
         <div class="panel-group" id="accordion">
-            <div class="faqHeader">General questions</div>
+            <div class="faqHeader">Channels</div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is account registration required?</a>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">How to edit my profile?</a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
+                <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
-                        Account registration at <strong>PrepBootstrap</strong> is only required if you will be selling or buying themes.
-                        This ensures a valid communication channel for all parties involved in any transactions.
+                        You can find a link with your name in the top left corner which takes you to your profile page, where you can edit your profile pic as well as any other information provided during registration.
+                        <br /><img src="./Assets/helpPage/workspace_profile.PNG">
                     </div>
                 </div>
             </div>
