@@ -30,7 +30,11 @@
 	font-size: 24px;
 	padding: 10px
 }
-
+.credentialsWrapper
+{
+	border-right: 2px inset;
+    border-color: #ececec;
+}
 .logo
 {
 	text-align: center;

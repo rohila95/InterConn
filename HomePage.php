@@ -89,8 +89,10 @@
 		header("location: ./index.php?status=notloggedin");
 	}
 ?>
+<!-- <!DOCTYPE html> -->
 <html lang="en">
 	<head>
+		<meta charset="UTF-8">
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="./Assets/jquery.min.js"></script>
@@ -458,7 +460,7 @@
                                 echo "<div class='row headerAddon_HP archivedChannel'>";
                             }
                         ?>
-		                    <span class="starChannelIcon headerSpan"> <i class="fa fa-star-o"></i> </span> |
+		                    <!-- <span class="starChannelIcon headerSpan"> <i class="fa fa-star-o"></i> </span> | -->
                             <span class="channelMemebersShortDetails headerSpan">
                                 <a href="#" class="channelMemebersEditButt" data-toggle="tooltip" data-placement="bottom"  title='<?php
                                     if($is_admin){

@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
 	<head>
+        <meta charset="UTF-8">
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="./Assets/jquery.min.js"></script>
@@ -24,8 +26,8 @@
             <div class="col-xs-1"></div>
                 <div class="col-xs-8 mainLoginWrapper well w3-panel w3-card-4">
                     <div class="row">
-                        <div class="col-sm-12" style="text-align: center;">
-                            <h1 style="font-family: buxton sketch;">InterConn</h1>
+                        <div class="col-sm-12">
+                            <h1 class="logo">InterConn</h1>
                         </div>
                     </div>
 

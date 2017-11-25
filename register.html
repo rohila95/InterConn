@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
+		<meta charset="UTF-8">
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="./Assets/jquery.min.js"></script>
@@ -51,28 +53,28 @@
 			    </div>
 			</div>
 			<div class="row">
-				<form role="form" class="col-xs-12" id="registerForm">
+				<form class="col-xs-12" id="registerForm">
 					<div class="row">
 						<div class="form-group col-xs-5">
-					        <input type="text" class="form-control firstName" name="firstName" maxlength="20" required>
+					        <input type="text" class="form-control firstName" name="firstName" id="firstName" maxlength="20" required>
 					        <label class="form-control-placeholder" for="firstName">First Name</label>
 				      	</div>
 				      	<div class="form-group col-xs-1">
 				      	</div>
 				      	<div class="form-group col-xs-6">
-					        <input type="text" class="form-control lastName" name="lastName" maxlength="20" required>
+					        <input type="text" class="form-control lastName" name="lastName" id="lastName" maxlength="20" required>
 					        <label class="form-control-placeholder" for="lastName">Last Name</label>
 				      	</div>
 				    </div>
 				    <div class="row">
 				      	<div class="form-group">
-					        <input type="email" class="form-control email" name="email" maxlength="50" required>
+					        <input type="email" class="form-control email" name="email" id="email" maxlength="50" required>
 					        <label class="form-control-placeholder" for="email">E-mail</label>
 				      	</div>
 				    </div>
 				    <div class="row">
 				      	<div class="form-group">
-					        <input type="password" class="form-control password" name="password" maxlength="20" required>
+					        <input type="password" class="form-control password" name="password" id="password" maxlength="20" required>
 					        <label class="form-control-placeholder" for="password">Password</label>
 					    </div>
 					</div>
@@ -81,30 +83,30 @@
 					        <select class="form-control" id="workspaceid" name="workspace">
 
 					      	</select>
-					        <label class="form-control-placeholder" for="workspace">Workspace</label>
+					        <label class="form-control-placeholder" for="workspaceid">Workspace</label>
 					    </div>
 					</div>
 					<div class="row">
 				      	<div class="form-group">
-					        <input type="text" class="form-control whatIDo not_reallyrequired" name="whatIDo" maxlength="200" required>
+					        <input type="text" class="form-control whatIDo not_reallyrequired" name="whatIDo" maxlength="200" id="whatIDo" required>
 					        <label class="form-control-placeholder" for="whatIDo">What I do</label>
 				      	</div>
 				    </div>
 				    <div class="row">
 				      	<div class="form-group">
-					        <input type="text" class="form-control status not_reallyrequired" name="status" maxlength="200"  required>
+					        <input type="text" class="form-control status not_reallyrequired" name="status" maxlength="200" id="status" required>
 					        <label class="form-control-placeholder" for="status">Status</label>
 				      	</div>
 				    </div>
 				    <div class="row">
 				      	<div class="form-group">
-					        <input type="number" class="form-control phoneNumber not_reallyrequired" name="phoneNumber" size="10" required>
+					        <input type="number" class="form-control phoneNumber not_reallyrequired" name="phoneNumber" size="10" id="phoneNumber" required>
 					        <label class="form-control-placeholder" for="phoneNumber">Phone Number</label>
 				      	</div>
 				    </div>
 				    <div class="row">
 				      	<div class="form-group">
-					        <input type="text" class="form-control skype not_reallyrequired" name="skype" maxlength="50" required>
+					        <input type="text" class="form-control skype not_reallyrequired" name="skype" maxlength="50" id="skype" required>
 					        <label class="form-control-placeholder" for="skype">Skype</label>
 				      	</div>
 				    </div>

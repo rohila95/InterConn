@@ -375,6 +375,10 @@ function start()
         	if($(this).parents(".headerAddon_HP").hasClass("archivedChannel")){
         		return;
 			}
+			if($('.currentChannelTitle').text().trim()=='general' || $('.currentChannelTitle').text().trim()=='random')
+			{
+				return;
+			}
             $("#channelMembershipEditingPUP .curSelChannel").html($(".currentChannelTitle span").html());
             $('.existingChannelInvites').select2('data', null);
             $('#channelMembershipEditingPUP').modal('show');
