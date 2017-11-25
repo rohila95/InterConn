@@ -95,14 +95,14 @@
 		<meta charset="UTF-8">
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="./Assets/jquery.min.js"></script>
-		<script src="./Assets/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+		<script type="text/javascript" src="./Assets/jquery.min.js"></script>
+		<script type="text/javascript" src="./Assets/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
                 integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
                 crossorigin="anonymous"></script>
-		<script src="./scripts/home_sitescript.js"></script>
+		<script type="text/javascript" src="./scripts/home_sitescript.js"></script>
 
-		<script src="./scripts/select2/select2.js"></script>
+		<script type="text/javascript" src="./scripts/select2/select2.js"></script>
         <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 
         <link rel="stylesheet" href="./scripts/select2/select2.css">

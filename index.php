@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="./Assets/jquery.min.js"></script>
-		<script src="./scripts/sitescript.js"></script>
+		<script type="text/javascript" src="./Assets/jquery.min.js"></script>
+		<script type="text/javascript" src="./scripts/sitescript.js"></script>
         <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="./scripts/d3/d3.js"></script>
 	    <script type="text/javascript" src="./scripts/d3/d3.geom.js"></script>
 	    <script type="text/javascript" src="./scripts/d3/d3.layout.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
 <!--	   	<script type="text/javascript" src="./scripts/collisiondetect.js"></script>
 -->	</head>
 	<body>
@@ -102,6 +103,10 @@
                 </div>
             <div class="col-xs-1"></div>
 		</div>
+        <div class="captchaWrapper">
+            <div class="g-recaptcha" data-sitekey="" data-callback="reCaptchad"></div>
+        </div>
+
 		<div class="footer row">
 			<small >&copy; Mahesh Kukunooru, Rohila Gudipati, Maheedhar Gunnam</small>
 		</div>
