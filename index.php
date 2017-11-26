@@ -72,6 +72,9 @@
                                  <div class="forgotPasswordWrapper">
                                     <a href="#">Forgot password?</a>
                                 </div>
+                                <div class="captchaWrapper">
+                                    <div class="g-recaptcha" data-sitekey="6LfQVjoUAAAAAD_w1gSuM_bz8zLk97capHidchRN" data-callback="reCaptchad"></div>
+                                </div>
                                 <div class="buttonWrapper">
                                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                                 </div>
@@ -103,9 +106,7 @@
                 </div>
             <div class="col-xs-1"></div>
 		</div>
-        <div class="captchaWrapper">
-            <div class="g-recaptcha" data-sitekey="" data-callback="reCaptchad"></div>
-        </div>
+        
 
 		<div class="footer row">
 			<small >&copy; Mahesh Kukunooru, Rohila Gudipati, Maheedhar Gunnam</small>

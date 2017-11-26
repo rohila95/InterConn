@@ -2,6 +2,23 @@
 session_start();
 include_once "./database_connect.php";
 include_once "./SqlService.php";
+require_once "./recaptchalib.php";
+$secret = "6LfQVjoUAAAAADM4-r7g6y42SZXW-8qtdTVIa5_6";
+// empty response
+$response = null;
+ 
+// check secret key
+$reCaptcha = new ReCaptcha($secret);
+if ($_POST["g-recaptcha-response"]) {
+    $response = $reCaptcha->verifyResponse(
+        $_SERVER["REMOTE_ADDR"],
+        $_POST["g-recaptcha-response"]
+    );
+}
+if ($response != null && $response->success) {
+    echo 'captcha done';
+    return;
+    }
 
 $loggedInId="";
 
