@@ -16,43 +16,44 @@ if ($_POST["g-recaptcha-response"]) {
     );
 }
 if ($response != null && $response->success) {
-    echo 'captcha done';
-    return;
-    }
+    // echo 'captcha done';
+    // return;
 
-$loggedInId="";
 
-if($_POST && check_login($_POST['email'],$_POST['password'])){
-    $_SESSION['emailid'] = $_POST['email'];
-    $_SESSION['loggedIn'] = True;
-    $database_connection = new DatabaseConnection();
-    $conn = $database_connection->getConnection();
+    $loggedInId="";
 
-    $sql_service = new SqlService();
-    $getUserDetails = $sql_service->getChannelGeneral($_SESSION['userid']);
-    $result = $conn->query($getUserDetails);
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $channelid=$row['channel_id'];
+    if($_POST && check_login($_POST['email'],$_POST['password'])){
+        $_SESSION['emailid'] = $_POST['email'];
+        $_SESSION['loggedIn'] = True;
+        $database_connection = new DatabaseConnection();
+        $conn = $database_connection->getConnection();
+
+        $sql_service = new SqlService();
+        $getUserDetails = $sql_service->getChannelGeneral($_SESSION['userid']);
+        $result = $conn->query($getUserDetails);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $channelid=$row['channel_id'];
+            }
+        } else {
+            echo 'fail';
         }
-    } else {
-        echo 'fail';
-    }
-    $conn->close();
+        $conn->close();
 
-   header("location: ../HomePage.php?channel=".$channelid);
-    // exit();
-    // session_write_close();
-}elseif($_POST) {
-    echo "Unsuccessful login<br><br>";
-    echo "the session variable contents:<br>";
-    header("location: ../index.php?status=Unsuccessful");
-    print_r($_SESSION);
-}else {
-    echo "You're not logged in";
-    echo "<br><br>the session variable contents:<br>";
-    print_r($_SESSION);
-    header("location: ../index.php?status=notloggedin");
+       header("location: ../HomePage.php?channel=".$channelid);
+        // exit();
+        // session_write_close();
+    }elseif($_POST) {
+        echo "Unsuccessful login<br><br>";
+        echo "the session variable contents:<br>";
+        header("location: ../index.php?status=Unsuccessful");
+        print_r($_SESSION);
+    }else {
+        echo "You're not logged in";
+        echo "<br><br>the session variable contents:<br>";
+        print_r($_SESSION);
+        header("location: ../index.php?status=notloggedin");
+    }
 }
 
 function check_login($emailid,$password){

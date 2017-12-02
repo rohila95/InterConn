@@ -37,9 +37,13 @@
 
     function checkIfWebImg( $msgcontent ){
         $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG','gif','GIF'];
-        $urlArr = explode(".",$msgcontent);
+        // $urlArr = explode(".",$msgcontent);
         //print_r($urlArr[count($urlArr)-1]);
-        $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
+        $type = get_headers($msgcontent, 1)["Content-Type"];
+        echo $type;
+        $imgType=explode("/",$type);
+        // $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
+        $isImage= in_array($imgType[1],$imageExtension);
         if($isImage){
 
                 //echo '<img src="'.$url.'" />';
