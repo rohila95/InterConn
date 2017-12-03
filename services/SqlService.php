@@ -54,7 +54,7 @@ class SqlService{
 
 	public function getUsersWorkspace($workspaceid)
 	{
-		$sql="SELECT user.user_name,user.user_id as id,user.first_name,user.last_name,user.profile_pic,user.status,user.status_emoji FROM `user`,`user_workspace` where user.user_id=user_workspace.user_id and user_workspace.workspace_id=".$workspaceid;
+		$sql="SELECT user.user_name,user.user_id as id,user.first_name,user.last_name,user.profile_pic_pref,user.profile_pic,user.status,user.status_emoji FROM `user`,`user_workspace` where user.user_id=user_workspace.user_id and user_workspace.workspace_id=".$workspaceid;
 		return $sql;
 	}
 
@@ -82,12 +82,12 @@ class SqlService{
 
 	public function getChannelMessages($channelid)
 	{
-		$sql="select * from (SELECT message.message_id,user.user_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded,user.profile_pic,message.is_specialmessage,message.code_type FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at desc limit 10) A order by A.created_at";
+		$sql="select * from (SELECT message.message_id,user.user_id,user.profile_pic_pref,user.email_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded,user.profile_pic,message.is_specialmessage,message.code_type FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." order by message.created_at desc limit 10) A order by A.created_at";
 		return $sql;
 	}
 	public function getOlderChannelMessages($channelid,$lastmessageid)
 	{
-		$sql="select * from (SELECT message.message_id,user.user_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded, user.profile_pic,message.is_specialmessage,message.code_type FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." and message.message_id<".$lastmessageid." order by message.created_at desc limit 10) A order by A.created_at";
+		$sql="select * from (SELECT message.message_id,user.user_id,user.profile_pic_pref,user.email_id,user.first_name,user.last_name,message.created_at,message.content,message.is_threaded, user.profile_pic,message.is_specialmessage,message.code_type FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." and message.message_id<".$lastmessageid." order by message.created_at desc limit 10) A order by A.created_at";
 		return $sql;
 	}
 	public function getOlderChannelMessagesCount($channelid,$lastmessageid)
@@ -95,6 +95,13 @@ class SqlService{
 		$sql="SELECT count(*) as messagecount FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." and message.message_id<".$lastmessageid;
 		return $sql;
 	}
+
+	public function getDirectMessages($userid,$messagerUserid)
+	{
+		$sql="SELECT message.created_by,message.created_at,message.content,message_direct.receiver_id,message.message_id FROM `message`,`message_direct` where message.message_id=message_direct.message_id and ((message.created_by=".$userid." and message_direct.receiver_id=".$messagerUserid.") or (message.created_by=".$messagerUserid." and message_direct.receiver_id=".$userid.")) order by message.created_at";
+		return $sql;
+	}
+
 	public function deletethreadedMessages($messageid)
 	{
 		$sql="UPDATE `InterConn`.`threaded_message` SET `is_active` = '1' WHERE `threaded_message`.`id` =".$messageid;
@@ -112,7 +119,7 @@ class SqlService{
 	}
 	public function getThreadMessages($parent_message_id)
 	{
-		$sql="SELECT threaded_message.id,threaded_message.content,threaded_message.created_at,user.user_id,user.first_name,user.last_name,user.profile_pic FROM `threaded_message`,`user` where threaded_message.created_by=user.user_id and threaded_message.is_active=0 and parent_message_id=".$parent_message_id." order by threaded_message.created_at";
+		$sql="SELECT threaded_message.id,threaded_message.content,threaded_message.created_at,user.user_id,user.profile_pic_pref,user.email_id,user.first_name,user.last_name,user.profile_pic FROM `threaded_message`,`user` where threaded_message.created_by=user.user_id and threaded_message.is_active=0 and parent_message_id=".$parent_message_id." order by threaded_message.created_at";
 		return $sql;
 	}
 	public function getThreadMessageReactions($threadmessage_id)
@@ -185,14 +192,10 @@ class SqlService{
 
 	public function getLastThreadReply($messageid)
 	{
-		$sql="SELECT content,created_at,first_name,last_name,profile_pic FROM `threaded_message`,user where threaded_message.created_by=user.user_id and parent_message_id=".$messageid." order by created_at desc limit 1";
+		$sql="SELECT content,created_at,first_name,last_name,profile_pic,email_id,profile_pic_pref FROM `threaded_message`,user where threaded_message.created_by=user.user_id and parent_message_id=".$messageid." order by created_at desc limit 1";
 		return $sql;
 	}
-	public function getDirectMessages($userid,$messagerUserid)
-	{
-		$sql="SELECT message.created_by,message.created_at,message.content,message_direct.receiver_id,message.message_id FROM `message`,`message_direct` where message.message_id=message_direct.message_id and ((message.created_by=".$userid." and message_direct.receiver_id=".$messagerUserid.") or (message.created_by=".$messagerUserid." and message_direct.receiver_id=".$userid.")) order by message.created_at";
-		return $sql;
-	}
+	
 
 	public function createMessage($userid,$content,$timestamp)
 	{

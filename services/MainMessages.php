@@ -53,11 +53,20 @@ function constructMessagesDiv($messageStr)
               }
 // echo'in 1 if';
 
-              if($message->profile_pic=='./images/0.jpeg')
-                 $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header" userid="'.$message->user_id .'"  ><b>';
+              $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic">';
+              if($message->profile_pic_pref==1)
+              {
+                $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.get_gravatar($message->email_id) .') !important;background-size: 36px 36px !important;">';
+              }
               else
-                $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;"></div></div><div class="col-xs-11 message"><div class="message_header" userid="'.$message->user_id .'"><b>';
-
+              {
+                if($message->profile_pic=='./images/0.jpeg')
+                   $msgStr.='<div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName));
+                else
+                  $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;">';
+              }
+              $msgStr.='</div></div><div class="col-xs-11 message"><div class="message_header" userid="'. $message->user_id .'" ><b>';
+              
               $msgStr.=htmlspecialchars($message->first_name);
               $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
               $msgStr.=$currentTime;
@@ -116,10 +125,19 @@ function constructMessagesDiv($messageStr)
                   $prevdate=$currentDate;
               }
               // $msgStr.= $message->profile_pic;
-              if($message->profile_pic=='./images/0.jpeg')
-                 $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName)) .'</div></div><div class="col-xs-11 message"><div class="message_header" userid="'.$message->user_id .'"  ><b>';
+              $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic">';
+              if($message->profile_pic_pref==1)
+              {
+                $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.get_gravatar($message->email_id) .') !important;background-size: 36px 36px !important;">';
+              }
               else
-                $msgStr.='<div class="row messageSet"><div class="col-xs-1 userPic"><div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;"></div></div><div class="col-xs-11 message"><div class="message_header" userid="'. $message->user_id .'" ><b>';
+              {
+                if($message->profile_pic=='./images/0.jpeg')
+                   $msgStr.='<div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName));
+                else
+                  $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;">';
+              }
+              $msgStr.='</div></div><div class="col-xs-11 message"><div class="message_header" userid="'. $message->user_id .'" ><b>';
               $msgStr.=htmlspecialchars($message->first_name);
               $msgStr.=' '.htmlspecialchars($message->last_name).'</b><span class="message_time"> ';
               $msgStr.=$currentTime;
@@ -154,6 +172,12 @@ function constructMessagesDiv($messageStr)
   echo $msgStr;
 }
 
+function get_gravatar( $email) {
+    $url = 'https://www.gravatar.com/avatar/';
+    $url .= md5( strtolower( trim( $email ) ) );
+    $url .= "?s=80&d=mm&r=g";
+    return $url;
+}
 
 function messageContentHelper($message){
     $codeSnippLanguagesArr=["html","javascript","python","php"];

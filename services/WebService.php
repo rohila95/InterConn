@@ -267,6 +267,8 @@ class WebService{
                     $innerrow['first_name']=$lastThreadrow['first_name'];
                     $innerrow['last_name']=$lastThreadrow['last_name'];
                     $innerrow['profile_pic']=$lastThreadrow['profile_pic'];
+                    $innerrow['profile_pic_pref']=$lastThreadrow['profile_pic_pref'];
+                    $innerrow['email_id']=$lastThreadrow['email_id'];
                   }
                 }
 
@@ -312,6 +314,9 @@ class WebService{
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
+          if($row['profile_pic_pref']==1)
+            $row['profile_pic']=get_gravatar($row['email_id']);
+
           //get emojis
           $messageid=$row['id'];
           $emojiArray=[];
@@ -333,6 +338,13 @@ class WebService{
     }
     return json_encode($array);
     $conn->close();
+  }
+
+  function get_gravatar( $email) {
+    $url = 'https://www.gravatar.com/avatar/';
+    $url .= md5( strtolower( trim( $email ) ) );
+    $url .= "?s=80&d=mm&r=g";
+    return $url;
   }
 
   public function getDirectMessages($userid,$messagerUserid)

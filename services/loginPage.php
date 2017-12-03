@@ -15,7 +15,9 @@ if ($_POST["g-recaptcha-response"]) {
         $_POST["g-recaptcha-response"]
     );
 }
-if ($response != null && $response->success) {
+if ($response != null && $response->success) 
+// if(1)
+{
     // echo 'captcha done';
     // return;
 
