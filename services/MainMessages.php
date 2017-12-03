@@ -1,4 +1,9 @@
 <?php
+// profile pic pref
+// 1--gravatar
+// 2--github
+// other--default
+
 function constructMessagesDiv($messageStr)
 {
     $codeSnippLanguagesArr=["html","javascript","python","php"];

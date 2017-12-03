@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 02, 2017 at 06:40 PM
+-- Generation Time: Dec 03, 2017 at 05:53 PM
 -- Server version: 10.0.19-MariaDB-1~trusty-log
 -- PHP Version: 5.5.9-1ubuntu4.9
 
@@ -18,7 +18,6 @@ SET time_zone = "+00:00";
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `InterConn` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `InterConn`;
-
 --
 -- Database: `InterConn`
 --
@@ -774,26 +773,27 @@ CREATE TABLE IF NOT EXISTS `user` (
   `status` varchar(150) NOT NULL,
   `status_emoji` bigint(20) DEFAULT NULL,
   `skype` varchar(150) NOT NULL,
-  `profile_pic_pref` int(11) NOT NULL DEFAULT '1'
+  `profile_pic_pref` int(11) NOT NULL DEFAULT '1',
+  `github_avatar` varchar(200) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`, `profile_pic_pref`) VALUES
-(1, '@mater', 'Tow', 'Mater', 'mater@rsprings.gov', './images/0.jpeg', 'mater', '1234567890', 'student at ODU', '', 1, '', 1),
-(2, '@sally', 'Sally', 'Carrera', 'porsche@rsprings.gov', './images/0.jpeg', 'sally', '', '', '', 1, '', 1),
-(3, '@doc', 'Doc', 'Hudson', 'hornet@rsprings.gov', './images/0.jpeg', 'doc', '', '', '', NULL, '', 1),
-(6, '@mcmissile', 'Finn', 'McMissile', 'topsecret@agent.org', './images/0.jpeg', 'mcmissile', '', '', '', NULL, '', 1),
-(7, '@mcqueen', 'Lightning', 'McQueen', 'kachow@rusteze.com', './images/0.jpeg', 'mcqueen', '', '', '', NULL, '', 1),
-(8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', './images/0.jpeg', 'chick', '', '', '', NULL, '', 1),
-(9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', './images/9.png', 'rohila', '', '', '', NULL, ' ', 1),
-(10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', './images/10.png', 'maheedhar', '', '', '', NULL, '', 1),
-(11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', './images/0.jpeg', 'mahesh', '', '', '', NULL, '', 1),
-(34, '@rohit', 'Rohit', 'Kandhi', 'rkand@odu.edu', ' 0', '1234', '', 'student', '', 1, '', 1),
-(40, '@dg', 'dg', 'fh', 'rgudi@odu.edu', ' 0', 'rohila', '', '', '', 1, '', 1),
-(41, '@aaaksh', 'Aaaksh', 'Nunna', 'aakashnunna@gmail.com', ' 0', 'aakash123', '1112345678', 'Nothing', 'Single - Looking for ....', 1, '', 1);
+INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`, `profile_pic_pref`, `github_avatar`) VALUES
+(1, '@mater', 'Tow', 'Mater', 'mater@rsprings.gov', './images/0.jpeg', 'mater', '1234567890', 'student at ODU', '', 1, '', 1, '0'),
+(2, '@sally', 'Sally', 'Carrera', 'porsche@rsprings.gov', './images/0.jpeg', 'sally', '', '', '', 1, '', 1, '0'),
+(3, '@doc', 'Doc', 'Hudson', 'hornet@rsprings.gov', './images/0.jpeg', 'doc', '', '', '', NULL, '', 1, '0'),
+(6, '@mcmissile', 'Finn', 'McMissile', 'topsecret@agent.org', './images/0.jpeg', 'mcmissile', '', '', '', NULL, '', 1, '0'),
+(7, '@mcqueen', 'Lightning', 'McQueen', 'kachow@rusteze.com', './images/0.jpeg', 'mcqueen', '', '', '', NULL, '', 1, '0'),
+(8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', './images/0.jpeg', 'chick', '', '', '', NULL, '', 1, '0'),
+(9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', './images/9.png', 'rohila', '', '', '', NULL, ' ', 1, '0'),
+(10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', './images/10.png', 'maheedhar', '', '', '', NULL, '', 1, '0'),
+(11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', './images/0.jpeg', 'mahesh', '', '', '', NULL, '', 1, '0'),
+(34, '@rohit', 'Rohit', 'Kandhi', 'rkand@odu.edu', ' 0', '1234', '', 'student', '', 1, '', 1, '0'),
+(40, '@dg', 'dg', 'fh', 'rgudi@odu.edu', ' 0', 'rohila', '', '', '', 1, '', 1, '0'),
+(41, '@aaaksh', 'Aaaksh', 'Nunna', 'aakashnunna@gmail.com', ' 0', 'aakash123', '1112345678', 'Nothing', 'Single - Looking for ....', 1, '', 1, '0');
 
 -- --------------------------------------------------------
 

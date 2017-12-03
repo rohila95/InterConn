@@ -48,6 +48,10 @@
                                         {
                                             echo 'You are not signed in. Please Sign In';
                                         }
+                                        else if($_GET["status"]=='nocaptcha')
+                                        {
+                                            echo 'Please verify captcha. Try again.';
+                                        }
                                         else if($_GET["status"]=='signout')
                                         {
                                             session_start();
@@ -73,7 +77,10 @@
                                     <a href="#">Forgot password?</a>
                                 </div>
                                 <div class="captchaWrapper">
+                                <!-- qav2 -->
                                     <div class="g-recaptcha" data-sitekey="6LfQVjoUAAAAAD_w1gSuM_bz8zLk97capHidchRN" data-callback="reCaptchad"></div>
+                                    <!-- docker -->
+                                    <!-- <div class="g-recaptcha" data-sitekey="6LfjejsUAAAAAAPDW7-tn-daogbbotzZclSiCLSD" data-callback="reCaptchad"></div> -->
                                 </div>
                                 <div class="buttonWrapper">
                                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
@@ -86,17 +93,22 @@
 
                         <div class="col-sm-5 otherSourcesWrapper">
                             <h3>Login with</h3>
-
+                            <div class="gitHubWrapper">
+                            <!-- git hub login qav2 -->
+                            <a href="https://github.com/login/oauth/authorize?client_id=209a35200a7fe455f866&redirect_uri=http://qav2.cs.odu.edu/rohila/WebProgramming-CS518/services/githubLogin.php&scope=user:email/">
+                            <!-- git hub login docker -->
+                            <!-- <a href="https://github.com/login/oauth/authorize?client_id=209a35200a7fe455f866&redirect_uri=http://rohila95.cs518.cs.odu.edu/services/githubLogin.php&scope=user:email/"> -->
+                                <button type="submit" class="btn btn-primary btn-block">        
+                                     <i class="glyphicon fa fa-github"></i>&nbsp;&nbsp; GitHub
+                                </button>
+                            </a>
+                            </div>
                             <div class="twitterWrapper">
                                 <button type="submit" class="btn btn-primary btn-block disabled">
                                     <i class="glyphicon fa fa-twitter"></i>&nbsp;&nbsp; Twitter
                                 </button>
                             </div>
-                            <div class="gitHubWrapper">
-                                <button type="submit" class="btn btn-primary btn-block disabled">
-                                    <i class="glyphicon fa fa-github"></i>&nbsp;&nbsp; GitHub
-                                </button>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="row newAccountWrapper">
