@@ -87,6 +87,21 @@ function start()
 
                 $(".imageBeingPutinMsg").trigger("click");
 
+            }else if($(this).attr("intent") == "localfile")
+            {
+            	$(".anyfileUpload").trigger('click');
+
+            	$(".anyfileUpload").on('change', function(){
+             //        readImageURL(this);
+            	//  // console.log(mime_content_type(this));
+            	 $("#sendLocalFileModal").modal("show");
+                });
+
+             //    $(".imageBeingPutinMsg").on('click', function(){
+             //        $(".anyfileUpload").trigger('click');
+             //    });
+
+             //    $(".imageBeingPutinMsg").trigger("click");
             }
 		});
 
@@ -131,6 +146,48 @@ function start()
                     console.log(error);
                 }
             });
+        });
+		$(document).on("click",".sendLocalFileButt",function(e){
+            e.preventDefault();
+            var fileFormData = new FormData();
+            fileFormData.append('filetoUpload', $('.anyfileUpload')[0].files[0]);
+            console.log($('.anyfileUpload')[0].files[0].type);
+            // var file_name=$(".fileUploadIP").val();
+            // fileFormData.append("imageAsMsg","yes");
+            // fileFormData.append("channelid",channelid);
+            // fileFormData.append("file_name",file_name);
+            // $("#wholebody_loader").show();
+      //       $.ajax({
+      //           url: './Controller.php',
+      //           type: 'POST',
+      //           data: fileFormData,
+      //           processData: false,
+      //           contentType: false,
+      //           success: function(data) {
+						// 			data = $.trim(data);
+      //               console.log(data);
+      //               $("#wholebody_loader").hide();
+
+      //               if(data.includes("success")){
+						// location.reload();
+      //               }
+      //               else if(data.includes("fail"))
+      //               {
+      //                   $('#errorModal .modal-body').html("<p>"+ $.trim(data).split("-")[1]+"</p>");
+      //                   $('#errorModal').on('hidden.bs.modal', function (e) {
+      //                       $('#errorModal').off();
+      //                   });
+
+      //                   $("#errorModal").modal("show");
+      //                   $("#errorModal").css("z-index","1100");
+      //                   setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
+      //               }
+      //           },
+      //           error: function(xhr,error){
+      //               $("#wholebody_loader").hide();
+      //               console.log(error);
+      //           }
+      //       });
         });
 
 		// handler for sendSnippet butt click

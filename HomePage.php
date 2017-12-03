@@ -215,7 +215,7 @@
             </div>
 
             <!-- modal for local image -->
-
+ 			
             <div class="modal fade" id="sendLocalImgModal" role="dialog">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
@@ -242,6 +242,36 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             <button type="button" class="btn btn-primary sendLocalImgButt" data-dismiss="modal">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<!-- modal for local file -->
+            <div class="modal fade" id="sendLocalFileModal" role="dialog">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Upload Local File</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" id="sendFileInMsgs" enctype="multipart/form-data">
+                                <div class="form-group" style="margin-left: 10%;">
+
+                                        <!-- <div class="fileBeingPutinMsg">
+                                            <span class="glyphicon glyphicon-camera"></span>
+                                            <span>Change Image</span>
+                                        </div> -->
+
+                                        <input class="anyfileUpload hidden" name="anyfileUpload" type="file">
+                                </div>
+                            </form>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary sendLocalFileButt" data-dismiss="modal">Send</button>
                         </div>
                     </div>
                 </div>
@@ -536,6 +566,7 @@ if(isset($_GET["channel"])){
 							<span class="caret"></span></button>
 					<ul class="dropdown-menu">
 							<li intent="localimage" ><a href="#" class="localimagesel_regularmsg"><i class="fa fa-picture-o" aria-hidden="true">&nbsp;Local Image</i></a></li>
+							<li intent="localfile" ><a href="#" class="codesnippetsel__regularmsg"><i class="fa fa-file" aria-hidden="true">&nbsp;&nbsp;Local File</i></a></li>
 							<li intent="codesnipp" ><a href="#" class="codesnippetsel__regularmsg"><i class="fa fa-code" aria-hidden="true">&nbsp;Code Snippet</i></a></li>
 					</ul>
 			</div>';
