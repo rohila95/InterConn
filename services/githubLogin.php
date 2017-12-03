@@ -1,7 +1,7 @@
 <?php
 include_once "./database_connect.php";
 include_once "./SqlService.php";
-
+session_start();
 define('clientID', '209a35200a7fe455f866');
 define('clientSecret', 'b4a3590e45aef0c065b00e1d4c2cda7763ed5cc5');
 //github login qav2
@@ -49,4 +49,6 @@ curl_close($ch);
 echo $output["login"].'<br>';
 echo $output["avatar_url"].'<br>';
 
+
+$_SESSION['githubLogin']=1;
 ?>
