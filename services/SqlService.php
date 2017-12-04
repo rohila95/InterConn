@@ -8,6 +8,11 @@ class SqlService{
 		$sql="select * from user where email_id='".$emailid. "' and password='".$password. "'";
 		return $sql;
 	}
+	public function getUserDetailsById($userid)
+	{
+		$sql="select * from user where user_id=".$userid;
+		return $sql;
+	}
 
 	public function getUserDetail($emailid)
 	{
@@ -240,6 +245,17 @@ class SqlService{
 		return $sql;
 	}
 
+	public function registerNewGitHubUser($username,$first_name,$last_name,$email_id,$profile_pic_pref,$github_avatar)
+	{
+		$sql="INSERT INTO `InterConn`.`user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`, `profile_pic_pref`, `github_avatar`) VALUES (NULL, '".$username."', '".$first_name."', '".$last_name."', '".$email_id."', './images/0.jpeg', '', '', '', '', NULL, '', '".$profile_pic_pref."', '".$github_avatar."')";
+		return $sql;
+	}
+
+	public function checkGitUser($user_name)
+	{
+		$sql="SELECT * FROM `user` where user_name='".$user_name."' and password='' and github_avatar=0";
+		return $sql;
+	}
 	public function channelInWorkspace($channel_name,$workspaceid)
 	{
 		$sql="SELECT * FROM `channel`,`workspace_channel` where channel.channel_id=workspace_channel.channel_id and channel_name='".$channel_name."' and workspace_channel.workspace_id=".$workspaceid;

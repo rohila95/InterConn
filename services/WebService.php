@@ -191,13 +191,13 @@ class WebService{
     $conn->close();
   }
 
-  public function getUserDetails($emailid)
+  public function getUserDetails($userid)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
-    $emailid=mysqli_real_escape_string($conn,$emailid);
+    $userid=mysqli_real_escape_string($conn,$userid);
     $sql_service = new SqlService();
-    $userDetailQuery = $sql_service->getUserDetail($emailid);
+    $userDetailQuery = $sql_service->getUserDetailsById($userid);
     //echo $userDetailQuery;
     $result = $conn->query($userDetailQuery);
 
@@ -343,7 +343,7 @@ class WebService{
   function get_gravatar( $email) {
     $url = 'https://www.gravatar.com/avatar/';
     $url .= md5( strtolower( trim( $email ) ) );
-    $url .= "?s=80&d=mm&r=g";
+    $url .= "?s=80&r=g";
     return $url;
   }
 
@@ -912,7 +912,62 @@ class WebService{
     }
     $conn->close();
   }
+  public function registerNewGitHubUser($username,$first_name,$last_name,$email_id,$workspaceid,$timestamp,$profile_pic_pref,$github_avatar)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $username=mysqli_real_escape_string($conn,$username);
+    $first_name=mysqli_real_escape_string($conn,$first_name);
+    $last_name=mysqli_real_escape_string($conn,$last_name);
+    $email_id=mysqli_real_escape_string($conn,$email_id);
+    $profile_pic='./images/0.jpeg';
+    $password='';
+    // $phone_number=mysqli_real_escape_string($conn,$phone_number);
+    // $what_i_do=mysqli_real_escape_string($conn,$what_i_do);
+    // $status=mysqli_real_escape_string($conn,$status);
+    // $status_emoji=mysqli_real_escape_string($conn,$status_emoji);
+    // $skype=mysqli_real_escape_string($conn,$skype);
+    $profile_pic_pref=mysqli_real_escape_string($conn,$profile_pic_pref);
+    $github_avatar=mysqli_real_escape_string($conn,$github_avatar);
+    $workspaceid=mysqli_real_escape_string($conn,$workspaceid);
+    $timestamp=mysqli_real_escape_string($conn,$timestamp);
+    $sql_service = new SqlService();
+    $user = $sql_service->registerNewGitHubUser($username,$first_name,$last_name,$email_id,$profile_pic_pref,$github_avatar);
+    $result = $conn->query($user);
+    if ($result === TRUE) {
+        $userid = $conn->insert_id;
+        echo "----".$userid."----";
+        $userWorkspaceMap = $sql_service->userWorkspaceMap($userid,$workspaceid);
+        $result = $conn->query($userWorkspaceMap);
+        if ($result === TRUE) {
+            echo "New record created successfully. Last inserted ID is: ";
+        } else {
+            echo "Error: " . $userWorkspaceMap . "<br>" . $conn->error;
+        }
+        //insert into default channels
+        $defaultChannels = $sql_service->getDefaultWorkspaceChannels($workspaceid);
+        $result = $conn->query($defaultChannels);
+        if ($result->num_rows > 0) {
 
+            while($row = $result->fetch_assoc()) {
+                  $channelid=$row['channel_id'];
+                  $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
+                  $innerresult = $conn->query($userChannelMap);
+                  if ($innerresult === TRUE) {
+                      echo "New record created successfully. Last inserted ID is: ";
+                  } else {
+                      echo "Error: " . $userChannelMap . "<br>" . $conn->error;
+                  }
+            }
+        } else {
+            return 'fail';
+        }
+    } else {
+        echo "fail-Email Id already exists. Try with different Email Id.";
+    }
+
+    $conn->close();
+  }
   public function registerNewUser($username,$first_name,$last_name,$email_id,$profile_pic,$password,$phone_number,$what_i_do,$status,$status_emoji,$skype,$workspaceid,$timestamp)
   {
     $database_connection = new DatabaseConnection();

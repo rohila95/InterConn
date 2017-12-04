@@ -180,7 +180,7 @@ function constructMessagesDiv($messageStr)
 function get_gravatar( $email) {
     $url = 'https://www.gravatar.com/avatar/';
     $url .= md5( strtolower( trim( $email ) ) );
-    $url .= "?s=80&d=mm&r=g";
+    $url .= "?s=80&r=g";
     return $url;
 }
 

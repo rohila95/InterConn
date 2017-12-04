@@ -79,6 +79,8 @@ function check_login($emailid,$password){
         while($row = $result->fetch_assoc()) {
             $loggedInId = $row['user_id'];
             $_SESSION['userid'] = $loggedInId ;
+            if($row['github_avatar']!=0)
+                return false;
             return true;
         }
     } else {

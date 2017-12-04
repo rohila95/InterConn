@@ -9,7 +9,7 @@
 	{
 		$web_service = new WebService();
 
-    $userDetails = json_decode($web_service->getUserDetails($_SESSION['emailid']));
+    $userDetails = json_decode($web_service->getUserDetails($_SESSION['userid']));
     $workspaceDetails = json_decode($web_service->getWorkspaceDetails($_SESSION['userid']));
     $workspaceName=$workspaceDetails[0]->workspace_name;
     $workspaceid=$workspaceDetails[0]->workspace_id;
