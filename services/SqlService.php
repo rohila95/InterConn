@@ -163,14 +163,14 @@ class SqlService{
 		$sql="INSERT INTO `InterConn`.`threaded_message` (`id`, `parent_message_id`, `content`, `created_by`, `created_at`, `is_active`, `is_specialmessage`, `code_type`) VALUES (NULL, '".$parentmessageid."', '".$content."', '".$created_by."', '".$timestamp."', '0', '".$splmsg."', '".$codetype."')";
 		return $sql;
 	}
-	public function updateUserProfile($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype)
+	public function updateUserProfile($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype,$pic_pref)
 	{
-		$sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `email_id` = '$emailid', `profile_pic` = '$profile_pic', `password` = '$password', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype' WHERE `user`.`user_id` = ".$userid;
+		$sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `email_id` = '$emailid', `profile_pic` = '$profile_pic', `password` = '$password', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype',`profile_pic_pref`='$pic_pref' WHERE `user`.`user_id` = ".$userid;
 		return $sql;
 	}
-    public function updateUserProfileWOPP($userid,$first_name,$last_name,$emailid,$password,$phone_number,$whatido,$status,$skype)
+    public function updateUserProfileWOPP($userid,$first_name,$last_name,$emailid,$password,$phone_number,$whatido,$status,$skype,$pic_pref)
     {
-        $sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `email_id` = '$emailid',`password` = '$password', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype' WHERE `user`.`user_id` = ".$userid;
+        $sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `email_id` = '$emailid',`password` = '$password', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype',`profile_pic_pref`='$pic_pref' WHERE `user`.`user_id` = ".$userid;
         return $sql;
     }
 

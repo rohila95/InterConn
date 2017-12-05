@@ -2,7 +2,9 @@ Message Threads
 
 -> Make sure to get a registration link with in admin logged in page somewehere✔
 -> Got to change the folder permission for the uploded images
-
+---------------------- Tasks MileStone 4 ------------------------
+picture prefernce...change all conditions to--- 2- github pic, 1-gravatar,0- local,-1 - default
+Fatal error: Call to undefined function get_gravatar() in /var/www/qav2/rohila/WebProgramming-CS518/services/WebService.php on line 1079
 
     ---------------------- Tasks MileStone 3 ------------------------
     New Features & Pagination

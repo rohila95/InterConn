@@ -28,6 +28,7 @@ if ($response != null && $response->success)
     if($_POST && check_login($_POST['email'],$_POST['password'])){
         $_SESSION['emailid'] = $_POST['email'];
         $_SESSION['loggedIn'] = True;
+        $_SESSION['githubLogin']=0;
         $database_connection = new DatabaseConnection();
         $conn = $database_connection->getConnection();
 
@@ -78,8 +79,9 @@ function check_login($emailid,$password){
 
         while($row = $result->fetch_assoc()) {
             $loggedInId = $row['user_id'];
-            $_SESSION['userid'] = $loggedInId ;
-            if($row['github_avatar']!=0)
+            $_SESSION['userid'] = $loggedInId;
+            // echo $row['github_avatar'];
+            if(!$row['github_avatar']==0)
                 return false;
             return true;
         }

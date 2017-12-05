@@ -63,12 +63,17 @@ function constructMessagesDiv($messageStr)
               {
                 $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.get_gravatar($message->email_id) .') !important;background-size: 36px 36px !important;">';
               }
+              else if($message->profile_pic_pref==2)
+              {
+                $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.$message->github_avatar .') !important;background-size: 36px 36px !important;">';
+              }
+              else if($message->profile_pic_pref==0)
+              {
+                $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;">';
+              }
               else
               {
-                if($message->profile_pic=='./images/0.jpeg')
-                   $msgStr.='<div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName));
-                else
-                  $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;">';
+                $msgStr.='<div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName));                 
               }
               $msgStr.='</div></div><div class="col-xs-11 message"><div class="message_header" userid="'. $message->user_id .'" ><b>';
               
@@ -135,12 +140,17 @@ function constructMessagesDiv($messageStr)
               {
                 $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.get_gravatar($message->email_id) .') !important;background-size: 36px 36px !important;">';
               }
+              else if($message->profile_pic_pref==2)
+              {
+                $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.$message->github_avatar .') !important;background-size: 36px 36px !important;">';
+              }
+               else if($message->profile_pic_pref==0)
+              {
+                $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;">';
+              }
               else
               {
-                if($message->profile_pic=='./images/0.jpeg')
-                   $msgStr.='<div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName));
-                else
-                  $msgStr.='<div class="defUserPic profilePic" style="background-image:url('.$message->profile_pic .') !important;background-size: 36px 36px !important;">';
+                $msgStr.='<div class="defUserPic" style="background:'.$defUserPicBGColor .';">'. htmlspecialchars(strtoupper($shortName));                 
               }
               $msgStr.='</div></div><div class="col-xs-11 message"><div class="message_header" userid="'. $message->user_id .'" ><b>';
               $msgStr.=htmlspecialchars($message->first_name);

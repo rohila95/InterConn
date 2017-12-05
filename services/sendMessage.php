@@ -40,7 +40,7 @@
         // $urlArr = explode(".",$msgcontent);
         //print_r($urlArr[count($urlArr)-1]);
         $type = get_headers($msgcontent, 1)["Content-Type"];
-        echo $type;
+        // echo $type;
         $imgType=explode("/",$type);
         // $isImage= in_array($urlArr[count($urlArr)-1],$imageExtension);
         $isImage= in_array($imgType[1],$imageExtension);

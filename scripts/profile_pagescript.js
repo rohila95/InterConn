@@ -72,6 +72,7 @@ function start()
 			 fileFormData.append("status",$('.status').val());
 			 fileFormData.append("phoneNumber",$('.phoneNumber').val());
 			 fileFormData.append("skype",$('.skype').val());
+			 fileFormData.append("pic_pref",$('input[name=radiogroup]:checked', '#updateForm').val());
 
 			 $(".not_reallyrequired").removeAttr("required");
 			 if(!$("#updateForm")[0].checkValidity()){

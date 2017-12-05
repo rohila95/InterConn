@@ -981,7 +981,7 @@ function getAllThreadReplies(parentMsgID){
                 var jsonArrRes = $.parseJSON(data);
                 // to update the number of replies in case if changed
 								if(jsonArrRes.length > 0 && $(".messagewithid_"+parentMsgID).find(".repliescount").length < 1){
-				                    $(".messagewithid_"+parentMsgID).find(".msg_reactionsec").append('<div class="repliescount" 										title="view thread"><a href="#"><span>'+jsonArrRes.length +'</span> replies</a></div>');
+				                    $(".messagewithid_"+parentMsgID).find(".msg_reactionsec").append('<div class="repliescount" title="view thread"><a href="#"><span>'+jsonArrRes.length +'</span> replies</a></div>');
 								}else {
 									$(".messagewithid_"+parentMsgID).find(".repliescount span").html(jsonArrRes.length);
 								}

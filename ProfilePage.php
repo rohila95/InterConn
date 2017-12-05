@@ -6,6 +6,7 @@
 	include_once "./services/WebService.php";
 	if($_SESSION['loggedIn'])
 	{
+        // echo $_SESSION['githubLogin'];
 		$web_service = new WebService();
 		$userDetails=$web_service->getProfileDetails($_GET['userid']);
 		if(strpos($userDetails, 'fail') !== false)
@@ -81,7 +82,7 @@
 
 			        </div>
 			        <div class="modal-footer">
-			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			          <a href='./HomePage.php?channel=<?php echo $_SESSION['channelid']?>'><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></a>
 			        </div>
 			      </div>
 			    </div>
@@ -186,6 +187,33 @@
                                 <span>Change Image</span>
                             </div>
                             <input class="file-upload" name="imgToUpload" type="file" accept="image/*" />
+
+                        </div>
+                        <div class="row">
+                            <?php
+                                if($_SESSION['githubLogin']==1)
+                                {
+                                    echo '<div class="radio">
+                                            <label><input type="radio" name="radiogroup" value="2" ';
+                                    if($userDetails[0]->profile_pic_pref==2)
+                                        echo 'checked';
+                                    echo '>GitHub Avatar</label>
+                                          </div>';
+                                }
+                            ?>
+                            <div class="radio">
+                              <label><input type="radio" name="radiogroup" value="1" <?php if($userDetails[0]->profile_pic_pref==1)
+                                        echo ' checked'; ?>>Gravatar</label>
+                            </div>
+                            <div class="radio">
+                              <label><input type="radio" name="radiogroup" value="0" <?php if($userDetails[0]->profile_pic_pref==0)
+                                        echo ' checked'; ?>>Local Picture</label>
+                            </div>
+                            <div class="radio">
+                              <label><input type="radio" name="radiogroup" value="-1" <?php if($userDetails[0]->profile_pic_pref==-1)
+                                        echo ' checked'; ?>>Default Picture</label>
+                            </div>
+
 
                         </div>
 

@@ -71,10 +71,17 @@ $result = $conn->query($checkQuery);
             $loggedInId = $row['user_id'];
         }
     } else {
-        
-    	$name=explode(' ',$output["name"]);
-		$first_name=$name[0];
-		$last_name=$name[1];
+        $name=explode(' ',$output["name"]);
+        if($name=='')
+        {
+            $first_name=$output["login"];
+            // $last_name=$output["login"];
+        }
+        else
+        {
+    		$first_name=$name[0];
+    		$last_name=$name[1];
+        }
 		$email_id=$output["email"];
 		$workspaceid=2;
 		$profile_pic_pref=2;

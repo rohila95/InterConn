@@ -316,6 +316,10 @@ class WebService{
         while($row = $result->fetch_assoc()) {
           if($row['profile_pic_pref']==1)
             $row['profile_pic']=get_gravatar($row['email_id']);
+          else if($row['profile_pic_pref']==2)
+            $row['profile_pic']=$row['github_avatar'];
+          else if($row['profile_pic_pref']==-1)
+            $row['profile_pic']='./images/0.jpeg';
 
           //get emojis
           $messageid=$row['id'];
@@ -338,13 +342,6 @@ class WebService{
     }
     return json_encode($array);
     $conn->close();
-  }
-
-  function get_gravatar( $email) {
-    $url = 'https://www.gravatar.com/avatar/';
-    $url .= md5( strtolower( trim( $email ) ) );
-    $url .= "?s=80&r=g";
-    return $url;
   }
 
   public function getDirectMessages($userid,$messagerUserid)
@@ -1023,7 +1020,7 @@ class WebService{
     $conn->close();
   }
 
-  public function updateUserDetails($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype)
+  public function updateUserDetails($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype,$pic_pref)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
@@ -1031,6 +1028,7 @@ class WebService{
     $first_name=mysqli_real_escape_string($conn,$first_name);
     $last_name=mysqli_real_escape_string($conn,$last_name);
     $emailid=mysqli_real_escape_string($conn,$emailid);
+    $pic_pref=mysqli_real_escape_string($conn,$pic_pref);
 
     if($profile_pic == ""){
 
@@ -1047,9 +1045,9 @@ class WebService{
     $sql_service = new SqlService();
 
     if($profile_pic == "") {
-        $updateUPQuery = $sql_service->updateUserProfileWOPP($userid, $first_name, $last_name, $emailid, $password, $phone_number, $whatido, $status, $skype);
+        $updateUPQuery = $sql_service->updateUserProfileWOPP($userid, $first_name, $last_name, $emailid, $password, $phone_number, $whatido, $status, $skype,$pic_pref);
     }else{
-        $updateUPQuery = $sql_service->updateUserProfile($userid, $first_name, $last_name, $emailid, $profile_pic, $password, $phone_number, $whatido, $status, $skype);
+        $updateUPQuery = $sql_service->updateUserProfile($userid, $first_name, $last_name, $emailid, $profile_pic, $password, $phone_number, $whatido, $status, $skype,$pic_pref);
     }
    // echo $updateUPQuery;
 
@@ -1069,11 +1067,20 @@ class WebService{
     $sql_service = new SqlService();
     $profileDetails = $sql_service->getProfileDetails($userid);
     $result = $conn->query($profileDetails);
-
-
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
+          if($row['profile_pic_pref']==1)
+          {
+            $url = 'https://www.gravatar.com/avatar/';
+            $url .= md5( strtolower( trim( $row['email_id'] ) ) );
+            $url .= "?s=80&r=g";
+            $row['profile_pic']=$url;
+          }
+          else if($row['profile_pic_pref']==2)
+            $row['profile_pic']=$row['github_avatar'];
+          else if($row['profile_pic_pref']==-1)
+            $row['profile_pic']='./images/0.jpeg';        
             $array[]= $row;
         }
     } else {
@@ -1105,7 +1112,12 @@ class WebService{
     return json_encode($array);
     $conn->close();
   }
-
+  public function get_gravatar($email) {
+    $url = 'https://www.gravatar.com/avatar/';
+    $url .= md5( strtolower( trim( $email ) ) );
+    $url .= "?s=80&r=g";
+    return $url;
+  }
 
 }
 ?>

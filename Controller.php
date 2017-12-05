@@ -243,6 +243,7 @@ if(isset($_POST["updateProfile"]))
       $status = $_POST["status"];
       $phoneNumber = $_POST["phoneNumber"];
       $skype = $_POST["skype"];
+      $pic_pref = $_POST["pic_pref"];
       $userid=$_SESSION['userid'];
       $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG");
    // echo "strlen phoneNumber :".strlen($phoneNumber).is_numeric($phoneNumber);
@@ -297,7 +298,7 @@ if(isset($_POST["updateProfile"]))
     {
       if($file_name==""){
 
-          echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
+          echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype,$pic_pref);
       }else{
         // chmod("./images", 777); 
           $fname=$_FILES['filetoUpload']['tmp_name'];
@@ -318,7 +319,7 @@ if(isset($_POST["updateProfile"]))
               {
                   echo 'fail-Image too large. Try small image.';
               }else{
-                  echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype);
+                  echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype,$pic_pref);
               }
           }
 
