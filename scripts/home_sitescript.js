@@ -92,16 +92,10 @@ function start()
             	$(".anyfileUpload").trigger('click');
 
             	$(".anyfileUpload").on('change', function(){
-             //        readImageURL(this);
-            	//  // console.log(mime_content_type(this));
             	 $("#sendLocalFileModal").modal("show");
                 });
 
-             //    $(".imageBeingPutinMsg").on('click', function(){
-             //        $(".anyfileUpload").trigger('click');
-             //    });
-
-             //    $(".imageBeingPutinMsg").trigger("click");
+            
             }
 		});
 
