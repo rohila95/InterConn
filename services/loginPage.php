@@ -4,13 +4,13 @@ include_once "./database_connect.php";
 include_once "./SqlService.php";
 require_once "./recaptchalib.php";
 //qav2 captcha
-$secret = "6LfQVjoUAAAAADM4-r7g6y42SZXW-8qtdTVIa5_6";
+// $secret = "6LfQVjoUAAAAADM4-r7g6y42SZXW-8qtdTVIa5_6";
 //docker captcha
-// $secret = "6LfjejsUAAAAACmfQ4aNiB2QUbfzChTy5YgkFmzg";
+$secret = "6LfjejsUAAAAACmfQ4aNiB2QUbfzChTy5YgkFmzg";
 
 // empty response
 $response = null;
- 
+
 // check secret key
 $reCaptcha = new ReCaptcha($secret);
 if ($_POST["g-recaptcha-response"]) {
@@ -20,7 +20,7 @@ if ($_POST["g-recaptcha-response"]) {
     );
 }
 
-if ($response != null && $response->success) 
+if ($response != null && $response->success)
 
 {
     $loggedInId="";

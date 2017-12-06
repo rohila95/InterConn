@@ -7,10 +7,10 @@ define('clientID', '209a35200a7fe455f866');
 define('clientSecret', 'b4a3590e45aef0c065b00e1d4c2cda7763ed5cc5');
 
 //github login qav2
-define('appName', 'InterConn_Dev');
+// define('appName', 'InterConn_Dev');
 
 //github login docker
-// define('appName', 'InterConn');
+define('appName', 'InterConn');
 
 $url = 'https://github.com/login/oauth/access_token';
 
@@ -98,7 +98,7 @@ $result = $conn->query($checkQuery);
     }
 $_SESSION['userid'] = $loggedInId;
 $_SESSION['loggedIn'] = True;
-        
+
 $getUserDetails = $sql_service->getChannelGeneral($_SESSION['userid']);
 $result = $conn->query($getUserDetails);
 if ($result->num_rows > 0) {
