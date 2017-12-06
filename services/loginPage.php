@@ -47,7 +47,7 @@ if ($response != null && $response->success)
         }
         $conn->close();
 
-       header("location: ../HomePage.php?channel=".$channelid);
+       // header("location: ../HomePage.php?channel=".$channelid);
         // exit();
         // session_write_close();
     }elseif($_POST) {
