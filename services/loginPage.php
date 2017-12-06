@@ -47,7 +47,7 @@ if ($response != null && $response->success)
         }
         $conn->close();
 
-       // header("location: ../HomePage.php?channel=".$channelid);
+       header("location: ../HomePage.php?channel=".$channelid);
         // exit();
         // session_write_close();
     }elseif($_POST) {
@@ -83,10 +83,13 @@ function check_login($emailid,$password){
         while($row = $result->fetch_assoc()) {
             $loggedInId = $row['user_id'];
             $_SESSION['userid'] = $loggedInId;
-            // echo $row['github_avatar'];
-            if(!$row['github_avatar']==0)
+            echo $row['github_avatar'];
+            if($row['github_avatar']=='0')
+            {
+                return true;
+            }
+            else
                 return false;
-            return true;
         }
     } else {
         return false;
