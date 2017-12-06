@@ -267,7 +267,7 @@ class SqlService{
 
 	public function checkGitUser($user_name)
 	{
-		$sql="SELECT * FROM `user` where user_name='".$user_name."' and password='' and github_avatar=0";
+		$sql="SELECT * FROM `user` where user_name='".$user_name."' and github_avatar<>'0'";
 		return $sql;
 	}
 	public function channelInWorkspace($channel_name,$workspaceid)
