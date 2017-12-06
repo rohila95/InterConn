@@ -433,28 +433,6 @@ class WebService{
     $conn->close();
   }
 
-  // public function getDirectMessages($userid,$messagerUserid)
-  // {
-  //   $database_connection = new DatabaseConnection();
-  //   $conn = $database_connection->getConnection();
-  //   $userid=mysqli_real_escape_string($conn,$userid);
-  //   $messagerUserid=mysqli_real_escape_string($conn,$messagerUserid);
-  //   $sql_service = new SqlService();
-  //   $directMessages = $sql_service->getDirectMessages($userid,$messagerUserid);
-  //   $result = $conn->query($directMessages);
-  //
-  //
-  //   if ($result->num_rows > 0) {
-  //
-  //       while($row = $result->fetch_assoc()) {
-  //             $array[]= $row;
-  //       }
-  //   } else {
-  //       return 'fail';
-  //   }
-  //   return json_encode($array);
-  //   $conn->close();
-  // }
   public function getSpecificChannelUserDetails($channelid)
   {
     $database_connection = new DatabaseConnection();
@@ -948,32 +926,6 @@ class WebService{
         return 0;
     }
 
-  // public function createDirectMessage($userid,$content,$receiverid)
-  // {
-  //   $database_connection = new DatabaseConnection();
-  //   $conn = $database_connection->getConnection();
-  //   $userid=mysqli_real_escape_string($conn,$userid);
-  //   $content=mysqli_real_escape_string($conn,$content);
-  //   $receiverid=mysqli_real_escape_string($conn,$receiverid);
-  //   $sql_service = new SqlService();
-  //   $message = $sql_service->createMessage($userid,$content);
-  //   $result = $conn->query($message);
-  //   if ($result === TRUE) {
-  //       $messageid = $conn->insert_id;
-  //       // echo "New record created successfully. Last inserted ID is: " . $last_id;
-  //   } else {
-  //       echo "Error: " . $message . "<br>" . $conn->error;
-  //   }
-  //   $messageChannelMap = $sql_service->createDirectMessageMap($receiverid,$messageid);
-  //   $result = $conn->query($messageChannelMap);
-  //   if ($result === TRUE) {
-  //       echo "New record created successfully. Last inserted ID is: " ;
-  //   } else {
-  //       echo "Error: " . $messageChannelMap . "<br>" . $conn->error;
-  //   }
-  //   $conn->close();
-  // }
-
   public function getFormatDate($timestamp)
   {
     $time = strtotime($timestamp);
@@ -1081,11 +1033,6 @@ class WebService{
     $email_id=mysqli_real_escape_string($conn,$email_id);
     $profile_pic='./images/0.jpeg';
     $password='';
-    // $phone_number=mysqli_real_escape_string($conn,$phone_number);
-    // $what_i_do=mysqli_real_escape_string($conn,$what_i_do);
-    // $status=mysqli_real_escape_string($conn,$status);
-    // $status_emoji=mysqli_real_escape_string($conn,$status_emoji);
-    // $skype=mysqli_real_escape_string($conn,$skype);
     $profile_pic_pref=mysqli_real_escape_string($conn,$profile_pic_pref);
     $github_avatar=mysqli_real_escape_string($conn,$github_avatar);
     $workspaceid=mysqli_real_escape_string($conn,$workspaceid);

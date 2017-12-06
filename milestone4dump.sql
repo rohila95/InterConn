@@ -773,7 +773,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `status` varchar(150) NOT NULL,
   `status_emoji` bigint(20) DEFAULT NULL,
   `skype` varchar(150) NOT NULL,
-  `profile_pic_pref` int(11) NOT NULL DEFAULT '1',
+  `profile_pic_pref` int(11) NOT NULL DEFAULT '-1',
   `github_avatar` varchar(200) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 

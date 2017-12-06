@@ -231,11 +231,6 @@ class SqlService{
 		$sql="INSERT INTO `InterConn`.`message_direct` (`message_id`, `receiver_id`) VALUES ('".$messageid."', '".$receiverid."')";
 		return $sql;
 	}
-	// public function createDirectMessageMap($receiverid,$messageid)
-	// {
-	// 	$sql="INSERT INTO `InterConn`.`message_direct` (`message_id`, `receiver_id`) VALUES ('".$messageid."', '".$receiverid."')";
-	// 	return $sql;
-	// }
 
 	public function createChannel($channelName,$type,$purpose,$created_by,$timestamp)
 	{
