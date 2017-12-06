@@ -47,26 +47,26 @@ if ($response != null && $response->success)
         }
         $conn->close();
 
-       header("location: ../HomePage.php?channel=".$channelid);
+       // header("location: ../HomePage.php?channel=".$channelid);
         // exit();
         // session_write_close();
     }elseif($_POST) {
         echo "Unsuccessful login<br><br>";
         echo "the session variable contents:<br>";
-        header("location: ../index.php?status=Unsuccessful");
+        // header("location: ../index.php?status=Unsuccessful");
         // print_r($_SESSION);
     }else {
         echo "You're not logged in";
         echo "<br><br>the session variable contents:<br>";
         // print_r($_SESSION);
-        header("location: ../index.php?status=notloggedin");
+        // header("location: ../index.php?status=notloggedin");
     }
 }
 else {
         echo "Please verify captcha";
         echo "<br><br>the session variable contents:<br>";
         // print_r($_SESSION);
-        header("location: ../index.php?status=nocaptcha");
+        // header("location: ../index.php?status=nocaptcha");
     }
 
 function check_login($emailid,$password){
@@ -86,10 +86,14 @@ function check_login($emailid,$password){
             echo $row['github_avatar'];
             if($row['github_avatar']=='0')
             {
+                echo 'in if';
                 return true;
             }
             else
+            {
+                echo 'in else';
                 return false;
+            }
         }
     } else {
         return false;
