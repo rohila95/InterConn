@@ -100,10 +100,19 @@ class SqlService{
 		$sql="SELECT count(*) as messagecount FROM `message`,`message_channel`,`user` where message.message_id=message_channel.message_id and message.created_by=user.user_id and is_active=0 and message_channel.channel_id=".$channelid." and message.message_id<".$lastmessageid;
 		return $sql;
 	}
-
 	public function getDirectMessages($userid,$messagerUserid)
 	{
-		$sql="SELECT message.created_by,message.created_at,message.content,message_direct.receiver_id,message.message_id FROM `message`,`message_direct` where message.message_id=message_direct.message_id and ((message.created_by=".$userid." and message_direct.receiver_id=".$messagerUserid.") or (message.created_by=".$messagerUserid." and message_direct.receiver_id=".$userid.")) order by message.created_at";
+		$sql="select * from (SELECT message.created_by,message.created_at,message.content,message_direct.receiver_id,message.message_id,user.user_id,user.profile_pic_pref,user.github_avatar,user.email_id,user.first_name,user.last_name,message.is_threaded,user.profile_pic,message.is_specialmessage,message.code_type FROM `message`,`message_direct`,`user` where message.message_id=message_direct.message_id and is_active=0 and user.user_id=message.created_by and ((message.created_by=".$userid." and message_direct.receiver_id=".$messagerUserid.") or (message.created_by=".$messagerUserid." and message_direct.receiver_id=".$userid.")) order by message.created_at desc limit 10) A order by A.created_at";
+		return $sql;
+	}
+	public function getOlderDirectMessages($userid,$messagerUserid,$lastmessageid)
+	{
+		$sql="select * from (SELECT message.created_by,message.created_at,message.content,message_direct.receiver_id,message.message_id,user.user_id,user.profile_pic_pref,user.github_avatar,user.email_id,user.first_name,user.last_name,message.is_threaded,user.profile_pic,message.is_specialmessage,message.code_type FROM `message`,`message_direct`,`user` where message.message_id=message_direct.message_id and is_active=0 and user.user_id=message.created_by and message.message_id<".$lastmessageid." and ((message.created_by=".$userid." and message_direct.receiver_id=".$messagerUserid.") or (message.created_by=".$messagerUserid." and message_direct.receiver_id=".$userid.")) order by message.created_at desc limit 10) A order by A.created_at";
+		return $sql;
+	}
+	public function getOlderDirectMessagesCount($userid,$messagerUserid,$lastmessageid)
+	{
+		$sql="SELECT count(*) FROM `message`,`message_direct`,`user` where message.message_id=message_direct.message_id and user.user_id=message.created_by and is_active=0 and message.message_id<".$lastmessageid." and ((message.created_by=".$userid." and message_direct.receiver_id=11) or (message.created_by=".$messagerUserid." and message_direct.receiver_id=".$userid."))";
 		return $sql;
 	}
 
@@ -200,7 +209,7 @@ class SqlService{
 		$sql="SELECT content,created_at,first_name,last_name,profile_pic,email_id,profile_pic_pref,github_avatar FROM `threaded_message`,user where threaded_message.created_by=user.user_id and parent_message_id=".$messageid." order by created_at desc limit 1";
 		return $sql;
 	}
-	
+
 
 	public function createMessage($userid,$content,$timestamp)
 	{
@@ -215,6 +224,11 @@ class SqlService{
 	public function createChannelMessageMap($channelid,$messageid)
 	{
 		$sql="INSERT INTO `InterConn`.`message_channel` (`message_id`, `channel_id`) VALUES ('".$messageid."', '".$channelid."')";
+		return $sql;
+	}
+	public function createDirectMessageMap($receiverid,$messageid)
+	{
+		$sql="INSERT INTO `InterConn`.`message_direct` (`message_id`, `receiver_id`) VALUES ('".$messageid."', '".$receiverid."')";
 		return $sql;
 	}
 	public function createDirectMessageMap($receiverid,$messageid)
@@ -339,16 +353,12 @@ class SqlService{
 		$sql="SELECT * FROM `channel`,`user_channel` WHERE channel.channel_id=user_channel.channel_id and user_channel.user_id=".$user_id." and channel.type='public'";
 		return $sql;
 	}
-	
+
 	public function getUserScore($user_id){
-		$sql = "SELECT 'threadreaction' as title,count(*) as count FROM `threadmessage_reaction` where created_by=".$user_id." UNION SELECT 'messagereaction' as title,count(*) as count FROM `message_reaction` where created_by=".$user_id." UNION SELECT 'threadmessages' as title,count(*) as count FROM `threaded_message` where created_by=".$user_id." UNION SELECT 'messages' as title,count(*) as count FROM `message` where created_by=".$user_id." UNION SELECT 'createdchannel' as title,count(*) as count FROM `channel` where created_by=".$user_id." UNION SELECT 'channel' as title,count(*) as count FROM `user_channel` where user_id=".$user_id; 
+		$sql = "SELECT 'threadreaction' as title,count(*) as count FROM `threadmessage_reaction` where created_by=".$user_id." UNION SELECT 'messagereaction' as title,count(*) as count FROM `message_reaction` where created_by=".$user_id." UNION SELECT 'threadmessages' as title,count(*) as count FROM `threaded_message` where created_by=".$user_id." UNION SELECT 'messages' as title,count(*) as count FROM `message` where created_by=".$user_id." UNION SELECT 'createdchannel' as title,count(*) as count FROM `channel` where created_by=".$user_id." UNION SELECT 'channel' as title,count(*) as count FROM `user_channel` where user_id=".$user_id;
 		return $sql;
  	}
 
 
 }
 ?>
-
-
-
-

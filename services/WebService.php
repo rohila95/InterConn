@@ -87,7 +87,6 @@ class WebService{
     $workspaceUserDetailsQuery = $sql_service->getUsersWorkspace($workspaceid);
     $result = $conn->query($workspaceUserDetailsQuery);
 
-
     if ($result->num_rows > 0) {
 
         while($row = $result->fetch_assoc()) {
@@ -302,6 +301,96 @@ class WebService{
     return json_encode(array("messages"=>$array,"messageCount"=>$messagesExist,"lastmessageid"=>$lastmessageid));
     $conn->close();
   }
+  //direct messages retrival
+  public function getDirectMessages($userid,$receiverid,$lastMessageid)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $receiverid=mysqli_real_escape_string($conn,$receiverid);
+    $lastMessageid=mysqli_real_escape_string($conn,$lastMessageid);
+    $sql_service = new SqlService();
+    if($lastMessageid==-1)
+      $channelMessages = $sql_service->getDirectMessages($userid,$receiverid);
+    else
+      $channelMessages = $sql_service->getOlderDirectMessages($userid,$receiverid,$lastMessageid);
+    $result = $conn->query($channelMessages);
+    $flag=0;
+    $messagesExist=0;
+    if ($result->num_rows > 0) {
+
+        while($row = $result->fetch_assoc()) {
+          if($flag==0)
+          {
+            $lastmessageid=$row['message_id'];
+            $flag=1;
+          }
+          //get emojis
+          $messageid=$row['message_id'];
+          $emojiArray=[];
+          $messageReactions = $sql_service->getMessageReactions($messageid);
+          $innerresult = $conn->query($messageReactions);
+          if ($innerresult->num_rows > 0) {
+            while($innerrow = $innerresult->fetch_assoc()) {
+              $emojiArray[]=$innerrow;
+            }
+            $row['emojis']=$emojiArray;
+          }
+          else {
+            $row['emojis']=0;
+          }
+          //get threads
+          if($row['is_threaded']==1)
+          {
+            $messageThreads = $sql_service->getThreadReplyCount($messageid);
+            $innerresult = $conn->query($messageThreads);
+            if ($innerresult->num_rows > 0) {
+              while($innerrow = $innerresult->fetch_assoc()) {
+
+                $lastMessageThreads = $sql_service->getLastThreadReply($messageid);
+                $lastThreadresult = $conn->query($lastMessageThreads);
+                if ($lastThreadresult->num_rows > 0) {
+                  while($lastThreadrow = $lastThreadresult->fetch_assoc()) {
+                    $innerrow['content']=$lastThreadrow['content'];
+                    $innerrow['created_at']=$lastThreadrow['created_at'];
+                    $innerrow['first_name']=$lastThreadrow['first_name'];
+                    $innerrow['last_name']=$lastThreadrow['last_name'];
+                    $innerrow['profile_pic']=$lastThreadrow['profile_pic'];
+                    $innerrow['profile_pic_pref']=$lastThreadrow['profile_pic_pref'];
+                    $innerrow['email_id']=$lastThreadrow['email_id'];
+                  }
+                }
+
+                $row['threads']=$innerrow;
+              }
+            }
+
+
+          }
+
+          $array[]= $row;
+      }
+      if($lastmessageid!=0){
+        $messagesCount = $sql_service->getOlderDirectMessagesCount($userid,$receiverid,$lastmessageid);
+        $countresult = $conn->query($messagesCount);
+         // echo 'message count'.$messagesCount;
+        if ($countresult->num_rows > 0) {
+          while($countrow = $countresult->fetch_assoc()) {
+            $messagesExist=$countrow["messagecount"];
+             // echo 'new line'.$messagesExist.'---------'.$countrow["messagecount"];
+          }
+        }
+        else
+          return 'fail';
+      }
+
+    } else {
+        return 'fail';
+    }
+
+    return json_encode(array("messages"=>$array,"messageCount"=>$messagesExist,"lastmessageid"=>$lastmessageid));
+    $conn->close();
+  }
 
   public function getThreadMessages($parent_message_id)
   {
@@ -344,28 +433,28 @@ class WebService{
     $conn->close();
   }
 
-  public function getDirectMessages($userid,$messagerUserid)
-  {
-    $database_connection = new DatabaseConnection();
-    $conn = $database_connection->getConnection();
-    $userid=mysqli_real_escape_string($conn,$userid);
-    $messagerUserid=mysqli_real_escape_string($conn,$messagerUserid);
-    $sql_service = new SqlService();
-    $directMessages = $sql_service->getDirectMessages($userid,$messagerUserid);
-    $result = $conn->query($directMessages);
-
-
-    if ($result->num_rows > 0) {
-
-        while($row = $result->fetch_assoc()) {
-              $array[]= $row;
-        }
-    } else {
-        return 'fail';
-    }
-    return json_encode($array);
-    $conn->close();
-  }
+  // public function getDirectMessages($userid,$messagerUserid)
+  // {
+  //   $database_connection = new DatabaseConnection();
+  //   $conn = $database_connection->getConnection();
+  //   $userid=mysqli_real_escape_string($conn,$userid);
+  //   $messagerUserid=mysqli_real_escape_string($conn,$messagerUserid);
+  //   $sql_service = new SqlService();
+  //   $directMessages = $sql_service->getDirectMessages($userid,$messagerUserid);
+  //   $result = $conn->query($directMessages);
+  //
+  //
+  //   if ($result->num_rows > 0) {
+  //
+  //       while($row = $result->fetch_assoc()) {
+  //             $array[]= $row;
+  //       }
+  //   } else {
+  //       return 'fail';
+  //   }
+  //   return json_encode($array);
+  //   $conn->close();
+  // }
   public function getSpecificChannelUserDetails($channelid)
   {
     $database_connection = new DatabaseConnection();
@@ -541,6 +630,44 @@ class WebService{
     }
     $conn->close();
   }
+  public function createDirectMessage($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $content=mysqli_real_escape_string($conn,$content);
+    $receiverid=mysqli_real_escape_string($conn,$receiverid);
+    $timestamp=mysqli_real_escape_string($conn,$timestamp);
+    $splmessage=mysqli_real_escape_string($conn,$splmessage);
+    $codetype=mysqli_real_escape_string($conn,$codetype);
+
+    $sql_service = new SqlService();
+    if($splmessage==0)
+      $message = $sql_service->createMessage($userid,$content,$timestamp);
+    else if($splmessage==1)
+            $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
+    else if($splmessage==2)
+              {
+                $codetype=mysqli_real_escape_string($conn,$codetype);
+                $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
+              }
+
+    $result = $conn->query($message);
+    if ($result === TRUE) {
+        $messageid = $conn->insert_id;
+        // echo "New record created successfully. Last inserted ID is: " . $last_id;
+    } else {
+        echo "Error: " . $message . "<br>" . $conn->error;
+    }
+    $messageDirectMap = $sql_service->createDirectMessageMap($receiverid,$messageid);
+    $result = $conn->query($messageDirectMap);
+    if ($result === TRUE) {
+        echo "New record created successfully. Last inserted ID is: " ;
+    } else {
+        echo "Error: " . $messageDirectMap . "<br>" . $conn->error;
+    }
+    $conn->close();
+  }
 
     /* method to enter the dummy msg to get the unique same for msgimage */
     public function getUniqueMsgIDAfterInsertion($userid,$content,$channelid,$timestamp,$splmessage,$codetype)
@@ -579,7 +706,42 @@ class WebService{
         }
         $conn->close();
     }
+    public function getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
+    {
+        $database_connection = new DatabaseConnection();
+        $conn = $database_connection->getConnection();
+        $userid=mysqli_real_escape_string($conn,$userid);
+        $content=mysqli_real_escape_string($conn,$content);
+        $receiverid=mysqli_real_escape_string($conn,$receiverid);
+        $timestamp=mysqli_real_escape_string($conn,$timestamp);
+        $splmessage=mysqli_real_escape_string($conn,$splmessage);
+        $codetype=mysqli_real_escape_string($conn,$codetype);
+        $messageidtobereturn = -1;
+        $sql_service = new SqlService();
 
+            $message = $sql_service->createSplMessage($userid,$content,$timestamp,$splmessage,$codetype);
+
+
+        echo $message;
+        // return;
+
+        $result = $conn->query($message);
+        if ($result === TRUE) {
+            $messageidtobereturn = $conn->insert_id;
+            // echo "New record created successfully. Last inserted ID is: " . $last_id;
+        } else {
+            return  -1;
+        }
+        $messageChannelMap = $sql_service->createDirectMessageMap($receiverid,$messageidtobereturn);
+
+        $result = $conn->query($messageChannelMap);
+        if ($result === TRUE) {
+           return $messageidtobereturn;
+        } else {
+            return  -1;
+        }
+        $conn->close();
+    }
 
 
 
@@ -1080,7 +1242,7 @@ class WebService{
           else if($row['profile_pic_pref']==2)
             $row['profile_pic']=$row['github_avatar'];
           else if($row['profile_pic_pref']==-1)
-            $row['profile_pic']='./images/0.jpeg';        
+            $row['profile_pic']='./images/0.jpeg';
             $array[]= $row;
         }
     } else {

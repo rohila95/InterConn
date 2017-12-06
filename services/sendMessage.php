@@ -17,7 +17,7 @@
     if(trim($content)!='')
     {
       $web_service = new WebService();
-      
+
       if(checkIfWebImg( trim($content ))){
           $content = trim($content);
           $splmessage = 1;
@@ -30,8 +30,10 @@
       }
 //splmessage= 0--normal,  1--image,2--code6
 //codetype---int  ,0-html,1-js,2-python,3-php....
-      
+
       $insertStr = $web_service->createChannelMessage($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
+      //create directMessages
+      // $insertStr = $web_service->createDirectMessage($userid,$content,$receiverid,$timestamp,$splmessage,$codetype);
     }
     header("location: ../HomePage.php?channel=".$channelid);
 

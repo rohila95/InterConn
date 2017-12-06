@@ -42,6 +42,15 @@ if(isset($_POST["retrieveOldMessages"]))
   $lastmessageid=$data->lastmessageid;
   constructMessagesDiv($webService->getChannelMessages($channelid,$lastmessageid));
 }
+//Direct messages retrieve
+if(isset($_POST["retrieveOldDirectMessages"]))
+{
+  $data=json_decode($_POST["retrieveOldDirectMessages"]);
+  $userid=$data->userid;
+  $receiverid=$data->receiverid;
+  $lastmessageid=$data->lastmessageid;
+  constructMessagesDiv($webService->getDirectMessages($userid,$receiverid,$lastMessageid));
+}
 if(isset($_POST["register"])){ // to post a react by a
 	$data=json_decode($_POST["register"]);
 	// var_dump($data);
@@ -108,7 +117,7 @@ if(isset($_POST["archieveChannel"]))
   $channelid=$_POST["archieveChannel"];
   if($_SESSION['workspace_creator']==$_SESSION['userid'])
     echo  $webService->archieveChannel($channelid);
-  else 
+  else
     echo 'fail';
 }
 if(isset($_POST["unArchieveChannel"]))
@@ -116,7 +125,7 @@ if(isset($_POST["unArchieveChannel"]))
   $channelid=$_POST["unArchieveChannel"];
   if($_SESSION['workspace_creator']==$_SESSION['userid'])
     echo  $webService->unArchieveChannel($channelid);
-  else 
+  else
     echo 'fail';
 }
 
@@ -126,7 +135,7 @@ if(isset($_POST["deleteMessage"]))
   $messageid=$_POST["deleteMessage"];
   if($_SESSION['workspace_creator']==$_SESSION['userid'])
     echo  $webService->deleteMessage($messageid);
-  else 
+  else
     echo 'fail';
 }
 if(isset($_POST["deleteThreadedMessage"]))
@@ -136,7 +145,7 @@ if(isset($_POST["deleteThreadedMessage"]))
   //echo $messageid." ".$parentmsgid;
   if($_SESSION['workspace_creator']==$_SESSION['userid'])
     echo  $webService->deleteThreadedMessage($messageid, $parentmsgid);
-  else 
+  else
     echo 'fail';
 }
 
@@ -300,7 +309,7 @@ if(isset($_POST["updateProfile"]))
 
           echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype,$pic_pref);
       }else{
-        // chmod("./images", 777); 
+        // chmod("./images", 777);
           $fname=$_FILES['filetoUpload']['tmp_name'];
           $file_name=explode('\\', $file_name);
           $file_ext=explode('.', $file_name[2]);
