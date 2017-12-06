@@ -117,6 +117,17 @@ function start()
 								$("#errorModal").css("z-index","1100");
 								setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 							}
+							else if(data.includes("Error"))
+							{
+								$('#errorModal .modal-body').html("<p>E-mail id already exists. Try different id.</p>");
+								$('#errorModal').on('hidden.bs.modal', function (e) {
+									$('#errorModal').off();
+								});
+
+								$("#errorModal").modal("show");
+								$("#errorModal").css("z-index","1100");
+								setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
+							}
 						},
 						error: function(xhr,error){
 							console.log(error);

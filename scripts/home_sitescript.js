@@ -95,6 +95,8 @@ function start()
             	 $("#sendLocalFileModal").modal("show");
                 });
 
+                
+
             
             }
 		});

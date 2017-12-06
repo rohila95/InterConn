@@ -10,7 +10,7 @@ define('clientSecret', 'b4a3590e45aef0c065b00e1d4c2cda7763ed5cc5');
 define('appName', 'InterConn_Dev');
 
 //github login docker
-// define('appName', 'InterConn_Dev');
+// define('appName', 'InterConn');
 
 $url = 'https://github.com/login/oauth/access_token';
 
