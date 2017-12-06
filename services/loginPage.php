@@ -10,7 +10,7 @@ $secret = "6LfjejsUAAAAACmfQ4aNiB2QUbfzChTy5YgkFmzg";
 
 // empty response
 $response = null;
-
+ 
 // check secret key
 $reCaptcha = new ReCaptcha($secret);
 if ($_POST["g-recaptcha-response"]) {
@@ -20,7 +20,7 @@ if ($_POST["g-recaptcha-response"]) {
     );
 }
 
-if ($response != null && $response->success)
+if ($response != null && $response->success) 
 
 {
     $loggedInId="";
