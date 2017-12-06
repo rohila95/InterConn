@@ -3,6 +3,9 @@ session_start();
 include_once "./database_connect.php";
 include_once "./SqlService.php";
 require_once "./recaptchalib.php";
+ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 //qav2 captcha
 // $secret = "6LfQVjoUAAAAADM4-r7g6y42SZXW-8qtdTVIa5_6";
 //docker captcha
