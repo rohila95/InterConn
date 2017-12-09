@@ -219,3 +219,8 @@ main, #messages-card {
     top: 10%;
     left: 10%;
 }
+
+#livecolobmodal .modal-body{
+  height: 80% !important;
+}
+
