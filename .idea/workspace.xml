@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93e66bcb-f980-4c53-a607-cd86fbac036d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/main_lc.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/main_lc.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/sitescript_lc.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HomePage.php" afterPath="$PROJECT_DIR$/HomePage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/githubLogin.php" afterPath="$PROJECT_DIR$/services/githubLogin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/loginPage.php" afterPath="$PROJECT_DIR$/services/loginPage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/milestone3dump.sql" afterPath="$PROJECT_DIR$/milestone3dump.sql" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -86,11 +79,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="githubLogin.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="githubLogin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/githubLogin.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
               <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="milestone4dump.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/milestone4dump.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1209" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="milestone3dump.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/milestone3dump.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="233">
+              <caret line="1192" column="0" lean-forward="true" selection-start-line="1192" selection-start-column="0" selection-end-line="1192" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -201,6 +214,7 @@
         <option value="$PROJECT_DIR$/services/loginPage.php" />
         <option value="$PROJECT_DIR$/services/githubLogin.php" />
         <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/milestone3dump.sql" />
       </list>
     </option>
   </component>
@@ -211,7 +225,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="146" />
     <option name="width" value="1386" />
     <option name="height" value="788" />
@@ -316,7 +330,7 @@
       <workItem from="1511052946845" duration="46000" />
       <workItem from="1511109866185" duration="7729000" />
       <workItem from="1512789593914" duration="347000" />
-      <workItem from="1512841587541" duration="2212000" />
+      <workItem from="1512841587541" duration="2391000" />
     </task>
     <servers />
   </component>
@@ -353,7 +367,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="200510000" />
+    <option name="totallyTimeSpent" value="200689000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -365,7 +379,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21331316" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -441,16 +455,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/services/WebService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <marker date="1512789792681" expanded="true" signature="2120:2467" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CSS/home_site.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4658">
@@ -611,13 +615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="53" lean-forward="false" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/milestone3dump.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -880,6 +877,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/milestone4dump.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1209" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/milestone3dump.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="1192" column="0" lean-forward="true" selection-start-line="1192" selection-start-column="0" selection-end-line="1192" selection-end-column="0" />
           <folding />
         </state>
       </provider>
