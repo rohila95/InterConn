@@ -111,6 +111,17 @@
 		<link rel="stylesheet" href="./Assets/w3.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+        <!--        live colob related  -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+        <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+        <!-- App Styling -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+        <link rel="stylesheet" href="CSS/main_lc.css">
+
+
+
 	</head>
 
 	<body>
@@ -390,6 +401,122 @@
             </div>
 
 
+            <!--  for the livecolab modal -->
+
+            <div class="modal fade" id="livecolobmodal" role="dialog">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header regularModal">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Coloborate live</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+                                <!-- Header section containing logo -->
+                                <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+                                    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+                                        <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+                                            <h3><i class="material-icons">chat_bubble_outline</i> Friendly Chat</h3>
+                                        </div>
+                                        <div id="user-container">
+                                            <div hidden id="user-pic"></div>
+                                            <div hidden id="user-name"></div>
+                                            <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                                                Sign-out
+                                            </button>
+                                            <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                                                <i class="material-icons">account_circle</i>Sign-in with Google
+                                            </button>
+                                        </div>
+                                    </div>
+                                </header>
+
+                                <main class="mdl-layout__content mdl-color--grey-100">
+                                    <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
+
+                                        <!-- Messages container -->
+                                        <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
+                                            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                                                <div id="messages">
+                                                    <span id="message-filler"></span>
+                                                </div>
+                                                <form id="message-form" action="#">
+                                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                        <input class="mdl-textfield__input" type="text" id="message">
+                                                        <label class="mdl-textfield__label" for="message">Message...</label>
+                                                    </div>
+                                                    <button id="submit" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                                        Send
+                                                    </button>
+                                                </form>
+                                                <form id="image-form" action="#">
+                                                    <input id="mediaCapture" type="file" accept="image/*,capture=camera">
+                                                    <button id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
+                                                        <i class="material-icons">image</i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
+                                            <div class="mdl-snackbar__text"></div>
+                                            <button class="mdl-snackbar__action" type="button"></button>
+                                        </div>
+
+                                    </div>
+                                    <div class="editablediv" contenteditable>
+                                        <div class="currentline"> </div>
+
+                                    </div>
+
+
+
+                                </main>
+                            </div>
+
+                            <!-- Import and configure the Firebase SDK -->
+                            <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
+                            <!-- If you do not want to serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
+                            <!-- <script src="/__/firebase/4.1.3/firebase.js"></script>
+                            <script src="/__/firebase/init.js"></script> -->
+                            <!-- <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+                              <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+                              <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+                              <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+                              <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-messaging.js"></script>
+
+                            <!-- Leave out Storage -->
+                            <!--<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-storage.js"></script> -->
+
+                            <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+                            <script>
+                                // Initialize Firebase
+                                var config = {
+                                    apiKey: "AIzaSyDJ0kOFXIaFLLzpmEVLz27OzF5nn8fi7vA",
+                                    authDomain: "interconn-d0826.firebaseapp.com",
+                                    databaseURL: "https://interconn-d0826.firebaseio.com",
+                                    projectId: "interconn-d0826",
+                                    storageBucket: "",
+                                    messagingSenderId: "521078521512"
+                                };
+                                firebase.initializeApp(config);
+                            </script>
+                            <script src="scripts/main_lc.js"></script>
+                            <script src="scripts/sitescript_lc.js"></script>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  end for livecolab modal -->
 
             <div class="modal fade" id="createChannel" role="dialog">
 			    <div class="modal-dialog modal-lg">
