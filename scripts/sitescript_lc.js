@@ -7,7 +7,17 @@ function start(){
         $(document).on("click",".colloborateLiveBtn",function(e) {
             $('#livecolobmodal').modal('show');
         });
-        
+
+        $(document).on("click","#livecolobmodal #sign-out",function(e) {
+            $(".editablediv").empty();
+            $(".editablediv").hide();
+        });
+        $(document).on("click","#livecolobmodal #sign-in",function(e) {
+            $(".editablediv").show();
+        });
+
+
+
 		// var contents = $('.editablediv').html();
 		// $('.editablediv').blur(function() {
 		//     if (contents!=$(this).html()){

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93e66bcb-f980-4c53-a607-cd86fbac036d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CSS/main_lc.css" afterPath="$PROJECT_DIR$/CSS/main_lc.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HomePage.php" afterPath="$PROJECT_DIR$/HomePage.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/sitescript_lc.js" afterPath="$PROJECT_DIR$/scripts/sitescript_lc.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,21 +50,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main_lc.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main_lc.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CSS/main_lc.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="222" column="28" lean-forward="true" selection-start-line="222" selection-start-column="28" selection-end-line="222" selection-end-column="28" />
+            <state relative-caret-position="492">
+              <caret line="235" column="29" lean-forward="false" selection-start-line="235" selection-start-column="29" selection-end-line="235" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sitescript_lc.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="sitescript_lc.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/sitescript_lc.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+            <state relative-caret-position="238">
+              <caret line="14" column="71" lean-forward="false" selection-start-line="14" selection-start-column="71" selection-end-line="14" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -184,8 +184,8 @@
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/milestone3dump.sql" />
         <option value="$PROJECT_DIR$/HomePage.php" />
-        <option value="$PROJECT_DIR$/scripts/sitescript_lc.js" />
         <option value="$PROJECT_DIR$/CSS/main_lc.css" />
+        <option value="$PROJECT_DIR$/scripts/sitescript_lc.js" />
       </list>
     </option>
   </component>
@@ -307,7 +307,7 @@
       <workItem from="1511052946845" duration="46000" />
       <workItem from="1511109866185" duration="7729000" />
       <workItem from="1512789593914" duration="347000" />
-      <workItem from="1512841587541" duration="4853000" />
+      <workItem from="1512841587541" duration="5658000" />
     </task>
     <servers />
   </component>
@@ -344,7 +344,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="203151000" />
+    <option name="totallyTimeSpent" value="203956000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -854,18 +854,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sitescript_lc.js">
+    <entry file="file://$PROJECT_DIR$/CSS/main_lc.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+        <state relative-caret-position="492">
+          <caret line="235" column="29" lean-forward="false" selection-start-line="235" selection-start-column="29" selection-end-line="235" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CSS/main_lc.css">
+    <entry file="file://$PROJECT_DIR$/scripts/sitescript_lc.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="222" column="28" lean-forward="true" selection-start-line="222" selection-start-column="28" selection-end-line="222" selection-end-column="28" />
+        <state relative-caret-position="238">
+          <caret line="14" column="71" lean-forward="false" selection-start-line="14" selection-start-column="71" selection-end-line="14" selection-end-column="71" />
           <folding />
         </state>
       </provider>

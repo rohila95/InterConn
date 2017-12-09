@@ -231,3 +231,7 @@ main, #messages-card {
 .mdl-layout__container{
   margin-left: -2.5%;
 }
+
+.mdl-layout__header h3{
+  font-size: 30px !important;
+}
