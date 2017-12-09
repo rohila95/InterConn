@@ -221,6 +221,13 @@ main, #messages-card {
 }
 
 #livecolobmodal .modal-body{
-  height: 80% !important;
+  height: 70% !important;
 }
 
+#livecolobmodal .modal-footer{
+  padding-top: 4% !important;
+}
+
+.mdl-layout__container{
+  margin-left: -2.5%;
+}

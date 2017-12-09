@@ -2,6 +2,12 @@ var lastStateOfLastSpan="";
 function start(){
 	$(document).ready(function(){
 
+
+
+        $(document).on("click",".colloborateLiveBtn",function(e) {
+            $('#livecolobmodal').modal('show');
+        });
+        
 		// var contents = $('.editablediv').html();
 		// $('.editablediv').blur(function() {
 		//     if (contents!=$(this).html()){
