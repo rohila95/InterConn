@@ -67,7 +67,19 @@
                 overflow: hidden !important;
             }
         </style>
-        <script> var userScore=<?php echo $userScore;?>;</script>
+        <script> 
+           var userScore=<?php echo $userScore;?>;
+            var loggedInThroughGit = <?php  
+
+               if($userDetails[0]->github_avatar == "0"){
+                    echo "false";
+               }else{
+                    echo "true";
+               }
+
+            ?>;
+
+        </script>
 	</head>
 	<body>
 		<div class="container mainLoginWrapper well w3-panel w3-card-4">
@@ -140,7 +152,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input type="email" class="form-control email" name="email" value ="<?php echo $userDetails[0]->email_id ?>" maxlength="50" required>
+                                <input disabled type="email" class="form-control email" name="email" value ="<?php echo $userDetails[0]->email_id ?>" maxlength="50" required>
                                 <label class="form-control-placeholder" for="name">E-mail</label>
                             </div>
                         </div>
