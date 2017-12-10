@@ -1042,11 +1042,11 @@ class WebService{
     $result = $conn->query($user);
     if ($result === TRUE) {
         $userid = $conn->insert_id;
-        echo "----".$userid."----";
+        echo $userid;
         $userWorkspaceMap = $sql_service->userWorkspaceMap($userid,$workspaceid);
         $result = $conn->query($userWorkspaceMap);
         if ($result === TRUE) {
-            echo "New record created successfully. Last inserted ID is: ";
+            // echo "New record created successfully. Last inserted ID is: ";
         } else {
             echo "Error: " . $userWorkspaceMap . "<br>" . $conn->error;
         }
@@ -1060,7 +1060,7 @@ class WebService{
                   $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
                   $innerresult = $conn->query($userChannelMap);
                   if ($innerresult === TRUE) {
-                      echo "New record created successfully. Last inserted ID is: ";
+                      // echo "New record created successfully. Last inserted ID is: ";
                   } else {
                       echo "Error: " . $userChannelMap . "<br>" . $conn->error;
                   }
