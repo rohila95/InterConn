@@ -100,7 +100,7 @@ $result = $conn->query($checkQuery);
 $_SESSION['userid'] = $loggedInId;
 $_SESSION['loggedIn'] = True;
 
-$getUserDetails = $sql_service->getChannelGeneral($_SESSION['userid']);
+$getUserDetails = $sql_service->getChannelGeneral($loggedInId);
 $result = $conn->query($getUserDetails);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
