@@ -768,6 +768,22 @@ class WebService{
     }
     $conn->close();
   }
+  public function updateMessage($messageid,$content)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $messageid=mysqli_real_escape_string($conn,$messageid);
+    $content=mysqli_real_escape_string($conn,$content);
+    $sql_service = new SqlService();
+    $query = $sql_service->updateChannelMessages($messageid,$content);
+    $result = $conn->query($query);
+    if ($result === TRUE) {
+      echo "success";
+    } else {
+        echo "Error: " . $query . "<br>" . $conn->error;
+    }
+    $conn->close();
+  }
 
   public function deleteThreadedMessage($messageid,$parentmsgid)
   {

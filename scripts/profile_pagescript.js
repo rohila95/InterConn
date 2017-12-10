@@ -115,7 +115,7 @@ function start()
 
 								$("#errorModal").modal("show");
 								$("#errorModal").css("z-index","1100");
-								setTimeout(function() {$('#errorModal').modal('hide');location.reload();}, 2000);
+								setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 							}
 							else if(data.includes("Error"))
 							{
@@ -126,7 +126,7 @@ function start()
 
 								$("#errorModal").modal("show");
 								$("#errorModal").css("z-index","1100");
-								setTimeout(function() {$('#errorModal').modal('hide');location.reload();}, 2000);
+								setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
 							}
 						},
 						error: function(xhr,error){

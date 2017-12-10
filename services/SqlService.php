@@ -123,6 +123,11 @@ class SqlService{
 	}
 	public function deleteChannelMessages($messageid)
 	{
+		$sql="UPDATE `InterConn`.`message` SET `content` = '".$content."' WHERE `message`.`message_id` = ".$messageid;
+		return $sql;
+	}
+	public function updateChannelMessages($messageid,$content)
+	{
 		$sql="UPDATE `InterConn`.`message` SET `is_active` = '1' WHERE `message`.`message_id` =".$messageid;
 		return $sql;
 	}
