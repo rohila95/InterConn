@@ -1146,7 +1146,7 @@ class WebService{
     $conn->close();
   }
 
-  public function updateUserDetails($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype,$pic_pref)
+  public function updateUserDetails($userid,$first_name,$last_name,$emailid,$profile_pic,$password,$phone_number,$whatido,$status,$skype,$pic_pref,$loggedInThroughGit)
   {
     $database_connection = new DatabaseConnection();
     $conn = $database_connection->getConnection();
@@ -1185,6 +1185,47 @@ class WebService{
     }
   }
 
+
+  public function updateUserDetailsLTGH($userid,$first_name,$last_name,$profile_pic,$phone_number,$whatido,$status,$skype,$pic_pref,$loggedInThroughGit)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $userid=mysqli_real_escape_string($conn,$userid);
+    $first_name=mysqli_real_escape_string($conn,$first_name);
+    $last_name=mysqli_real_escape_string($conn,$last_name);
+    $emailid=mysqli_real_escape_string($conn,$emailid);
+    $pic_pref=mysqli_real_escape_string($conn,$pic_pref);
+
+    if($profile_pic == ""){
+
+    }else{
+        $profile_pic=mysqli_real_escape_string($conn,$profile_pic);
+
+    }
+    $password=mysqli_real_escape_string($conn,$password);
+    $phone_number=mysqli_real_escape_string($conn,$phone_number);
+    $whatido=mysqli_real_escape_string($conn,$whatido);
+    $status=mysqli_real_escape_string($conn,$status);
+    // $status_emoji=mysqli_real_escape_string($conn,$status_emoji);
+    $skype=mysqli_real_escape_string($conn,$skype);
+    $sql_service = new SqlService();
+
+    if($profile_pic == "") {
+        $updateUPQuery = $sql_service->updateUserProfileWOPPLTGH($userid, $first_name, $last_name, $phone_number, $whatido, $status, $skype,$pic_pref);
+    }else{
+        $updateUPQuery = $sql_service->updateUserProfileLTGH($userid, $first_name, $last_name,$profile_pic,$phone_number, $whatido, $status, $skype,$pic_pref);
+    }
+   // echo $updateUPQuery;
+
+    $result = $conn->query($updateUPQuery);
+    if ($result === TRUE) {
+        echo "success-User updated.";
+    } else {
+        echo "Error: ".$updateUPQuery . "<br>" . $conn->error;
+    }
+  }
+
+
   public function getProfileDetails($userid){
 
     $database_connection = new DatabaseConnection();
@@ -1216,6 +1257,13 @@ class WebService{
     $conn->close();
 
   }
+
+
+
+
+
+
+
 
   public function getPublicChannelsDetails($userid)
   {

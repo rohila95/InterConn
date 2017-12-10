@@ -287,6 +287,7 @@ if(isset($_POST["updateProfile"]))
     $uploadfile_newname ='';
       $firstName = $_POST["firstName"];
       $lastName = $_POST["lastName"];
+
       $email = $_POST["email"];
       $password = $_POST["password"];
       $whatIDo = $_POST["whatIDo"];
@@ -295,6 +296,13 @@ if(isset($_POST["updateProfile"]))
       $skype = $_POST["skype"];
       $pic_pref = $_POST["pic_pref"];
       $userid=$_SESSION['userid'];
+      $loggedInThroughGit = $_POST["loggedInThroughGit"];
+      if($loggedInThroughGit == 1){
+        $email = "dummy@gmail.com";
+        $password = "dummy";
+      }
+
+
       $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG");
    // echo "strlen phoneNumber :".strlen($phoneNumber).is_numeric($phoneNumber);
 
@@ -347,8 +355,14 @@ if(isset($_POST["updateProfile"]))
     else
     {
       if($file_name==""){
+        if($loggedInThroughGit == 1){
+            echo $webService->updateUserDetailsLTGH($userid,$firstName,$lastName,$uploadfile_newname,$phoneNumber,$whatIDo,$status,$skype,$pic_pref,$loggedInThroughGit);
 
-          echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype,$pic_pref);
+        }else{
+            echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype,$pic_pref,$loggedInThroughGit);
+
+        }
+      
       }else{
         // chmod("./images", 777);
           $fname=$_FILES['filetoUpload']['tmp_name'];
@@ -369,7 +383,12 @@ if(isset($_POST["updateProfile"]))
               {
                   echo 'fail-Image too large. Try small image.';
               }else{
-                  echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype,$pic_pref);
+                if($loggedInThroughGit == 1){
+                    echo $webService->updateUserDetailsLTGH($userid,$firstName,$lastName,$uploadfile_newname,$phoneNumber,$whatIDo,$status,$skype,$pic_pref,$loggedInThroughGit);
+
+                }else{
+                    echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype,$pic_pref,$loggedInThroughGit);
+                }
               }
           }
 

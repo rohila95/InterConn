@@ -189,6 +189,25 @@ class SqlService{
     }
 
 
+    public function updateUserProfileLTGH($userid,$first_name,$last_name,$profile_pic,$phone_number,$whatido,$status,$skype,$pic_pref)
+	{
+		$sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `profile_pic` = '$profile_pic',`phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype',`profile_pic_pref`='$pic_pref' WHERE `user`.`user_id` = ".$userid;
+		return $sql;
+	}
+    public function updateUserProfileWOPPLTGH($userid,$first_name,$last_name,$phone_number,$whatido,$status,$skype,$pic_pref)
+    {
+        $sql="UPDATE `InterConn`.`user` SET `first_name` = '$first_name', `last_name` = '$last_name', `phone_number` = '$phone_number', `what_i_do` = '$whatido', `status` = '$status', `skype` = '$skype',`profile_pic_pref`='$pic_pref' WHERE `user`.`user_id` = ".$userid;
+        return $sql;
+    }
+
+
+
+
+
+
+
+
+
 	public function updateParentThread($parentmessageid)
 	{
 		$sql="UPDATE `InterConn`.`message` SET `is_threaded` = '1' WHERE `message`.`message_id` = ".$parentmessageid;

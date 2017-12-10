@@ -152,7 +152,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <input disabled type="email" class="form-control email" name="email" value ="<?php echo $userDetails[0]->email_id ?>" maxlength="50" required>
+                                <input disabled type="email" class="form-control email not_reallyrequired" name="email" value ="<?php echo $userDetails[0]->email_id ?>" maxlength="50" required>
                                 <label class="form-control-placeholder" for="name">E-mail</label>
                             </div>
                         </div>
@@ -185,6 +185,8 @@
                             <div class="form-group">
                                 <input type="text" class="form-control skype not_reallyrequired" name="skype" value ="<?php echo $userDetails[0]->skype ?>" maxlength="50" required>
                                 <label class="form-control-placeholder" for="name">Skype</label>
+                                <input type="hidden" class="hidden form-control skype not_reallyrequired" name="loggedInThroughGit" value ="<?php echo $userDetails[0]->github_avatar ?>" required>
+
                             </div>
 
                         </div>

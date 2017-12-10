@@ -72,6 +72,12 @@ function start()
 			 fileFormData.append("status",$('.status').val());
 			 fileFormData.append("phoneNumber",$('.phoneNumber').val());
 			 fileFormData.append("skype",$('.skype').val());
+			 if(loggedInThroughGit){
+			 	fileFormData.append("loggedInThroughGit",1);
+			 }else{
+			 	fileFormData.append("loggedInThroughGit",0);
+			 }
+
 			 fileFormData.append("pic_pref",$('input[name=radiogroup]:checked', '#updateForm').val());
 
 			 $(".not_reallyrequired").removeAttr("required");
@@ -134,6 +140,8 @@ function start()
 						}
 					});
 			});
+
+
 		$(document).on("click",".editProfile",function() {
             $(".editProfile").hide();
             $(".displayProfile").hide();
@@ -141,9 +149,11 @@ function start()
 				console.log(data);
             		var userData=$.parseJSON(data);
             		$('.password').val(userData[0]['password']);
-
-
 			});
+			if(loggedInThroughGit){
+				$(".updateProfile .password").addClass("not_reallyrequired");
+				$(".updateProfile .password").attr("disabled",true);
+			}
 
             $(".updateProfile").show();
 		});
