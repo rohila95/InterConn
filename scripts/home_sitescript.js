@@ -65,6 +65,51 @@ function start()
 
 
         }
+        var readFileImageURL = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var imageBlob = e.target.result;
+                    var file = input.files[0];
+                    var _URL = window.URL || window.webkitURL;
+                    img = new Image();
+                    var minwidth = 250;
+                    var minheight = 250;
+                    var imgwidth = 0;
+                    var imgheight = 0;
+                    var maxwidth = 1250;
+                    var maxheight = 1250;
+
+                    img.src = _URL.createObjectURL(file);
+                    img.onload = function() {
+                        imgwidth = this.width;
+                        imgheight = this.height;
+                        console.log("width & height:" + imgwidth + "&" + imgheight);
+                        $("#width").text(imgwidth);
+                        $("#height").text(imgheight);
+                        // if(imgwidth <= maxwidth && imgwidth >=minwidth && imgheight >= minheight && imgheight <= maxheight ){
+                            $('.fileimageBeingPutinMsg').css('background-image',"url("+imageBlob+")");
+                            // $("#sendLocalImgModal").modal("show");
+                        // }else{
+                        //     $('#errorModal .modal-body').html("<p>Dimensions of the image are too weird!! Try the one with both width & height are less than 1250px  and greater than 250px aswell..</p>");
+                        //     $('#errorModal').on('hidden.bs.modal', function (e) {
+                        //         $('#errorModal').off();
+                        //     });
+
+                        //     $("#errorModal").modal("show");
+                        //     $("#errorModal").css("z-index","1100");
+                        //     setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
+                        // }
+
+                    }
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+
+
+        }
 
 
 
@@ -93,7 +138,15 @@ function start()
 
             	$(".anyfileUpload").on('change', function(){
                     console.log($('.anyfileUpload')[0].files[0].type);
-                    
+                    if((($('.anyfileUpload')[0].files[0].type).split('/')[0])=="image")
+                    {
+                        readFileImageURL(this);
+                    }
+                    else
+                    {
+                        $('.fileimageBeingPutinMsg').hide();
+                        $(".fileName").html("File being uploaded is "+$('.anyfileUpload')[0].files[0].name);
+                    }
             	 $("#sendLocalFileModal").modal("show");
                 });
 

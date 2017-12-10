@@ -513,7 +513,20 @@ textarea {resize: none;}
     transition: all .3s ease;
     text-decoration: none;
 }
-
+.fileimageBeingPutinMsg
+{
+    border-radius: 5%;
+    height: 30%;
+    width: 40%;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all .3s ease;
+    text-decoration: none;
+}
 .msg_content img{
   max-width: 40%;
   max-height: 40%;

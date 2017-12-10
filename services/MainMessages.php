@@ -213,8 +213,12 @@ function messageContentHelper($message){
     {
       $file_name=explode('=', $message->content);
       $ext=explode('.', $file_name[1]);
-      
-      $msgContent= '<div class="msg_content"><a href="./Assets/msgimages/'.htmlspecialchars($message->content).'" download="">'.htmlspecialchars($file_name[0].'.'.$ext[1]).'</a></div>';
+      $valid_file_extensions = array("jpg", "jpeg", "png", "PNG", "JPG","JPEG","gif");
+      if(!in_array($ext[1], $valid_file_extensions))
+        $msgContent= '<div class="msg_content"><a href="./Assets/msgimages/'.htmlspecialchars($message->content).'" download="">'.htmlspecialchars($file_name[0].'.'.$ext[1]).'</a></div>';
+      else
+         $msgContent= '<div class="msg_content"><div class="well"><a href="./Assets/msgimages/'.htmlspecialchars($message->content).'" download="">'.htmlspecialchars($file_name[0].'.'.$ext[1]).'</a><br> <img src="./Assets/msgimages/'.htmlspecialchars($message->content) .'" /></div></div>';
+
     }
     else{
         $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
