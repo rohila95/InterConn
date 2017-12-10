@@ -4,14 +4,14 @@ include_once "./SqlService.php";
 include_once "./WebService.php";
 session_start();
 //github login qav2
-define('clientID', '209a35200a7fe455f866');
-define('clientSecret', 'b4a3590e45aef0c065b00e1d4c2cda7763ed5cc5');
-define('appName', 'InterConn_Dev');
+// define('clientID', '209a35200a7fe455f866');
+// define('clientSecret', 'b4a3590e45aef0c065b00e1d4c2cda7763ed5cc5');
+// define('appName', 'InterConn_Dev');
 
 //github login docker
- // define('clientID', '308de2ae4d6509d14594');
- // define('clientSecret', '8168c4e567a06aca5d92f798d5e2850b030b951d');
- // define('appName', 'InterConn');
+ define('clientID', '308de2ae4d6509d14594');
+ define('clientSecret', '8168c4e567a06aca5d92f798d5e2850b030b951d');
+ define('appName', 'InterConn');
 
 $url = 'https://github.com/login/oauth/access_token';
 
