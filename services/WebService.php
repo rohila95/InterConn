@@ -768,6 +768,23 @@ class WebService{
     }
     $conn->close();
   }
+  public function updateMessage($messageid,$content)
+  {
+    $database_connection = new DatabaseConnection();
+    $conn = $database_connection->getConnection();
+    $messageid=mysqli_real_escape_string($conn,$messageid);
+    $content=mysqli_real_escape_string($conn,$content);
+    $sql_service = new SqlService();
+    $query = $sql_service->updateChannelMessages($messageid,$content);
+    echo $query;
+    $result = $conn->query($query);
+    if ($result === TRUE) {
+      echo "success";
+    } else {
+        echo "Error: " . $query . "<br>" . $conn->error;
+    }
+    $conn->close();
+  }
 
   public function deleteThreadedMessage($messageid,$parentmsgid)
   {
@@ -1042,11 +1059,11 @@ class WebService{
     $result = $conn->query($user);
     if ($result === TRUE) {
         $userid = $conn->insert_id;
-        echo "----".$userid."----";
+        echo $userid;
         $userWorkspaceMap = $sql_service->userWorkspaceMap($userid,$workspaceid);
         $result = $conn->query($userWorkspaceMap);
         if ($result === TRUE) {
-            echo "New record created successfully. Last inserted ID is: ";
+            // echo "New record created successfully. Last inserted ID is: ";
         } else {
             echo "Error: " . $userWorkspaceMap . "<br>" . $conn->error;
         }
@@ -1060,7 +1077,7 @@ class WebService{
                   $userChannelMap = $sql_service->createChannelUserMap($userid,$channelid,$timestamp);
                   $innerresult = $conn->query($userChannelMap);
                   if ($innerresult === TRUE) {
-                      echo "New record created successfully. Last inserted ID is: ";
+                      // echo "New record created successfully. Last inserted ID is: ";
                   } else {
                       echo "Error: " . $userChannelMap . "<br>" . $conn->error;
                   }

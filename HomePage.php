@@ -269,10 +269,12 @@
                             <form role="form" id="sendFileInMsgs" enctype="multipart/form-data">
                                 <div class="form-group" style="margin-left: 10%;">
 
-                                        <!-- <div class="fileBeingPutinMsg">
-                                            <span class="glyphicon glyphicon-camera"></span>
-                                            <span>Change Image</span>
-                                        </div> -->
+                                        <div class="fileimageBeingPutinMsg">
+
+                                        </div>
+                                        <div class="fileName">
+
+                                        </div>
 
                                         <input class="anyfileUpload hidden" name="anyfileUpload" type="file">
                                 </div>

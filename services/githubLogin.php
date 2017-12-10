@@ -4,9 +4,9 @@ include_once "./SqlService.php";
 include_once "./WebService.php";
 session_start();
 //github login qav2
-//define('clientID', '209a35200a7fe455f866');
-//define('clientSecret', 'b4a3590e45aef0c065b00e1d4c2cda7763ed5cc5');
-//define('appName', 'InterConn_Dev');
+// define('clientID', '209a35200a7fe455f866');
+// define('clientSecret', 'b4a3590e45aef0c065b00e1d4c2cda7763ed5cc5');
+// define('appName', 'InterConn_Dev');
 
 //github login docker
  define('clientID', '308de2ae4d6509d14594');
@@ -64,7 +64,7 @@ $_SESSION['githubLogin']=1;
 $username=$output["login"];
 
 $checkQuery=$sql_service->checkGitUser($username);
-echo $checkQuery;
+// echo $checkQuery;
 $result = $conn->query($checkQuery);
     if ($result->num_rows > 0) {
 
@@ -91,16 +91,31 @@ $result = $conn->query($checkQuery);
 		$profile_pic_pref=2;
 		$github_avatar=$output["avatar_url"];
 
-
+        $timestamp=date('Y-m-d H:i:s', time());
 
 		$newGitUser=$webService->registerNewGitHubUser($username,$first_name,$last_name,$email_id,$workspaceid,$timestamp,$profile_pic_pref,$github_avatar);
-		$loggedInId = explode('----',$newGitUser)[1];
+        // echo $newGitUser;
+        // echo '1 is '.explode('----',$newGitUser)[0];
+		// $loggedInId = $newGitUser;
+        $checkQuery1=$sql_service->checkGitUser($output["login"]);
+        // echo $checkQuery;
+        $result1 = $conn->query($checkQuery1);
+        if ($result1->num_rows > 0) {
+
+        while($row1 = $result1->fetch_assoc()) {
+            $loggedInId = $row1['user_id'];
+        }
+    } else{
+        echo 'fail';
+    }
+
 
     }
+    // echo 'logid'.$loggedInId.'done';
 $_SESSION['userid'] = $loggedInId;
 $_SESSION['loggedIn'] = True;
 
-$getUserDetails = $sql_service->getChannelGeneral($_SESSION['userid']);
+$getUserDetails = $sql_service->getChannelGeneral($loggedInId);
 $result = $conn->query($getUserDetails);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -110,7 +125,7 @@ if ($result->num_rows > 0) {
     echo 'fail';
 }
 $conn->close();
-
+// echo $channelid;
 header("location: ../HomePage.php?channel=".$channelid);
 
 ?>

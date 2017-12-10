@@ -280,62 +280,63 @@
                     </tbody>
                   </table>
 				 </div>
-			</div>
-            <div class="row userratingwrapper">
-                <div class="rating " data-vote="0" >
+                <div class="row userratingwrapper">
+                    <div class="rating " data-vote="0" >
 
-                    <div class="star hidden">
-                        <span class="full" data-value="0"></span>
-                        <span class="half" data-value="0"></span>
-                    </div>
+                        <div class="star hidden">
+                            <span class="full" data-value="0"></span>
+                            <span class="half" data-value="0"></span>
+                        </div>
 
-                    <div class="star">
+                        <div class="star">
 
-                        <span class="full" data-value="1"></span>
-                        <span class="half" data-value="0.5"></span>
-                        <span class="selected"></span>
+                            <span class="full" data-value="1"></span>
+                            <span class="half" data-value="0.5"></span>
+                            <span class="selected"></span>
 
-                    </div>
+                        </div>
 
-                    <div class="star">
+                        <div class="star">
 
-                        <span class="full" data-value="2"></span>
-                        <span class="half" data-value="1.5"></span>
-                        <span class="selected"></span>
+                            <span class="full" data-value="2"></span>
+                            <span class="half" data-value="1.5"></span>
+                            <span class="selected"></span>
 
-                    </div>
+                        </div>
 
-                    <div class="star">
+                        <div class="star">
 
-                        <span class="full" data-value="3"></span>
-                        <span class="half" data-value="2.5"></span>
-                        <span class="selected"></span>
+                            <span class="full" data-value="3"></span>
+                            <span class="half" data-value="2.5"></span>
+                            <span class="selected"></span>
 
-                    </div>
+                        </div>
 
-                    <div class="star">
+                        <div class="star">
 
-                        <span class="full" data-value="4"></span>
-                        <span class="half" data-value="3.5"></span>
-                        <span class="selected"></span>
+                            <span class="full" data-value="4"></span>
+                            <span class="half" data-value="3.5"></span>
+                            <span class="selected"></span>
 
-                    </div>
+                        </div>
 
-                    <div class="star">
+                        <div class="star">
 
-                        <span class="full" data-value="5"></span>
-                        <span class="half" data-value="4.5"></span>
-                        <span class="selected"></span>
+                            <span class="full" data-value="5"></span>
+                            <span class="half" data-value="4.5"></span>
+                            <span class="selected"></span>
 
-                    </div>
+                        </div>
 
-                    <div class="score">
-                        <span class="score-rating js-score">0</span>
-                        <span>/</span>
-                        <span class="total">5</span>
+                        <div class="score">
+                            <span class="score-rating js-score">0</span>
+                            <span>/</span>
+                            <span class="total">5</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+			</div>
+
 		</div>
 		<div class="footer row">
 			<small >&copy; Mahesh Kukunooru, Rohila Gudipati, Maheedhar Gunnam</small>

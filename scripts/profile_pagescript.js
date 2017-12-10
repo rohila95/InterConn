@@ -94,7 +94,7 @@ function start()
 							$('#successModal .modal-body').html("<p> Profile updated Successfully. </p>");
 							$('#successModal').on('hidden.bs.modal', function (e) {
 								$('#successModal').off();
-
+								location.reload();
 							});
 
 
@@ -103,7 +103,7 @@ function start()
 							setTimeout(function()
 								{
 									$('#successModal').modal('hide');
-
+									location.reload();
 								}, 2000);
 							}
 						else if(data.includes("fail"))

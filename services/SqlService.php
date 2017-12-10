@@ -126,6 +126,11 @@ class SqlService{
 		$sql="UPDATE `InterConn`.`message` SET `is_active` = '1' WHERE `message`.`message_id` =".$messageid;
 		return $sql;
 	}
+	public function updateChannelMessages($messageid,$content)
+	{
+		$sql="UPDATE `InterConn`.`message` SET `content` = '".$content."' WHERE `message`.`message_id` = ".$messageid;
+		return $sql;
+	}
 	public function getMessageReactions($messageid)
 	{
 		$sql="SELECT count(*) as count,message_reaction.emoji_id,message_id,emoji.emoji_code,emoji.emoji_pic FROM `message_reaction`,`emoji` where message_reaction.emoji_id=emoji.emoji_id and message_id=".$messageid." group by message_id, message_reaction.emoji_id";
