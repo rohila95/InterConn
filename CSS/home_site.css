@@ -227,6 +227,7 @@ html, body {
      padding-top: 1%;
      padding-bottom: 1%;
      padding-left: 11%;
+    color: #888C93 !important;
 }
 .channelPrivacyLevel
 {
@@ -532,3 +533,6 @@ textarea {resize: none;}
   max-height: 40%;
 }
 
+textarea.form-control{
+    overflow-x: hidden;
+}
