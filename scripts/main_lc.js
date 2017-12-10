@@ -361,8 +361,9 @@ FriendlyChat.prototype.addMessagesToEditableDiv = function(key, name, text, picU
             lastStateOfLastSpan = "&nbsp;";
 
             setTimeout(function(){
-                $(".editablediv br").remove();
-            }, 500);
+                $(".editablediv br").parents("span").eq(0).removeAttr("spacedfor");
+                $(".editablediv br").parents("div").eq(0).remove();
+            }, 300);
 
         }else{
             wholeMsgStr ='<span class="space" spacedfor="'+key +'"> </span><span class="contentspan" id="'+ key + '" title="'+ name +'">'+ text +'</span>';
