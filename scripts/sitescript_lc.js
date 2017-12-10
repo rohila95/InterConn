@@ -1,8 +1,7 @@
 var lastStateOfLastSpan="";
 function start(){
 	$(document).ready(function(){
-
-
+        $(".editablediv").hide();
 
         $(document).on("click",".colloborateLiveBtn",function(e) {
             $('#livecolobmodal').modal('show');
@@ -17,6 +16,24 @@ function start(){
         });
 
 
+        $(document).on('DOMCharacterDataModified', '.editablediv .contentspan', function(e) {
+            if($(this).attr("id") != undefined){
+                var curContentSpanID = $(this).attr("id");
+                curStateOfCurSpan = $(this).html();
+                var curSpanPos = $(this).parents(".editablediv").find(".contentspan").index(this)+1;
+                var spanLenAvail= $(this).parents(".editablediv").find(".contentspan").length;
+                if(curSpanPos<spanLenAvail){
+                    window.friendlyChat.changeMessage($(this).attr("id") ,$.trim(curStateOfCurSpan));
+                }
+            }
+        });
+
+
+        $(document).on('DOMNodeRemoved','.currentline', function(e) {
+            if ($(e.target).attr("spacedfor") != undefined) {
+                window.friendlyChat.deleteMessage($(e.target).attr("spacedfor"));
+            }
+        });
 
 		// var contents = $('.editablediv').html();
 		// $('.editablediv').blur(function() {
