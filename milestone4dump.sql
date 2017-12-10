@@ -773,7 +773,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `status` varchar(150) NOT NULL,
   `status_emoji` bigint(20) DEFAULT NULL,
   `skype` varchar(150) NOT NULL,
-  `profile_pic_pref` int(11) NOT NULL DEFAULT '-1',
+  `profile_pic_pref` int(11) NOT NULL DEFAULT '1',
   `github_avatar` varchar(200) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 
@@ -782,12 +782,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `profile_pic`, `password`, `phone_number`, `what_i_do`, `status`, `status_emoji`, `skype`, `profile_pic_pref`, `github_avatar`) VALUES
-(1, '@mater', 'Tow', 'Mater', 'mater@rsprings.gov', './images/0.jpeg', 'mater', '1234567890', 'student at ODU', '', 1, '', 1, '0'),
-(2, '@sally', 'Sally', 'Carrera', 'porsche@rsprings.gov', './images/0.jpeg', 'sally', '', '', '', 1, '', 1, '0'),
-(3, '@doc', 'Doc', 'Hudson', 'hornet@rsprings.gov', './images/0.jpeg', 'doc', '', '', '', NULL, '', 1, '0'),
-(6, '@mcmissile', 'Finn', 'McMissile', 'topsecret@agent.org', './images/0.jpeg', 'mcmissile', '', '', '', NULL, '', 1, '0'),
-(7, '@mcqueen', 'Lightning', 'McQueen', 'kachow@rusteze.com', './images/0.jpeg', 'mcqueen', '', '', '', NULL, '', 1, '0'),
-(8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', './images/0.jpeg', 'chick', '', '', '', NULL, '', 1, '0'),
+(1, '@mater', 'Tow', 'Mater', 'mater@rsprings.gov', './images/0.jpeg', 'mater', '1234567890', 'student at ODU', '', 1, '', -1, '0'),
+(2, '@sally', 'Sally', 'Carrera', 'porsche@rsprings.gov', './images/0.jpeg', 'sally', '', '', '', 1, '', -1, '0'),
+(3, '@doc', 'Doc', 'Hudson', 'hornet@rsprings.gov', './images/0.jpeg', 'doc', '', '', '', NULL, '', -1, '0'),
+(6, '@mcmissile', 'Finn', 'McMissile', 'topsecret@agent.org', './images/0.jpeg', 'mcmissile', '', '', '', NULL, '', -1, '0'),
+(7, '@mcqueen', 'Lightning', 'McQueen', 'kachow@rusteze.com', './images/0.jpeg', 'mcqueen', '', '', '', NULL, '', -1, '0'),
+(8, '@chick', 'Chick', 'Hicks', 'chinga@cars.com', './images/0.jpeg', 'chick', '', '', '', NULL, '', -1, '0'),
 (9, '@rohila', 'Rohila', 'Gudipati', 'rgudi001@odu.edu', './images/9.png', 'rohila', '', '', '', NULL, ' ', 1, '0'),
 (10, '@maheedhar', 'Maheedhar', 'Gunnam', 'mgunn001@odu.edu', './images/10.png', 'maheedhar', '', '', '', NULL, '', 1, '0'),
 (11, '@mahesh', 'Mahesh', 'Kukunooru', 'mkuku002@odu.edu', './images/0.jpeg', 'mahesh', '', '', '', NULL, '', 1, '0'),

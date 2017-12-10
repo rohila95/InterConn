@@ -306,7 +306,7 @@ html, body {
 .addOnMessages
 {
   margin-top: -0.5%;
-
+  padding-top: 2%;
 }
 
 .loginDetails
@@ -500,7 +500,10 @@ textarea {resize: none;}
     width: 75% !important;
     height: 75% !important;
 }
-
+.message_body .msg_content .well
+{
+  margin-bottom: 0px !important;
+}
 .imageBeingPutinMsg {
     border-radius: 5%;
     height: 30%;
