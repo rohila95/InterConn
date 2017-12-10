@@ -262,17 +262,18 @@ if(isset($_POST["fileAsMsg"])){
         echo "fail- Failed to send the image";
         return;
     }
-    $uploadfile_newname='./Assets/msgimages/'.$file_name.'_'.trim($insertedMsgID).'.'.$file_ext[1];
+    $uploadfile_newname='./Assets/msgimages/'.$file_ext[0].'='.trim($insertedMsgID).'.'.$file_ext[1];
 
-   
+   // echo $file_ext[0].'_'.trim($insertedMsgID).'.'.$file_ext[1];
 
     $uploadSucess = move_uploaded_file($fname, $uploadfile_newname);
+    echo !$uploadSucess;
     if(!$uploadSucess)
     {
         $webService->deleteMessage($insertedMsgID);
         echo 'fail-File too large. Try small file.';
     }else{
-        $webService->updateMessage($insertedMsgID,$file_name.'_'.trim($insertedMsgID).'.'.$file_ext[1]);
+        $webService->updateMessage($insertedMsgID,$file_ext[0].'='.trim($insertedMsgID).'.'.$file_ext[1]);
         echo "success";
     }
     

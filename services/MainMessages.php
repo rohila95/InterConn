@@ -209,7 +209,14 @@ function messageContentHelper($message){
             $msgContent= '<div class="msg_content"><div class="well"> <img src="./Assets/msgimages/'.trim($message->message_id).'.'.htmlspecialchars($message->content) .'" /></div></div>';
         }
 
-    }else{
+    }else if($message->is_specialmessage == 3)
+    {
+      $file_name=explode('=', $message->content);
+      $ext=explode('.', $file_name[1]);
+      
+      $msgContent= '<div class="msg_content"><a href="./Assets/msgimages/'.htmlspecialchars($message->content).'" download="">'.htmlspecialchars($file_name[0].'.'.$ext[1]).'</a></div>';
+    }
+    else{
         $msgContent= '<div class="msg_content">'.htmlspecialchars($message->content).'</div>';
     }
 

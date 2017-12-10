@@ -150,7 +150,7 @@ function start()
             var fileFormData = new FormData();
             fileFormData.append('filetoUpload', $('.anyfileUpload')[0].files[0]);
             // console.log($('.anyfileUpload')[0].files[0].type);
-            var file_name=$(".fileUploadIP").val();
+            var file_name=$(".anyfileUpload").val();
             fileFormData.append("fileAsMsg","yes");
             fileFormData.append("channelid",channelid);
             fileFormData.append("file_name",file_name);

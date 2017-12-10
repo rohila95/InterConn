@@ -776,6 +776,7 @@ class WebService{
     $content=mysqli_real_escape_string($conn,$content);
     $sql_service = new SqlService();
     $query = $sql_service->updateChannelMessages($messageid,$content);
+    echo $query;
     $result = $conn->query($query);
     if ($result === TRUE) {
       echo "success";
