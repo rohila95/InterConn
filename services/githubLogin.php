@@ -55,14 +55,14 @@ echo $output["avatar_url"].'<br>';
 echo $output["name"];
 echo $output["email"];
 
-$ch = curl_init();
-curl_setopt($ch,CURLOPT_URL,"https://api.github.com/user/emails?access_token=".$result["access_token"]);
-curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-curl_setopt($ch,CURLOPT_USERAGENT,'https://developer.github.com/v3/users/emails/#list-email-addresses-for-a-user');
-curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
-$outputEmail=json_decode(curl_exec($ch),TRUE);
-curl_close($ch);
-echo $outputEmail[0]['email'];
+// $ch = curl_init();
+// curl_setopt($ch,CURLOPT_URL,"https://api.github.com/user/emails?access_token=".$result["access_token"]);
+// curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+// curl_setopt($ch,CURLOPT_USERAGENT,'https://developer.github.com/v3/users/emails/#list-email-addresses-for-a-user');
+// curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+// $outputEmail=json_decode(curl_exec($ch),TRUE);
+// curl_close($ch);
+// echo $outputEmail[0]['email'];
 
 
 
@@ -95,9 +95,9 @@ $result = $conn->query($checkQuery);
     		$last_name=$name[1];
         }
         if($output["email"]=='')
-            $email_id=$outputEmail[0]['email'];
+            $email_id=$output["login"];
         else
-    		  $email_id=$output["email"];
+    		$email_id=$output["email"];
 		$workspaceid=2;
 		$profile_pic_pref=2;
 		$github_avatar=$output["avatar_url"];
