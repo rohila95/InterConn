@@ -214,7 +214,7 @@ if(isset($_POST["imageAsMsg"])){
     }
     else{
       // for direct message
-      $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
+      $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype);
 
     }
 
@@ -261,7 +261,7 @@ if(isset($_POST["fileAsMsg"])){
 
     }else{
       //for direct message
-      $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
+      $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype);
     }
 
 
