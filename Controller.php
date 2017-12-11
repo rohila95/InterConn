@@ -209,7 +209,8 @@ if(isset($_POST["imageAsMsg"])){
     $timestamp = date('Y-m-d H:i:s', time());
 
     $insertedMsgID = $webService->getUniqueMsgIDAfterInsertion($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
-
+    // for direct message
+    // $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
     /*  there was a problem with .PNG thing
         if($file_ext[1] == "png"){
             $file_ext[1] == "PNG";
@@ -252,7 +253,8 @@ if(isset($_POST["fileAsMsg"])){
     $timestamp = date('Y-m-d H:i:s', time());
 
     $insertedMsgID = $webService->getUniqueMsgIDAfterInsertion($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
-
+    // for direct message
+    // $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
     /*  there was a problem with .PNG thing
         if($file_ext[1] == "png"){
             $file_ext[1] == "PNG";
@@ -276,7 +278,7 @@ if(isset($_POST["fileAsMsg"])){
         $webService->updateMessage($insertedMsgID,$file_ext[0].'='.trim($insertedMsgID).'.'.$file_ext[1]);
         echo "success";
     }
-    
+
 }
 
 if(isset($_POST["updateProfile"]))
@@ -362,7 +364,7 @@ if(isset($_POST["updateProfile"]))
             echo $webService->updateUserDetails($userid,$firstName,$lastName,$email,$uploadfile_newname,$password,$phoneNumber,$whatIDo,$status,$skype,$pic_pref,$loggedInThroughGit);
 
         }
-      
+
       }else{
         // chmod("./images", 777);
           $fname=$_FILES['filetoUpload']['tmp_name'];

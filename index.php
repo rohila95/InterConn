@@ -95,9 +95,9 @@
                             <h3>Login with</h3>
                             <div class="gitHubWrapper">
                             <!-- git hub login qav2 -->
-                            <a href="https://github.com/login/oauth/authorize?client_id=209a35200a7fe455f866&redirect_uri=http://localhost:8888/services/githubLogin.php&scope=user:email/">
+                            <!-- <a href="https://github.com/login/oauth/authorize?client_id=209a35200a7fe455f866&redirect_uri=http://localhost:8888/services/githubLogin.php&scope=user:email/"> -->
                             <!-- git hub login docker -->
-                             <!-- <a href="https://github.com/login/oauth/authorize?client_id=308de2ae4d6509d14594&redirect_uri=http://rohila95.cs518.cs.odu.edu/services/githubLogin.php&scope=user:email/"> -->
+                             <a href="https://github.com/login/oauth/authorize?client_id=308de2ae4d6509d14594&redirect_uri=http://rohila95.cs518.cs.odu.edu/services/githubLogin.php&scope=user:email/">
                                 <button type="submit" class="btn btn-primary btn-block">
                                      <i class="glyphicon fa fa-github"></i>&nbsp;&nbsp; GitHub
                                 </button>
