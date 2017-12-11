@@ -83,9 +83,9 @@ $result = $conn->query($checkQuery);
     		$first_name=$name[0];
     		$last_name=$name[1];
         }
-        // if($output["email"]=='')
-        //     $email_id=$output["login"];
-        // else
+        if($output["email"]=='')
+            $email_id=$output["login"];
+        else
     		  $email_id=$output["email"];
 		$workspaceid=2;
 		$profile_pic_pref=2;
