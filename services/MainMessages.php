@@ -7,7 +7,7 @@
 function constructMessagesDiv($messageStr)
 {
     $codeSnippLanguagesArr=["html","javascript","python","php"];
-
+    //echo $messageStr;
     $web_service = new WebService();
   $currentChannelMessages = json_decode($messageStr);
   // var_dump($currentChannelMessages);

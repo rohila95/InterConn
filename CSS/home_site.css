@@ -205,7 +205,7 @@ html, body {
 }
 
 
-.currentChannel
+.currentChannel, .currentDirectMsg
 {
     background-color: #4c4b4b;
     color: #e6e6e6;

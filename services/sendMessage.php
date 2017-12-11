@@ -5,7 +5,14 @@
     include_once "./WebService.php";
 
     $userid=$_POST['userid'];
+    $isChannelMode = true;
     $channelid=$_POST['channelid'];
+    $directmsgid = $_POST['directmsgid'];
+    if($channelid==""){
+      $isChannelMode = false;
+    }
+
+
     $content=$_POST['message'];
     $codetype=0;
     $splmessage=$_POST['isspecialmsg'];
@@ -28,14 +35,22 @@
       }else{
           $content = trim($content );
       }
-//splmessage= 0--normal,  1--image,2--code6
-//codetype---int  ,0-html,1-js,2-python,3-php....
+      //splmessage= 0--normal,  1--image,2--code6
+      //codetype---int  ,0-html,1-js,2-python,3-php....
+      if($isChannelMode){
+          $insertStr = $web_service->createChannelMessage($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
 
-      $insertStr = $web_service->createChannelMessage($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
-      //create directMessages
-      // $insertStr = $web_service->createDirectMessage($userid,$content,$receiverid,$timestamp,$splmessage,$codetype);
+      }else{
+          $insertStr = $web_service->createDirectMessage($userid,$content,$directmsgid ,$timestamp,$splmessage,$codetype);
+
+      }
     }
-    header("location: ../HomePage.php?channel=".$channelid);
+    if($isChannelMode){
+          header("location: ../HomePage.php?channel=".$channelid);
+
+    }else{
+          header("location: ../HomePage.php?directmsg=".$directmsgid);
+    }
 
     function checkIfWebImg( $msgcontent ){
         $imageExtension = ['jpg','JPG','jpeg','JPEG','png','PNG','gif','GIF'];

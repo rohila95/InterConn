@@ -112,7 +112,7 @@ class SqlService{
 	}
 	public function getOlderDirectMessagesCount($userid,$messagerUserid,$lastmessageid)
 	{
-		$sql="SELECT count(*) FROM `message`,`message_direct`,`user` where message.message_id=message_direct.message_id and user.user_id=message.created_by and is_active=0 and message.message_id<".$lastmessageid." and ((message.created_by=".$userid." and message_direct.receiver_id=11) or (message.created_by=".$messagerUserid." and message_direct.receiver_id=".$userid."))";
+		$sql="SELECT count(*) as messagecount FROM `message`,`message_direct`,`user` where message.message_id=message_direct.message_id and user.user_id=message.created_by and is_active=0 and message.message_id<".$lastmessageid." and ((message.created_by=".$userid." and message_direct.receiver_id=11) or (message.created_by=".$messagerUserid." and message_direct.receiver_id=".$userid."))";
 		return $sql;
 	}
 
