@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
 		<title>InterConn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script type="text/javascript" src="./Assets/jquery.min.js"></script>
-		<script type="text/javascript" src="./scripts/sitescript.js"></script>
+		<script src="./Assets/jquery.min.js"></script>
+		<script src="./scripts/sitescript.js"></script>
         <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,9 +13,9 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="./CSS/site.css">
 		<link rel="stylesheet" href="./CSS/colisiondetect.css">
-		<script type="text/javascript" src="./scripts/d3/d3.js"></script>
+		<!-- <script src="./scripts/d3/d3.js"></script>
 	    <script type="text/javascript" src="./scripts/d3/d3.geom.js"></script>
-	    <script type="text/javascript" src="./scripts/d3/d3.layout.js"></script>
+	    <script type="text/javascript" src="./scripts/d3/d3.layout.js"></script> -->
         <script src="https://www.google.com/recaptcha/api.js"></script>
 <!--	   	<script type="text/javascript" src="./scripts/collisiondetect.js"></script>
 -->	</head>
@@ -97,11 +97,13 @@
                             <!-- git hub login qav2 -->
                             <!-- <a href="https://github.com/login/oauth/authorize?client_id=209a35200a7fe455f866&redirect_uri=http://localhost:8888/services/githubLogin.php&scope=user:email/"> -->
                             <!-- git hub login docker -->
-                             <a href="https://github.com/login/oauth/authorize?client_id=308de2ae4d6509d14594&redirect_uri=http://rohila95.cs518.cs.odu.edu/services/githubLogin.php&scope=user:email/">
-                                <button type="submit" class="btn btn-primary btn-block">
+                             
+                                <button type="button" class="btn btn-primary btn-block">
+                                        <a href="https://github.com/login/oauth/authorize?client_id=308de2ae4d6509d14594&redirect_uri=http://rohila95.cs518.cs.odu.edu/services/githubLogin.php&scope=user:email/">
                                      <i class="glyphicon fa fa-github"></i>&nbsp;&nbsp; GitHub
+                                     </a>
                                 </button>
-                            </a>
+                            
                             </div>
                             <div class="twitterWrapper">
                                 <button type="submit" class="btn btn-primary btn-block disabled">
