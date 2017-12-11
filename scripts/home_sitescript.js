@@ -289,15 +289,28 @@ function start()
 			$(".resSuggDiv").remove();
 		});
 		$(document).on("click",".oldMessages",function(){
-			var queryStr='{"channelid":"'+channelid+'","lastmessageid":"'+$(this).attr('id')+'"}';
 			// console.log(queryStr);
             $("#wholebody_loader").show();
-			$.post('./Controller.php',{"retrieveOldMessages":queryStr},function (data){
-                $("#wholebody_loader").hide();
-				$('.oldMessages').remove();
-				$('.messagesList').prepend(data);
+            if(isChannelMode){
+                var queryStr='{"channelid":"'+channelid+'","lastmessageid":"'+$(this).attr('id')+'"}';
 
-			});
+                $.post('./Controller.php',{"retrieveOldMessages":queryStr},function (data){
+                    $("#wholebody_loader").hide();
+                    $('.oldMessages').remove();
+                    $('.messagesList').prepend(data);
+                });
+
+            }else{
+                var receiverid = $(".headerMain .channelTitle").attr("id");
+                var loggedInUserID = $(".loggedIn_user").attr("id");
+                var queryStr='{"receiverid":"'+receiverid+'","userid":"'+loggedInUserID+'","lastmessageid":"'+$(this).attr('id')+'"}';
+                 $.post('./Controller.php',{"retrieveOldDirectMessages":queryStr},function (data){
+                    $("#wholebody_loader").hide();
+                    $('.oldMessages').remove();
+                    $('.messagesList').prepend(data);
+                });
+            }
+			
 		});
 		$(document).on("click",".deletebutt",function(){
 			var postDataObj={};

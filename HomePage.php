@@ -148,7 +148,18 @@
         <!-- App Styling -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
         <link rel="stylesheet" href="CSS/main_lc.css">
+        <script> 
+            var isChannelMode = <?php  
 
+               if($isChannelMode){
+                    echo "true";
+               }else{
+                    echo "false";
+               }
+
+            ?>;
+
+        </script>
 
 
 	</head>
@@ -786,6 +797,18 @@
 											</ul>
 									</div>';
 								}
+						}
+						else
+						{
+							echo '<div class="dropup dropupMenuRegularMsgs">
+											<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">More Options
+													<span class="caret"></span></button>
+											<ul class="dropdown-menu">
+													<li intent="localimage" ><a href="#" class="localimagesel_regularmsg"><i class="fa fa-picture-o" aria-hidden="true">&nbsp;Local Image</i></a></li>
+													<li intent="localfile" ><a href="#" class="codesnippetsel__regularmsg"><i class="fa fa-file" aria-hidden="true">&nbsp;&nbsp;Local File</i></a></li>
+													<li intent="codesnipp" ><a href="#" class="codesnippetsel__regularmsg"><i class="fa fa-code" aria-hidden="true">&nbsp;Code Snippet</i></a></li>
+											</ul>
+									</div>';
 						}
 						 ?>
                         <!-- <div class="dropup dropupMenuRegularMsgs">

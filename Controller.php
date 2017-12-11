@@ -49,7 +49,7 @@ if(isset($_POST["retrieveOldDirectMessages"]))
   $userid=$data->userid;
   $receiverid=$data->receiverid;
   $lastmessageid=$data->lastmessageid;
-  constructMessagesDiv($webService->getDirectMessages($userid,$receiverid,$lastMessageid));
+  constructMessagesDiv($webService->getDirectMessages($userid,$receiverid,$lastmessageid));
 }
 if(isset($_POST["register"])){ // to post a react by a
 	$data=json_decode($_POST["register"]);
