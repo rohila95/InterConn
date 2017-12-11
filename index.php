@@ -97,12 +97,10 @@
                             <!-- git hub login qav2 -->
                             <!-- <a href="https://github.com/login/oauth/authorize?client_id=209a35200a7fe455f866&redirect_uri=http://localhost:8888/services/githubLogin.php&scope=user:email/"> -->
                             <!-- git hub login docker -->
-                             
-                                <button type="button" class="btn btn-primary btn-block">
-                                        <a href="https://github.com/login/oauth/authorize?client_id=308de2ae4d6509d14594&redirect_uri=http://rohila95.cs518.cs.odu.edu/services/githubLogin.php&scope=user:email/">
-                                     <i class="glyphicon fa fa-github"></i>&nbsp;&nbsp; GitHub
-                                     </a>
-                                </button>
+                            
+                                <a class="btn btn-primary btn-block" href="https://github.com/login/oauth/authorize?client_id=308de2ae4d6509d14594&redirect_uri=http://rohila95.cs518.cs.odu.edu/services/githubLogin.php&scope=user:email/">
+                                 <i class="glyphicon fa fa-github"></i>&nbsp;&nbsp; GitHub
+                                </a>
                             
                             </div>
                             <div class="twitterWrapper">
