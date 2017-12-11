@@ -137,54 +137,61 @@
 			<!-- <a href="./help.html"><i class="fa fa-question-circle-o"></i></a> -->
 			<div class="row updateProfile">
 				<form role="form" id="updateForm" enctype='multipart/form-data'>
+                     <div class="row">
 					<div class="col-xs-8" style="margin-top: 2%;">
                         <div class="row">
                             <div class="form-group col-xs-5">
-                                <input type="text" class="form-control firstName" name="firstName" value="<?php echo $userDetails[0]->first_name ?>" maxlength="20" required>
                                 <label class="form-control-placeholder" for="name">First Name</label>
+                                <input type="text" class="form-control firstName" name="firstName" value="<?php echo $userDetails[0]->first_name ?>" maxlength="20" required>
                             </div>
                             <div class="form-group col-xs-1">
                             </div>
                             <div class="form-group col-xs-6">
+                                                                <label class="form-control-placeholder" for="name">Last Name</label>
                                 <input type="text" class="form-control lastName" name="lastName" value="<?php echo $userDetails[0]->last_name ?>" maxlength="20" required>
-                                <label class="form-control-placeholder" for="name">Last Name</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                                                <label class="form-control-placeholder" for="name">E-mail</label>
+
                                 <input disabled type="email" class="form-control email not_reallyrequired" name="email" value ="<?php echo $userDetails[0]->email_id ?>" maxlength="50" required>
-                                <label class="form-control-placeholder" for="name">E-mail</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                                                <label class="form-control-placeholder" for="password">Password</label>
+
                                 <input type="password" class="form-control password" name="password" maxlength="20" required>
-                                <label class="form-control-placeholder" for="password">Password</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                                                <label class="form-control-placeholder" for="name">What I do</label>
+
                                 <input type="text" class="form-control whatIDo not_reallyrequired" name="whatIDo" value ="<?php echo $userDetails[0]->what_i_do ?>" maxlength="200" required>
-                                <label class="form-control-placeholder" for="name">What I do</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                                                <label class="form-control-placeholder" for="name">Status</label>
+
                                 <input type="text" class="form-control status not_reallyrequired" name="status" value ="<?php echo $userDetails[0]->status ?>" maxlength="200" required>
-                                <label class="form-control-placeholder" for="name">Status</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                                                <label class="form-control-placeholder"  for="name">Phone Number</label>
+
                                 <input type="number" class="form-control phoneNumber not_reallyrequired " size="12"  name="phoneNumber" value ="<?php echo $userDetails[0]->phone_number ?>" maxlength="13" required>
-                                <label class="form-control-placeholder"  for="name">Phone Number</label>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                                                <label class="form-control-placeholder" for="name">Skype</label>
+
                                 <input type="text" class="form-control skype not_reallyrequired" name="skype" value ="<?php echo $userDetails[0]->skype ?>" maxlength="50" required>
-                                <label class="form-control-placeholder" for="name">Skype</label>
                                 <input type="hidden" class="hidden form-control skype not_reallyrequired" name="loggedInThroughGit" value ="<?php echo $userDetails[0]->github_avatar ?>" required>
 
                             </div>
@@ -193,6 +200,7 @@
                     </div>
                     <div class="col-xs-1"></div>
                     <div class="col-xs-3">
+
                         <div class="row">
 
                             <div class="profile-pic" style="background-image: url('<?php echo $userDetails[0]->profile_pic ?>')" >
@@ -232,8 +240,8 @@
                         </div>
 
                     </div>
-
-					<div class="row">
+                     </div>
+					<div class="row" style="margin-top:1%">
 						<div class="col-xs-6">
 							<button type="reset" class="btn btn-block" value="reset">Reset</button>
 
