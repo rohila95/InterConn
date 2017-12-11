@@ -55,6 +55,17 @@ echo $output["avatar_url"].'<br>';
 echo $output["name"];
 echo $output["email"];
 
+$ch = curl_init();
+curl_setopt($ch,CURLOPT_URL,"https://api.github.com/user/emails?access_token=".$result["access_token"]);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+curl_setopt($ch,CURLOPT_USERAGENT,'https://developer.github.com/v3/users/emails/#list-email-addresses-for-a-user');
+curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+$outputEmail=json_decode(curl_exec($ch),TRUE);
+curl_close($ch);
+echo $outputEmail[0]['email'];
+
+
+
 $webService = new WebService();
 $sql_service = new SqlService();
 $database_connection = new DatabaseConnection();
@@ -84,7 +95,7 @@ $result = $conn->query($checkQuery);
     		$last_name=$name[1];
         }
         if($output["email"]=='')
-            $email_id=$output["login"];
+            $email_id=$outputEmail[0]['email'];
         else
     		  $email_id=$output["email"];
 		$workspaceid=2;
