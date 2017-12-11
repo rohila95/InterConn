@@ -203,18 +203,21 @@ if(isset($_POST["imageAsMsg"])){
     $file_ext=explode('.', $file_name[2]);
     $userid = $_SESSION['userid'];
     $channelid=$_POST['channelid'];
+    $receiverid=$_POST['directmsgid'];
+    $isChannelMode = (boolean)json_decode(strtolower($_POST['isChannelMode']));
     $content=$file_ext[1];
     $codetype=0;
     $splmessage= 1;
     $timestamp = date('Y-m-d H:i:s', time());
+    if($isChannelMode){
+      $insertedMsgID = $webService->getUniqueMsgIDAfterInsertion($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
+    }
+    else{
+      // for direct message
+      $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
 
-    $insertedMsgID = $webService->getUniqueMsgIDAfterInsertion($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
-    // for direct message
-    // $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
-    /*  there was a problem with .PNG thing
-        if($file_ext[1] == "png"){
-            $file_ext[1] == "PNG";
-        }*/
+    }
+
 
     if($insertedMsgID == -1){
         echo "fail- Failed to send the image";
@@ -247,18 +250,20 @@ if(isset($_POST["fileAsMsg"])){
     $file_ext=explode('.', $file_name[2]);
     $userid = $_SESSION['userid'];
     $channelid=$_POST['channelid'];
+    $receiverid=$_POST['directmsgid'];
+    $isChannelMode = (boolean)json_decode(strtolower($_POST['isChannelMode']));
     $content=$file_ext[1];
     $codetype=0;
     $splmessage= 3;
     $timestamp = date('Y-m-d H:i:s', time());
+    if($isChannelMode){
+      $insertedMsgID = $webService->getUniqueMsgIDAfterInsertion($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
 
-    $insertedMsgID = $webService->getUniqueMsgIDAfterInsertion($userid,$content,$channelid,$timestamp,$splmessage,$codetype);
-    // for direct message
-    // $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
-    /*  there was a problem with .PNG thing
-        if($file_ext[1] == "png"){
-            $file_ext[1] == "PNG";
-        }*/
+    }else{
+      //for direct message
+      $insertedMsgID = $webService->getUniqueMsgIDAfterInsertionDirect($userid,$content,$receiverid,$timestamp,$splmessage,$codetype)
+    }
+
 
     if($insertedMsgID == -1){
         echo "fail- Failed to send the image";

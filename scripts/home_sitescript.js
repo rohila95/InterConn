@@ -150,9 +150,9 @@ function start()
             	 $("#sendLocalFileModal").modal("show");
                 });
 
-                
 
-            
+
+
             }
 		});
 
@@ -163,7 +163,9 @@ function start()
             fileFormData.append('filetoUpload', $('.fileUploadIP')[0].files[0]);
             var file_name=$(".fileUploadIP").val();
             fileFormData.append("imageAsMsg","yes");
-            fileFormData.append("channelid",channelid);
+						fileFormData.append("isChannelMode",isChannelMode);
+						fileFormData.append("channelid",channelid);
+						fileFormData.append("directmsgid",channelid); // both channelid and directmsg id are stored in the attribute of the heade itself
             fileFormData.append("file_name",file_name);
             $("#wholebody_loader").show();
             $.ajax({
@@ -205,7 +207,9 @@ function start()
             // console.log($('.anyfileUpload')[0].files[0].type);
             var file_name=$(".anyfileUpload").val();
             fileFormData.append("fileAsMsg","yes");
+						fileFormData.append("isChannelMode",isChannelMode);
             fileFormData.append("channelid",channelid);
+						fileFormData.append("directmsgid",channelid); // both channelid and directmsg id are stored in the attribute of the heade itself
             fileFormData.append("file_name",file_name);
             $("#wholebody_loader").show();
             $.ajax({
@@ -310,7 +314,7 @@ function start()
                     $('.messagesList').prepend(data);
                 });
             }
-			
+
 		});
 		$(document).on("click",".deletebutt",function(){
 			var postDataObj={};
