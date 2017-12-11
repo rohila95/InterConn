@@ -13,7 +13,7 @@ ini_set('display_errors', 1);
 
 // empty response
 $response = null;
- 
+
 // check secret key
 $reCaptcha = new ReCaptcha($secret);
 if ($_POST["g-recaptcha-response"]) {
@@ -23,8 +23,8 @@ if ($_POST["g-recaptcha-response"]) {
     );
 }
 
-//if ($response != null && $response->success)
-if(1)
+if ($response != null && $response->success)
+// if(1)
 {
     $loggedInId="";
 
