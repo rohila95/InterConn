@@ -24,7 +24,7 @@
 
     $channelDetails = json_decode($web_service->getChannelsDetails($_SESSION['userid'],$workspaceid,$is_admin));
     $directMessagesDetails = json_decode($web_service->getDirectMessagesDetails($workspaceDetails[0]->workspace_id));
-   	
+
     // the folowing block deals with the redirection to channel or direct msgs
    	$isChannelMode = true;
     if((isset($_GET["channel"]) && isset($_GET["directmsg"]) )|| (!isset($_GET["channel"]) && !isset($_GET["directmsg"])))
@@ -51,9 +51,9 @@
 	    $groupMembers=json_decode($web_service->getSpecificChannelUserDetails($_GET["channel"]));
 
 	    $groupMembersWholeDet=json_decode($web_service->getSpecificChannelUserDetWithIDs($_GET["channel"]));
-	    
+
     }
-   // the following code deals with the side nav bar 
+   // the following code deals with the side nav bar
   	$channelstr='';
    	$archiveChannelstr='';
    	$directMessagestr='';
@@ -81,11 +81,11 @@
 	            }
 	            else if($channel->is_archive==1)
 	            {
-	            	if($channel->channel_id==$_GET["channel"])
-					{
+	            	if($isChannelMode && 	$channel->channel_id==$_GET["channel"])
+								{
 	                    $archiveChannelstr.='<li class="active currentChannel">';
-						$flag=1;
-					}
+											$flag=1;
+								}
 	                else
 	                    $archiveChannelstr.='<li class="active">';
 	                if($channel->type=='private')
@@ -148,8 +148,8 @@
         <!-- App Styling -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
         <link rel="stylesheet" href="CSS/main_lc.css">
-        <script> 
-            var isChannelMode = <?php  
+        <script>
+            var isChannelMode = <?php
 
                if($isChannelMode){
                     echo "true";
@@ -216,7 +216,7 @@
 						</div>
 
 						<div class="row directMessageContainer_menu_HP">
-                            <div class="row categoryTitle_HP channelTitle"> <div class="col-xs-10"> <span>Direct Messages </span> <span class="noOfDirectMessages_HP numberCount_badge"> <?php echo count($directMessagesDetails);?></span><i class="fa fa-plus-square-o pull-right "></i> </div></div>
+                            <div class="row categoryTitle_HP channelTitle"> <div class="col-xs-10"> <span>Direct Messages </span> <span class="noOfDirectMessages_HP numberCount_badge"> <?php echo count($directMessagesDetails);?></span></div></div>
 							<ul class="nav navbar-nav directmessages_UL_List">
 						        <?php echo $directMessagestr;?>
 						    </ul>
@@ -266,7 +266,7 @@
             </div>
 
             <!-- modal for local image -->
- 			
+
             <div class="modal fade" id="sendLocalImgModal" role="dialog">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
@@ -673,7 +673,7 @@
 		                            {
 
 		                                echo '<div class="channelTitle currentChannelTitle col-xs-6 " id="'.$_GET["directmsg"].'"> <span>'. htmlspecialchars($currentUser[0]->first_name).' '.htmlspecialchars($currentUser[0]->last_name).'</span></div>';
-		                                
+
 		                                $status=$currentUser[0]->status;
 		                            }
 		                        }
@@ -697,13 +697,13 @@
 	                        	$editTitle="";
 	                        	if($is_admin){
 	                                  $editTitle = "Edit members";
-	                             
+
 	                             }
 
 	                            $channelRelatedHeaders= '<span class="channelMemebersShortDetails headerSpan">
 	                                <a href="#" class="channelMemebersEditButt" data-toggle="tooltip" data-placement="bottom"  title="'.$editTitle . '" >
-	        
-	                            <i class="fa fa-users"></i></a> <span class="membersCount" title="'.htmlspecialchars($groupMembers[0]->names).'">'.$user_count. 
+
+	                            <i class="fa fa-users"></i></a> <span class="membersCount" title="'.htmlspecialchars($groupMembers[0]->names).'">'.$user_count.
 	                            '</span></span>|';
 	                            $channelRelatedHeaders.='<span class="channelPurpose headerSpan" title="Channel Purpose">
                                 <i>purpose: '.htmlspecialchars($purpose).'</i></span>';
@@ -716,7 +716,7 @@
 
                           ?>
 
-                            
+
 
 		                    <?php
 		                    	if($isChannelMode && $currentChannel[0]->is_archive==0)
@@ -740,7 +740,7 @@
 					</div>
 					<div class="col-xs-2 addOnButtons">
 						<?php
-							
+
 							if($isChannelMode  && ($workspaceCreatorId==$_SESSION['userid']))
 							{
 								if($currentChannel[0]->is_archive==0)
@@ -900,7 +900,7 @@
 
 				                           </div>';
                            		}
-                           		
+
 
                            ?>
 
