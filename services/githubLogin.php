@@ -83,17 +83,22 @@ $result = $conn->query($checkQuery);
             $loggedInId = $row['user_id'];
         }
     } else {
-        $name=explode(' ',$output["name"]);
-        if($name=='')
+        if($output["name"]!='')
         {
-            $first_name=$output["login"];
-            // $last_name=$output["login"];
+            $name=explode(' ',$output["name"]);
+            if($name=='')
+            {
+                $first_name=$output["login"];
+                // $last_name=$output["login"];
+            }
+            else
+            {
+        		$first_name=$name[0];
+        		$last_name=$name[1];
+            }
         }
         else
-        {
-    		$first_name=$name[0];
-    		$last_name=$name[1];
-        }
+            $first_name=$output["login"];
         if($output["email"]=='')
             $email_id=$output["login"];
         else

@@ -255,7 +255,7 @@ function start()
 
                         $("#errorModal").modal("show");
                         $("#errorModal").css("z-index","1100");
-                        setTimeout(functio
+                        setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
                     console.log(error);
                 }
             });
