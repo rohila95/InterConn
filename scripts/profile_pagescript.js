@@ -54,7 +54,29 @@ function start()
 		$(".profile-pic").on('click', function(){
 			$(".file-upload").trigger('click');
 		});
-
+		$('input[type=radio][name=radiogroup]').change(function() {
+	        if (this.value == '-1') {
+	        	$('.profile-pic').hide();
+	        	$('.profile-picDefault').show();
+	            $('.profile-picDefault').css('background-color', defaultpic_bg);
+	            $('.profile-picDefault').html(defaultpic_title);
+	        }
+	        else if (this.value == '0') {
+	        	$('.profile-pic').show();
+	            $('.profile-pic').css('background-image', 'url(' + local_pic + ')');
+	            $('.profile-picDefault').hide();
+	        }
+	        else if (this.value == '1') {
+	        	$('.profile-pic').show();
+	            $('.profile-pic').css('background-image', 'url(' + gravatar_pic + ')');
+	            $('.profile-picDefault').hide();
+	        }
+	        else if (this.value == '2') {
+	        	$('.profile-pic').show();
+	            $('.profile-pic').css('background-image', 'url(' + github_avatar + ')');
+	            $('.profile-picDefault').hide();
+	        }
+	    });
 		$(document).on("click",".updateUser",function(e){
 			// var recruitmentId = $(this).attr("recid");
 			e.preventDefault();
@@ -146,7 +168,7 @@ function start()
             $(".editProfile").hide();
             $(".displayProfile").hide();
             $.post('./Controller.php',{"getProfileDetails":''},function (data){
-				console.log(data);
+				// console.log(data);
             		var userData=$.parseJSON(data);
             		$('.password').val(userData[0]['password']);
 			});

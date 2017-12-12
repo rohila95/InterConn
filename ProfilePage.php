@@ -15,9 +15,19 @@
 		}
 		else
 		{
+            $userpicDetails=json_decode($web_service->getProfilePicDetails($_GET['userid']));
 	    	$userDetails = json_decode($userDetails);
 			$channelDetails = json_decode($web_service->getPublicChannelsDetails($_GET['userid']));
-
+            $gravatar=get_gravatar($userDetails[0]->email_id);
+            //default pic
+            $defUserPicBGColorArr = ['#3F51B5','#2196F3','#00BCD4','#CDDC39','#FF5722'];
+            $defUserPicBGColor = $defUserPicBGColorArr[((int)$userDetails[0]->user_id)%5];
+            $shortName= $userDetails[0]->first_name[0];
+              if($userDetails[0]->last_name == '' || $userDetails[0]->last_name== null){
+                  $shortName.= $userDetails[0]->first_name[1];
+              }else{
+                  $shortName.= $userDetails[0]->last_name[0];
+              }
 			$channelstr='';
 			$displayChannelList='';
 			if ($channelDetails!='')
@@ -40,6 +50,12 @@
     else
     {
     	header("location: ./index.php?status=notloggedin");
+    }
+    function get_gravatar( $email) {
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5( strtolower( trim( $email ) ) );
+        $url .= "?s=80&r=g";
+        return $url;
     }
 
 
@@ -78,6 +94,13 @@
                }
 
             ?>;
+            var gravatar_pic=<?php echo '"'.$gravatar.'"';?>;
+            var github_avatar=<?php echo '"'.$userpicDetails[0]->github_avatar.'"';?>;
+            var local_pic=<?php echo '"'.$userpicDetails[0]->profile_pic.'"';?>;
+            var defaultpic_bg=<?php echo '"'.$defUserPicBGColor.'"';?>;
+            var defaultpic_title=<?php echo '"'.$shortName.'"';?>;
+            
+            
 
         </script>
 	</head>
@@ -209,7 +232,9 @@
                                 <span>Change Image</span>
                             </div>
                             <input class="file-upload" name="imgToUpload" type="file" accept="image/*" />
+                             <div class="profile-picDefault" style="display:none;">
 
+                            </div>
                         </div>
                         <div class="row">
                             <?php

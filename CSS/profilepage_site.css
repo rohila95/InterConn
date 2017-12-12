@@ -102,6 +102,26 @@
     padding-top: 4.5em;
     padding-bottom: 4.5em;
 }
+.profile-picDefault
+{
+  background-color: rgb(255, 87, 34);
+    border-radius: 15%;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    /* color: transparent; */
+    transition: all .3s ease;
+    text-decoration: none;
+    font-size: -webkit-xxx-large;
+    text-align: center;
+    /* margin-top: 9%; */
+    padding-top: 25%;
+    font-weight: bolder;
+}
 /*.form-control:focus + .form-control-placeholder,
 .form-control:valid + .form-control-placeholder {
   font-size: 18px;
