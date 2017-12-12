@@ -46,6 +46,12 @@
             // echo $userScore;
 
         }
+        $back="";
+        if($_SESSION["channelid"]=="")
+            $back='directmsg='.$_SESSION['directmsg_id'];
+        else if($_SESSION['directmsg_id']=="")
+            $back='channel='.$_SESSION['channelid'];
+
     }
     else
     {
@@ -99,8 +105,16 @@
             var local_pic=<?php echo '"'.$userpicDetails[0]->profile_pic.'"';?>;
             var defaultpic_bg=<?php echo '"'.$defUserPicBGColor.'"';?>;
             var defaultpic_title=<?php echo '"'.$shortName.'"';?>;
-            
-            
+            $(document).ready(function() {
+                var pic=<?php echo '"'.$userDetails[0]->profile_pic.'"';?>;
+                if(pic=="./images/0.jpeg")
+                {
+                    $('.profile-pic').hide();
+                    $('.profile-picDefault').show();
+                    $('.profile-picDefault').css('background-color', defaultpic_bg);
+                    $('.profile-picDefault').html(defaultpic_title);
+                }
+            });
 
         </script>
 	</head>
@@ -140,7 +154,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-1 goBack">
-					<a href='./HomePage.php?channel=<?php echo $_SESSION['channelid']?>'><i class="fa fa-arrow-left"></i></a>
+					<a href='./HomePage.php?<?php echo $back;?>'><i class="fa fa-arrow-left"></i></a>
 				</div>
 
 				<div class="col-sm-10 logo">
@@ -284,7 +298,15 @@
 
 			<div class="row displayProfile">
 				<div class="col-md-3 col-lg-3 " align="center">
-						<img alt="User Pic" src="<?php echo $userDetails[0]->profile_pic ?>" class="profilePicDisplay">
+                    <?php
+                        if($userDetails[0]->profile_pic=='./images/0.jpeg')
+                        {
+                            echo '<div class="profile-picDefault" style="background-color:'.$defUserPicBGColor.' ;">'.$shortName.'</div>';
+                        }
+                        else
+                            echo '<img alt="User Pic" src="'.$userDetails[0]->profile_pic.'" class="profilePicDisplay">';
+                    ?>
+						
 				</div>
 				<div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
