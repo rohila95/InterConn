@@ -196,6 +196,14 @@ function start()
                 },
                 error: function(xhr,error){
                     $("#wholebody_loader").hide();
+                    $('#errorModal .modal-body').html("<p>Something went wrong with the upload</p>");
+                        $('#errorModal').on('hidden.bs.modal', function (e) {
+                            $('#errorModal').off();
+                        });
+
+                        $("#errorModal").modal("show");
+                        $("#errorModal").css("z-index","1100");
+                        setTimeout(function() {$('#errorModal').modal('hide');}, 2000);
                     console.log(error);
                 }
             });
@@ -219,7 +227,7 @@ function start()
                 processData: false,
                 contentType: false,
                 success: function(data) {
-									data = $.trim(data);
+					data = $.trim(data);
                     console.log(data);
                     $("#wholebody_loader").hide();
 
@@ -240,6 +248,14 @@ function start()
                 },
                 error: function(xhr,error){
                     $("#wholebody_loader").hide();
+                    $('#errorModal .modal-body').html("<p>Something went wrong with the upload</p>");
+                        $('#errorModal').on('hidden.bs.modal', function (e) {
+                            $('#errorModal').off();
+                        });
+
+                        $("#errorModal").modal("show");
+                        $("#errorModal").css("z-index","1100");
+                        setTimeout(functio
                     console.log(error);
                 }
             });
