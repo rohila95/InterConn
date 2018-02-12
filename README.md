@@ -8,5 +8,9 @@ Along with these features, live collaboration satisfies an effective use case fo
 
 LAMP is technical stack used for implementation of this project.
 
-**DataBase Schema Design**
+**Following is the live link of the project - http://qav2.cs.odu.edu/projects/Infovis/index.html**
+
+   ### DataBase Schema Design
 ![DB Schema Design](FinalDBDesign.JPG)
+
+
