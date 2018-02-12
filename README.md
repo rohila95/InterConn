@@ -1,4 +1,4 @@
-#InterConn - A Slack like platform for Interprofessional Collaboration
+# InterConn - A Slack like platform for Interprofessional Collaboration
 
 ### Intro to the features available 
 
