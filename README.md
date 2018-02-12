@@ -16,8 +16,14 @@ LAMP is technical stack used for implementation of this project.
 ![DB Schema Design](FinalDBDesign.JPG)
 
 ### TechStuff
-The porject is very well modularized by segregating the code into neat folder structure. All the UI scripts are placed inside scripts folder, Stylesheets are put up under CSS.
-Assets folder is the place where the scripts for the frameworks like jQuery and Bootstrap are preserved, In addition Images that are posted by the users are also stored in here.
+* The porject is very well modularized by segregating the code into neat folder structure. All the UI scripts are placed inside **scripts** folder, Stylesheets are put up under folder **CSS**.
 
+* **Assets** folder is the place where the scripts for the frameworks like jQuery and Bootstrap are preserved, In addition Images that are posted by the users are also stored in here under folder named **msgimages**.
+
+* **services** is the folder containing all the serverside services, business logic is put in here. These services return a JSON object as the response to client.
+
+* **controller.php** is the place that acts as a controller/router and navigates the request to the correct service.
+
+* This project can be hosted on Nginix, Apachache Tomcat (All servers tha can support PHP), MYSQL is the database used, **milestone4dump.sql** has all the SQL create queries needed to brig up the Database schema.
 
 
