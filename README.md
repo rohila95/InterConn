@@ -24,6 +24,6 @@ LAMP is technical stack used for implementation of this project.
 
 * **controller.php** is the place that acts as a controller/router and navigates the request to the correct service.
 
-* This project can be hosted on Nginix, Apachache Tomcat (All servers tha can support PHP), MYSQL is the database used, **milestone4dump.sql** has all the SQL create queries needed to brig up the Database schema.
+* This project can be hosted on Nginix, Apache Tomcat (All servers tha can support PHP), MYSQL is the database used, **milestone4dump.sql** has all the SQL create queries needed to brig up the Database schema.
 
 
